@@ -39,5 +39,10 @@ namespace Yutai.Check
             //_mapListener = context.Container.GetInstance<MapListener>();
             // _dockPanelService = context.Container.GetInstance<TemplateDockPanelService>();
         }
+        public IPipelineConfig PipeConfig
+        {
+            get { return _config; }
+        }
+
     }
 }

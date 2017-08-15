@@ -39,7 +39,8 @@ namespace Yutai.Pipeline.Editor.Classes
                     return false;
                 }
                 Aspose.Cells.Workbook workbook = new Aspose.Cells.Workbook();
-                workbook.Open(filepath);
+                if (File.Exists(filepath))
+                    workbook.Open(filepath);
                 Aspose.Cells.Worksheet sheet = workbook.Worksheets.Add(datatable.TableName);
                 Aspose.Cells.Cells cells = sheet.Cells;
 
@@ -60,7 +61,7 @@ namespace Yutai.Pipeline.Editor.Classes
                     }
                 }
 
-                workbook.Save(filepath);
+                workbook.Save(filepath, FileFormatType.Default);
                 return true;
             }
             catch (System.Exception e)

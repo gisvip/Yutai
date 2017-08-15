@@ -26,10 +26,7 @@ namespace Yutai.Check.Views
     {
         private readonly IAppContext _context;
         private List<FeatureItem> _featureItems;
-        private IFeatureLayer _featureLayer;
         private IGridView _gridView;
-        private bool _displayName;
-        private bool _displayRemarks;
 
         public CheckResultDockPanel(IAppContext context)
         {
@@ -60,29 +57,12 @@ namespace Yutai.Check.Views
 
         public const string DefaultDockName = "Check_ResultView";
 
-        public bool DisplayName
-        {
-            get { return _displayName; }
-            set { _displayName = value; }
-        }
-
-        public bool DisplayRemarks
-        {
-            get { return _displayRemarks; }
-            set { _displayRemarks = value; }
-        }
-
         public List<FeatureItem> FeatureItems
         {
             get { return _featureItems; }
             set { _featureItems = value; }
         }
-
-        public IFeatureLayer FeatureLayer
-        {
-            set { _featureLayer = value; }
-        }
-
+        
         public void Initialize(IAppContext context)
         {
         }
@@ -91,13 +71,11 @@ namespace Yutai.Check.Views
         {
             mainPanel.Controls.Clear();
             _gridView = new GridControlView();
-            _gridView.DisplayRemarks = _displayRemarks;
             _gridView.IsSelect = toolSelected.Checked;
             _gridView.IsPanTo = toolPanTo.Checked;
             _gridView.IsZoomTo = toolZoomTo.Checked;
             _gridView.Dock = DockStyle.Fill;
             _gridView.Map = _context.FocusMap;
-            _gridView.FeatureLayer = _featureLayer;
             _gridView.Grid.DataSource = ConvertToExpandoObjectList(_featureItems);
             _gridView.BestFitColumns();
             mainPanel.Controls.Add(_gridView as Control);
@@ -111,8 +89,10 @@ namespace Yutai.Check.Views
             {
                 var expandoObject = new ExpandoObject() as IDictionary<string, System.Object>;
                 expandoObject.Add("[编号]", featureItem.OID);
-                if (_displayName)
-                    expandoObject.Add("[信息]", featureItem.Name);
+                expandoObject.Add("[图层组]", featureItem.PipelineName);
+                expandoObject.Add("[图层]", featureItem.PipeLayerName);
+                expandoObject.Add("[检查项]", featureItem.CheckItem);
+                expandoObject.Add("[检查信息]", featureItem.ErrDesc);
 
                 IFields fields = featureItem.MainFeature.Fields;
                 for (int i = 0; i < fields.FieldCount; i++)
@@ -132,8 +112,6 @@ namespace Yutai.Check.Views
                         expandoObject.Add(field.AliasName, "二进制数据");
                     }
                 }
-                if (_displayRemarks)
-                    expandoObject.Add("[备注]", featureItem.Remarks);
 
                 list.Add(expandoObject as ExpandoObject);
             }
@@ -199,7 +177,7 @@ namespace Yutai.Check.Views
                 }
             }
         }
-        
+
         private void toolSelected_Click(object sender, EventArgs e)
         {
             if (_gridView == null)

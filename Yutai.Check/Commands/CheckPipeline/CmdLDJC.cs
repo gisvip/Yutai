@@ -48,10 +48,7 @@ namespace Yutai.Check.Commands.CheckPipeline
                 return;
             if (_dockPanelService == null)
                 _dockPanelService = _context.Container.GetInstance<CheckResultDockPanelService>();
-            _dockPanelService.View.DisplayName = true;
-            _dockPanelService.View.DisplayRemarks = false;
             _dockPanelService.View.FeatureItems = _featureItems;
-            _dockPanelService.View.FeatureLayer = _lineFeatureLayer;
             _dockPanelService.View.ReloadData();
 
             if (_dockPanelService.Visible == false)
@@ -132,7 +129,8 @@ namespace Yutai.Check.Commands.CheckPipeline
                     {
                         _featureItems.Add(new FeatureItem(pFeature)
                         {
-                            Name = msg
+                            ErrDesc = msg,
+                            PipeLayerName = _lineFeatureLayer.Name
                         });
                     }
                 }

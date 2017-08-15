@@ -11,8 +11,6 @@ namespace Yutai.Check.Controls
 {
     interface IGridView
     {
-        bool DisplayRemarks { get; set; }
-        IFeatureLayer FeatureLayer { set; }
         IMap Map { set; }
         DockStyle Dock { get; set; }
         GridControl Grid { get; }

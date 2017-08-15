@@ -14,6 +14,7 @@ using ESRI.ArcGIS.DataSourcesRaster;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 using Yutai.Check.Classes;
+using Yutai.Pipeline.Editor.Helper;
 
 namespace Yutai.Check.Controls
 {
@@ -22,7 +23,6 @@ namespace Yutai.Check.Controls
         private double expandNum = 5;
         private IMap _map;
         private IActiveView _activeView;
-        private IFeatureLayer _featureLayer;
         private bool _isSelect;
         private bool _isPanTo;
         private bool _isZoomTo;
@@ -44,12 +44,7 @@ namespace Yutai.Check.Controls
                 this.mainGridView.PreviewFieldName = value ? "[备注]" : "";
             }
         }
-
-        public IFeatureLayer FeatureLayer
-        {
-            set { _featureLayer = value; }
-        }
-
+        
         public IMap Map
         {
             set
@@ -116,18 +111,21 @@ namespace Yutai.Check.Controls
 
         private void mainGridView_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
         {
-            if (_map == null || _featureLayer == null)
+            if (_map == null)
                 return;
             ExpandoObject featureItem = mainGridView.GetRow(e.RowHandle) as ExpandoObject;
             if (featureItem == null)
                 return;
             var item = featureItem as IDictionary<string, System.Object>;
+            IFeatureLayer featureLayer = MapHelper.GetCurrentFeatureLayerByName(_map, item["[图层]"].ToString());
+            if (featureLayer == null)
+                return;
             if (_isSelect)
-                SelectFeature(_featureLayer, (int)item["[编号]"]);
+                SelectFeature(featureLayer, (int)item["[编号]"]);
             if (_isPanTo)
-                PanToFeature(_featureLayer, (int)item["[编号]"]);
+                PanToFeature(featureLayer, (int)item["[编号]"]);
             if (_isZoomTo)
-                ZoomToFeature(_featureLayer, (int)item["[编号]"]);
+                ZoomToFeature(featureLayer, (int)item["[编号]"]);
         }
 
         public IFeature SelectFeature(IFeatureLayer featureLayer, int oid)

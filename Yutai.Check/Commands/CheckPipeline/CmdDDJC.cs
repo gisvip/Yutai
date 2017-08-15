@@ -48,10 +48,7 @@ namespace Yutai.Check.Commands.CheckPipeline
                 return;
             if (_dockPanelService == null)
                 _dockPanelService = _context.Container.GetInstance<CheckResultDockPanelService>();
-            _dockPanelService.View.DisplayName = true;
-            _dockPanelService.View.DisplayRemarks = false;
             _dockPanelService.View.FeatureItems = _featureItems;
-            _dockPanelService.View.FeatureLayer = _featureLayer;
             _dockPanelService.View.ReloadData();
 
             if (_dockPanelService.Visible == false)
@@ -97,7 +94,10 @@ namespace Yutai.Check.Commands.CheckPipeline
                 IFeature pFeature;
                 while ((pFeature = pFeatureCursor.NextFeature()) != null)
                 {
-                    _featureItems.Add(new FeatureItem(pFeature));
+                    _featureItems.Add(new FeatureItem(pFeature)
+                    {
+                        PipeLayerName = _featureLayer.Name
+                    });
                 }
                 Marshal.ReleaseComObject(pFeatureCursor);
 
@@ -118,6 +118,7 @@ namespace Yutai.Check.Commands.CheckPipeline
                         {
                             continue;
                         }
+                        
                         bool isSame = true;
                         foreach (KeyValuePair<int, IField> selectedField in _selectedFields)
                         {
@@ -142,7 +143,7 @@ namespace Yutai.Check.Commands.CheckPipeline
                         {
                             _featureItems.Remove(_featureItems.FirstOrDefault(c => c.OID == pFeature.OID));
                             featureItem.SubFeatureItems.Add(new FeatureItem(pFeature));
-                            featureItem.Name = $"重复个数 {featureItem.SubFeatureItems.Count}";
+                            featureItem.ErrDesc = $"重复个数 {featureItem.SubFeatureItems.Count}";
                         }
                     }
                 }

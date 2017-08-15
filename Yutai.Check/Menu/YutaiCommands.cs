@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Yutai.Check.Commands.CheckManager;
 using Yutai.Check.Commands.CheckPipeline;
 using Yutai.Plugins.Concrete;
 using Yutai.Plugins.Interfaces;
@@ -38,9 +39,10 @@ namespace Yutai.Check.Menu
                     return new List<YutaiCommand>();
                 _commands = new List<YutaiCommand>()
                 {
-                    new CmdDDJC(_context, _plugin),
-                    new CmdLDJC(_context, _plugin),
-                    new CmdSXFKJC(_context, _plugin),
+                    //new CmdDDJC(_context, _plugin),
+                    //new CmdLDJC(_context, _plugin),
+                    //new CmdSXFKJC(_context, _plugin),
+                    new CmdDataCheck(_context, _plugin),
                 };
             }
             catch (Exception ex)

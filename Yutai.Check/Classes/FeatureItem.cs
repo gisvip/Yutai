@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
 
 namespace Yutai.Check.Classes
@@ -16,7 +17,11 @@ namespace Yutai.Check.Classes
         private IFeature _mainFeature;
         private List<FeatureItem> _subFeatureItems;
         private string _remarks;
-        private string _name;
+        private string _pipelineName;
+        private string _pipeLayerName;
+        private string _checkItem;
+        private string _errDesc;
+        private IFeatureLayer _featureLayer;
 
         public FeatureItem(IFeature feature)
         {
@@ -24,7 +29,30 @@ namespace Yutai.Check.Classes
             _mainFeature = feature;
             _subFeatureItems = new List<FeatureItem>();
         }
-
+        /// <summary>
+        /// 图层组名称
+        /// </summary>
+        public string PipelineName
+        {
+            get { return _pipelineName; }
+            set { _pipelineName = value; }
+        }
+        /// <summary>
+        /// 图层名称
+        /// </summary>
+        public string PipeLayerName
+        {
+            get { return _pipeLayerName; }
+            set { _pipeLayerName = value; }
+        }
+        /// <summary>
+        /// 检查项
+        /// </summary>
+        public string CheckItem
+        {
+            get { return _checkItem; }
+            set { _checkItem = value; }
+        }
 
         public int OID
         {
@@ -44,12 +72,6 @@ namespace Yutai.Check.Classes
             set { _subFeatureItems = value; }
         }
         
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-
         public string Remarks
         {
             get
@@ -57,6 +79,12 @@ namespace Yutai.Check.Classes
                 return _remarks;
             }
             set { _remarks = value; }
+        }
+
+        public string ErrDesc
+        {
+            get { return _errDesc; }
+            set { _errDesc = value; }
         }
     }
 }
