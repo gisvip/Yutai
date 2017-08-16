@@ -23,13 +23,19 @@ namespace Yutai.Check.Forms
             this.checkedListBoxPipelineLayers.DisplayMember = "Name";
             this.checkedListBoxPipelineLayers.ValueMember = "Code";
         }
-        
+
         public List<EnumCheckItem> GetCheckItems()
         {
             List<EnumCheckItem> items = new List<EnumCheckItem>();
 
             if (checkBoxFieldFull.Checked)
                 items.Add(EnumCheckItem.P_FieldFull);
+            if (checkBoxFieldRepeat.Checked)
+                items.Add(EnumCheckItem.P_FieldRepeat);
+            if (checkBoxSinglePoint.Checked)
+                items.Add(EnumCheckItem.G_SinglePoint);
+            if (checkBoxSingleLine.Checked)
+                items.Add(EnumCheckItem.G_SingleLine);
 
             return items;
         }

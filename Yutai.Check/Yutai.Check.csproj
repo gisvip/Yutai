@@ -101,9 +101,13 @@
     <Compile Include="Classes\DataCheckBase.cs" />
     <Compile Include="Classes\FeatureItem.cs" />
     <Compile Include="Classes\FieldFullCheck.cs" />
+    <Compile Include="Classes\FieldRepeatCheck.cs" />
     <Compile Include="Classes\IAttributeCheck.cs" />
     <Compile Include="Classes\IDataCheck.cs" />
     <Compile Include="Classes\IDataCheckRule.cs" />
+    <Compile Include="Classes\IGeometryCheck.cs" />
+    <Compile Include="Classes\SingleLineCheck.cs" />
+    <Compile Include="Classes\SinglePointCheck.cs" />
     <Compile Include="Commands\CheckManager\CmdDataCheck.cs" />
     <Compile Include="Commands\CheckPipeline\CmdDDJC.cs" />
     <Compile Include="Commands\CheckPipeline\CmdLDJC.cs" />
@@ -141,6 +145,12 @@
     </Compile>
     <Compile Include="Forms\FrmLDJC.Designer.cs">
       <DependentUpon>FrmLDJC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmProgress.Designer.cs">
+      <DependentUpon>FrmProgress.cs</DependentUpon>
     </Compile>
     <Compile Include="Menu\MenuGenerator.cs" />
     <Compile Include="Menu\YutaiCommands.cs" />
@@ -197,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmLDJC.resx">
       <DependentUpon>FrmLDJC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmProgress.resx">
+      <DependentUpon>FrmProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu\MenuLayout.xml" />
     <EmbeddedResource Include="Views\CheckResultDockPanel.resx">

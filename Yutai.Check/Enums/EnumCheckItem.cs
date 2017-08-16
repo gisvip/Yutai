@@ -10,11 +10,9 @@ namespace Yutai.Check.Enums
 {
     public enum EnumCheckItem
     {
-        P_FieldFull,        // 属性检查 字段完整性检查
-        P_FieldRepeat,      // 属性检查 字段重复值检查
-        P_FieldType,        // 属性检查 字段类型检查
-        P_FieldLength,      // 属性检查 字段长度检查
-        G_SinglePoint,      // 空间检查 孤立点检查
-        G_SingleLine,       // 空间检查 孤立线检查
+        P_FieldFull,        // 属性检查 字段完整性检查 对必填的关键字段进行检查，以确保不会因为这些关键字段没有填写，而导致分析统计出错。
+        P_FieldRepeat,      // 属性检查 字段重复值检查 相同字段值检查，针对管点和管线的业务场景，部分属性不能出现重复的值。如果出现重复的值则视为有错误。
+        G_SinglePoint,      // 空间检查 孤立点检查 是否存在管点没有落在管线情况，如果存在说明该管点绘制有错误。
+        G_SingleLine,       // 空间检查 孤立线检查 是否存在管线不与任何其他管线有公共点，如果存在说明该管线绘制有错误。
     }
 }

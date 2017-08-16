@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,15 +22,47 @@ namespace Yutai.Check.Commands.CheckManager
         private CheckPlugin _plugin;
         private FrmDataCheck _frmDataCheck;
         private CheckResultDockPanelService _dockPanelService;
-        private IDictionary<int, IField> _selectedFields;
         private List<FeatureItem> _featureItems;
         private IDataCheck _dataCheck;
-        private IFeatureLayer _featureLayer;
-
+        private BackgroundWorker _backgroundWorker;
         public CmdDataCheck(IAppContext context, CheckPlugin plugin)
         {
             OnCreate(context);
             _plugin = plugin;
+            _backgroundWorker = new BackgroundWorker();
+            _backgroundWorker.WorkerReportsProgress = true;
+            _backgroundWorker.WorkerSupportsCancellation = true;
+            _backgroundWorker.DoWork += BackgroundWorkerOnDoWork;
+            _backgroundWorker.RunWorkerCompleted += BackgroundWorkerOnRunWorkerCompleted;
+        }
+
+        private void BackgroundWorkerOnRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
+        {
+            if (_dockPanelService == null)
+                _dockPanelService = _context.Container.GetInstance<CheckResultDockPanelService>();
+            _dockPanelService.View.FeatureItems = _featureItems;
+            _dockPanelService.View.ReloadData();
+
+            if (_dockPanelService.Visible == false)
+                _dockPanelService.Show();
+        }
+
+        private void BackgroundWorkerOnDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
+        {
+            try
+            {
+                _dataCheck.ProgressChanged += (o, s) =>
+                {
+                    _backgroundWorker.ReportProgress(0, s);
+                };
+                _dataCheck.CheckPipelineList = _frmDataCheck.GetCheckPipeline();
+                _featureItems = _dataCheck.Check(_frmDataCheck.GetCheckItems());
+                
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         public override void OnClick(object sender, EventArgs args)
@@ -39,16 +72,11 @@ namespace Yutai.Check.Commands.CheckManager
                 _frmDataCheck = new FrmDataCheck(_dataCheck);
             if (_frmDataCheck.ShowDialog() != DialogResult.OK)
                 return;
-            _dataCheck.CheckPipelineList = _frmDataCheck.GetCheckPipeline();
-            _featureItems = _dataCheck.Check(_frmDataCheck.GetCheckItems());
 
-            if (_dockPanelService == null)
-                _dockPanelService = _context.Container.GetInstance<CheckResultDockPanelService>();
-            _dockPanelService.View.FeatureItems = _featureItems;
-            _dockPanelService.View.ReloadData();
-
-            if (_dockPanelService.Visible == false)
-                _dockPanelService.Show();
+            FrmProgress frmProgress = new FrmProgress(_backgroundWorker);
+            frmProgress.TopMost = true;
+            frmProgress.Show();
+            _backgroundWorker.RunWorkerAsync(this);
         }
 
         public sealed override void OnCreate(object hook)
