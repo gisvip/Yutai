@@ -439,5 +439,24 @@ namespace Yutai.Pipeline.Editor.Helper
 
             return (df * (bc - de)) / bd + de;
         }
+
+        public static bool IsSame(IPolyline polyline1, IPolyline polyline2)
+        {
+            IPointCollection pointCollection1 = polyline1 as IPointCollection;
+            IPointCollection pointCollection2 = polyline2 as IPointCollection;
+            if (pointCollection1 == null || pointCollection2 == null)
+                return false;
+            if (pointCollection1.PointCount != pointCollection2.PointCount)
+                return false;
+            for (int i = 0; i < pointCollection1.PointCount; i++)
+            {
+                IPoint point1 = pointCollection1.Point[i];
+                IPoint point2 = pointCollection2.Point[i];
+                if (GetDistance(point1, point2) >= 0.001)
+                    return false;
+            }
+
+            return true;
+        }
     }
 }

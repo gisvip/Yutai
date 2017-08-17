@@ -44,7 +44,7 @@ namespace Yutai.Check.Controls
                 this.mainGridView.PreviewFieldName = value ? "[备注]" : "";
             }
         }
-        
+
         public IMap Map
         {
             set
@@ -120,12 +120,18 @@ namespace Yutai.Check.Controls
             IFeatureLayer featureLayer = MapHelper.GetCurrentFeatureLayerByName(_map, item["[图层]"].ToString());
             if (featureLayer == null)
                 return;
-            if (_isSelect)
-                SelectFeature(featureLayer, (int)item["[编号]"]);
-            if (_isPanTo)
-                PanToFeature(featureLayer, (int)item["[编号]"]);
-            if (_isZoomTo)
-                ZoomToFeature(featureLayer, (int)item["[编号]"]);
+            if (!item.ContainsKey("[编号]") || string.IsNullOrWhiteSpace(item["[编号]"]?.ToString()))
+                return;
+            int oid = 0;
+            if (int.TryParse(item["[编号]"].ToString(), out oid))
+            {
+                if (_isSelect)
+                    SelectFeature(featureLayer, oid);
+                if (_isPanTo)
+                    PanToFeature(featureLayer, oid);
+                if (_isZoomTo)
+                    ZoomToFeature(featureLayer, oid);
+            }
         }
 
         public IFeature SelectFeature(IFeatureLayer featureLayer, int oid)

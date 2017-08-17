@@ -13,12 +13,14 @@ namespace Yutai.Check.Classes
     {
         private readonly IAppContext _appContext;
         private readonly IPipelineConfig _pipelineConfig;
+        private IDataCheckConfig _dataCheckConfig;
         private List<string> _checkPipelineList;
 
-        public DataCheckBase(IAppContext context, IPipelineConfig pipelineConfig)
+        public DataCheckBase(IAppContext context, IPipelineConfig pipelineConfig, IDataCheckConfig dataCheckConfig)
         {
             _appContext = context;
             _pipelineConfig = pipelineConfig;
+            _dataCheckConfig = dataCheckConfig;
             _pipelineConfig.OrganizeMap(_appContext.FocusMap);
         }
 
@@ -55,6 +57,21 @@ namespace Yutai.Check.Classes
                         geometryCheck = new SingleLineCheck(this);
                         list.AddRange(geometryCheck.Check());
                         break;
+                    case EnumCheckItem.G_PointRepeat:
+                        OnProgressChanged("正在进行 重复点检查");
+                        geometryCheck = new PointRepeatCheck(this);
+                        list.AddRange(geometryCheck.Check());
+                        break;
+                    case EnumCheckItem.G_LineRepeat:
+                        OnProgressChanged("正在进行 重复线检查");
+                        geometryCheck = new LineRepeatCheck(this);
+                        list.AddRange(geometryCheck.Check());
+                        break;
+                    case EnumCheckItem.G_Coord:
+                        OnProgressChanged("正在进行 坐标信息检查");
+                        geometryCheck = new CoordCheck(this);
+                        list.AddRange(geometryCheck.Check());
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -69,6 +86,11 @@ namespace Yutai.Check.Classes
         {
             get { return _checkPipelineList; }
             set { _checkPipelineList = value; }
+        }
+
+        public IDataCheckConfig DataCheckConfig
+        {
+            get { return _dataCheckConfig; }
         }
 
         public event EventHandler<string> ProgressChanged;

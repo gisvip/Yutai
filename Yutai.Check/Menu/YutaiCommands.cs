@@ -42,6 +42,7 @@ namespace Yutai.Check.Menu
                     //new CmdDDJC(_context, _plugin),
                     //new CmdLDJC(_context, _plugin),
                     //new CmdSXFKJC(_context, _plugin),
+                    new CmdDataCheckConfig(_context, _plugin),
                     new CmdDataCheck(_context, _plugin),
                 };
             }

@@ -1,4 +1,5 @@
-﻿using Yutai.Check.Menu;
+﻿using Yutai.Check.Classes;
+using Yutai.Check.Menu;
 using Yutai.Pipeline.Config.Concretes;
 using Yutai.Pipeline.Config.Interfaces;
 using Yutai.Plugins.Concrete;
@@ -16,6 +17,8 @@ namespace Yutai.Check
         private IAppContext _context;
         private MenuGenerator _menuGenerator;
         private IPipelineConfig _config;
+        private IDataCheckConfig _dataCheckConfig;
+
         protected override void RegisterServices(IApplicationContainer container)
         {
             CompositionRoot.Compose(container);
@@ -44,5 +47,10 @@ namespace Yutai.Check
             get { return _config; }
         }
 
+        public IDataCheckConfig DataCheckConfig
+        {
+            get { return _dataCheckConfig; }
+            set { _dataCheckConfig = value; }
+        }
     }
 }

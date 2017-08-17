@@ -71,8 +71,17 @@ namespace Yutai.Check.Classes
             List<FeatureItem> list = new List<FeatureItem>();
 
             int keyIndex = basicLayerInfo.FeatureClass.FindField(keyName);
-            if (keyIndex <= 0)
+            if (keyIndex < 0)
+            {
+                list.Add(new FeatureItem()
+                {
+                    PipelineName = pipelineName,
+                    PipeLayerName = basicLayerInfo.FeatureClass.AliasName,
+                    CheckItem = "字段重复值检查",
+                    ErrDesc = $"字段唯一值字段配置错误，字段 {keyName} 不存在",
+                });
                 return list;
+            }
             IDictionary<string, IFeature> uniqueDictionary = new Dictionary<string, IFeature>();
             IDictionary<string, int> repeatDictionary = new Dictionary<string, int>();
             IFeatureCursor featureCursor = basicLayerInfo.FeatureClass.Search(null, false);

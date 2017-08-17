@@ -18,6 +18,7 @@ namespace Yutai.Check.Classes
     public interface IDataCheck
     {
         IAppContext AppContext { get; }
+        IDataCheckConfig DataCheckConfig { get; }
         List<FeatureItem> Check(List<EnumCheckItem> items);
         List<IPipelineLayer> PipelineLayers { get; }
         List<string> CheckPipelineList { get; set; }

@@ -8,6 +8,7 @@
           <BarItem Key="Check_Pipeline_SXFKJC" Visible="true"/>
         </PageGroup>-->
         <PageGroup Key="Check_Pipeline" Caption="检查管理" Visible="true" Index="1">
+          <BarItem Key="Check_Pipeline_DataCheckConfig" Visible="true"/>
           <BarItem Key="Check_Pipeline_DataCheck" Visible="true"/>
         </PageGroup>
       </Page>

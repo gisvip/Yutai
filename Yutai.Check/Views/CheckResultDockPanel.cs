@@ -62,7 +62,7 @@ namespace Yutai.Check.Views
             get { return _featureItems; }
             set { _featureItems = value; }
         }
-        
+
         public void Initialize(IAppContext context)
         {
         }
@@ -88,31 +88,33 @@ namespace Yutai.Check.Views
             foreach (FeatureItem featureItem in featureItems)
             {
                 var expandoObject = new ExpandoObject() as IDictionary<string, System.Object>;
-                expandoObject.Add("[编号]", featureItem.OID);
                 expandoObject.Add("[图层组]", featureItem.PipelineName);
                 expandoObject.Add("[图层]", featureItem.PipeLayerName);
                 expandoObject.Add("[检查项]", featureItem.CheckItem);
                 expandoObject.Add("[检查信息]", featureItem.ErrDesc);
 
-                IFields fields = featureItem.MainFeature.Fields;
-                for (int i = 0; i < fields.FieldCount; i++)
+                if (featureItem.MainFeature != null)
                 {
-                    IField field = fields.Field[i];
-                    string strGeometry = FeatureClassUtil.GetShapeString(featureItem.MainFeature);
-                    if (field.Type == esriFieldType.esriFieldTypeGeometry)
+                    expandoObject.Add("[编号]", featureItem.OID);
+                    IFields fields = featureItem.MainFeature.Fields;
+                    for (int i = 0; i < fields.FieldCount; i++)
                     {
-                        expandoObject.Add(field.AliasName, strGeometry);
-                    }
-                    else if (field.Type != esriFieldType.esriFieldTypeBlob)
-                    {
-                        expandoObject.Add(field.AliasName, featureItem.MainFeature.Value[i]);
-                    }
-                    else
-                    {
-                        expandoObject.Add(field.AliasName, "二进制数据");
+                        IField field = fields.Field[i];
+                        string strGeometry = FeatureClassUtil.GetShapeString(featureItem.MainFeature);
+                        if (field.Type == esriFieldType.esriFieldTypeGeometry)
+                        {
+                            expandoObject.Add(field.AliasName, strGeometry);
+                        }
+                        else if (field.Type != esriFieldType.esriFieldTypeBlob)
+                        {
+                            expandoObject.Add(field.AliasName, featureItem.MainFeature.Value[i]);
+                        }
+                        else
+                        {
+                            expandoObject.Add(field.AliasName, "二进制数据");
+                        }
                     }
                 }
-
                 list.Add(expandoObject as ExpandoObject);
             }
 

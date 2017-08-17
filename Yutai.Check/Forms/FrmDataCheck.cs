@@ -16,12 +16,30 @@ namespace Yutai.Check.Forms
 {
     public partial class FrmDataCheck : Form
     {
+        private IDataCheck _dataCheck;
         public FrmDataCheck(IDataCheck dataCheck)
         {
             InitializeComponent();
+            _dataCheck = dataCheck;
             this.checkedListBoxPipelineLayers.DataSource = dataCheck.PipelineLayers;
             this.checkedListBoxPipelineLayers.DisplayMember = "Name";
             this.checkedListBoxPipelineLayers.ValueMember = "Code";
+        }
+
+        public void InitCheckItem(CheckPlugin plugin)
+        {
+            this.checkBoxFieldFull.Enabled = true;
+            this.checkBoxFieldRepeat.Enabled = true;
+
+            this.checkBoxSinglePoint.Enabled = true;
+            this.checkBoxSingleLine.Enabled = true;
+            this.checkBoxPointRepeat.Enabled = true;
+            this.checkBoxLineRepeat.Enabled = true;
+
+            if (plugin.DataCheckConfig != null)
+            {
+                this.checkBoxCoord.Enabled = true;
+            }
         }
 
         public List<EnumCheckItem> GetCheckItems()
@@ -36,6 +54,12 @@ namespace Yutai.Check.Forms
                 items.Add(EnumCheckItem.G_SinglePoint);
             if (checkBoxSingleLine.Checked)
                 items.Add(EnumCheckItem.G_SingleLine);
+            if (checkBoxPointRepeat.Checked)
+                items.Add(EnumCheckItem.G_PointRepeat);
+            if (checkBoxLineRepeat.Checked)
+                items.Add(EnumCheckItem.G_LineRepeat);
+            if (checkBoxCoord.Checked)
+                items.Add(EnumCheckItem.G_Coord);
 
             return items;
         }

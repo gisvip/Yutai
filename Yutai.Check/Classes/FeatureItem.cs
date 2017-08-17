@@ -29,6 +29,9 @@ namespace Yutai.Check.Classes
             _mainFeature = feature;
             _subFeatureItems = new List<FeatureItem>();
         }
+        public FeatureItem()
+        {
+        }
         /// <summary>
         /// 图层组名称
         /// </summary>

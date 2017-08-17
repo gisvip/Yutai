@@ -57,7 +57,7 @@ namespace Yutai.Check.Commands.CheckManager
                 };
                 _dataCheck.CheckPipelineList = _frmDataCheck.GetCheckPipeline();
                 _featureItems = _dataCheck.Check(_frmDataCheck.GetCheckItems());
-                
+
             }
             catch (Exception exception)
             {
@@ -67,9 +67,10 @@ namespace Yutai.Check.Commands.CheckManager
 
         public override void OnClick(object sender, EventArgs args)
         {
-            _dataCheck = new DataCheckBase(_context, _plugin.PipeConfig);
+            _dataCheck = new DataCheckBase(_context, _plugin.PipeConfig, _plugin.DataCheckConfig);
             if (_frmDataCheck == null)
                 _frmDataCheck = new FrmDataCheck(_dataCheck);
+            _frmDataCheck.InitCheckItem(_plugin);
             if (_frmDataCheck.ShowDialog() != DialogResult.OK)
                 return;
 

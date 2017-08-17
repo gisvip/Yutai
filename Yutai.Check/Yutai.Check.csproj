@@ -98,17 +98,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CoordCheck.cs" />
     <Compile Include="Classes\DataCheckBase.cs" />
     <Compile Include="Classes\FeatureItem.cs" />
     <Compile Include="Classes\FieldFullCheck.cs" />
     <Compile Include="Classes\FieldRepeatCheck.cs" />
     <Compile Include="Classes\IAttributeCheck.cs" />
     <Compile Include="Classes\IDataCheck.cs" />
+    <Compile Include="Classes\IDataCheckConfig.cs" />
     <Compile Include="Classes\IDataCheckRule.cs" />
     <Compile Include="Classes\IGeometryCheck.cs" />
+    <Compile Include="Classes\LineRepeatCheck.cs" />
+    <Compile Include="Classes\PointRepeatCheck.cs" />
     <Compile Include="Classes\SingleLineCheck.cs" />
     <Compile Include="Classes\SinglePointCheck.cs" />
     <Compile Include="Commands\CheckManager\CmdDataCheck.cs" />
+    <Compile Include="Commands\CheckManager\CmdDataCheckConfig.cs" />
     <Compile Include="Commands\CheckPipeline\CmdDDJC.cs" />
     <Compile Include="Commands\CheckPipeline\CmdLDJC.cs" />
     <Compile Include="Commands\CheckPipeline\CmdSXFKJC.cs" />
@@ -127,6 +132,12 @@
     </Compile>
     <Compile Include="Forms\FrmDataCheck.Designer.cs">
       <DependentUpon>FrmDataCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmDataCheckConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmDataCheckConfig.Designer.cs">
+      <DependentUpon>FrmDataCheckConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmFKJC.cs">
       <SubType>Form</SubType>
@@ -198,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmDataCheck.resx">
       <DependentUpon>FrmDataCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmDataCheckConfig.resx">
+      <DependentUpon>FrmDataCheckConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmFKJC.resx">
       <DependentUpon>FrmFKJC.cs</DependentUpon>
