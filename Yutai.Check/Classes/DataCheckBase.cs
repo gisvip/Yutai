@@ -47,6 +47,11 @@ namespace Yutai.Check.Classes
                         attributeCheck = new FieldRepeatCheck(this);
                         list.AddRange(attributeCheck.Check());
                         break;
+                    case EnumCheckItem.P_Hylink:
+                        OnProgressChanged("正在进行 超链接检查");
+                        attributeCheck = new HylinkCheck(this);
+                        list.AddRange(attributeCheck.Check());
+                        break;
                     case EnumCheckItem.G_SinglePoint:
                         OnProgressChanged("正在进行 孤立点检查");
                         geometryCheck = new SinglePointCheck(this);
@@ -70,6 +75,11 @@ namespace Yutai.Check.Classes
                     case EnumCheckItem.G_Coord:
                         OnProgressChanged("正在进行 坐标信息检查");
                         geometryCheck = new CoordCheck(this);
+                        list.AddRange(geometryCheck.Check());
+                        break;
+                    case EnumCheckItem.G_Relation:
+                        OnProgressChanged("正在进行 点线关联检查");
+                        geometryCheck = new RelationCheck(this);
                         list.AddRange(geometryCheck.Check());
                         break;
                     default:

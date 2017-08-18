@@ -103,6 +103,7 @@
     <Compile Include="Classes\FeatureItem.cs" />
     <Compile Include="Classes\FieldFullCheck.cs" />
     <Compile Include="Classes\FieldRepeatCheck.cs" />
+    <Compile Include="Classes\HylinkCheck.cs" />
     <Compile Include="Classes\IAttributeCheck.cs" />
     <Compile Include="Classes\IDataCheck.cs" />
     <Compile Include="Classes\IDataCheckConfig.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Classes\IGeometryCheck.cs" />
     <Compile Include="Classes\LineRepeatCheck.cs" />
     <Compile Include="Classes\PointRepeatCheck.cs" />
+    <Compile Include="Classes\RelationCheck.cs" />
     <Compile Include="Classes\SingleLineCheck.cs" />
     <Compile Include="Classes\SinglePointCheck.cs" />
     <Compile Include="Commands\CheckManager\CmdDataCheck.cs" />
@@ -225,7 +227,9 @@
     <EmbeddedResource Include="Forms\FrmProgress.resx">
       <DependentUpon>FrmProgress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menu\MenuLayout.xml" />
+    <EmbeddedResource Include="Menu\MenuLayout.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\CheckResultDockPanel.resx">
       <DependentUpon>CheckResultDockPanel.cs</DependentUpon>
     </EmbeddedResource>

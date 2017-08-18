@@ -30,6 +30,7 @@ namespace Yutai.Check.Forms
         {
             this.checkBoxFieldFull.Enabled = true;
             this.checkBoxFieldRepeat.Enabled = true;
+            this.checkBoxHylink.Enabled = true;
 
             this.checkBoxSinglePoint.Enabled = true;
             this.checkBoxSingleLine.Enabled = true;
@@ -40,6 +41,8 @@ namespace Yutai.Check.Forms
             {
                 this.checkBoxCoord.Enabled = true;
             }
+
+            this.checkBoxRelation.Enabled = true;
         }
 
         public List<EnumCheckItem> GetCheckItems()
@@ -50,6 +53,8 @@ namespace Yutai.Check.Forms
                 items.Add(EnumCheckItem.P_FieldFull);
             if (checkBoxFieldRepeat.Checked)
                 items.Add(EnumCheckItem.P_FieldRepeat);
+            if (checkBoxHylink.Checked)
+                items.Add(EnumCheckItem.P_Hylink);
             if (checkBoxSinglePoint.Checked)
                 items.Add(EnumCheckItem.G_SinglePoint);
             if (checkBoxSingleLine.Checked)
@@ -60,6 +65,8 @@ namespace Yutai.Check.Forms
                 items.Add(EnumCheckItem.G_LineRepeat);
             if (checkBoxCoord.Checked)
                 items.Add(EnumCheckItem.G_Coord);
+            if (checkBoxRelation.Checked)
+                items.Add(EnumCheckItem.G_Relation);
 
             return items;
         }

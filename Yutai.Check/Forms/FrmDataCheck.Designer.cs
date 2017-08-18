@@ -34,13 +34,15 @@
             this.checkBoxFieldRepeat = new System.Windows.Forms.CheckBox();
             this.checkBoxFieldFull = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkBoxRelation = new System.Windows.Forms.CheckBox();
+            this.checkBoxCoord = new System.Windows.Forms.CheckBox();
             this.checkBoxLineRepeat = new System.Windows.Forms.CheckBox();
             this.checkBoxPointRepeat = new System.Windows.Forms.CheckBox();
             this.checkBoxSingleLine = new System.Windows.Forms.CheckBox();
             this.checkBoxSinglePoint = new System.Windows.Forms.CheckBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.checkBoxCoord = new System.Windows.Forms.CheckBox();
+            this.checkBoxHylink = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -68,6 +70,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.checkBoxHylink);
             this.groupBox2.Controls.Add(this.checkBoxFieldRepeat);
             this.groupBox2.Controls.Add(this.checkBoxFieldFull);
             this.groupBox2.Location = new System.Drawing.Point(314, 12);
@@ -101,6 +104,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.checkBoxRelation);
             this.groupBox3.Controls.Add(this.checkBoxCoord);
             this.groupBox3.Controls.Add(this.checkBoxLineRepeat);
             this.groupBox3.Controls.Add(this.checkBoxPointRepeat);
@@ -112,6 +116,28 @@
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "空间检查";
+            // 
+            // checkBoxRelation
+            // 
+            this.checkBoxRelation.AutoSize = true;
+            this.checkBoxRelation.Enabled = false;
+            this.checkBoxRelation.Location = new System.Drawing.Point(264, 42);
+            this.checkBoxRelation.Name = "checkBoxRelation";
+            this.checkBoxRelation.Size = new System.Drawing.Size(72, 16);
+            this.checkBoxRelation.TabIndex = 3;
+            this.checkBoxRelation.Text = "点线关联";
+            this.checkBoxRelation.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxCoord
+            // 
+            this.checkBoxCoord.AutoSize = true;
+            this.checkBoxCoord.Enabled = false;
+            this.checkBoxCoord.Location = new System.Drawing.Point(127, 42);
+            this.checkBoxCoord.Name = "checkBoxCoord";
+            this.checkBoxCoord.Size = new System.Drawing.Size(72, 16);
+            this.checkBoxCoord.TabIndex = 3;
+            this.checkBoxCoord.Text = "坐标信息";
+            this.checkBoxCoord.UseVisualStyleBackColor = true;
             // 
             // checkBoxLineRepeat
             // 
@@ -177,16 +203,16 @@
             this.btnOK.Text = "检查";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
-            // checkBoxCoord
+            // checkBoxHylink
             // 
-            this.checkBoxCoord.AutoSize = true;
-            this.checkBoxCoord.Enabled = false;
-            this.checkBoxCoord.Location = new System.Drawing.Point(127, 42);
-            this.checkBoxCoord.Name = "checkBoxCoord";
-            this.checkBoxCoord.Size = new System.Drawing.Size(72, 16);
-            this.checkBoxCoord.TabIndex = 3;
-            this.checkBoxCoord.Text = "坐标信息";
-            this.checkBoxCoord.UseVisualStyleBackColor = true;
+            this.checkBoxHylink.AutoSize = true;
+            this.checkBoxHylink.Enabled = false;
+            this.checkBoxHylink.Location = new System.Drawing.Point(264, 20);
+            this.checkBoxHylink.Name = "checkBoxHylink";
+            this.checkBoxHylink.Size = new System.Drawing.Size(60, 16);
+            this.checkBoxHylink.TabIndex = 0;
+            this.checkBoxHylink.Text = "超链接";
+            this.checkBoxHylink.UseVisualStyleBackColor = true;
             // 
             // FrmDataCheck
             // 
@@ -228,5 +254,7 @@
         private System.Windows.Forms.CheckBox checkBoxLineRepeat;
         private System.Windows.Forms.CheckBox checkBoxPointRepeat;
         private System.Windows.Forms.CheckBox checkBoxCoord;
+        private System.Windows.Forms.CheckBox checkBoxRelation;
+        private System.Windows.Forms.CheckBox checkBoxHylink;
     }
 }
