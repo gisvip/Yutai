@@ -40,6 +40,7 @@ namespace Yutai.Check.Forms
             if (plugin.DataCheckConfig != null)
             {
                 this.checkBoxCoord.Enabled = true;
+                this.checkBoxElevation.Enabled = true;
             }
 
             this.checkBoxRelation.Enabled = true;
@@ -67,6 +68,8 @@ namespace Yutai.Check.Forms
                 items.Add(EnumCheckItem.G_Coord);
             if (checkBoxRelation.Checked)
                 items.Add(EnumCheckItem.G_Relation);
+            if (checkBoxElevation.Checked)
+                items.Add(EnumCheckItem.G_Elevation);
 
             return items;
         }

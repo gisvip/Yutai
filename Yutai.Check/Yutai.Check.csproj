@@ -100,6 +100,7 @@
   <ItemGroup>
     <Compile Include="Classes\CoordCheck.cs" />
     <Compile Include="Classes\DataCheckBase.cs" />
+    <Compile Include="Classes\ElevationCheck.cs" />
     <Compile Include="Classes\FeatureItem.cs" />
     <Compile Include="Classes\FieldFullCheck.cs" />
     <Compile Include="Classes\FieldRepeatCheck.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Controls\IGridView.cs" />
     <Compile Include="Enums\CheckResultCommand.cs" />
     <Compile Include="Enums\EnumCheckItem.cs" />
+    <Compile Include="Enums\Enums.cs" />
     <Compile Include="Forms\FrmDataCheck.cs">
       <SubType>Form</SubType>
     </Compile>

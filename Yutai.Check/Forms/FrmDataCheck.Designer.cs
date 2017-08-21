@@ -31,6 +31,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkedListBoxPipelineLayers = new System.Windows.Forms.CheckedListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBoxHylink = new System.Windows.Forms.CheckBox();
             this.checkBoxFieldRepeat = new System.Windows.Forms.CheckBox();
             this.checkBoxFieldFull = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -42,7 +43,7 @@
             this.checkBoxSinglePoint = new System.Windows.Forms.CheckBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.checkBoxHylink = new System.Windows.Forms.CheckBox();
+            this.checkBoxElevation = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -80,6 +81,17 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "属性检查";
             // 
+            // checkBoxHylink
+            // 
+            this.checkBoxHylink.AutoSize = true;
+            this.checkBoxHylink.Enabled = false;
+            this.checkBoxHylink.Location = new System.Drawing.Point(264, 20);
+            this.checkBoxHylink.Name = "checkBoxHylink";
+            this.checkBoxHylink.Size = new System.Drawing.Size(60, 16);
+            this.checkBoxHylink.TabIndex = 0;
+            this.checkBoxHylink.Text = "超链接";
+            this.checkBoxHylink.UseVisualStyleBackColor = true;
+            // 
             // checkBoxFieldRepeat
             // 
             this.checkBoxFieldRepeat.AutoSize = true;
@@ -104,6 +116,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.checkBoxElevation);
             this.groupBox3.Controls.Add(this.checkBoxRelation);
             this.groupBox3.Controls.Add(this.checkBoxCoord);
             this.groupBox3.Controls.Add(this.checkBoxLineRepeat);
@@ -203,16 +216,16 @@
             this.btnOK.Text = "检查";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
-            // checkBoxHylink
+            // checkBoxElevation
             // 
-            this.checkBoxHylink.AutoSize = true;
-            this.checkBoxHylink.Enabled = false;
-            this.checkBoxHylink.Location = new System.Drawing.Point(264, 20);
-            this.checkBoxHylink.Name = "checkBoxHylink";
-            this.checkBoxHylink.Size = new System.Drawing.Size(60, 16);
-            this.checkBoxHylink.TabIndex = 0;
-            this.checkBoxHylink.Text = "超链接";
-            this.checkBoxHylink.UseVisualStyleBackColor = true;
+            this.checkBoxElevation.AutoSize = true;
+            this.checkBoxElevation.Enabled = false;
+            this.checkBoxElevation.Location = new System.Drawing.Point(6, 64);
+            this.checkBoxElevation.Name = "checkBoxElevation";
+            this.checkBoxElevation.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxElevation.TabIndex = 3;
+            this.checkBoxElevation.Text = "高程";
+            this.checkBoxElevation.UseVisualStyleBackColor = true;
             // 
             // FrmDataCheck
             // 
@@ -256,5 +269,6 @@
         private System.Windows.Forms.CheckBox checkBoxCoord;
         private System.Windows.Forms.CheckBox checkBoxRelation;
         private System.Windows.Forms.CheckBox checkBoxHylink;
+        private System.Windows.Forms.CheckBox checkBoxElevation;
     }
 }

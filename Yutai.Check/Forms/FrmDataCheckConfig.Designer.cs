@@ -29,13 +29,23 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.numSurfaceTolerance = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.numElevationTolerance = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
+            this.numSurfaceTolerance = new System.Windows.Forms.NumericUpDown();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radioGroupElevationCheckType = new DevExpress.XtraEditors.RadioGroup();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numCompareLimit = new System.Windows.Forms.NumericUpDown();
+            this.numCompareRadius = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numSurfaceTolerance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numElevationTolerance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSurfaceTolerance)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroupElevationCheckType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCompareLimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCompareRadius)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -51,23 +61,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "空间检查设置";
             // 
-            // numSurfaceTolerance
+            // label2
             // 
-            this.numSurfaceTolerance.DecimalPlaces = 3;
-            this.numSurfaceTolerance.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
-            this.numSurfaceTolerance.Location = new System.Drawing.Point(65, 20);
-            this.numSurfaceTolerance.Name = "numSurfaceTolerance";
-            this.numSurfaceTolerance.Size = new System.Drawing.Size(120, 21);
-            this.numSurfaceTolerance.TabIndex = 0;
-            this.numSurfaceTolerance.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            196608});
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 49);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "高程容差";
             // 
             // label1
             // 
@@ -96,27 +97,124 @@
             0,
             196608});
             // 
-            // label2
+            // numSurfaceTolerance
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 49);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "高程容差";
+            this.numSurfaceTolerance.DecimalPlaces = 3;
+            this.numSurfaceTolerance.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.numSurfaceTolerance.Location = new System.Drawing.Point(65, 20);
+            this.numSurfaceTolerance.Name = "numSurfaceTolerance";
+            this.numSurfaceTolerance.Size = new System.Drawing.Size(120, 21);
+            this.numSurfaceTolerance.TabIndex = 0;
+            this.numSurfaceTolerance.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            196608});
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.radioGroupElevationCheckType);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.numCompareLimit);
+            this.groupBox2.Controls.Add(this.numCompareRadius);
+            this.groupBox2.Location = new System.Drawing.Point(217, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(280, 78);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "高程检查设置";
+            // 
+            // radioGroupElevationCheckType
+            // 
+            this.radioGroupElevationCheckType.EditValue = "UseAttribute";
+            this.radioGroupElevationCheckType.Location = new System.Drawing.Point(191, 13);
+            this.radioGroupElevationCheckType.Name = "radioGroupElevationCheckType";
+            this.radioGroupElevationCheckType.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.radioGroupElevationCheckType.Properties.Appearance.Options.UseBackColor = true;
+            this.radioGroupElevationCheckType.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.radioGroupElevationCheckType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("UseAttribute", "使用属性"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("UseZValue", "使用Z值")});
+            this.radioGroupElevationCheckType.Size = new System.Drawing.Size(88, 55);
+            this.radioGroupElevationCheckType.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "对比限值";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 22);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "对比半径";
+            // 
+            // numCompareLimit
+            // 
+            this.numCompareLimit.DecimalPlaces = 2;
+            this.numCompareLimit.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numCompareLimit.Location = new System.Drawing.Point(65, 47);
+            this.numCompareLimit.Name = "numCompareLimit";
+            this.numCompareLimit.Size = new System.Drawing.Size(120, 21);
+            this.numCompareLimit.TabIndex = 0;
+            this.numCompareLimit.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // numCompareRadius
+            // 
+            this.numCompareRadius.DecimalPlaces = 2;
+            this.numCompareRadius.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numCompareRadius.Location = new System.Drawing.Point(65, 20);
+            this.numCompareRadius.Name = "numCompareRadius";
+            this.numCompareRadius.Size = new System.Drawing.Size(120, 21);
+            this.numCompareRadius.TabIndex = 0;
+            this.numCompareRadius.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
             // 
             // FrmDataCheckConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(217, 96);
+            this.ClientSize = new System.Drawing.Size(511, 96);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmDataCheckConfig";
             this.Text = "数据检查设置";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numSurfaceTolerance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numElevationTolerance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSurfaceTolerance)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGroupElevationCheckType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCompareLimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCompareRadius)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -128,5 +226,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown numElevationTolerance;
         private System.Windows.Forms.NumericUpDown numSurfaceTolerance;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numCompareLimit;
+        private System.Windows.Forms.NumericUpDown numCompareRadius;
+        private DevExpress.XtraEditors.RadioGroup radioGroupElevationCheckType;
     }
 }

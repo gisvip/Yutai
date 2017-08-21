@@ -8,6 +8,7 @@
 // 更新时间 :  2017/08/17  15:28
 
 using System.Windows.Forms;
+using Yutai.Check.Enums;
 
 namespace Yutai.Check.Classes
 {
@@ -15,6 +16,9 @@ namespace Yutai.Check.Classes
     {
         double SurfaceTolerance { get; set; }
         double ElevationTolerance { get; set; }
+        double CompareRadius { get; set; }
+        double CompareLimit { get; set; }
+        EnumElevationCheckType ElevationCheckType { get; set; }
 
         DialogResult ShowDialog();
     }
