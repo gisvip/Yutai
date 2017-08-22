@@ -54,5 +54,17 @@ namespace Yutai.Check.Forms
                 radioGroupElevationCheckType.EditValue = Enum.GetName(typeof(EnumElevationCheckType), value);
             }
         }
+
+        public string ZxValue
+        {
+            get { return textBoxZX.Text; }
+            set { textBoxZX.Text = value; }
+        }
+
+        public string NxValue
+        {
+            get { return textBoxNX.Text; }
+            set { textBoxNX.Text = value; }
+        }
     }
 }

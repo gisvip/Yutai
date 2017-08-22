@@ -13,7 +13,7 @@ using Yutai.Pipeline.Config.Interfaces;
 
 namespace Yutai.Check.Classes
 {
-    class ElevationCheck : IAttributeCheck
+    class ElevationCheck : IGeometryCheck
     {
         private IDataCheck _dataCheck;
         public ElevationCheck(IDataCheck dataCheck)
@@ -31,7 +31,8 @@ namespace Yutai.Check.Classes
                 {
                     IBasicLayerInfo pointLayerInfo =
                         pipelineLayer.Layers.FirstOrDefault(c => c.DataType == enumPipelineDataType.Point);
-                    //list.AddRange(Check(pipelineLayer.Name, pointLayerInfo.FeatureClass, PipeConfigWordHelper.PointWords.DMZP));
+                    if (pointLayerInfo != null)
+                        list.AddRange(Check(pipelineLayer.Name, pointLayerInfo.FeatureClass, PipeConfigWordHelper.PointWords.DMGC));
                     //list.AddRange(Check(pipelineLayer.Name, pointLayerInfo.FeatureClass, PipeConfigWordHelper.PointWords.FSWZP));
                 }
             }

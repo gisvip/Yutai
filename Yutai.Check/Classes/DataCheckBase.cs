@@ -82,6 +82,16 @@ namespace Yutai.Check.Classes
                         geometryCheck = new RelationCheck(this);
                         list.AddRange(geometryCheck.Check());
                         break;
+                    case EnumCheckItem.G_Elevation:
+                        OnProgressChanged("正在进行 高程检查");
+                        geometryCheck = new ElevationCheck(this);
+                        list.AddRange(geometryCheck.Check());
+                        break;
+                    case EnumCheckItem.G_Flow:
+                        OnProgressChanged("正在进行 流向检查");
+                        geometryCheck = new FlowCheck(this);
+                        list.AddRange(geometryCheck.Check());
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

@@ -19,6 +19,8 @@ namespace Yutai.Check.Classes
         double CompareRadius { get; set; }
         double CompareLimit { get; set; }
         EnumElevationCheckType ElevationCheckType { get; set; }
+        string ZxValue { get; set; }
+        string NxValue { get; set; }
 
         DialogResult ShowDialog();
     }

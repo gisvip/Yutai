@@ -44,6 +44,7 @@ namespace Yutai.Check.Forms
             }
 
             this.checkBoxRelation.Enabled = true;
+            this.checkBoxFlow.Enabled = true;
         }
 
         public List<EnumCheckItem> GetCheckItems()
@@ -70,6 +71,8 @@ namespace Yutai.Check.Forms
                 items.Add(EnumCheckItem.G_Relation);
             if (checkBoxElevation.Checked)
                 items.Add(EnumCheckItem.G_Elevation);
+            if (checkBoxFlow.Checked)
+                items.Add(EnumCheckItem.G_Flow);
 
             return items;
         }

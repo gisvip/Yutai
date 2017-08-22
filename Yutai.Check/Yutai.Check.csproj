@@ -104,6 +104,7 @@
     <Compile Include="Classes\FeatureItem.cs" />
     <Compile Include="Classes\FieldFullCheck.cs" />
     <Compile Include="Classes\FieldRepeatCheck.cs" />
+    <Compile Include="Classes\FlowCheck.cs" />
     <Compile Include="Classes\HylinkCheck.cs" />
     <Compile Include="Classes\IAttributeCheck.cs" />
     <Compile Include="Classes\IDataCheck.cs" />

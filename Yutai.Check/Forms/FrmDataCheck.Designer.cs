@@ -35,6 +35,7 @@
             this.checkBoxFieldRepeat = new System.Windows.Forms.CheckBox();
             this.checkBoxFieldFull = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkBoxElevation = new System.Windows.Forms.CheckBox();
             this.checkBoxRelation = new System.Windows.Forms.CheckBox();
             this.checkBoxCoord = new System.Windows.Forms.CheckBox();
             this.checkBoxLineRepeat = new System.Windows.Forms.CheckBox();
@@ -43,7 +44,7 @@
             this.checkBoxSinglePoint = new System.Windows.Forms.CheckBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.checkBoxElevation = new System.Windows.Forms.CheckBox();
+            this.checkBoxFlow = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -116,6 +117,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.checkBoxFlow);
             this.groupBox3.Controls.Add(this.checkBoxElevation);
             this.groupBox3.Controls.Add(this.checkBoxRelation);
             this.groupBox3.Controls.Add(this.checkBoxCoord);
@@ -129,6 +131,17 @@
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "空间检查";
+            // 
+            // checkBoxElevation
+            // 
+            this.checkBoxElevation.AutoSize = true;
+            this.checkBoxElevation.Enabled = false;
+            this.checkBoxElevation.Location = new System.Drawing.Point(6, 64);
+            this.checkBoxElevation.Name = "checkBoxElevation";
+            this.checkBoxElevation.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxElevation.TabIndex = 3;
+            this.checkBoxElevation.Text = "高程";
+            this.checkBoxElevation.UseVisualStyleBackColor = true;
             // 
             // checkBoxRelation
             // 
@@ -216,16 +229,16 @@
             this.btnOK.Text = "检查";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
-            // checkBoxElevation
+            // checkBoxFlow
             // 
-            this.checkBoxElevation.AutoSize = true;
-            this.checkBoxElevation.Enabled = false;
-            this.checkBoxElevation.Location = new System.Drawing.Point(6, 64);
-            this.checkBoxElevation.Name = "checkBoxElevation";
-            this.checkBoxElevation.Size = new System.Drawing.Size(48, 16);
-            this.checkBoxElevation.TabIndex = 3;
-            this.checkBoxElevation.Text = "高程";
-            this.checkBoxElevation.UseVisualStyleBackColor = true;
+            this.checkBoxFlow.AutoSize = true;
+            this.checkBoxFlow.Enabled = false;
+            this.checkBoxFlow.Location = new System.Drawing.Point(127, 64);
+            this.checkBoxFlow.Name = "checkBoxFlow";
+            this.checkBoxFlow.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxFlow.TabIndex = 3;
+            this.checkBoxFlow.Text = "流向";
+            this.checkBoxFlow.UseVisualStyleBackColor = true;
             // 
             // FrmDataCheck
             // 
@@ -270,5 +283,6 @@
         private System.Windows.Forms.CheckBox checkBoxRelation;
         private System.Windows.Forms.CheckBox checkBoxHylink;
         private System.Windows.Forms.CheckBox checkBoxElevation;
+        private System.Windows.Forms.CheckBox checkBoxFlow;
     }
 }

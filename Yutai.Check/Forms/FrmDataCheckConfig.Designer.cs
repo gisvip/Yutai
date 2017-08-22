@@ -39,6 +39,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.numCompareLimit = new System.Windows.Forms.NumericUpDown();
             this.numCompareRadius = new System.Windows.Forms.NumericUpDown();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxNX = new System.Windows.Forms.TextBox();
+            this.textBoxZX = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numElevationTolerance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSurfaceTolerance)).BeginInit();
@@ -46,6 +51,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.radioGroupElevationCheckType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCompareLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCompareRadius)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -197,12 +203,60 @@
             0,
             0});
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.textBoxNX);
+            this.groupBox3.Controls.Add(this.textBoxZX);
+            this.groupBox3.Location = new System.Drawing.Point(12, 96);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(199, 78);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "流向检查设置";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 49);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "  逆向值";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 22);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "  正向值";
+            // 
+            // textBoxNX
+            // 
+            this.textBoxNX.Location = new System.Drawing.Point(65, 47);
+            this.textBoxNX.Name = "textBoxNX";
+            this.textBoxNX.Size = new System.Drawing.Size(120, 21);
+            this.textBoxNX.TabIndex = 0;
+            this.textBoxNX.Text = "1";
+            // 
+            // textBoxZX
+            // 
+            this.textBoxZX.Location = new System.Drawing.Point(65, 20);
+            this.textBoxZX.Name = "textBoxZX";
+            this.textBoxZX.Size = new System.Drawing.Size(120, 21);
+            this.textBoxZX.TabIndex = 0;
+            this.textBoxZX.Text = "0";
+            // 
             // FrmDataCheckConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 96);
+            this.ClientSize = new System.Drawing.Size(511, 182);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmDataCheckConfig";
             this.Text = "数据检查设置";
@@ -215,6 +269,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.radioGroupElevationCheckType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCompareLimit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCompareRadius)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -232,5 +288,10 @@
         private System.Windows.Forms.NumericUpDown numCompareLimit;
         private System.Windows.Forms.NumericUpDown numCompareRadius;
         private DevExpress.XtraEditors.RadioGroup radioGroupElevationCheckType;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBoxNX;
+        private System.Windows.Forms.TextBox textBoxZX;
     }
 }
