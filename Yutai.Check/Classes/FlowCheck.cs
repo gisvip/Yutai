@@ -34,7 +34,7 @@ namespace Yutai.Check.Classes
                         pipelineLayer.Layers.FirstOrDefault(c => c.DataType == enumPipelineDataType.Line);
                     if (pointLayerInfo == null || lineLayerInfo == null || pointLayerInfo.FeatureClass == null || lineLayerInfo.FeatureClass == null)
                         continue;
-                    //list.AddRange(Check(pipelineLayer.Name, pointLayerInfo.FeatureClass, lineLayerInfo.FeatureClass, PipeConfigWordHelper.PointWords.GDBH, PipeConfigWordHelper.LineWords.QDBH, PipeConfigWordHelper.LineWords.ZDBH));
+                    list.AddRange(Check(pipelineLayer.Name, lineLayerInfo.FeatureClass, PipeConfigWordHelper.LineWords.QDGC, PipeConfigWordHelper.LineWords.ZDGC, PipeConfigWordHelper.LineWords.GJ, PipeConfigWordHelper.LineWords.LX));
                 }
             }
 
@@ -91,7 +91,7 @@ namespace Yutai.Check.Classes
                         CheckItem = "流向检查",
                         ErrDesc = "字段属性错误 字段 " + (string.IsNullOrWhiteSpace(lx) ? lxFieldName + " " : "") + (double.IsNaN(qdgc) ? qdgcFieldName + " " : "") + (double.IsNaN(zdgc) ? zdgcFieldName + " " : "") + (double.IsNaN(gj) ? gjFieldName + " " : "") + "属性为空或格式错误",
                     });
-                    return list;
+                    continue;
                 }
 
                 if (lx != _dataCheck.DataCheckConfig.ZxValue || lx != _dataCheck.DataCheckConfig.NxValue)
@@ -103,7 +103,7 @@ namespace Yutai.Check.Classes
                         CheckItem = "流向检查",
                         ErrDesc = "流向字段值格式错误",
                     });
-                    return list;
+                    continue;
                 }
 
                 if (lx == _dataCheck.DataCheckConfig.ZxValue)
@@ -120,7 +120,7 @@ namespace Yutai.Check.Classes
                             CheckItem = "流向检查",
                             ErrDesc = (isGcyc ? "高程异常 " : "") + (isGjyc ? "管径异常 " : ""),
                         });
-                        return list;
+                        continue;
                     }
                 }
                 if (lx == _dataCheck.DataCheckConfig.NxValue)
@@ -137,7 +137,7 @@ namespace Yutai.Check.Classes
                             CheckItem = "流向检查",
                             ErrDesc = (isGcyc ? "高程异常 " : "") + (isGjyc ? "管径异常 " : ""),
                         });
-                        return list;
+                        continue;
                     }
                 }
             }

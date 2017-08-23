@@ -35,6 +35,7 @@
             this.checkBoxFieldRepeat = new System.Windows.Forms.CheckBox();
             this.checkBoxFieldFull = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkBoxFlow = new System.Windows.Forms.CheckBox();
             this.checkBoxElevation = new System.Windows.Forms.CheckBox();
             this.checkBoxRelation = new System.Windows.Forms.CheckBox();
             this.checkBoxCoord = new System.Windows.Forms.CheckBox();
@@ -44,7 +45,7 @@
             this.checkBoxSinglePoint = new System.Windows.Forms.CheckBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.checkBoxFlow = new System.Windows.Forms.CheckBox();
+            this.checkBoxIntersect = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -119,6 +120,7 @@
             // 
             this.groupBox3.Controls.Add(this.checkBoxFlow);
             this.groupBox3.Controls.Add(this.checkBoxElevation);
+            this.groupBox3.Controls.Add(this.checkBoxIntersect);
             this.groupBox3.Controls.Add(this.checkBoxRelation);
             this.groupBox3.Controls.Add(this.checkBoxCoord);
             this.groupBox3.Controls.Add(this.checkBoxLineRepeat);
@@ -131,6 +133,17 @@
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "空间检查";
+            // 
+            // checkBoxFlow
+            // 
+            this.checkBoxFlow.AutoSize = true;
+            this.checkBoxFlow.Enabled = false;
+            this.checkBoxFlow.Location = new System.Drawing.Point(127, 64);
+            this.checkBoxFlow.Name = "checkBoxFlow";
+            this.checkBoxFlow.Size = new System.Drawing.Size(48, 16);
+            this.checkBoxFlow.TabIndex = 3;
+            this.checkBoxFlow.Text = "流向";
+            this.checkBoxFlow.UseVisualStyleBackColor = true;
             // 
             // checkBoxElevation
             // 
@@ -229,16 +242,16 @@
             this.btnOK.Text = "检查";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
-            // checkBoxFlow
+            // checkBoxIntersect
             // 
-            this.checkBoxFlow.AutoSize = true;
-            this.checkBoxFlow.Enabled = false;
-            this.checkBoxFlow.Location = new System.Drawing.Point(127, 64);
-            this.checkBoxFlow.Name = "checkBoxFlow";
-            this.checkBoxFlow.Size = new System.Drawing.Size(48, 16);
-            this.checkBoxFlow.TabIndex = 3;
-            this.checkBoxFlow.Text = "流向";
-            this.checkBoxFlow.UseVisualStyleBackColor = true;
+            this.checkBoxIntersect.AutoSize = true;
+            this.checkBoxIntersect.Enabled = false;
+            this.checkBoxIntersect.Location = new System.Drawing.Point(264, 64);
+            this.checkBoxIntersect.Name = "checkBoxIntersect";
+            this.checkBoxIntersect.Size = new System.Drawing.Size(72, 16);
+            this.checkBoxIntersect.TabIndex = 3;
+            this.checkBoxIntersect.Text = "管线交叉";
+            this.checkBoxIntersect.UseVisualStyleBackColor = true;
             // 
             // FrmDataCheck
             // 
@@ -284,5 +297,6 @@
         private System.Windows.Forms.CheckBox checkBoxHylink;
         private System.Windows.Forms.CheckBox checkBoxElevation;
         private System.Windows.Forms.CheckBox checkBoxFlow;
+        private System.Windows.Forms.CheckBox checkBoxIntersect;
     }
 }

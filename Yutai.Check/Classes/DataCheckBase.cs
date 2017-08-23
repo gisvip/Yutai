@@ -92,6 +92,11 @@ namespace Yutai.Check.Classes
                         geometryCheck = new FlowCheck(this);
                         list.AddRange(geometryCheck.Check());
                         break;
+                    case EnumCheckItem.G_Intersect:
+                        OnProgressChanged("正在进行 管线交叉检查");
+                        geometryCheck = new IntersectCheck(this);
+                        list.AddRange(geometryCheck.Check());
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

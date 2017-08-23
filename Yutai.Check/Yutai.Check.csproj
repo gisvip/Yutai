@@ -111,6 +111,7 @@
     <Compile Include="Classes\IDataCheckConfig.cs" />
     <Compile Include="Classes\IDataCheckRule.cs" />
     <Compile Include="Classes\IGeometryCheck.cs" />
+    <Compile Include="Classes\IntersectCheck.cs" />
     <Compile Include="Classes\LineRepeatCheck.cs" />
     <Compile Include="Classes\PointRepeatCheck.cs" />
     <Compile Include="Classes\RelationCheck.cs" />
