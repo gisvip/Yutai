@@ -66,5 +66,29 @@ namespace Yutai.Check.Forms
             get { return textBoxNX.Text; }
             set { textBoxNX.Text = value; }
         }
+
+        public string StraightPnt
+        {
+            get { return textBoxStraightPnt.Text; }
+            set { textBoxStraightPnt.Text = value; }
+        }
+
+        public string ThreeConnect
+        {
+            get { return textBoxThreeConnect.Text; }
+            set { textBoxThreeConnect.Text = value; }
+        }
+
+        public string FourConnect
+        {
+            get { return textBoxFourConnect.Text; }
+            set { textBoxFourConnect.Text = value; }
+        }
+
+        public string MultiConnect
+        {
+            get { return textBoxMultiConnect.Text; }
+            set { textBoxMultiConnect.Text = value; }
+        }
     }
 }

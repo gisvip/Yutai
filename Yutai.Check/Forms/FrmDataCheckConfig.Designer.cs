@@ -44,6 +44,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxNX = new System.Windows.Forms.TextBox();
             this.textBoxZX = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBoxStraightPnt = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxThreeConnect = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxFourConnect = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxMultiConnect = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numElevationTolerance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSurfaceTolerance)).BeginInit();
@@ -52,6 +61,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numCompareLimit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCompareRadius)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -250,11 +260,97 @@
             this.textBoxZX.TabIndex = 0;
             this.textBoxZX.Text = "0";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label10);
+            this.groupBox4.Controls.Add(this.label9);
+            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.textBoxMultiConnect);
+            this.groupBox4.Controls.Add(this.textBoxFourConnect);
+            this.groupBox4.Controls.Add(this.textBoxThreeConnect);
+            this.groupBox4.Controls.Add(this.textBoxStraightPnt);
+            this.groupBox4.Location = new System.Drawing.Point(12, 180);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(199, 131);
+            this.groupBox4.TabIndex = 1;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "特征点类型检查设置";
+            // 
+            // textBoxStraightPnt
+            // 
+            this.textBoxStraightPnt.Location = new System.Drawing.Point(65, 20);
+            this.textBoxStraightPnt.Name = "textBoxStraightPnt";
+            this.textBoxStraightPnt.Size = new System.Drawing.Size(120, 21);
+            this.textBoxStraightPnt.TabIndex = 0;
+            this.textBoxStraightPnt.Text = "直线";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(18, 23);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(41, 12);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "直线点";
+            // 
+            // textBoxThreeConnect
+            // 
+            this.textBoxThreeConnect.Location = new System.Drawing.Point(65, 47);
+            this.textBoxThreeConnect.Name = "textBoxThreeConnect";
+            this.textBoxThreeConnect.Size = new System.Drawing.Size(120, 21);
+            this.textBoxThreeConnect.TabIndex = 0;
+            this.textBoxThreeConnect.Text = "三通";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(18, 50);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(41, 12);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "三通点";
+            // 
+            // textBoxFourConnect
+            // 
+            this.textBoxFourConnect.Location = new System.Drawing.Point(65, 74);
+            this.textBoxFourConnect.Name = "textBoxFourConnect";
+            this.textBoxFourConnect.Size = new System.Drawing.Size(120, 21);
+            this.textBoxFourConnect.TabIndex = 0;
+            this.textBoxFourConnect.Text = "四通";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(18, 77);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(41, 12);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "四通点";
+            // 
+            // textBoxMultiConnect
+            // 
+            this.textBoxMultiConnect.Location = new System.Drawing.Point(65, 101);
+            this.textBoxMultiConnect.Name = "textBoxMultiConnect";
+            this.textBoxMultiConnect.Size = new System.Drawing.Size(120, 21);
+            this.textBoxMultiConnect.TabIndex = 0;
+            this.textBoxMultiConnect.Text = "多通";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(18, 104);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(41, 12);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "多通点";
+            // 
             // FrmDataCheckConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 182);
+            this.ClientSize = new System.Drawing.Size(511, 318);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
@@ -271,6 +367,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numCompareRadius)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -293,5 +391,14 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxNX;
         private System.Windows.Forms.TextBox textBoxZX;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxMultiConnect;
+        private System.Windows.Forms.TextBox textBoxFourConnect;
+        private System.Windows.Forms.TextBox textBoxThreeConnect;
+        private System.Windows.Forms.TextBox textBoxStraightPnt;
     }
 }

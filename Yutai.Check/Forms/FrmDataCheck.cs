@@ -42,6 +42,7 @@ namespace Yutai.Check.Forms
                 this.checkBoxCoord.Enabled = true;
                 this.checkBoxElevation.Enabled = true;
                 this.checkBoxIntersect.Enabled = true;
+                this.checkBoxFeature.Enabled = true;
             }
 
             this.checkBoxRelation.Enabled = true;
@@ -76,6 +77,8 @@ namespace Yutai.Check.Forms
                 items.Add(EnumCheckItem.G_Flow);
             if (checkBoxIntersect.Checked)
                 items.Add(EnumCheckItem.G_Intersect);
+            if (checkBoxFeature.Checked)
+                items.Add(EnumCheckItem.G_Feature);
 
             return items;
         }

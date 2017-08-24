@@ -101,6 +101,7 @@
     <Compile Include="Classes\CoordCheck.cs" />
     <Compile Include="Classes\DataCheckBase.cs" />
     <Compile Include="Classes\ElevationCheck.cs" />
+    <Compile Include="Classes\FeatureCheck.cs" />
     <Compile Include="Classes\FeatureItem.cs" />
     <Compile Include="Classes\FieldFullCheck.cs" />
     <Compile Include="Classes\FieldRepeatCheck.cs" />

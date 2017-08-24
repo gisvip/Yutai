@@ -82,6 +82,11 @@ namespace Yutai.Check.Classes
                         geometryCheck = new RelationCheck(this);
                         list.AddRange(geometryCheck.Check());
                         break;
+                    case EnumCheckItem.G_Feature:
+                        OnProgressChanged("正在进行 特征点类型检查");
+                        geometryCheck = new FeatureCheck(this);
+                        list.AddRange(geometryCheck.Check());
+                        break;
                     case EnumCheckItem.G_Elevation:
                         OnProgressChanged("正在进行 高程检查");
                         geometryCheck = new ElevationCheck(this);

@@ -21,6 +21,10 @@ namespace Yutai.Check.Classes
         EnumElevationCheckType ElevationCheckType { get; set; }
         string ZxValue { get; set; }
         string NxValue { get; set; }
+        string StraightPnt { get; set; }
+        string ThreeConnect { get; set; }
+        string FourConnect { get; set; }
+        string MultiConnect { get; set; }
 
         DialogResult ShowDialog();
     }
