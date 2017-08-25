@@ -39,6 +39,7 @@ namespace Yutai.Check.Forms
 
             if (plugin.DataCheckConfig != null)
             {
+                this.checkBoxStandardization.Enabled = true;
                 this.checkBoxCoord.Enabled = true;
                 this.checkBoxElevation.Enabled = true;
                 this.checkBoxIntersect.Enabled = true;
@@ -59,6 +60,8 @@ namespace Yutai.Check.Forms
                 items.Add(EnumCheckItem.P_FieldRepeat);
             if (checkBoxHylink.Checked)
                 items.Add(EnumCheckItem.P_Hylink);
+            if (checkBoxStandardization.Checked)
+                items.Add(EnumCheckItem.P_Standardization);
             if (checkBoxSinglePoint.Checked)
                 items.Add(EnumCheckItem.G_SinglePoint);
             if (checkBoxSingleLine.Checked)

@@ -52,6 +52,11 @@ namespace Yutai.Check.Classes
                         attributeCheck = new HylinkCheck(this);
                         list.AddRange(attributeCheck.Check());
                         break;
+                    case EnumCheckItem.P_Standardization:
+                        OnProgressChanged("正在进行 字段标准化检查");
+                        attributeCheck = new StandardizationCheck(this);
+                        list.AddRange(attributeCheck.Check());
+                        break;
                     case EnumCheckItem.G_SinglePoint:
                         OnProgressChanged("正在进行 孤立点检查");
                         geometryCheck = new SinglePointCheck(this);

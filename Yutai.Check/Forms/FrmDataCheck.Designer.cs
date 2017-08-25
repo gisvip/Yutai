@@ -36,6 +36,7 @@
             this.checkBoxFieldFull = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.checkBoxFlow = new System.Windows.Forms.CheckBox();
+            this.checkBoxFeature = new System.Windows.Forms.CheckBox();
             this.checkBoxElevation = new System.Windows.Forms.CheckBox();
             this.checkBoxIntersect = new System.Windows.Forms.CheckBox();
             this.checkBoxRelation = new System.Windows.Forms.CheckBox();
@@ -46,7 +47,7 @@
             this.checkBoxSinglePoint = new System.Windows.Forms.CheckBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.checkBoxFeature = new System.Windows.Forms.CheckBox();
+            this.checkBoxStandardization = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -76,10 +77,11 @@
             // 
             this.groupBox2.Controls.Add(this.checkBoxHylink);
             this.groupBox2.Controls.Add(this.checkBoxFieldRepeat);
+            this.groupBox2.Controls.Add(this.checkBoxStandardization);
             this.groupBox2.Controls.Add(this.checkBoxFieldFull);
             this.groupBox2.Location = new System.Drawing.Point(314, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(386, 58);
+            this.groupBox2.Size = new System.Drawing.Size(386, 74);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "属性检查";
@@ -129,7 +131,7 @@
             this.groupBox3.Controls.Add(this.checkBoxPointRepeat);
             this.groupBox3.Controls.Add(this.checkBoxSingleLine);
             this.groupBox3.Controls.Add(this.checkBoxSinglePoint);
-            this.groupBox3.Location = new System.Drawing.Point(314, 76);
+            this.groupBox3.Location = new System.Drawing.Point(314, 92);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(386, 114);
             this.groupBox3.TabIndex = 1;
@@ -146,6 +148,17 @@
             this.checkBoxFlow.TabIndex = 3;
             this.checkBoxFlow.Text = "流向";
             this.checkBoxFlow.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxFeature
+            // 
+            this.checkBoxFeature.AutoSize = true;
+            this.checkBoxFeature.Enabled = false;
+            this.checkBoxFeature.Location = new System.Drawing.Point(6, 64);
+            this.checkBoxFeature.Name = "checkBoxFeature";
+            this.checkBoxFeature.Size = new System.Drawing.Size(60, 16);
+            this.checkBoxFeature.TabIndex = 3;
+            this.checkBoxFeature.Text = "特征点";
+            this.checkBoxFeature.UseVisualStyleBackColor = true;
             // 
             // checkBoxElevation
             // 
@@ -255,16 +268,16 @@
             this.btnOK.Text = "检查";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
-            // checkBoxFeature
+            // checkBoxStandardization
             // 
-            this.checkBoxFeature.AutoSize = true;
-            this.checkBoxFeature.Enabled = false;
-            this.checkBoxFeature.Location = new System.Drawing.Point(6, 64);
-            this.checkBoxFeature.Name = "checkBoxFeature";
-            this.checkBoxFeature.Size = new System.Drawing.Size(60, 16);
-            this.checkBoxFeature.TabIndex = 3;
-            this.checkBoxFeature.Text = "特征点";
-            this.checkBoxFeature.UseVisualStyleBackColor = true;
+            this.checkBoxStandardization.AutoSize = true;
+            this.checkBoxStandardization.Enabled = false;
+            this.checkBoxStandardization.Location = new System.Drawing.Point(6, 42);
+            this.checkBoxStandardization.Name = "checkBoxStandardization";
+            this.checkBoxStandardization.Size = new System.Drawing.Size(84, 16);
+            this.checkBoxStandardization.TabIndex = 0;
+            this.checkBoxStandardization.Text = "字段标准化";
+            this.checkBoxStandardization.UseVisualStyleBackColor = true;
             // 
             // FrmDataCheck
             // 
@@ -312,5 +325,6 @@
         private System.Windows.Forms.CheckBox checkBoxFlow;
         private System.Windows.Forms.CheckBox checkBoxIntersect;
         private System.Windows.Forms.CheckBox checkBoxFeature;
+        private System.Windows.Forms.CheckBox checkBoxStandardization;
     }
 }

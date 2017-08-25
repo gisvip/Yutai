@@ -100,6 +100,7 @@
   <ItemGroup>
     <Compile Include="Classes\CoordCheck.cs" />
     <Compile Include="Classes\DataCheckBase.cs" />
+    <Compile Include="Classes\DomainItem.cs" />
     <Compile Include="Classes\ElevationCheck.cs" />
     <Compile Include="Classes\FeatureCheck.cs" />
     <Compile Include="Classes\FeatureItem.cs" />
@@ -113,11 +114,13 @@
     <Compile Include="Classes\IDataCheckRule.cs" />
     <Compile Include="Classes\IGeometryCheck.cs" />
     <Compile Include="Classes\IntersectCheck.cs" />
+    <Compile Include="Classes\ISelectField.cs" />
     <Compile Include="Classes\LineRepeatCheck.cs" />
     <Compile Include="Classes\PointRepeatCheck.cs" />
     <Compile Include="Classes\RelationCheck.cs" />
     <Compile Include="Classes\SingleLineCheck.cs" />
     <Compile Include="Classes\SinglePointCheck.cs" />
+    <Compile Include="Classes\StandardizationCheck.cs" />
     <Compile Include="Commands\CheckManager\CmdDataCheck.cs" />
     <Compile Include="Commands\CheckManager\CmdDataCheckConfig.cs" />
     <Compile Include="Commands\CheckPipeline\CmdDDJC.cs" />
@@ -169,6 +172,12 @@
     </Compile>
     <Compile Include="Forms\FrmProgress.Designer.cs">
       <DependentUpon>FrmProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmSelectField.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmSelectField.Designer.cs">
+      <DependentUpon>FrmSelectField.cs</DependentUpon>
     </Compile>
     <Compile Include="Menu\MenuGenerator.cs" />
     <Compile Include="Menu\YutaiCommands.cs" />
@@ -232,6 +241,9 @@
     <EmbeddedResource Include="Forms\FrmProgress.resx">
       <DependentUpon>FrmProgress.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmSelectField.resx">
+      <DependentUpon>FrmSelectField.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Menu\MenuLayout.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -239,7 +251,9 @@
       <DependentUpon>CheckResultDockPanel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="CheckConfig.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

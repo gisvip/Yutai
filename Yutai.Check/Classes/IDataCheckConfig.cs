@@ -7,6 +7,8 @@
 // 创建时间 :  2017/08/17  15:28
 // 更新时间 :  2017/08/17  15:28
 
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 using Yutai.Check.Enums;
 
@@ -14,6 +16,7 @@ namespace Yutai.Check.Classes
 {
     public interface IDataCheckConfig
     {
+        void LoadXml();
         double SurfaceTolerance { get; set; }
         double ElevationTolerance { get; set; }
         double CompareRadius { get; set; }
@@ -25,7 +28,10 @@ namespace Yutai.Check.Classes
         string ThreeConnect { get; set; }
         string FourConnect { get; set; }
         string MultiConnect { get; set; }
+        BindingList<DomainItem> DomainItems { get; set; }
 
         DialogResult ShowDialog();
+        void Save();
+        void SaveToXml(string filePath);
     }
 }
