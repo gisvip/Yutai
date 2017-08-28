@@ -100,6 +100,7 @@
   <ItemGroup>
     <Compile Include="Classes\CoordCheck.cs" />
     <Compile Include="Classes\DataCheckBase.cs" />
+    <Compile Include="Classes\DepthCheck.cs" />
     <Compile Include="Classes\DomainItem.cs" />
     <Compile Include="Classes\ElevationCheck.cs" />
     <Compile Include="Classes\FeatureCheck.cs" />
@@ -116,6 +117,8 @@
     <Compile Include="Classes\IntersectCheck.cs" />
     <Compile Include="Classes\ISelectField.cs" />
     <Compile Include="Classes\LineRepeatCheck.cs" />
+    <Compile Include="Classes\MaxLengthCheck.cs" />
+    <Compile Include="Classes\MinimumSpacingCheck.cs" />
     <Compile Include="Classes\PointRepeatCheck.cs" />
     <Compile Include="Classes\RelationCheck.cs" />
     <Compile Include="Classes\SingleLineCheck.cs" />

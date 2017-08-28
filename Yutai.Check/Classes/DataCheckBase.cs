@@ -57,6 +57,16 @@ namespace Yutai.Check.Classes
                         attributeCheck = new StandardizationCheck(this);
                         list.AddRange(attributeCheck.Check());
                         break;
+                    case EnumCheckItem.P_MaxLength:
+                        OnProgressChanged("正在进行 管线最大长度检查");
+                        attributeCheck = new MaxLengthCheck(this);
+                        list.AddRange(attributeCheck.Check());
+                        break;
+                    case EnumCheckItem.P_Depth:
+                        OnProgressChanged("正在进行 地下埋深取值检查");
+                        attributeCheck = new DepthCheck(this);
+                        list.AddRange(attributeCheck.Check());
+                        break;
                     case EnumCheckItem.G_SinglePoint:
                         OnProgressChanged("正在进行 孤立点检查");
                         geometryCheck = new SinglePointCheck(this);
@@ -80,6 +90,11 @@ namespace Yutai.Check.Classes
                     case EnumCheckItem.G_Coord:
                         OnProgressChanged("正在进行 坐标信息检查");
                         geometryCheck = new CoordCheck(this);
+                        list.AddRange(geometryCheck.Check());
+                        break;
+                    case EnumCheckItem.G_MinimumSpacing:
+                        OnProgressChanged("正在进行 最小间距检查");
+                        geometryCheck = new MinimumSpacingCheck(this);
                         list.AddRange(geometryCheck.Check());
                         break;
                     case EnumCheckItem.G_Relation:

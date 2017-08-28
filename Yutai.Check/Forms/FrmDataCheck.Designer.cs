@@ -33,10 +33,14 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBoxHylink = new System.Windows.Forms.CheckBox();
             this.checkBoxFieldRepeat = new System.Windows.Forms.CheckBox();
+            this.checkBoxDepth = new System.Windows.Forms.CheckBox();
+            this.checkBoxMaxLength = new System.Windows.Forms.CheckBox();
+            this.checkBoxStandardization = new System.Windows.Forms.CheckBox();
             this.checkBoxFieldFull = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.checkBoxFlow = new System.Windows.Forms.CheckBox();
             this.checkBoxFeature = new System.Windows.Forms.CheckBox();
+            this.checkBoxMinimumSpacing = new System.Windows.Forms.CheckBox();
             this.checkBoxElevation = new System.Windows.Forms.CheckBox();
             this.checkBoxIntersect = new System.Windows.Forms.CheckBox();
             this.checkBoxRelation = new System.Windows.Forms.CheckBox();
@@ -47,7 +51,6 @@
             this.checkBoxSinglePoint = new System.Windows.Forms.CheckBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
-            this.checkBoxStandardization = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -77,11 +80,13 @@
             // 
             this.groupBox2.Controls.Add(this.checkBoxHylink);
             this.groupBox2.Controls.Add(this.checkBoxFieldRepeat);
+            this.groupBox2.Controls.Add(this.checkBoxDepth);
+            this.groupBox2.Controls.Add(this.checkBoxMaxLength);
             this.groupBox2.Controls.Add(this.checkBoxStandardization);
             this.groupBox2.Controls.Add(this.checkBoxFieldFull);
             this.groupBox2.Location = new System.Drawing.Point(314, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(386, 74);
+            this.groupBox2.Size = new System.Drawing.Size(386, 75);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "属性检查";
@@ -108,6 +113,39 @@
             this.checkBoxFieldRepeat.Text = "字段重复值";
             this.checkBoxFieldRepeat.UseVisualStyleBackColor = true;
             // 
+            // checkBoxDepth
+            // 
+            this.checkBoxDepth.AutoSize = true;
+            this.checkBoxDepth.Enabled = false;
+            this.checkBoxDepth.Location = new System.Drawing.Point(264, 42);
+            this.checkBoxDepth.Name = "checkBoxDepth";
+            this.checkBoxDepth.Size = new System.Drawing.Size(96, 16);
+            this.checkBoxDepth.TabIndex = 0;
+            this.checkBoxDepth.Text = "地下埋深取值";
+            this.checkBoxDepth.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxMaxLength
+            // 
+            this.checkBoxMaxLength.AutoSize = true;
+            this.checkBoxMaxLength.Enabled = false;
+            this.checkBoxMaxLength.Location = new System.Drawing.Point(127, 42);
+            this.checkBoxMaxLength.Name = "checkBoxMaxLength";
+            this.checkBoxMaxLength.Size = new System.Drawing.Size(96, 16);
+            this.checkBoxMaxLength.TabIndex = 0;
+            this.checkBoxMaxLength.Text = "管线最大长度";
+            this.checkBoxMaxLength.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxStandardization
+            // 
+            this.checkBoxStandardization.AutoSize = true;
+            this.checkBoxStandardization.Enabled = false;
+            this.checkBoxStandardization.Location = new System.Drawing.Point(6, 42);
+            this.checkBoxStandardization.Name = "checkBoxStandardization";
+            this.checkBoxStandardization.Size = new System.Drawing.Size(84, 16);
+            this.checkBoxStandardization.TabIndex = 0;
+            this.checkBoxStandardization.Text = "字段标准化";
+            this.checkBoxStandardization.UseVisualStyleBackColor = true;
+            // 
             // checkBoxFieldFull
             // 
             this.checkBoxFieldFull.AutoSize = true;
@@ -123,6 +161,7 @@
             // 
             this.groupBox3.Controls.Add(this.checkBoxFlow);
             this.groupBox3.Controls.Add(this.checkBoxFeature);
+            this.groupBox3.Controls.Add(this.checkBoxMinimumSpacing);
             this.groupBox3.Controls.Add(this.checkBoxElevation);
             this.groupBox3.Controls.Add(this.checkBoxIntersect);
             this.groupBox3.Controls.Add(this.checkBoxRelation);
@@ -131,7 +170,7 @@
             this.groupBox3.Controls.Add(this.checkBoxPointRepeat);
             this.groupBox3.Controls.Add(this.checkBoxSingleLine);
             this.groupBox3.Controls.Add(this.checkBoxSinglePoint);
-            this.groupBox3.Location = new System.Drawing.Point(314, 92);
+            this.groupBox3.Location = new System.Drawing.Point(314, 93);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(386, 114);
             this.groupBox3.TabIndex = 1;
@@ -142,7 +181,7 @@
             // 
             this.checkBoxFlow.AutoSize = true;
             this.checkBoxFlow.Enabled = false;
-            this.checkBoxFlow.Location = new System.Drawing.Point(264, 64);
+            this.checkBoxFlow.Location = new System.Drawing.Point(6, 86);
             this.checkBoxFlow.Name = "checkBoxFlow";
             this.checkBoxFlow.Size = new System.Drawing.Size(48, 16);
             this.checkBoxFlow.TabIndex = 3;
@@ -153,18 +192,29 @@
             // 
             this.checkBoxFeature.AutoSize = true;
             this.checkBoxFeature.Enabled = false;
-            this.checkBoxFeature.Location = new System.Drawing.Point(6, 64);
+            this.checkBoxFeature.Location = new System.Drawing.Point(127, 64);
             this.checkBoxFeature.Name = "checkBoxFeature";
             this.checkBoxFeature.Size = new System.Drawing.Size(60, 16);
             this.checkBoxFeature.TabIndex = 3;
             this.checkBoxFeature.Text = "特征点";
             this.checkBoxFeature.UseVisualStyleBackColor = true;
             // 
+            // checkBoxMinimumSpacing
+            // 
+            this.checkBoxMinimumSpacing.AutoSize = true;
+            this.checkBoxMinimumSpacing.Enabled = false;
+            this.checkBoxMinimumSpacing.Location = new System.Drawing.Point(264, 42);
+            this.checkBoxMinimumSpacing.Name = "checkBoxMinimumSpacing";
+            this.checkBoxMinimumSpacing.Size = new System.Drawing.Size(72, 16);
+            this.checkBoxMinimumSpacing.TabIndex = 3;
+            this.checkBoxMinimumSpacing.Text = "最小间距";
+            this.checkBoxMinimumSpacing.UseVisualStyleBackColor = true;
+            // 
             // checkBoxElevation
             // 
             this.checkBoxElevation.AutoSize = true;
             this.checkBoxElevation.Enabled = false;
-            this.checkBoxElevation.Location = new System.Drawing.Point(127, 64);
+            this.checkBoxElevation.Location = new System.Drawing.Point(264, 64);
             this.checkBoxElevation.Name = "checkBoxElevation";
             this.checkBoxElevation.Size = new System.Drawing.Size(48, 16);
             this.checkBoxElevation.TabIndex = 3;
@@ -175,7 +225,7 @@
             // 
             this.checkBoxIntersect.AutoSize = true;
             this.checkBoxIntersect.Enabled = false;
-            this.checkBoxIntersect.Location = new System.Drawing.Point(6, 86);
+            this.checkBoxIntersect.Location = new System.Drawing.Point(127, 86);
             this.checkBoxIntersect.Name = "checkBoxIntersect";
             this.checkBoxIntersect.Size = new System.Drawing.Size(72, 16);
             this.checkBoxIntersect.TabIndex = 3;
@@ -186,7 +236,7 @@
             // 
             this.checkBoxRelation.AutoSize = true;
             this.checkBoxRelation.Enabled = false;
-            this.checkBoxRelation.Location = new System.Drawing.Point(264, 42);
+            this.checkBoxRelation.Location = new System.Drawing.Point(6, 64);
             this.checkBoxRelation.Name = "checkBoxRelation";
             this.checkBoxRelation.Size = new System.Drawing.Size(72, 16);
             this.checkBoxRelation.TabIndex = 3;
@@ -268,17 +318,6 @@
             this.btnOK.Text = "检查";
             this.btnOK.UseVisualStyleBackColor = true;
             // 
-            // checkBoxStandardization
-            // 
-            this.checkBoxStandardization.AutoSize = true;
-            this.checkBoxStandardization.Enabled = false;
-            this.checkBoxStandardization.Location = new System.Drawing.Point(6, 42);
-            this.checkBoxStandardization.Name = "checkBoxStandardization";
-            this.checkBoxStandardization.Size = new System.Drawing.Size(84, 16);
-            this.checkBoxStandardization.TabIndex = 0;
-            this.checkBoxStandardization.Text = "字段标准化";
-            this.checkBoxStandardization.UseVisualStyleBackColor = true;
-            // 
             // FrmDataCheck
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -326,5 +365,8 @@
         private System.Windows.Forms.CheckBox checkBoxIntersect;
         private System.Windows.Forms.CheckBox checkBoxFeature;
         private System.Windows.Forms.CheckBox checkBoxStandardization;
+        private System.Windows.Forms.CheckBox checkBoxMinimumSpacing;
+        private System.Windows.Forms.CheckBox checkBoxDepth;
+        private System.Windows.Forms.CheckBox checkBoxMaxLength;
     }
 }

@@ -10,6 +10,7 @@ using ESRI.ArcGIS.Geometry;
 using Yutai.Check.Enums;
 using Yutai.Pipeline.Config.Helpers;
 using Yutai.Pipeline.Config.Interfaces;
+using Yutai.Pipeline.Editor.Helper;
 
 namespace Yutai.Check.Classes
 {
@@ -33,7 +34,6 @@ namespace Yutai.Check.Classes
                         pipelineLayer.Layers.FirstOrDefault(c => c.DataType == enumPipelineDataType.Point);
                     if (pointLayerInfo != null)
                         list.AddRange(Check(pipelineLayer.Name, pointLayerInfo.FeatureClass, PipeConfigWordHelper.PointWords.DMGC));
-                    //list.AddRange(Check(pipelineLayer.Name, pointLayerInfo.FeatureClass, PipeConfigWordHelper.PointWords.FSWZP));
                 }
             }
 
@@ -74,29 +74,7 @@ namespace Yutai.Check.Classes
                 double z;
                 if (_dataCheck.DataCheckConfig.ElevationCheckType == EnumElevationCheckType.UseAttribute)
                 {
-                    object value = feature.Value[idx];
-                    if (value == null || value is DBNull || string.IsNullOrWhiteSpace(value.ToString()))
-                    {
-                        list.Add(new FeatureItem(feature)
-                        {
-                            PipelineName = pipelineName,
-                            PipeLayerName = featureClass.AliasName,
-                            CheckItem = "高程检查",
-                            ErrDesc = "属性为空",
-                        });
-                        continue;
-                    }
-                    if (double.TryParse(value.ToString(), out z) == false)
-                    {
-                        list.Add(new FeatureItem(feature)
-                        {
-                            PipelineName = pipelineName,
-                            PipeLayerName = featureClass.AliasName,
-                            CheckItem = "高程检查",
-                            ErrDesc = "属性填写错误",
-                        });
-                        continue;
-                    }
+                    z = CommonHelper.ConvertToDouble(feature.Value[idx]);
                 }
                 else
                 {
@@ -113,6 +91,17 @@ namespace Yutai.Check.Classes
                         ErrDesc = "高程为空",
                     });
                     continue;
+                }
+                if (z < _dataCheck.DataCheckConfig.GroundElevationMin ||
+                    z > _dataCheck.DataCheckConfig.GroundElevationMax)
+                {
+                    list.Add(new FeatureItem(feature)
+                    {
+                        PipelineName = pipelineName,
+                        PipeLayerName = featureClass.AliasName,
+                        CheckItem = "高程检查",
+                        ErrDesc = $"高程为 {z},不在范围内",
+                    });
                 }
                 if (IsUnusual(featureClass, point, z, feature.OID, idx))
                 {

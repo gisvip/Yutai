@@ -29,6 +29,13 @@ namespace Yutai.Check.Classes
         string FourConnect { get; set; }
         string MultiConnect { get; set; }
         BindingList<DomainItem> DomainItems { get; set; }
+        double PointMinimumSpacing { get; set; }
+        double LineMinimumSpacing { get; set; }
+        double MaxLength { get; set; }
+        double GroundElevationMin { get; set; }
+        double GroundElevationMax { get; set; }
+        double DepthMin { get; set; }
+        double DepthMax { get; set; }
 
         DialogResult ShowDialog();
         void Save();

@@ -39,6 +39,9 @@ namespace Yutai.Check.Forms
 
             if (plugin.DataCheckConfig != null)
             {
+                this.checkBoxMaxLength.Enabled = true;
+                this.checkBoxDepth.Enabled = true;
+                this.checkBoxMinimumSpacing.Enabled = true;
                 this.checkBoxStandardization.Enabled = true;
                 this.checkBoxCoord.Enabled = true;
                 this.checkBoxElevation.Enabled = true;
@@ -62,6 +65,10 @@ namespace Yutai.Check.Forms
                 items.Add(EnumCheckItem.P_Hylink);
             if (checkBoxStandardization.Checked)
                 items.Add(EnumCheckItem.P_Standardization);
+            if (checkBoxMaxLength.Checked)
+                items.Add(EnumCheckItem.P_MaxLength);
+            if (checkBoxDepth.Enabled)
+                items.Add(EnumCheckItem.P_Depth);
             if (checkBoxSinglePoint.Checked)
                 items.Add(EnumCheckItem.G_SinglePoint);
             if (checkBoxSingleLine.Checked)
@@ -72,6 +79,8 @@ namespace Yutai.Check.Forms
                 items.Add(EnumCheckItem.G_LineRepeat);
             if (checkBoxCoord.Checked)
                 items.Add(EnumCheckItem.G_Coord);
+            if (checkBoxMinimumSpacing.Checked)
+                items.Add(EnumCheckItem.G_MinimumSpacing);
             if (checkBoxRelation.Checked)
                 items.Add(EnumCheckItem.G_Relation);
             if (checkBoxElevation.Checked)
