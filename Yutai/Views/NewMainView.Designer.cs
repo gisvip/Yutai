@@ -28,12 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewMainView));
             this.ribbonManager = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
-            this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
+            this.dockManager = new DevExpress.XtraBars.Docking.DockManager();
+            this.toolTipController1 = new DevExpress.Utils.ToolTipController();
             this.pageMap = new DevExpress.XtraTab.XtraTabPage();
             this.axMapControl1 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
@@ -86,8 +85,8 @@
             // 
             // pageMap
             // 
-            this.pageMap.Controls.Add(this.axMapControl1);
             this.pageMap.Controls.Add(this.axLicenseControl1);
+            this.pageMap.Controls.Add(this.axMapControl1);
             this.pageMap.Name = "pageMap";
             this.pageMap.Size = new System.Drawing.Size(1122, 574);
             this.pageMap.Text = "地图窗口";

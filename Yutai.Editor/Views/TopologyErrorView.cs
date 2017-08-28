@@ -1953,7 +1953,7 @@ namespace Yutai.Plugins.Editor.Views
             m_pEditWorkspace = Yutai.ArcGIS.Common.Editor.Editor.EditWorkspace as IWorkspace;
             TopologyLayer = CmdSelectTopology.m_TopologyLayer;
             //EditorEvent.OnStopEditing += new EditorEvent.OnStopEditingHandler(this.EditorEvent_OnStopEditing);
-            //m_pMap = _context.MapControl.Map;
+            //m_pMap = _context.FocusMap;
             //m_pActiveViewEvents = m_pMap as IActiveViewEvents_Event;
             //m_pActiveViewEvents.SelectionChanged += MPActiveViewEventsOnSelectionChanged;
             ////     (new IActiveViewEvents_SelectionChangedEventHandler(m_pActiveViewEvents_SelectionChanged));

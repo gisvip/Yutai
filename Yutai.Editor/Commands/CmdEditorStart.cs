@@ -24,11 +24,11 @@ namespace Yutai.Plugins.Editor.Commands
         {
             get
             {
-                if (_context.MapControl.Map == null)
+                if (_context.MainView.FocusMap == null)
                 {
                     return false;
                 }
-                if (_context.MapControl.Map.LayerCount == 0)
+                if (_context.MainView.FocusMap.LayerCount == 0)
                 {
                     return false;
                 }
@@ -41,7 +41,7 @@ namespace Yutai.Plugins.Editor.Commands
                 {
                     return false;
                 }
-                if ((Editor2.EditMap != null) && (Editor2.EditMap != _context.MapControl.Map))
+                if ((Editor2.EditMap != null) && (Editor2.EditMap != _context.MainView.FocusMap))
                 {
                     return false;
                 }
@@ -90,14 +90,14 @@ namespace Yutai.Plugins.Editor.Commands
             {
                 _context.ShowCommandString("正在启动编辑", CommandTipsType.CTTLog);
 
-                if (Editor2.StartEditing(_context.MapControl.Map, _context))
+                if (Editor2.StartEditing(_context.MainView.FocusMap, _context))
                 {
                     m_pEditWorkspace = Editor2.EditWorkspace;
 
                     _context.Config.IsInEdit = true;
                     _context.ShowCommandString("启动编辑", CommandTipsType.CTTEnd);
                     EditorEvent.StartEditing();
-                    //EditToolUI.EditTemplateCtrl.Map = _context.MapControl.Map;
+                    //EditToolUI.EditTemplateCtrl.Map = _context.FocusMap;
                     //base.m_HookHelper.DockWindows(EditToolUI.EditTemplateCtrl, null);
                 }
                 else
@@ -107,7 +107,7 @@ namespace Yutai.Plugins.Editor.Commands
             }
             else
             {
-                if ((Editor2.EditMap != null) && (Editor2.EditMap != _context.MapControl.Map))
+                if ((Editor2.EditMap != null) && (Editor2.EditMap != _context.MainView.FocusMap))
                 {
                     _context.ShowCommandString("已处于编辑状态", CommandTipsType.CTTEnd);
                 }

@@ -114,7 +114,7 @@ namespace Yutai.Plugins.Editor.Commands
             if (int_1 == 27)
             {
                 ifeature_0 = null;
-                _context.MapControl.Map.ClearSelection();
+                _context.FocusMap.ClearSelection();
                 if (idisplayFeedback_0 != null) idisplayFeedback_0 = null;
             }
         }

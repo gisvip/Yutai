@@ -106,15 +106,15 @@ namespace Yutai.Plugins.Editor.Commands.Topology
                     flag = false;
                 }
 
-                if (_context.MapControl.Map == null)
+                if (_context.FocusMap == null)
                 {
                     return false;
                 }
-                if (Yutai.ArcGIS.Common.Editor.Editor.EditMap == null || Yutai.ArcGIS.Common.Editor.Editor.EditMap != _context.MapControl.Map)
+                if (Yutai.ArcGIS.Common.Editor.Editor.EditMap == null || Yutai.ArcGIS.Common.Editor.Editor.EditMap != _context.FocusMap)
                 {
                     return false;
                 }
-                if (_context.MapControl.Map.LayerCount == 0)
+                if (_context.FocusMap.LayerCount == 0)
                 {
                     return false;
                 }

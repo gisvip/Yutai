@@ -25,15 +25,15 @@ namespace Yutai.Plugins.Editor.Commands
         {
             get
             {
-                if (_context.MapControl.Map == null)
+                if (_context.FocusMap == null)
                 {
                     return false;
                 }
-                if (Editor2.EditMap != null && Editor2.EditMap != _context.MapControl.Map)
+                if (Editor2.EditMap != null && Editor2.EditMap != _context.FocusMap)
                 {
                     return false;
                 }
-                if (_context.MapControl.Map.LayerCount == 0)
+                if (_context.FocusMap.LayerCount == 0)
                 {
                     if (Editor2.EditWorkspace != null)
                     {
@@ -92,8 +92,8 @@ namespace Yutai.Plugins.Editor.Commands
 
             bool hasEdits = false;
             EditorEvent.BeginStopEditing();
-            IActiveView focusMap = _context.MapControl.Map as IActiveView;
-            _context.MapControl.Map.ClearSelection();
+            IActiveView focusMap = _context.FocusMap as IActiveView;
+            _context.FocusMap.ClearSelection();
             try
             {
                 Editor2.EditWorkspace.HasEdits(ref hasEdits);

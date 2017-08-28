@@ -668,7 +668,7 @@ namespace Yutai.Plugins.Editor.Views
             EditorEvent.OnFeatureGeometryChanged +=
                 new EditorEvent.OnFeatureGeometryChangedHandler(this.EditorEvent_OnFeatureGeometryChanged);
             EditorEvent.OnStopEditing += new EditorEvent.OnStopEditingHandler(this.EditorEvent_OnStopEditing);
-            m_pMap = _context.MapControl.Map;
+            m_pMap = _context.FocusMap;
             m_pActiveViewEvents = m_pMap as IActiveViewEvents_Event;
             m_pActiveViewEvents.SelectionChanged += MPActiveViewEventsOnSelectionChanged;
             //     (new IActiveViewEvents_SelectionChangedEventHandler(m_pActiveViewEvents_SelectionChanged));

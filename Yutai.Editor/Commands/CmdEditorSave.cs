@@ -25,15 +25,15 @@ namespace Yutai.Plugins.Editor.Commands
         {
             get
             {
-                if (_context.MapControl.Map == null)
+                if (_context.FocusMap == null)
                 {
                     return false;
                 }
-                if (_context.MapControl.Map.LayerCount == 0)
+                if (_context.FocusMap.LayerCount == 0)
                 {
                     return false;
                 }
-                if ((Editor2.EditMap != null) && (Editor2.EditMap != _context.MapControl.Map))
+                if ((Editor2.EditMap != null) && (Editor2.EditMap != _context.FocusMap))
                 {
                     return false;
                 }
@@ -79,7 +79,7 @@ namespace Yutai.Plugins.Editor.Commands
             {
                 Editor2.EditWorkspace.StopEditing(true);
                 Editor2.EditWorkspace.StartEditing(true);
-                ((IActiveView) _context.MapControl.Map).Refresh();
+                ((IActiveView) _context.FocusMap).Refresh();
                 EditorEvent.SaveEditing();
             }
         }

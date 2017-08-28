@@ -27,15 +27,15 @@ namespace Yutai.Plugins.Editor.Commands
         {
             get
             {
-                if (_context.MapControl.Map == null)
+                if (_context.FocusMap == null)
                 {
                     return false;
                 }
-                if (_context.MapControl.Map.LayerCount == 0)
+                if (_context.FocusMap.LayerCount == 0)
                 {
                     return false;
                 }
-                if ((Editor2.EditMap != null) && (Editor2.EditMap != _context.MapControl.Map))
+                if ((Editor2.EditMap != null) && (Editor2.EditMap != _context.FocusMap))
                 {
                     return false;
                 }

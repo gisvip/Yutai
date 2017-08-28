@@ -86,7 +86,8 @@ namespace Yutai.Plugins.Editor.Commands
             featureSelection.Reset();
             IEnvelope envelope = featureSelection.Next().Shape.Envelope;
             envelope.Expand(10, 10, false);
-            _context.MapControl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, envelope);
+            //_context.MapControl.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, envelope);
+            _context.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, envelope);
             base.OnClick();
         }
 

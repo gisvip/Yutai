@@ -166,24 +166,24 @@ namespace Yutai.ArcGIS.Common.Editor
             double y2 = ipoint_3.Y - ipoint_2.Y;
             if (x1 != 0)
             {
-                double num2 = y1/x1;
-                double y3 = pPoint.Y - num2*pPoint.X;
+                double num2 = y1 / x1;
+                double y3 = pPoint.Y - num2 * pPoint.X;
                 if (x2 == 0)
                 {
                     x = ipoint_1.X;
-                    num1 = x*num2 + y3;
+                    num1 = x * num2 + y3;
                     pointClass = new ESRI.ArcGIS.Geometry.Point();
                     pointClass.PutCoords(x, num1);
                     point = pointClass;
                 }
                 else
                 {
-                    num = y2/x2;
-                    y = ipoint_2.Y - num*ipoint_2.X;
+                    num = y2 / x2;
+                    y = ipoint_2.Y - num * ipoint_2.X;
                     if (num2 != num)
                     {
-                        x = (y - y3)/(num2 - num);
-                        num1 = x*num2 + y3;
+                        x = (y - y3) / (num2 - num);
+                        num1 = x * num2 + y3;
                         pointClass = new ESRI.ArcGIS.Geometry.Point();
                         pointClass.PutCoords(x, num1);
                         point = pointClass;
@@ -200,10 +200,10 @@ namespace Yutai.ArcGIS.Common.Editor
             }
             else
             {
-                num = y2/x2;
-                y = ipoint_2.Y - num*ipoint_2.X;
+                num = y2 / x2;
+                y = ipoint_2.Y - num * ipoint_2.X;
                 x = pPoint.X;
-                num1 = x*num + y;
+                num1 = x * num + y;
                 pointClass = new ESRI.ArcGIS.Geometry.Point();
                 pointClass.PutCoords(x, num1);
                 point = pointClass;
@@ -516,7 +516,7 @@ namespace Yutai.ArcGIS.Common.Editor
             int num1 = 0;
             if (ilayer_0 is IGroupLayer)
             {
-                ICompositeLayer ilayer0 = (ICompositeLayer) ilayer_0;
+                ICompositeLayer ilayer0 = (ICompositeLayer)ilayer_0;
                 for (int i = 0; i < ilayer0.Count; i++)
                 {
                     num1 = num1 + Editor.CheckStartEditing(ilayer0.Layer[i], ref string_0);
@@ -524,13 +524,13 @@ namespace Yutai.ArcGIS.Common.Editor
             }
             else if (ilayer_0 is IFeatureLayer)
             {
-                IFeatureLayer featureLayer = (IFeatureLayer) ilayer_0;
+                IFeatureLayer featureLayer = (IFeatureLayer)ilayer_0;
                 if (featureLayer.FeatureClass == null)
                 {
                     num = num1;
                     return num;
                 }
-                IDataset featureClass = (IDataset) featureLayer.FeatureClass;
+                IDataset featureClass = (IDataset)featureLayer.FeatureClass;
                 if ((featureClass.Type == esriDatasetType.esriDTFeatureClass
                     ? false
                     : featureClass.Type != esriDatasetType.esriDTFeatureDataset))
@@ -539,7 +539,7 @@ namespace Yutai.ArcGIS.Common.Editor
                 }
                 else
                 {
-                    IWorkspaceEdit workspace = (IWorkspaceEdit) featureClass.Workspace;
+                    IWorkspaceEdit workspace = (IWorkspaceEdit)featureClass.Workspace;
                     if (featureClass.Workspace.Type != esriWorkspaceType.esriRemoteDatabaseWorkspace)
                     {
                         if (!workspace.IsBeingEdited())
@@ -585,7 +585,7 @@ namespace Yutai.ArcGIS.Common.Editor
             bool flag1 = false;
             try
             {
-                IWorkspaceEdit workspace = (IWorkspaceEdit) idataset_0.Workspace;
+                IWorkspaceEdit workspace = (IWorkspaceEdit)idataset_0.Workspace;
                 if (workspace.IsBeingEdited())
                 {
                     if (bool_0)
@@ -613,7 +613,7 @@ namespace Yutai.ArcGIS.Common.Editor
             {
                 if (ilayer_0 is IGroupLayer)
                 {
-                    ICompositeLayer ilayer0 = (ICompositeLayer) ilayer_0;
+                    ICompositeLayer ilayer0 = (ICompositeLayer)ilayer_0;
                     for (int i = 0; i < ilayer0.Count; i++)
                     {
                         if (Editor.CheckStopEdits(ilayer0.Layer[i], bool_0))
@@ -624,15 +624,15 @@ namespace Yutai.ArcGIS.Common.Editor
                 }
                 else if (ilayer_0 is IFeatureLayer)
                 {
-                    IFeatureLayer featureLayer = (IFeatureLayer) ilayer_0;
+                    IFeatureLayer featureLayer = (IFeatureLayer)ilayer_0;
                     if (featureLayer.FeatureClass != null)
                     {
-                        IDataset featureClass = (IDataset) featureLayer.FeatureClass;
+                        IDataset featureClass = (IDataset)featureLayer.FeatureClass;
                         if ((featureClass.Type == esriDatasetType.esriDTFeatureClass
                             ? true
                             : featureClass.Type == esriDatasetType.esriDTFeatureDataset))
                         {
-                            IWorkspaceEdit workspace = (IWorkspaceEdit) featureClass.Workspace;
+                            IWorkspaceEdit workspace = (IWorkspaceEdit)featureClass.Workspace;
                             if (workspace.IsBeingEdited())
                             {
                                 if (bool_0)
@@ -664,7 +664,7 @@ namespace Yutai.ArcGIS.Common.Editor
             bool flag2 = false;
             if (ilayer_0 is IGroupLayer)
             {
-                ICompositeLayer ilayer0 = (ICompositeLayer) ilayer_0;
+                ICompositeLayer ilayer0 = (ICompositeLayer)ilayer_0;
                 int num = 0;
                 while (num < ilayer0.Count)
                 {
@@ -681,17 +681,17 @@ namespace Yutai.ArcGIS.Common.Editor
             }
             else if (ilayer_0 is IFeatureLayer)
             {
-                IFeatureLayer featureLayer = (IFeatureLayer) ilayer_0;
+                IFeatureLayer featureLayer = (IFeatureLayer)ilayer_0;
                 if (featureLayer.FeatureClass != null)
                 {
-                    IDataset featureClass = (IDataset) featureLayer.FeatureClass;
+                    IDataset featureClass = (IDataset)featureLayer.FeatureClass;
                     if (featureClass != null)
                     {
                         if ((featureClass.Type == esriDatasetType.esriDTFeatureClass
                             ? true
                             : featureClass.Type == esriDatasetType.esriDTFeatureDataset))
                         {
-                            IWorkspaceEdit workspace = (IWorkspaceEdit) featureClass.Workspace;
+                            IWorkspaceEdit workspace = (IWorkspaceEdit)featureClass.Workspace;
                             if (!workspace.IsBeingEdited())
                             {
                                 flag = false;
@@ -786,7 +786,7 @@ namespace Yutai.ArcGIS.Common.Editor
             bool flag1 = false;
             if (ilayer_0 is IGroupLayer)
             {
-                ICompositeLayer ilayer0 = (ICompositeLayer) ilayer_0;
+                ICompositeLayer ilayer0 = (ICompositeLayer)ilayer_0;
                 int num = 0;
                 while (num < ilayer0.Count)
                 {
@@ -803,10 +803,10 @@ namespace Yutai.ArcGIS.Common.Editor
             }
             else if (ilayer_0 is IFeatureLayer)
             {
-                IFeatureLayer featureLayer = (IFeatureLayer) ilayer_0;
+                IFeatureLayer featureLayer = (IFeatureLayer)ilayer_0;
                 if (featureLayer.FeatureClass != null)
                 {
-                    IDataset featureClass = (IDataset) featureLayer.FeatureClass;
+                    IDataset featureClass = (IDataset)featureLayer.FeatureClass;
                     if ((featureClass.Type == esriDatasetType.esriDTFeatureClass
                         ? true
                         : featureClass.Type == esriDatasetType.esriDTFeatureDataset))
@@ -979,7 +979,7 @@ namespace Yutai.ArcGIS.Common.Editor
                         flag1 = false;
                     }
                 }
-                else if (int_1 >= geometry.SegmentCount/2)
+                else if (int_1 >= geometry.SegmentCount / 2)
                 {
                     segment = geometry.Segment[geometry.SegmentCount - 1];
                     flag1 = false;
@@ -1008,7 +1008,7 @@ namespace Yutai.ArcGIS.Common.Editor
                         flag2 = false;
                     }
                 }
-                else if (int_3 >= segmentCollection.SegmentCount/2)
+                else if (int_3 >= segmentCollection.SegmentCount / 2)
                 {
                     segment1 = segmentCollection.Segment[segmentCollection.SegmentCount - 1];
                     flag2 = false;
@@ -1166,7 +1166,7 @@ namespace Yutai.ArcGIS.Common.Editor
                 IGeometryDef geometryDef = ifeatureClass_0.Fields.Field[num2].GeometryDef;
                 if (geometryDef.HasZ)
                 {
-                    ((IZAware) igeometry_0).ZAware = true;
+                    ((IZAware)igeometry_0).ZAware = true;
                     geometryDef.SpatialReference.GetZDomain(out num, out num1);
                     IZ igeometry0 = igeometry_0 as IZ;
                     if (igeometry0 != null)
@@ -1176,11 +1176,11 @@ namespace Yutai.ArcGIS.Common.Editor
                 }
                 if (geometryDef.HasM)
                 {
-                    ((IMAware) igeometry_0).MAware = true;
+                    ((IMAware)igeometry_0).MAware = true;
                 }
                 workspace.StartEditOperation();
                 IFeature feature = ifeatureClass_0.CreateFeature();
-                ((IRowSubtypes) feature).InitDefaultValues();
+                ((IRowSubtypes)feature).InitDefaultValues();
                 feature.Shape = igeometry_0;
                 feature.Store();
                 workspace.StopEditOperation();
@@ -1223,18 +1223,18 @@ namespace Yutai.ArcGIS.Common.Editor
                         }
                         IPoint pointClass = new ESRI.ArcGIS.Geometry.Point();
                         num++;
-                        string[] strArrays = str2.Split(new char[] {','});
+                        string[] strArrays = str2.Split(new char[] { ',' });
                         try
                         {
-                            if ((int) strArrays.Length >= 2)
+                            if ((int)strArrays.Length >= 2)
                             {
                                 pointClass.X = double.Parse(strArrays[0]);
                                 pointClass.Y = double.Parse(strArrays[1]);
-                                if ((int) strArrays.Length > 2)
+                                if ((int)strArrays.Length > 2)
                                 {
                                     pointClass.Z = double.Parse(strArrays[2]);
                                 }
-                                if ((int) strArrays.Length > 3)
+                                if ((int)strArrays.Length > 3)
                                 {
                                     pointClass.M = double.Parse(strArrays[3]);
                                 }
@@ -1260,7 +1260,7 @@ namespace Yutai.ArcGIS.Common.Editor
                 {
                     if (streamReader != null)
                     {
-                        ((IDisposable) streamReader).Dispose();
+                        ((IDisposable)streamReader).Dispose();
                     }
                 }
             }
@@ -1295,14 +1295,14 @@ namespace Yutai.ArcGIS.Common.Editor
                             break;
                         }
                         num5++;
-                        string[] strArrays = str2.Split(new char[] {','});
+                        string[] strArrays = str2.Split(new char[] { ',' });
                         try
                         {
-                            if ((int) strArrays.Length >= 2)
+                            if ((int)strArrays.Length >= 2)
                             {
                                 pointClass.X = double.Parse(strArrays[0]);
                                 pointClass.Y = double.Parse(strArrays[1]);
-                                if ((int) strArrays.Length > 2)
+                                if ((int)strArrays.Length > 2)
                                 {
                                     pointClass.Z = double.Parse(strArrays[2]);
                                 }
@@ -1311,7 +1311,7 @@ namespace Yutai.ArcGIS.Common.Editor
                                     geometryDef.SpatialReference.GetZDomain(out num, out num1);
                                     pointClass.Z = num;
                                 }
-                                if ((int) strArrays.Length > 3)
+                                if ((int)strArrays.Length > 3)
                                 {
                                     pointClass.M = double.Parse(strArrays[3]);
                                 }
@@ -1347,7 +1347,7 @@ namespace Yutai.ArcGIS.Common.Editor
                 {
                     if (streamReader != null)
                     {
-                        ((IDisposable) streamReader).Dispose();
+                        ((IDisposable)streamReader).Dispose();
                     }
                 }
             }
@@ -1367,14 +1367,14 @@ namespace Yutai.ArcGIS.Common.Editor
             int num4 = ifeatureClass_0.FindField(ifeatureClass_0.ShapeFieldName);
             IGeometryDef geometryDef = ifeatureClass_0.Fields.Field[num4].GeometryDef;
             IPoint pointClass = new ESRI.ArcGIS.Geometry.Point();
-            string[] strArrays = string_0.Split(new char[] {','});
+            string[] strArrays = string_0.Split(new char[] { ',' });
             try
             {
-                if ((int) strArrays.Length >= 2)
+                if ((int)strArrays.Length >= 2)
                 {
                     pointClass.X = double.Parse(strArrays[0]);
                     pointClass.Y = double.Parse(strArrays[1]);
-                    if ((int) strArrays.Length > 2)
+                    if ((int)strArrays.Length > 2)
                     {
                         pointClass.Z = double.Parse(strArrays[2]);
                     }
@@ -1383,7 +1383,7 @@ namespace Yutai.ArcGIS.Common.Editor
                         geometryDef.SpatialReference.GetZDomain(out num, out num1);
                         pointClass.Z = num;
                     }
-                    if ((int) strArrays.Length > 3)
+                    if ((int)strArrays.Length > 3)
                     {
                         pointClass.M = double.Parse(strArrays[3]);
                     }
@@ -1495,7 +1495,7 @@ namespace Yutai.ArcGIS.Common.Editor
                 {
                     if (streamReader != null)
                     {
-                        ((IDisposable) streamReader).Dispose();
+                        ((IDisposable)streamReader).Dispose();
                     }
                 }
             }
@@ -1588,7 +1588,7 @@ namespace Yutai.ArcGIS.Common.Editor
                 {
                     if (streamReader != null)
                     {
-                        ((IDisposable) streamReader).Dispose();
+                        ((IDisposable)streamReader).Dispose();
                     }
                 }
             }
@@ -1711,7 +1711,7 @@ namespace Yutai.ArcGIS.Common.Editor
 
         public static void DeletedSelectedFeatures(IMap imap_0)
         {
-            IEnumFeature featureSelection = (IEnumFeature) imap_0.FeatureSelection;
+            IEnumFeature featureSelection = (IEnumFeature)imap_0.FeatureSelection;
             featureSelection.Reset();
             IFeature feature = featureSelection.Next();
             IWorkspaceEdit workspaceEdit = null;
@@ -1719,7 +1719,7 @@ namespace Yutai.ArcGIS.Common.Editor
             {
                 if (feature != null)
                 {
-                    IWorkspaceEdit workspace = (IWorkspaceEdit) ((IDataset) feature.Class).Workspace;
+                    IWorkspaceEdit workspace = (IWorkspaceEdit)((IDataset)feature.Class).Workspace;
                     if (workspace.IsBeingEdited())
                     {
                         workspaceEdit = workspace;
@@ -1742,7 +1742,7 @@ namespace Yutai.ArcGIS.Common.Editor
             if (pWorkspace != null)
             {
                 bool flag = false;
-                IEnumFeature featureSelection = (IEnumFeature) imap_0.FeatureSelection;
+                IEnumFeature featureSelection = (IEnumFeature)imap_0.FeatureSelection;
                 featureSelection.Reset();
                 IFeature item = featureSelection.Next();
                 IList<IFeature> features = new List<IFeature>();
@@ -1781,7 +1781,7 @@ namespace Yutai.ArcGIS.Common.Editor
             bool flag;
             IWorkspaceEdit workspace = null;
             bool flag1 = false;
-            IDataset @class = (IDataset) ifeature_0.Class;
+            IDataset @class = (IDataset)ifeature_0.Class;
             if ((@class.Type == esriDatasetType.esriDTFeatureClass
                 ? false
                 : @class.Type != esriDatasetType.esriDTFeatureDataset))
@@ -1790,7 +1790,7 @@ namespace Yutai.ArcGIS.Common.Editor
             }
             else
             {
-                workspace = (IWorkspaceEdit) @class.Workspace;
+                workspace = (IWorkspaceEdit)@class.Workspace;
                 if (!workspace.IsBeingEdited())
                 {
                     flag1 = true;
@@ -1848,30 +1848,30 @@ namespace Yutai.ArcGIS.Common.Editor
                 {
                     case esriGeometryType.esriGeometryPoint:
                     case esriGeometryType.esriGeometryMultipoint:
-                    {
-                        break;
-                    }
+                        {
+                            break;
+                        }
                     case esriGeometryType.esriGeometryPolyline:
-                    {
-                        Editor.ExportPolyline(streamWriter, ifeatureLayer_0);
-                        goto case esriGeometryType.esriGeometryMultipoint;
-                    }
+                        {
+                            Editor.ExportPolyline(streamWriter, ifeatureLayer_0);
+                            goto case esriGeometryType.esriGeometryMultipoint;
+                        }
                     case esriGeometryType.esriGeometryPolygon:
-                    {
-                        Editor.ExportPolygon(streamWriter, ifeatureLayer_0);
-                        goto case esriGeometryType.esriGeometryMultipoint;
-                    }
+                        {
+                            Editor.ExportPolygon(streamWriter, ifeatureLayer_0);
+                            goto case esriGeometryType.esriGeometryMultipoint;
+                        }
                     default:
-                    {
-                        goto case esriGeometryType.esriGeometryMultipoint;
-                    }
+                        {
+                            goto case esriGeometryType.esriGeometryMultipoint;
+                        }
                 }
             }
             finally
             {
                 if (streamWriter != null)
                 {
-                    ((IDisposable) streamWriter).Dispose();
+                    ((IDisposable)streamWriter).Dispose();
                 }
             }
         }
@@ -2291,7 +2291,7 @@ namespace Yutai.ArcGIS.Common.Editor
             ifeature_0 = null;
             double num = -10;
             double num1 = 0;
-            IProximityOperator ipoint0 = (IProximityOperator) pPoint;
+            IProximityOperator ipoint0 = (IProximityOperator)pPoint;
             layers.Reset();
             for (ILayer i = layers.Next(); i != null; i = layers.Next())
             {
@@ -2354,7 +2354,7 @@ namespace Yutai.ArcGIS.Common.Editor
             ifeature_0 = null;
             double num = -10;
             double num1 = 0;
-            IProximityOperator ipoint0 = (IProximityOperator) pPoint;
+            IProximityOperator ipoint0 = (IProximityOperator)pPoint;
             layers.Reset();
             ILayer layer = layers.Next();
             while (layer != null)
@@ -2418,7 +2418,7 @@ namespace Yutai.ArcGIS.Common.Editor
             }
             else
             {
-                IProximityOperator ipoint0 = (IProximityOperator) pPoint;
+                IProximityOperator ipoint0 = (IProximityOperator)pPoint;
                 IFeature feature = ifeatureCache_0.Feature[0];
                 double num = ipoint0.ReturnDistance(feature.ShapeCopy);
                 ifeature_0 = feature;
@@ -2439,7 +2439,7 @@ namespace Yutai.ArcGIS.Common.Editor
             ref IFeature ifeature_0)
         {
             double num;
-            IProximityOperator ipoint0 = (IProximityOperator) pPoint;
+            IProximityOperator ipoint0 = (IProximityOperator)pPoint;
             IFeature feature = ifeatureCursor_0.NextFeature();
             if (feature != null)
             {
@@ -2473,8 +2473,8 @@ namespace Yutai.ArcGIS.Common.Editor
             ifeature_0 = null;
             double num = 0;
             double num1 = 0;
-            IProximityOperator ipoint0 = (IProximityOperator) pPoint;
-            IEnumFeature featureSelection = (IEnumFeature) imap_0.FeatureSelection;
+            IProximityOperator ipoint0 = (IProximityOperator)pPoint;
+            IEnumFeature featureSelection = (IEnumFeature)imap_0.FeatureSelection;
             featureSelection.Reset();
             for (IFeature i = featureSelection.Next(); i != null; i = featureSelection.Next())
             {
@@ -2817,25 +2817,25 @@ namespace Yutai.ArcGIS.Common.Editor
             switch (ifeatureLayer_0.FeatureClass.ShapeType)
             {
                 case esriGeometryType.esriGeometryPoint:
-                {
-                    Editor.CreatePoint(string_0, imap_0, ifeatureLayer_0);
-                    break;
-                }
+                    {
+                        Editor.CreatePoint(string_0, imap_0, ifeatureLayer_0);
+                        break;
+                    }
                 case esriGeometryType.esriGeometryMultipoint:
-                {
-                    Editor.CreateMultiPoint(string_0, imap_0, ifeatureLayer_0);
-                    break;
-                }
+                    {
+                        Editor.CreateMultiPoint(string_0, imap_0, ifeatureLayer_0);
+                        break;
+                    }
                 case esriGeometryType.esriGeometryPolyline:
-                {
-                    Editor.CreatePolyline(string_0, imap_0, ifeatureLayer_0);
-                    break;
-                }
+                    {
+                        Editor.CreatePolyline(string_0, imap_0, ifeatureLayer_0);
+                        break;
+                    }
                 case esriGeometryType.esriGeometryPolygon:
-                {
-                    Editor.CreatePolygon(string_0, imap_0, ifeatureLayer_0);
-                    break;
-                }
+                    {
+                        Editor.CreatePolygon(string_0, imap_0, ifeatureLayer_0);
+                        break;
+                    }
             }
             workspace.StopEditOperation();
         }
@@ -3036,7 +3036,7 @@ namespace Yutai.ArcGIS.Common.Editor
                 if ((pDistance != 0 ? true : double_1 != 0))
                 {
                     bool flag = false;
-                    IEnumFeature featureSelection = (IEnumFeature) imap_0.FeatureSelection;
+                    IEnumFeature featureSelection = (IEnumFeature)imap_0.FeatureSelection;
                     featureSelection.Reset();
                     IFeature feature = featureSelection.Next();
                     (pWorkspace as IWorkspaceEdit).StartEditOperation();
@@ -3092,10 +3092,10 @@ namespace Yutai.ArcGIS.Common.Editor
         {
             if (imap_0 != null)
             {
-                IActiveView imap0 = (IActiveView) imap_0;
+                IActiveView imap0 = (IActiveView)imap_0;
                 if (ienvelope_0 == null)
                 {
-                    IEnumFeature featureSelection = (IEnumFeature) imap_0.FeatureSelection;
+                    IEnumFeature featureSelection = (IEnumFeature)imap_0.FeatureSelection;
                     featureSelection.Reset();
                     IFeature feature = featureSelection.Next();
                     ienvelope_0 = Editor.GetEnvelope(feature.Shape);
@@ -3120,8 +3120,8 @@ namespace Yutai.ArcGIS.Common.Editor
                     }
                     else
                     {
-                        IFeatureLayer featureLayer = (IFeatureLayer) imap_0.Layer[i];
-                        if (((IFeatureSelection) featureLayer).SelectionSet.Count > 0)
+                        IFeatureLayer featureLayer = (IFeatureLayer)imap_0.Layer[i];
+                        if (((IFeatureSelection)featureLayer).SelectionSet.Count > 0)
                         {
                             imap0.PartialRefresh(esriViewDrawPhase_0, featureLayer, ienvelope_0);
                         }
@@ -3165,10 +3165,10 @@ namespace Yutai.ArcGIS.Common.Editor
             IGeometryDef geometryDef = ifeatureClass_0.Fields.Field[num2].GeometryDef;
             if (geometryDef.HasZ)
             {
-                ((IZAware) igeometry_0).ZAware = true;
+                ((IZAware)igeometry_0).ZAware = true;
                 if (igeometry_0 is IZ)
                 {
-                    IZ igeometry0 = (IZ) igeometry_0;
+                    IZ igeometry0 = (IZ)igeometry_0;
                     geometryDef.SpatialReference.GetZDomain(out num, out num1);
                     igeometry0.SetConstantZ(num);
                 }
@@ -3180,7 +3180,7 @@ namespace Yutai.ArcGIS.Common.Editor
             }
             if (geometryDef.HasM)
             {
-                ((IMAware) igeometry_0).MAware = true;
+                ((IMAware)igeometry_0).MAware = true;
             }
         }
 
@@ -3188,10 +3188,10 @@ namespace Yutai.ArcGIS.Common.Editor
         {
             if ((igeometry_1 as IZAware).ZAware)
             {
-                ((IZAware) igeometry_0).ZAware = true;
+                ((IZAware)igeometry_0).ZAware = true;
                 if (igeometry_0 is IZ)
                 {
-                    IZ igeometry0 = (IZ) igeometry_0;
+                    IZ igeometry0 = (IZ)igeometry_0;
                     if (igeometry_1 is IZ)
                     {
                         igeometry0.SetConstantZ((igeometry_1 as IZ).ZMin);
@@ -3215,7 +3215,7 @@ namespace Yutai.ArcGIS.Common.Editor
             }
             if ((igeometry_1 as IMAware).MAware)
             {
-                ((IMAware) igeometry_0).MAware = true;
+                ((IMAware)igeometry_0).MAware = true;
             }
         }
 
@@ -3225,11 +3225,11 @@ namespace Yutai.ArcGIS.Common.Editor
             IGeometryDef geometryDef = ifeatureClass_0.Fields.Field[num].GeometryDef;
             if (geometryDef.HasZ)
             {
-                ((IZAware) igeometry_0).ZAware = true;
+                ((IZAware)igeometry_0).ZAware = true;
             }
             if (geometryDef.HasM)
             {
-                ((IMAware) igeometry_0).MAware = true;
+                ((IMAware)igeometry_0).MAware = true;
             }
         }
 
@@ -3349,7 +3349,7 @@ namespace Yutai.ArcGIS.Common.Editor
                             if (feature.Shape.GeometryType == esriGeometryType.esriGeometryPolyline)
                             {
                                 pointClass = new ESRI.ArcGIS.Geometry.Point();
-                                if (((IHitTest) feature.Shape).HitTest(pPoint, pDistance,
+                                if (((IHitTest)feature.Shape).HitTest(pPoint, pDistance,
                                     esriGeometryHitPartType.esriGeometryPartEndpoint, pointClass, ref num2, ref num3,
                                     ref num4, ref flag1))
                                 {
@@ -3386,7 +3386,7 @@ namespace Yutai.ArcGIS.Common.Editor
                                 : feature.Shape.GeometryType != esriGeometryType.esriGeometryMultipoint))
                             {
                                 pointClass = new ESRI.ArcGIS.Geometry.Point();
-                                if (((IHitTest) feature.Shape).HitTest(pPoint, pDistance,
+                                if (((IHitTest)feature.Shape).HitTest(pPoint, pDistance,
                                     esriGeometryHitPartType.esriGeometryPartVertex, pointClass, ref num2, ref num3,
                                     ref num4, ref flag1))
                                 {
@@ -3923,8 +3923,11 @@ namespace Yutai.ArcGIS.Common.Editor
                         {
                             if (context.Config.EngineSnapEnvironment != null)
                             {
-                                (context.Config.EngineSnapEnvironment as IEngineEditor).StartEditing(
-                                    workspaceEdit as IWorkspace, pMap);
+                                //! 当前出错，暂时隐去该操作，等待检查问题
+                                //(context.Config.EngineSnapEnvironment as IEngineEditor).StartEditing(
+                                //    workspaceEdit as IWorkspace, pMap);
+
+                                workspaceEdit.StartEditing(true);
                             }
                             else
                             {
@@ -4145,7 +4148,7 @@ namespace Yutai.ArcGIS.Common.Editor
                 CheckStopEdits(imap_0.get_Layer(num), yes == DialogResult.Yes);
             }
             imap_0.ClearSelection();
-            ((IActiveView) imap_0).Refresh();
+            ((IActiveView)imap_0).Refresh();
             return true;
         }
 
@@ -4213,7 +4216,7 @@ namespace Yutai.ArcGIS.Common.Editor
                     IPointCollection points3;
                     IPointCollection points4;
                     IGeometryCollection geometrys;
-                    IPolycurve2 polycurve = (IPolycurve2) (igeometry_0 as IClone).Clone();
+                    IPolycurve2 polycurve = (IPolycurve2)(igeometry_0 as IClone).Clone();
                     polycurve.SplitAtPoints(points2.EnumVertices, true, false, -1.0);
                     double num = 0.0;
                     int num2 = 0;
@@ -4328,7 +4331,7 @@ namespace Yutai.ArcGIS.Common.Editor
                     if (num7 == -1)
                     {
                         point3 = points2.get_Point(num10);
-                        GeometryOperator.TestGeometryHit(double_0/10.0, point3, igeometry_0, out point4, ref num,
+                        GeometryOperator.TestGeometryHit(double_0 / 10.0, point3, igeometry_0, out point4, ref num,
                             ref num2, ref num3, out flag);
                         points3 = new ESRI.ArcGIS.Geometry.Path();
                         SetGeometryZM(point4, igeometry_0);
@@ -4352,7 +4355,7 @@ namespace Yutai.ArcGIS.Common.Editor
                     if (num11 == -1)
                     {
                         point3 = points2.get_Point(i);
-                        GeometryOperator.TestGeometryHit(double_0/10.0, point3, igeometry_0, out point4, ref num,
+                        GeometryOperator.TestGeometryHit(double_0 / 10.0, point3, igeometry_0, out point4, ref num,
                             ref num2, ref num3, out flag);
                         SetGeometryZM(point4, igeometry_0);
                         geometrys = new Polyline() as IGeometryCollection;
@@ -4382,7 +4385,7 @@ namespace Yutai.ArcGIS.Common.Editor
                         if (num14 > num8)
                         {
                             point3 = points2.get_Point(num10);
-                            GeometryOperator.TestGeometryHit(double_0/10.0, point3, igeometry_0, out point4, ref num,
+                            GeometryOperator.TestGeometryHit(double_0 / 10.0, point3, igeometry_0, out point4, ref num,
                                 ref num2, ref num3, out flag);
                             SetGeometryZM(point4, igeometry_0);
                             points3 = new ESRI.ArcGIS.Geometry.Path();
@@ -4404,7 +4407,7 @@ namespace Yutai.ArcGIS.Common.Editor
                             return (geometrys as IPolyline);
                         }
                         point3 = points2.get_Point(i);
-                        GeometryOperator.TestGeometryHit(double_0/10.0, point3, igeometry_0, out point4, ref num,
+                        GeometryOperator.TestGeometryHit(double_0 / 10.0, point3, igeometry_0, out point4, ref num,
                             ref num2, ref num3, out flag);
                         SetGeometryZM(point4, igeometry_0);
                         geometrys = new Polyline() as IGeometryCollection;
@@ -4477,7 +4480,7 @@ namespace Yutai.ArcGIS.Common.Editor
                     IPointCollection points2;
                     IPointCollection points3;
                     IGeometryCollection geometrys;
-                    IPolycurve2 polycurve = (IPolycurve2) (igeometry_0 as IClone).Clone();
+                    IPolycurve2 polycurve = (IPolycurve2)(igeometry_0 as IClone).Clone();
                     polycurve.SplitAtPoints(points.EnumVertices, true, false, -1.0);
                     double num = 0.0;
                     int num2 = 0;
@@ -4592,7 +4595,7 @@ namespace Yutai.ArcGIS.Common.Editor
                     if (num7 == -1)
                     {
                         point2 = points.get_Point(num10);
-                        GeometryOperator.TestGeometryHit(double_0/10.0, point2, igeometry_0, out point3, ref num,
+                        GeometryOperator.TestGeometryHit(double_0 / 10.0, point2, igeometry_0, out point3, ref num,
                             ref num2, ref num3, out flag);
                         points2 = new ESRI.ArcGIS.Geometry.Path();
                         SetGeometryZM(point3, igeometry_0);
@@ -4616,7 +4619,7 @@ namespace Yutai.ArcGIS.Common.Editor
                     if (num11 == -1)
                     {
                         point2 = points.get_Point(i);
-                        GeometryOperator.TestGeometryHit(double_0/10.0, point2, igeometry_0, out point3, ref num,
+                        GeometryOperator.TestGeometryHit(double_0 / 10.0, point2, igeometry_0, out point3, ref num,
                             ref num2, ref num3, out flag);
                         SetGeometryZM(point3, igeometry_0);
                         geometrys = new Polyline() as IGeometryCollection;
@@ -4646,7 +4649,7 @@ namespace Yutai.ArcGIS.Common.Editor
                         if (num14 > num8)
                         {
                             point2 = points.get_Point(num10);
-                            GeometryOperator.TestGeometryHit(double_0/10.0, point2, igeometry_0, out point3, ref num,
+                            GeometryOperator.TestGeometryHit(double_0 / 10.0, point2, igeometry_0, out point3, ref num,
                                 ref num2, ref num3, out flag);
                             SetGeometryZM(point3, igeometry_0);
                             points2 = new ESRI.ArcGIS.Geometry.Path();
@@ -4668,7 +4671,7 @@ namespace Yutai.ArcGIS.Common.Editor
                             return (geometrys as IPolyline);
                         }
                         point2 = points.get_Point(i);
-                        GeometryOperator.TestGeometryHit(double_0/10.0, point2, igeometry_0, out point3, ref num,
+                        GeometryOperator.TestGeometryHit(double_0 / 10.0, point2, igeometry_0, out point3, ref num,
                             ref num2, ref num3, out flag);
                         SetGeometryZM(point3, igeometry_0);
                         geometrys = new Polyline() as IGeometryCollection;
@@ -4714,7 +4717,7 @@ namespace Yutai.ArcGIS.Common.Editor
                 {
                     num++;
                 }
-                ((IActiveView) imap_0).Refresh();
+                ((IActiveView)imap_0).Refresh();
             }
         }
 
@@ -4723,7 +4726,7 @@ namespace Yutai.ArcGIS.Common.Editor
             bool flag;
             IWorkspaceEdit workspace = null;
             bool flag1 = false;
-            IDataset @class = (IDataset) ifeature_0.Class;
+            IDataset @class = (IDataset)ifeature_0.Class;
             if ((@class.Type == esriDatasetType.esriDTFeatureClass
                 ? false
                 : @class.Type != esriDatasetType.esriDTFeatureDataset))
@@ -4732,7 +4735,7 @@ namespace Yutai.ArcGIS.Common.Editor
             }
             else
             {
-                workspace = (IWorkspaceEdit) @class.Workspace;
+                workspace = (IWorkspaceEdit)@class.Workspace;
                 if (!workspace.IsBeingEdited())
                 {
                     flag1 = true;
@@ -4802,7 +4805,7 @@ namespace Yutai.ArcGIS.Common.Editor
             bool flag;
             IWorkspaceEdit workspace = null;
             bool flag1 = false;
-            IDataset @class = (IDataset) ifeature_0.Class;
+            IDataset @class = (IDataset)ifeature_0.Class;
             if ((@class.Type == esriDatasetType.esriDTFeatureClass
                 ? false
                 : @class.Type != esriDatasetType.esriDTFeatureDataset))
@@ -4811,7 +4814,7 @@ namespace Yutai.ArcGIS.Common.Editor
             }
             else
             {
-                workspace = (IWorkspaceEdit) @class.Workspace;
+                workspace = (IWorkspaceEdit)@class.Workspace;
                 if (!workspace.IsBeingEdited())
                 {
                     flag1 = true;
@@ -4824,7 +4827,7 @@ namespace Yutai.ArcGIS.Common.Editor
                 {
                     if (!(ifeature_0 is IAnnotationFeature2))
                     {
-                        ifeature_0.Shape = (IGeometry) itransform2D_0;
+                        ifeature_0.Shape = (IGeometry)itransform2D_0;
                     }
                     else
                     {
@@ -4838,7 +4841,7 @@ namespace Yutai.ArcGIS.Common.Editor
                             }
                             else
                             {
-                                ((IGraphicsContainer) layer).UpdateElement((IElement) itransform2D_0);
+                                ((IGraphicsContainer)layer).UpdateElement((IElement)itransform2D_0);
                                 goto Label0;
                             }
                         }

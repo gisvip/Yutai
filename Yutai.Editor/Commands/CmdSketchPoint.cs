@@ -106,7 +106,7 @@ namespace Yutai.Plugins.Editor.Commands
 
         public override void OnMouseMove(int Button, int Shift, int x, int y)
         {
-            IActiveView focusMap = (IActiveView) _context.MapControl.ActiveView;
+            IActiveView focusMap = (IActiveView) _context.ActiveView;
             pPoint = focusMap.ScreenDisplay.DisplayTransformation.ToMapPoint(x, y);
             ISnappingResult snappingResult = this.pointSnapper.Snap(this.pPoint);
             if (snappingResult == null)

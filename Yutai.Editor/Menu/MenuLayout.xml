@@ -27,6 +27,7 @@
           <BarItem Key="Edit_ViewGeometryInfo" Visible="true"></BarItem>
           <BarItem Key="Edit_FollowAlong" Visible="true"></BarItem>
           <BarItem Key="Edit_Buffer" Visible="true"></BarItem>
+          <BarItem Key="Edit_Attribute" Visible="true"></BarItem>
         </PageGroup>
         <PageGroup Key="Edit_AdvanceTools" Caption="高级工具" Visible="true" Index="2">
           <BarItem Key="Edit_ConstructJunction" Visible="true"></BarItem>

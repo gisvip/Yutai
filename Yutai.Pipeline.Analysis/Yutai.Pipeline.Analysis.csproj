@@ -741,6 +741,7 @@
     <Content Include="Resources\icon_valve.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Class3D\" />
     <Folder Include="ConfigForms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

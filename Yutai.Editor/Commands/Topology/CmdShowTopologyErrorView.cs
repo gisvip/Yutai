@@ -26,7 +26,7 @@ namespace Yutai.Plugins.Editor.Commands.Topology
                 {
                     return false;
                 }
-                if ((Yutai.ArcGIS.Common.Editor.Editor.EditMap != null) && (Yutai.ArcGIS.Common.Editor.Editor.EditMap != _context.MapControl.Map))
+                if ((Yutai.ArcGIS.Common.Editor.Editor.EditMap != null) && (Yutai.ArcGIS.Common.Editor.Editor.EditMap != _context.FocusMap))
                 {
                     return false;
                 }
