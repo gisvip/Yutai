@@ -1,0 +1,17 @@
+﻿<YutaiGIS>
+  <MainMenu>
+    <Pages>
+      <Page Key="Check" Caption="质量检查" Index="0" Visible="true">
+        <!--<PageGroup Key="Check_Pipeline" Caption="管线检查" Visible="true" Index="1">
+          <BarItem Key="Check_Pipeline_DDJC" Visible="true"/>
+          <BarItem Key="Check_Pipeline_LDJC" Visible="true"/>
+          <BarItem Key="Check_Pipeline_SXFKJC" Visible="true"/>
+        </PageGroup>-->
+        <PageGroup Key="Check_Pipeline" Caption="检查管理" Visible="true" Index="1">
+          <BarItem Key="Check_Pipeline_DataCheckConfig" Visible="true"/>
+          <BarItem Key="Check_Pipeline_DataCheck" Visible="true"/>
+        </PageGroup>
+      </Page>
+    </Pages>
+  </MainMenu>
+</YutaiGIS>

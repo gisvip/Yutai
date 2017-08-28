@@ -1,0 +1,24 @@
+﻿<CheckConfig>
+  <SurfaceTolerance>0.005</SurfaceTolerance>
+  <ElevationTolerance>0.005</ElevationTolerance>
+  <CompareRadius>50</CompareRadius>
+  <CompareLimit>5</CompareLimit>
+  <ElevationCheckType>UseAttribute</ElevationCheckType>
+  <ZxValue>0</ZxValue>
+  <NxValue>1</NxValue>
+  <StraightPnt>直线</StraightPnt>
+  <ThreeConnect>三通</ThreeConnect>
+  <FourConnect>四通</FourConnect>
+  <MultiConnect>多通</MultiConnect>
+  <Domains>
+    <Domain Name="TZW">
+      <Values>
+        <Value>直线点</Value>
+        <Value>三通点</Value>
+        <Value>四通点</Value>
+        <Value>多通点</Value>
+        <Value>转折点</Value>
+      </Values>
+    </Domain>
+  </Domains>
+</CheckConfig>

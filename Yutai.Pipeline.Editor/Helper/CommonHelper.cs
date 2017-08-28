@@ -23,7 +23,7 @@ using Yutai.Shared;
 
 namespace Yutai.Pipeline.Editor.Helper
 {
-    class CommonHelper
+    public class CommonHelper
     {
         public static ILayer GetLayerByName(IMap map, string layerName, bool isFeatureLayer = false)
         {
@@ -804,7 +804,7 @@ namespace Yutai.Pipeline.Editor.Helper
             {
                 string value = matchCollection.OfType<Match>().Last().Value;
                 double d = Double.Parse(value) + 1;
-                return code.Replace(value, d.ToString(CultureInfo.InvariantCulture).PadLeft(value.Length,'0'));
+                return code.Replace(value, d.ToString(CultureInfo.InvariantCulture).PadLeft(value.Length, '0'));
             }
         }
 
@@ -908,6 +908,25 @@ namespace Yutai.Pipeline.Editor.Helper
             return secondFeature;
         }
 
+
+        public static double ConvertToDouble(object obj)
+        {
+            double value;
+            if (obj == null || obj is DBNull || double.TryParse(obj.ToString(), out value) == false)
+            {
+                value = Double.NaN;
+            }
+            return value;
+        }
+
+        public static string ConvertToString(object obj)
+        {
+            if (obj == null || obj is DBNull)
+            {
+                return null;
+            }
+            return obj.ToString();
+        }
     }
 }
 

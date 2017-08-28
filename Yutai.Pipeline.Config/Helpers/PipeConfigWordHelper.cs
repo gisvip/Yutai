@@ -99,6 +99,16 @@ namespace Yutai.Pipeline.Config.Helpers
         {
             get { return "JGLX"; }
         }
+        //! 地面照片
+        public string DMZP
+        {
+            get { return "DMZP"; }
+        }
+        //! 附属物照片
+        public string FSWZP
+        {
+            get { return "FSWZP"; }
+        }
 
         //! 使用状态
         public string SYZT
@@ -353,7 +363,7 @@ namespace Yutai.Pipeline.Config.Helpers
         {
             get { return "BZ"; }
         }
-
+         
         public string BZ2
         {
             get { return "BZ2"; }
