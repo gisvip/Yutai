@@ -34,7 +34,7 @@ namespace Yutai.Check.Classes
                         pipelineLayer.Layers.FirstOrDefault(c => c.DataType == enumPipelineDataType.Line);
                     if (pointLayerInfo == null || lineLayerInfo == null || pointLayerInfo.FeatureClass == null || lineLayerInfo.FeatureClass == null)
                         continue;
-                    list.AddRange(Check(pipelineLayer.Name, lineLayerInfo.FeatureClass, PipeConfigWordHelper.LineWords.QDGC, PipeConfigWordHelper.LineWords.ZDGC, PipeConfigWordHelper.LineWords.GJ, PipeConfigWordHelper.LineWords.LX));
+                    list.AddRange(Check(pipelineLayer.Name, lineLayerInfo.FeatureClass, lineLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.QDGC), lineLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.ZDGC), lineLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.GJ), lineLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.LX)));
                 }
             }
 

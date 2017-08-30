@@ -37,9 +37,12 @@ namespace Yutai.Check.Classes
                     IBasicLayerInfo lineBasicLayerInfo = pipelineLayer.Layers.FirstOrDefault(c => c.DataType == enumPipelineDataType.Line);
                     if (lineBasicLayerInfo?.FeatureClass == null)
                         continue;
-                    int idxGj = lineBasicLayerInfo.FeatureClass.FindField(PipeConfigWordHelper.LineWords.GJ);
-                    int idxQdgc = lineBasicLayerInfo.FeatureClass.FindField(PipeConfigWordHelper.LineWords.QDGC);
-                    int idxZdgc = lineBasicLayerInfo.FeatureClass.FindField(PipeConfigWordHelper.LineWords.ZDGC);
+                    string gjFieldName = lineBasicLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.GJ);
+                    string qdgcFieldName = lineBasicLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.QDGC);
+                    string zdgcFieldName = lineBasicLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.ZDGC);
+                    int idxGj = lineBasicLayerInfo.FeatureClass.FindField(gjFieldName);
+                    int idxQdgc = lineBasicLayerInfo.FeatureClass.FindField(qdgcFieldName);
+                    int idxZdgc = lineBasicLayerInfo.FeatureClass.FindField(zdgcFieldName);
                     if (idxGj < 0 || idxQdgc < 0 || idxZdgc < 0)
                     {
                         list.Add(new FeatureItem()
@@ -47,7 +50,7 @@ namespace Yutai.Check.Classes
                             PipelineName = pipelineLayer.Name,
                             PipeLayerName = lineBasicLayerInfo.FeatureClass.AliasName,
                             CheckItem = "流向检查",
-                            ErrDesc = "字段配置错误 字段 " + (idxGj < 0 ? PipeConfigWordHelper.LineWords.GJ + " " : "") + (idxQdgc < 0 ? PipeConfigWordHelper.LineWords.QDGC + " " : "") + (idxZdgc < 0 ? PipeConfigWordHelper.LineWords.ZDGC + " " : "") + "不存在",
+                            ErrDesc = "字段配置错误 字段 " + (idxGj < 0 ? gjFieldName + " " : "") + (idxQdgc < 0 ? qdgcFieldName + " " : "") + (idxZdgc < 0 ? zdgcFieldName + " " : "") + "不存在",
                         });
                     }
                     else
@@ -67,14 +70,17 @@ namespace Yutai.Check.Classes
                     if (lineBasicLayerInfo?.FeatureClass == null)
                         continue;
 
-                    list.AddRange(Check(pipelineLayer.Name, pipelineLayer.Code, lineBasicLayerInfo.FeatureClass));
+                    string gjFieldName = lineBasicLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.GJ);
+                    string qdgcFieldName = lineBasicLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.QDGC);
+                    string zdgcFieldName = lineBasicLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.ZDGC);
+                    list.AddRange(Check(pipelineLayer.Name, pipelineLayer.Code, lineBasicLayerInfo.FeatureClass, gjFieldName, qdgcFieldName, zdgcFieldName));
                 }
             }
 
             return list;
         }
 
-        private List<FeatureItem> Check(string pipelineName, string pipelineCode, IFeatureClass featureClass)
+        private List<FeatureItem> Check(string pipelineName, string pipelineCode, IFeatureClass featureClass, string gjFieldName, string qdgcFieldName, string zdgcFieldName)
         {
             List<FeatureItem> list = new List<FeatureItem>();
 
@@ -104,7 +110,7 @@ namespace Yutai.Check.Classes
                         PipelineName = pipelineName,
                         PipeLayerName = featureClass.AliasName,
                         CheckItem = "交叉检查",
-                        ErrDesc = "字段属性错误 字段 " + (double.IsNaN(gj) ? PipeConfigWordHelper.LineWords.GJ + " " : "") + (double.IsNaN(qdgc) ? PipeConfigWordHelper.LineWords.QDGC + " " : "") + (double.IsNaN(zdgc) ? PipeConfigWordHelper.LineWords.ZDGC + " " : "") + "属性为空或格式错误",
+                        ErrDesc = "字段属性错误 字段 " + (double.IsNaN(gj) ? gjFieldName + " " : "") + (double.IsNaN(qdgc) ? qdgcFieldName + " " : "") + (double.IsNaN(zdgc) ? zdgcFieldName + " " : "") + "属性为空或格式错误",
                     });
                     continue;
                 }

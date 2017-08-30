@@ -36,7 +36,7 @@ namespace Yutai.Pipeline.Analysis
             if (string.IsNullOrEmpty(_config.XmlFile))
             {
                 string fileName =
-                    ((ISecureContext) _context).YutaiProject.FindPlugin("f804e812-481e-45c3-be08-749da82075d1")
+                    ((ISecureContext) _context).YutaiProject?.FindPlugin("f804e812-481e-45c3-be08-749da82075d1")
                         .ConfigXML;
                 if (string.IsNullOrEmpty(fileName)) return;
                 fileName = FileHelper.GetFullPath(fileName);

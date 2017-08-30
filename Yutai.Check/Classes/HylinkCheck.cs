@@ -28,8 +28,8 @@ namespace Yutai.Check.Classes
                 {
                     IBasicLayerInfo pointLayerInfo =
                         pipelineLayer.Layers.FirstOrDefault(c => c.DataType == enumPipelineDataType.Point);
-                    list.AddRange(Check(pipelineLayer.Name, pointLayerInfo.FeatureClass, PipeConfigWordHelper.PointWords.DMZP));
-                    list.AddRange(Check(pipelineLayer.Name, pointLayerInfo.FeatureClass, PipeConfigWordHelper.PointWords.FSWZP));
+                    list.AddRange(Check(pipelineLayer.Name, pointLayerInfo.FeatureClass, pointLayerInfo.GetFieldName(PipeConfigWordHelper.PointWords.DMZP)));
+                    list.AddRange(Check(pipelineLayer.Name, pointLayerInfo.FeatureClass, pointLayerInfo.GetFieldName(PipeConfigWordHelper.PointWords.NBZP)));
                 }
             }
 

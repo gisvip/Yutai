@@ -104,10 +104,10 @@ namespace Yutai.Pipeline.Config.Helpers
         {
             get { return "DMZP"; }
         }
-        //! 附属物照片
-        public string FSWZP
+        //! 内部照片
+        public string NBZP
         {
-            get { return "FSWZP"; }
+            get { return "NBZP"; }
         }
 
         //! 使用状态

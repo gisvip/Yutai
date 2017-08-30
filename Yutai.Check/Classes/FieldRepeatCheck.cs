@@ -32,7 +32,7 @@ namespace Yutai.Check.Classes
                         switch (basicLayerInfo.DataType)
                         {
                             case enumPipelineDataType.Point:
-                                list.AddRange(Check(basicLayerInfo, pipelineLayer.Name, PipeConfigWordHelper.PointWords.GDBH));
+                                list.AddRange(Check(basicLayerInfo, pipelineLayer.Name, basicLayerInfo.GetFieldName(PipeConfigWordHelper.PointWords.GDBH)));
                                 break;
                             case enumPipelineDataType.Line:
                                 break;

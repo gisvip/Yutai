@@ -40,7 +40,7 @@ namespace Yutai.Plugins.Locator.Menu
             //检测项目文档里面是否有插件的界面配置，如果没有，则使用默认配置，如果有，则使用配置文件里面的配置
             Guid dllGuid = new Guid("2b81c89a-ee45-4276-9dc1-72bbbf07f53f");
             XmlPlugin plugin =
-                ((ISecureContext) _context).YutaiProject.Plugins.FirstOrDefault(
+                ((ISecureContext) _context).YutaiProject?.Plugins.FirstOrDefault(
                     c => c.Guid == dllGuid);
             if (plugin != null)
             {

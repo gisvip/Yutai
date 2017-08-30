@@ -33,7 +33,7 @@ namespace Yutai.Check.Classes
                     IBasicLayerInfo pointLayerInfo =
                         pipelineLayer.Layers.FirstOrDefault(c => c.DataType == enumPipelineDataType.Point);
                     if (pointLayerInfo != null)
-                        list.AddRange(Check(pipelineLayer.Name, pointLayerInfo.FeatureClass, PipeConfigWordHelper.PointWords.DMGC));
+                        list.AddRange(Check(pipelineLayer.Name, pointLayerInfo.FeatureClass, pointLayerInfo.GetFieldName(PipeConfigWordHelper.PointWords.DMGC)));
                 }
             }
 

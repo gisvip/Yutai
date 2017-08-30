@@ -66,8 +66,10 @@ namespace Yutai.Plugins.Concrete
                     // new Guid("2b81c89a-ee45-4276-9dc1-72bbbf07f53f"), //定位器
                     new Guid("e7598649-d49b-45fa-b020-57e2dd777337"), //信息查看器
                     new Guid("01f8e32a-5837-431f-9c1b-5d0f195fb93e"), // 书签管理
-                    // new Guid("4a3bcaab-9d3e-4ca7-a19d-7ee08fb0629e"), // 编辑
-                    // new Guid("7da6c412-c345-4ccc-9f22-ef7eb3757898"), // 属性表
+                    new Guid("5e933989-b5a4-4a45-a5b7-2d9ded61df0f"), // 地图制图
+                    new Guid("2fd39cff-e0d7-44cb-a6f7-b5e90499124c"), // 模板工具
+                    new Guid("4a3bcaab-9d3e-4ca7-a19d-7ee08fb0629e"), // 编辑
+                    new Guid("7da6c412-c345-4ccc-9f22-ef7eb3757898"), // 属性表
                     // new Guid("5e857d4e-1a77-46d8-b1bb-b36548be7333"),//Catalog功能
                 };
             }

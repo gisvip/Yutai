@@ -56,7 +56,7 @@ namespace Yutai.Plugins.Editor
             if (string.IsNullOrEmpty(_pipelineConfig.XmlFile))
             {
                 string fileName =
-                    ((ISecureContext) _context).YutaiProject.FindPlugin("4a3bcaab-9d3e-4ca7-a19d-7ee08fb0629e")
+                    ((ISecureContext) _context).YutaiProject?.FindPlugin("4a3bcaab-9d3e-4ca7-a19d-7ee08fb0629e")
                         .ConfigXML;
                 if (string.IsNullOrEmpty(fileName)) return;
                 //fileName = FileHelper.GetFullPath(fileName);

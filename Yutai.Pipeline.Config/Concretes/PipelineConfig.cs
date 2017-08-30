@@ -381,7 +381,7 @@ namespace Yutai.Pipeline.Config.Concretes
 
             XmlNode rootNode = doc.CreateElement("PipelineConfig");
             XmlNode dbNode = doc.CreateElement("ConfigDatabase");
-            dbNode.InnerText = FileHelper.GetRelativePath(Application.StartupPath, _configDatabaseName);
+            dbNode.InnerText = _configDatabaseName;
             rootNode.AppendChild(dbNode);
             XmlNode configNode = doc.CreateElement("CommonConfigs");
             for (int i = 0; i < _commonConfigs.Count; i++)

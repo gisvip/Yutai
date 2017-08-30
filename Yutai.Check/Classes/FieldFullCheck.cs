@@ -43,10 +43,12 @@ namespace Yutai.Check.Classes
             IDictionary<int, IYTField> fieldDictionary = new Dictionary<int, IYTField>();
             foreach (IYTField ytField in basicLayerInfo.Fields)
             {
-                IFields fields = basicLayerInfo.FeatureClass.Fields;
-                if (string.IsNullOrWhiteSpace(ytField.EsriFieldName))
+                if (ytField.AllowNull)
                     continue;
-                int idx = fields.FindField(ytField.EsriFieldName);
+                IFields fields = basicLayerInfo.FeatureClass.Fields;
+                if (string.IsNullOrWhiteSpace(ytField.Name))
+                    continue;
+                int idx = fields.FindField(ytField.Name);
                 if (idx < 0)
                     continue;
                 fieldDictionary.Add(idx, ytField);
@@ -61,14 +63,12 @@ namespace Yutai.Check.Classes
                     object curValue = feature.Value[keyValuePair.Key];
                     if (curValue == null || curValue is DBNull || string.IsNullOrWhiteSpace(curValue.ToString()))
                     {
-                        if (keyValuePair.Value.AllowNull)
-                            continue;
                         list.Add(new FeatureItem(feature)
                         {
                             PipelineName = pipelineName,
                             PipeLayerName = basicLayerInfo.FeatureClass.AliasName,
                             CheckItem = "字段完整性检查",
-                            ErrDesc = "字段 " + keyValuePair.Value.EsriFieldName + " 为空值",
+                            ErrDesc = "字段 " + keyValuePair.Value.Name + " 为空值",
                         });
                     }
                 }

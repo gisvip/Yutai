@@ -46,7 +46,7 @@ namespace Yutai.Plugins.Editor.Menu
             Guid dllGuid = new Guid("4a3bcaab-9d3e-4ca7-a19d-7ee08fb0629e");
             string resString = "Yutai.Plugins.Editor.Menu.MenuLayout.xml";
             XmlPlugin plugin =
-                ((ISecureContext) _context).YutaiProject.Plugins.FirstOrDefault(
+                ((ISecureContext) _context).YutaiProject?.Plugins.FirstOrDefault(
                     c => c.Guid == dllGuid);
             if (plugin != null)
             {

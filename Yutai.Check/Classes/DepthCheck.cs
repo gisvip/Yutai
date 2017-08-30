@@ -29,18 +29,18 @@ namespace Yutai.Check.Classes
                     IBasicLayerInfo lineLayerInfo =
                         pipelineLayer.Layers.FirstOrDefault(c => c.DataType == enumPipelineDataType.Line);
                     if (lineLayerInfo != null && lineLayerInfo.FeatureClass != null)
-                        list.AddRange(Check(pipelineLayer.Name, lineLayerInfo.FeatureClass));
+                        list.AddRange(Check(pipelineLayer.Name, lineLayerInfo.FeatureClass, lineLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.QDMS), lineLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.ZDMS)));
                 }
             }
 
             return list;
         }
 
-        private List<FeatureItem> Check(string pipelineName, IFeatureClass featureClass)
+        private List<FeatureItem> Check(string pipelineName, IFeatureClass featureClass, string qdmsFieldName, string zdmsFieldName)
         {
             List<FeatureItem> list = new List<FeatureItem>();
-            int idxQdms = featureClass.FindField(PipeConfigWordHelper.LineWords.QDMS);
-            int idxZdms = featureClass.FindField(PipeConfigWordHelper.LineWords.ZDMS);
+            int idxQdms = featureClass.FindField(qdmsFieldName);
+            int idxZdms = featureClass.FindField(zdmsFieldName);
 
             if (idxQdms < 0 || idxZdms < 0)
             {

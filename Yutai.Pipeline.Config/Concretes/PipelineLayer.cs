@@ -165,13 +165,13 @@ namespace Yutai.Pipeline.Config.Concretes
         public bool OrganizeFeatureClass(IFeatureClass featureClass)
         {
             //! 因为图层是按照工作空间组织的，所以图层不可能被重复，也就是说一个工作控件里面的图层只可能识别一次
-            string ownerName = ConfigHelper.GetClassOwnerName(((IDataset) featureClass).FullName.NameString);
+            string ownerName = ConfigHelper.GetClassOwnerName(((IDataset)featureClass).FullName.NameString);
             string baseName = ConfigHelper.GetClassShortName(featureClass);
             string classAliasName = featureClass.AliasName;
             string autoStr = "/" + _autoNames + "/";
             IBasicLayerInfo layerInfo =
                 _layers.FirstOrDefault(
-                    c => c.Name == baseName || c.AliasName == baseName || c.FixAutoNames.ToUpper().Replace("_", "").Contains("/" + baseName.ToUpper().Replace("_", "") + "/"));
+                    c => c.Name == baseName || c.AliasName == baseName || c.FixAutoNames.Contains("/" + baseName + "/"));
             if (layerInfo != null && layerInfo.FeatureClass == null)
             {
                 layerInfo.FeatureClass = featureClass;
@@ -182,19 +182,19 @@ namespace Yutai.Pipeline.Config.Concretes
 
         public IPipelineLayer NewOrganizeFeatureClass(IFeatureClass featureClass)
         {
-            string ownerName = ConfigHelper.GetClassOwnerName(((IDataset) featureClass).Name);
+            string ownerName = ConfigHelper.GetClassOwnerName(((IDataset)featureClass).Name);
             string baseName = ConfigHelper.GetClassShortName(featureClass);
             string classAliasName = featureClass.AliasName;
             string autoStr = "/" + _autoNames + "/";
             IBasicLayerInfo layerInfo =
                 _layers.FirstOrDefault(
-                    c => c.Name.ToUpper() == baseName.ToUpper() || c.AliasName.ToUpper() == baseName.ToUpper() || autoStr.Contains("/" + baseName + "/") || c.AutoNames.ToUpper().Replace("_","").Contains(baseName.ToUpper().Replace("_","")));
+                    c => c.Name == baseName || c.AliasName == baseName || autoStr.Contains("/" + baseName + "/"));
             if (layerInfo != null)
             {
                 IPipelineLayer pipeLayer = new PipelineLayer(this, false);
                 layerInfo =
                     pipeLayer.Layers.FirstOrDefault(
-                        c => c.Name == baseName || c.AliasName == baseName || autoStr.Contains("/" + baseName + "/") || c.AutoNames.ToUpper().Replace("_", "").Contains(baseName.ToUpper().Replace("_", "")));
+                        c => c.Name == baseName || c.AliasName == baseName || autoStr.Contains("/" + baseName + "/"));
                 layerInfo.FeatureClass = featureClass;
                 return pipeLayer;
             }

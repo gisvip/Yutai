@@ -39,7 +39,7 @@ namespace Yutai.Pipeline.Editor
             if (string.IsNullOrEmpty(_config.XmlFile))
             {
                 string fileName =
-                    ((ISecureContext) _context).YutaiProject.FindPlugin("95ab64f9-65ca-400f-8f68-c18cadff1421")
+                    ((ISecureContext) _context).YutaiProject?.FindPlugin("95ab64f9-65ca-400f-8f68-c18cadff1421")
                         .ConfigXML;
                 if (string.IsNullOrEmpty(fileName)) return;
                 fileName = FileHelper.GetFullPath(fileName);

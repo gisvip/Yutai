@@ -32,7 +32,7 @@ namespace Yutai.Check.Classes
                     {
                         if (basicLayerInfo.FeatureClass == null)
                             continue;
-                        list.AddRange(Check(basicLayerInfo.FeatureClass, pipelineLayer.Name, PipeConfigWordHelper.PointWords.XZB, PipeConfigWordHelper.PointWords.YZB, PipeConfigWordHelper.PointWords.DMGC));
+                        list.AddRange(Check(basicLayerInfo.FeatureClass, pipelineLayer.Name, basicLayerInfo.GetFieldName(PipeConfigWordHelper.PointWords.XZB), basicLayerInfo.GetFieldName(PipeConfigWordHelper.PointWords.YZB), basicLayerInfo.GetFieldName(PipeConfigWordHelper.PointWords.DMGC)));
                     }
 
                 }

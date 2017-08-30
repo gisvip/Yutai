@@ -45,7 +45,7 @@ namespace Yutai.Plugins.Printing.Menu
             Guid dllGuid = new Guid("5e933989-b5a4-4a45-a5b7-2d9ded61df0f");
             string resString = "Yutai.Plugins.Printing.Menu.MenuLayout.xml";
             XmlPlugin plugin =
-                ((ISecureContext) _context).YutaiProject.Plugins.FirstOrDefault(
+                ((ISecureContext) _context).YutaiProject?.Plugins.FirstOrDefault(
                     c => c.Guid == dllGuid);
             if (plugin != null)
             {
