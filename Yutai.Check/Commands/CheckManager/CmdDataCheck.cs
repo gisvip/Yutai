@@ -9,6 +9,7 @@ using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
 using Yutai.Check.Classes;
 using Yutai.Check.Forms;
+using Yutai.Check.Properties;
 using Yutai.Check.Services;
 using Yutai.Pipeline.Config.Interfaces;
 using Yutai.Plugins.Concrete;
@@ -85,6 +86,7 @@ namespace Yutai.Check.Commands.CheckManager
             _context = hook as IAppContext;
             base.m_caption = "数据检查";
             base.m_category = "Check_Pipeline";
+            base.m_bitmap = Resources.icon_Check;
             base.m_name = "Check_Pipeline_DataCheck";
             base._key = "Check_Pipeline_DataCheck";
             base.m_toolTip = "数据检查。";

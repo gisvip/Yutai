@@ -20,6 +20,7 @@ namespace Yutai.Plugins.TableEditor.Views
         private int _searchCount = 0;
         private int _firstRow = -1;
         private int _firstColumn = -1;
+        private string _searchContent;
 
         public FindReplace(IAppContext context, IVirtualGridView view)
         {
@@ -44,12 +45,12 @@ namespace Yutai.Plugins.TableEditor.Views
 
         public string SearchContent
         {
-            get { return txtFind.Text; }
+            get { return _searchContent; }
         }
 
         public MatchType MatchType
         {
-            get { return (MatchType) Enum.Parse(typeof(MatchType), cboMatch.SelectedItem.ToString(), false); }
+            get { return (MatchType)Enum.Parse(typeof(MatchType), cboMatch.SelectedItem.ToString(), false); }
         }
 
         public string FieldName
@@ -163,6 +164,11 @@ namespace Yutai.Plugins.TableEditor.Views
                     return pColumn.Index;
             }
             return -1;
+        }
+
+        private void txtFind_TextChanged(object sender, EventArgs e)
+        {
+            _searchContent = txtFind.Text;
         }
     }
 }

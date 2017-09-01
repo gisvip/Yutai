@@ -110,41 +110,48 @@ namespace Yutai.Plugins.Locator.Views
             {
                 queryFilter.WhereClause = BuildWhereClause(locator.SearchFields, searchKey, likeStr);
             }
-            IFeatureCursor cursor = pClass.Search(queryFilter, false);
-            IFeature pFeature = cursor.NextFeature();
-            int nameIdx = GetFieldIdx(cursor, locator.NameField);
-            int addIdx = GetFieldIdx(cursor, locator.AddressField);
-            int descIdx = GetFieldIdx(cursor, locator.DescriptionField);
-            int telIdx = GetFieldIdx(cursor, locator.TelephoneField);
-            int emailIdx = GetFieldIdx(cursor, locator.EmailField);
-            int phoIdx = GetFieldIdx(cursor, locator.PhotoField);
-
-            while (pFeature != null)
+            try
             {
-                IGeometry pGeometry = pFeature.Shape;
-                if (pGeometry.IsEmpty)
+                IFeatureCursor cursor = pClass.Search(queryFilter, false);
+                IFeature pFeature = cursor.NextFeature();
+                int nameIdx = GetFieldIdx(cursor, locator.NameField);
+                int addIdx = GetFieldIdx(cursor, locator.AddressField);
+                int descIdx = GetFieldIdx(cursor, locator.DescriptionField);
+                int telIdx = GetFieldIdx(cursor, locator.TelephoneField);
+                int emailIdx = GetFieldIdx(cursor, locator.EmailField);
+                int phoIdx = GetFieldIdx(cursor, locator.PhotoField);
+
+                while (pFeature != null)
                 {
+                    IGeometry pGeometry = pFeature.Shape;
+                    if (pGeometry.IsEmpty)
+                    {
+                        pFeature = cursor.NextFeature();
+                        continue;
+                    }
+
+                    DataRow row = _dataTable.NewRow();
+                    row["图层"] = pSubLayer.Name;
+                    row["序号"] = pFeature.OID;
+                    row["名称"] = nameIdx < 0 ? "" : pFeature.get_Value(nameIdx);
+                    row["地址"] = addIdx < 0 ? "" : pFeature.get_Value(addIdx);
+                    row["说明"] = descIdx < 0 ? "" : pFeature.get_Value(descIdx);
+                    row["电话"] = telIdx < 0 ? "" : pFeature.get_Value(telIdx);
+                    row["邮箱"] = emailIdx < 0 ? "" : pFeature.get_Value(emailIdx);
+                    row["要素"] = pFeature.Shape;
+                    row["照片"] = phoIdx < 0 ? null : pFeature.get_Value(phoIdx);
+                    _dataTable.Rows.Add(row);
+                    _searchCount++;
+                    if (_searchCount > _context.Config.LocatorMaxCount) break;
                     pFeature = cursor.NextFeature();
-                    continue;
                 }
 
-                DataRow row = _dataTable.NewRow();
-                row["图层"] = pSubLayer.Name;
-                row["序号"] = pFeature.OID;
-                row["名称"] = nameIdx < 0 ? "" : pFeature.get_Value(nameIdx);
-                row["地址"] = addIdx < 0 ? "" : pFeature.get_Value(addIdx);
-                row["说明"] = descIdx < 0 ? "" : pFeature.get_Value(descIdx);
-                row["电话"] = telIdx < 0 ? "" : pFeature.get_Value(telIdx);
-                row["邮箱"] = emailIdx < 0 ? "" : pFeature.get_Value(emailIdx);
-                row["要素"] = pFeature.Shape;
-                row["照片"] = phoIdx < 0 ? null : pFeature.get_Value(phoIdx);
-                _dataTable.Rows.Add(row);
-                _searchCount++;
-                if (_searchCount > _context.Config.LocatorMaxCount) break;
-                pFeature = cursor.NextFeature();
+                OtherHelper.ReleaseObject(cursor);
             }
-
-            OtherHelper.ReleaseObject(cursor);
+            catch (Exception)
+            {
+                return;
+            }
         }
 
         private int GetFieldIdx(IFeatureCursor cursor, string locatorNameField)

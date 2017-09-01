@@ -17,7 +17,7 @@
     <Locator>
       <Name>道路定位</Name>
       <Caption>道路定位</Caption>
-      <Layer>LRDL_1000</Layer>
+      <Layer>道路定位</Layer>
       <SearchFields>RN,NAME</SearchFields>
       <NameField>NAME</NameField>
       <DeacriptionField>RTEG</DeacriptionField>
