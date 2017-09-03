@@ -16,11 +16,38 @@ namespace Yutai.Pipeline.Config.Helpers
             return enumPipelineHeightType.Middle;
         }
 
+       
+
         public static string ConvertHeightTypeToStr(enumPipelineHeightType type)
         {
             if (type == enumPipelineHeightType.Top) return "管顶";
             if (type == enumPipelineHeightType.Bottom) return "管底";
             return "管中";
+        }
+
+        public static enumPipelineDepthType ConvertDepthTypeFromStr(string typeStr)
+        {
+            if (typeStr.Contains("高程")) return enumPipelineDepthType.Absolute;
+            return enumPipelineDepthType.Relative;
+
+        }
+        public static string ConvertDepthTypeToStr(enumPipelineDepthType type)
+        {
+            if (type == enumPipelineDepthType.Absolute) return "高程";
+             return "埋深";
+        }
+
+
+        public static enumPipeSectionType ConvertSectionTypeFromStr(string typeStr)
+        {
+            if (typeStr.StartsWith("宽")) return enumPipeSectionType.WidthAndHeight;
+            return enumPipeSectionType.HeightAndWidth;
+
+        }
+        public static string ConvertSectionTypeToStr(enumPipeSectionType type)
+        {
+            if (type == enumPipeSectionType.WidthAndHeight) return "宽*高";
+            return "高*宽";
         }
 
         public static enumPipelineDataType ConvertDataTypeFromString(string typeStr)
