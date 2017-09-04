@@ -313,6 +313,7 @@
     <None Include="Resources\icon_select_location2.png" />
     <None Include="Resources\icon_information.png" />
     <EmbeddedResource Include="Menu\MenuLayout.xml" />
+    <None Include="Resources\icon_zoom_selection.png" />
     <Content Include="Resources\SelectFeatures.bmp" />
     <None Include="Resources\ZoomSelection.png" />
     <EmbeddedResource Include="Resources\Cursor\PolygonMoveSelectFeatures.cur" />

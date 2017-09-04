@@ -133,6 +133,11 @@
   <ItemGroup>
     <Compile Include="AppContext.cs" />
     <Compile Include="Commands\Data\CmdAddData.cs" />
+    <Compile Include="Commands\Data\CmdExit.cs" />
+    <Compile Include="Commands\Data\CmdExportMap.cs" />
+    <Compile Include="Commands\Data\CmdPrint.cs" />
+    <Compile Include="Commands\Data\CmdPrintPageSetup.cs" />
+    <Compile Include="Commands\Data\CmdPrintPreview.cs" />
     <Compile Include="Commands\Document\CmdCloseMapDocument.cs" />
     <Compile Include="Commands\Document\CmdCloseSceneDocument.cs" />
     <Compile Include="Commands\Document\CmdCloseYutaiDoc.cs" />
@@ -166,6 +171,7 @@
     <Compile Include="Commands\Settings\CmdOpenSetting.cs" />
     <Compile Include="Commands\Views\CmdDisplayCoordinates.cs" />
     <Compile Include="Commands\Views\CmdStartMapFrameProps.cs" />
+    <Compile Include="Commands\Views\CmdSwipeTool.cs" />
     <Compile Include="Commands\Views\CmdViewFixedZoomIn.cs" />
     <Compile Include="Commands\Views\CmdViewFixedZoomOut.cs" />
     <Compile Include="Commands\Views\CmdViewFullExtent.cs" />
@@ -669,11 +675,15 @@
     <None Include="Resources\icon_add_data.png" />
     <None Include="Resources\icon_exit.png" />
     <None Include="Resources\icon_exportmap.png" />
+    <None Include="Resources\icon_eeye.png" />
+    <None Include="Resources\icon_exitsys.png" />
+    <None Include="Resources\icon_export_map.png" />
     <Content Include="Resources\icon_maplegend.png" />
     <None Include="Resources\icon_overview.png" />
     <None Include="Resources\icon_pagesetup.png" />
     <None Include="Resources\icon_preview.png" />
     <None Include="Resources\icon_print.png" />
+    <None Include="Resources\icon_view_swipe.png" />
     <Content Include="Resources\icon_zoom_in_fixed.bmp" />
     <Content Include="Resources\icon_zoom_out_fixed.bmp" />
     <None Include="Resources\save_16.png" />

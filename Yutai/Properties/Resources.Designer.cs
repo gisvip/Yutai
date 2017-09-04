@@ -193,6 +193,16 @@ namespace Yutai.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap icon_eeye {
+            get {
+                object obj = ResourceManager.GetObject("icon_eeye", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap icon_element_add {
             get {
                 object obj = ResourceManager.GetObject("icon_element_add", resourceCulture);
@@ -206,6 +216,26 @@ namespace Yutai.Properties {
         internal static System.Drawing.Bitmap icon_exit {
             get {
                 object obj = ResourceManager.GetObject("icon_exit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_exitsys {
+            get {
+                object obj = ResourceManager.GetObject("icon_exitsys", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_export_map {
+            get {
+                object obj = ResourceManager.GetObject("icon_export_map", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -596,6 +626,16 @@ namespace Yutai.Properties {
         internal static System.Drawing.Bitmap icon_vertex {
             get {
                 object obj = ResourceManager.GetObject("icon_vertex", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_view_swipe {
+            get {
+                object obj = ResourceManager.GetObject("icon_view_swipe", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -279,6 +279,11 @@ namespace Yutai.ArcGIS.Controls.Editor.UI
 
         private void EditorTemplateManageCtrl_OnMapDocumentChangedEvent()
         {
+            //! 因为当前对象为获取参数，暂时该功能隐去
+            m_list.Clear();
+            this.InitControl();
+            return;
+
             if (ApplicationRef.Application.FocusMap == this.m_Map)
             {
                 m_list.Clear();

@@ -61,7 +61,7 @@ namespace Yutai.Plugins.Identifer.Commands
         public override void OnCreate(object hook)
         {
             _context = hook as IAppContext;
-            base.m_caption = "查看地图要素";
+            base.m_caption = "查看";
             base.m_category = "View";
             base.m_bitmap = Properties.Resources.icon_identify;
             base.m_cursor =

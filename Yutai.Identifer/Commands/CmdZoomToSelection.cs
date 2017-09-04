@@ -26,7 +26,7 @@ namespace Yutai.Plugins.Identifer.Commands
 
         public CmdZoomToSelection(IAppContext context)
         {
-            this.m_bitmap = Properties.Resources.ZoomSelection;
+            this.m_bitmap = Properties.Resources.icon_zoom_selection;
             this.m_caption = "缩放至选择集";
             this.m_category = "Query";
             this.m_message = "缩放至选择集";
