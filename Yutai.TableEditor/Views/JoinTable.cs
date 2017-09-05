@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Catalog;
 using ESRI.ArcGIS.CatalogUI;
+using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.Geodatabase;
+using Yutai.ArcGIS.Catalog;
+using Yutai.ArcGIS.Catalog.UI;
 using Yutai.Plugins.TableEditor.Controls;
+using Cursor = System.Windows.Forms.Cursor;
+using IGxObject = Yutai.ArcGIS.Catalog.IGxObject;
 
 namespace Yutai.Plugins.TableEditor.Views
 {
@@ -43,16 +48,18 @@ namespace Yutai.Plugins.TableEditor.Views
 
         public static IFeatureClass SelectFeatureClassDialog()
         {
-            IGxDialog pGxDialog = new GxDialogClass();
-            pGxDialog.ObjectFilter = new GxFilterFeatureClassesClass();
-            pGxDialog.AllowMultiSelect = false;
-            pGxDialog.RememberLocation = true;
-            IEnumGxObject pEnumGxObject;
-            if (pGxDialog.DoModalOpen(0, out pEnumGxObject))
+            frmOpenFile frm = new frmOpenFile()
             {
-                IGxObject pSelectGxObject = pEnumGxObject.Next();
-                IGxDataset pGxDataset = (IGxDataset) pSelectGxObject;
-                return pGxDataset.Dataset as IFeatureClass;
+                Text = @"添加数据",
+                AllowMultiSelect = false
+            };
+            frm.AddFilter(new MyGxFilterFeatureClasses(), true);
+            if (frm.DoModalOpen() == DialogResult.OK)
+            {
+                IGxObject gxObject = frm.Items.get_Element(0) as IGxObject;
+                IFeatureClassName className = gxObject.InternalObjectName as IFeatureClassName;
+                IFeatureClass featureClass = ((IName) className).Open() as IFeatureClass;
+                return featureClass;
             }
             return null;
         }

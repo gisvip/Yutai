@@ -59,5 +59,25 @@ namespace Yutai.Check.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_Check {
+            get {
+                object obj = ResourceManager.GetObject("icon_Check", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_CheckConfig {
+            get {
+                object obj = ResourceManager.GetObject("icon_CheckConfig", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
