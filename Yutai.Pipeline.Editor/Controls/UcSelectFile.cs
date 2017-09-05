@@ -11,6 +11,7 @@ using ESRI.ArcGIS.Catalog;
 using ESRI.ArcGIS.CatalogUI;
 using ESRI.ArcGIS.DataSourcesGDB;
 using ESRI.ArcGIS.Geodatabase;
+using Yutai.Pipeline.Editor.Helper;
 
 namespace Yutai.Pipeline.Editor.Controls
 {
@@ -43,27 +44,10 @@ namespace Yutai.Pipeline.Editor.Controls
         {
             if (CheckGxObjectFilter(_filter))
             {
-                IGxDialog dialog = (GxDialog)Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid("EAB9CE2A-E777-11D1-AEE7-080009EC734B")));
-                dialog.AllowMultiSelect = false;
-                dialog.ButtonCaption = "选择数据库";
-                ConvertToGxObjectFilterCollection(dialog, _filter);
-                IEnumGxObject selection = null;
-                if (dialog.DoModalOpen(0, out selection))
+                _workspace = GxDialogHelper.SelectWorkspaceDialog();
+                if (_workspace != null)
                 {
-                    IGxObject obj = selection.Next();
-                    if (obj != null)
-                    {
-                        _fileName = obj.FullName;
-                        string ext = obj.Name.Substring(obj.Name.Length - 4).ToUpper();
-                        if (ext.ToUpper() == ".GDB")
-                        {
-                            _workspace = new FileGDBWorkspaceFactoryClass().OpenFromFile(_fileName, 0);
-                        }
-                        else if (ext.ToUpper() == ".MDB")
-                        {
-                            _workspace = new AccessWorkspaceFactoryClass().OpenFromFile(_fileName, 0);
-                        }
-                    }
+                    _fileName = _workspace.PathName;
                     txtPath.Text = _fileName;
                 }
             }
@@ -93,23 +77,6 @@ namespace Yutai.Pipeline.Editor.Controls
                 return true;
             }
             return false;
-        }
-
-        private void ConvertToGxObjectFilterCollection(IGxDialog gxDialog, string filter)
-        {
-            IGxObjectFilterCollection filterCollection = gxDialog as IGxObjectFilterCollection;
-            if (filterCollection == null)
-                return;
-            if (filter.ToUpper().Contains(".MDB"))
-            {
-                IGxObjectFilter objectFilter = new GxFilterPersonalGeodatabasesClass();
-                filterCollection.AddFilter(objectFilter, true);
-            }
-            if (filter.ToUpper().Contains(".GDB"))
-            {
-                IGxObjectFilter objectFilter = new GxFilterFileGeodatabasesClass();
-                filterCollection.AddFilter(objectFilter, true);
-            }
         }
     }
 

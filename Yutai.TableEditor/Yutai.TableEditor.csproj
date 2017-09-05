@@ -291,6 +291,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Yutai.ArcGIS.Catalog\Yutai.ArcGIS.Catalog.csproj">
+      <Project>{A71076F2-B2ED-4522-8DBF-BCA1689EB637}</Project>
+      <Name>Yutai.ArcGIS.Catalog</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Yutai.ArcGIS.Common\Yutai.ArcGIS.Common.csproj">
       <Project>{1938b3f8-8ede-48f7-9594-eeb1f126e622}</Project>
       <Name>Yutai.ArcGIS.Common</Name>

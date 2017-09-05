@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ESRI.ArcGIS.Catalog;
-using ESRI.ArcGIS.CatalogUI;
 using ESRI.ArcGIS.Geodatabase;
+using Yutai.ArcGIS.Catalog;
+using Yutai.ArcGIS.Catalog.UI;
 
 namespace Yutai.Pipeline.Editor.Controls
 {
@@ -55,20 +55,14 @@ namespace Yutai.Pipeline.Editor.Controls
             {
                 case EnumExportType.FeatureClass:
                     {
-                        IGxDialog dialog = new GxDialogClass();
-                        IGxObjectFilterCollection filterCollection = dialog as IGxObjectFilterCollection;
-                        filterCollection.AddFilter(new GxFilterWorkspacesClass(), true);
-                        filterCollection.AddFilter(new GxFilterDatasetsClass(), false);
-                        dialog.AllowMultiSelect = false;
-                        dialog.ButtonCaption = "选择";
-                        dialog.RememberLocation = true;
-                        dialog.Title = "选择输出位置";
-                        IEnumGxObject selection = null;
-                        if (dialog.DoModalOpen(0, out selection))
+                        frmOpenFile frm = new frmOpenFile();
+                        frm.AllowMultiSelect = false;
+                        frm.AddFilter(new MyGxFilterWorkspaces(), false);
+                        frm.AddFilter(new MyGxFilterDatasets(), true);
+                        frm.Text = @"选择输出位置";
+                        if (frm.DoModalOpen() == DialogResult.OK)
                         {
-                            if (selection == null)
-                                return;
-                            IGxObject gxObject = selection.Next();
+                            IGxObject gxObject = frm.Items.get_Element(0) as IGxObject;
                             if (gxObject is IGxDatabase)
                             {
                                 IGxDatabase gxDatabase = gxObject as IGxDatabase;
@@ -83,7 +77,6 @@ namespace Yutai.Pipeline.Editor.Controls
                                 _workspace = _dataset.Workspace;
                                 _saveType = EnumSaveType.Dataset;
                             }
-                            txtPath.Text = gxObject.FullName;
                         }
                     }
                     break;

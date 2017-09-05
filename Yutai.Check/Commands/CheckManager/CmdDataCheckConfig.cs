@@ -29,7 +29,7 @@ namespace Yutai.Check.Commands.CheckManager
             _context = hook as IAppContext;
             base.m_caption = "数据检查设置";
             base.m_category = "Check_Pipeline";
-            //base.m_bitmap = Properties.Resources.icon_pipe_cqsz;
+            base.m_bitmap = Properties.Resources.icon_CheckConfig;
             base.m_name = "Check_Pipeline_DataCheckConfig";
             base._key = "Check_Pipeline_DataCheckConfig";
             base.m_toolTip = "";

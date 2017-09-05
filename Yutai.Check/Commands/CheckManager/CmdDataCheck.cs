@@ -85,6 +85,7 @@ namespace Yutai.Check.Commands.CheckManager
             _context = hook as IAppContext;
             base.m_caption = "数据检查";
             base.m_category = "Check_Pipeline";
+            base.m_bitmap = Properties.Resources.icon_Check;
             base.m_name = "Check_Pipeline_DataCheck";
             base._key = "Check_Pipeline_DataCheck";
             base.m_toolTip = "数据检查。";
