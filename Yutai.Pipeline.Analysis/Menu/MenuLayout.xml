@@ -46,7 +46,12 @@
           <BarItem Key="PipeAnalysis_PreAlarmAnalysis" Visible="true"></BarItem>
 
         </PageGroup>
+        <PageGroup Key="Pipeline_3D" Caption="管线三维" Visible="true" Index="0">
+          <BarItem Key="PipeAnalysis_3DBuilder" Visible="true"></BarItem>
+        </PageGroup>
       </Page>
+     
+       
       <Page Key="PipelineConfig" Caption="管线配置" Index="0" Visible="true">
         <PageGroup Key="Pipeline_Config_Common" Caption="管线配置" Visible="true" Index="0">
           <BarItem Key="PipeQuery_AutoConfig" Visible="true"></BarItem>

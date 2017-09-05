@@ -287,7 +287,7 @@ namespace Yutai.Pipeline.Analysis.Forms
 		private System.Windows.Forms.ProgressBar progressBar1;
 		private Timer timer_0;
 		private IFeature ifeature_0;
-	    private IAppContext _context;
+        private IContainer icontainer_0 = null;
         private IContainer components;
         private Label label2;
         private System.Windows.Forms.ComboBox cmbDepthType;

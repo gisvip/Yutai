@@ -193,6 +193,16 @@ namespace Yutai.Pipeline.Analysis.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap icon_pipeline_3d {
+            get {
+                object obj = ResourceManager.GetObject("icon_pipeline_3d", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap icon_prealarm {
             get {
                 object obj = ResourceManager.GetObject("icon_prealarm", resourceCulture);

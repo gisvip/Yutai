@@ -494,7 +494,6 @@ namespace Yutai.Pipeline.Config.Concretes
                             IPipelineLayer pSaveLayer = newLayer.Clone(true);
                             newLayer.Workspace = workspaceInfo.Workspace;
                             _layers.Add(newLayer);
-
                             break;
                         }
                     }

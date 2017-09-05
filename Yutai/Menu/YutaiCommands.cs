@@ -126,6 +126,9 @@ namespace Yutai.Menu
                     new CmdPrintPreview(_context),
                     new CmdExportMap(_context),
                     new CmdExit(_context),
+
+                    new CmdSwipeTool(_context),
+                    new CmdViewSwipe(_context),
                 };
                 _commandKeys = new List<string>();
                 foreach (var command in _commands)

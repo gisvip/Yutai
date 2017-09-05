@@ -57,7 +57,7 @@ namespace Yutai.Commands.Windows
             _context = hook as IAppContext;
             base.m_caption = "鹰眼视图";
             base.m_category = "Window";
-            base.m_bitmap = Properties.Resources.icon_overview;
+            base.m_bitmap = Properties.Resources.icon_eeye;
             base.m_name = "Window.Common.Overview";
             base._key = "Window_Common_Overview";
             base.m_toolTip = "鹰眼视图";

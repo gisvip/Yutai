@@ -11,6 +11,7 @@ using Yutai.Pipeline.Config.Interfaces;
 
 namespace Yutai.Pipeline.Config.Concretes
 {
+    //! 增加了埋深类型和规格数据类型，用于断面分析和三维生成
     public class BasicLayerInfo : IBasicLayerInfo
     {
         private string _name;
@@ -24,6 +25,8 @@ namespace Yutai.Pipeline.Config.Concretes
         private IFeatureClass _featureClass;
         private string _autoNames;
         private string _esriClassName;
+        private enumPipelineDepthType _depthType;
+        private enumPipeSectionType _sectionType;
 
         public string AutoNames
         {
@@ -64,6 +67,18 @@ namespace Yutai.Pipeline.Config.Concretes
         {
             get { return _heightType; }
             set { _heightType = value; }
+        }
+
+        public enumPipelineDepthType DepthType
+        {
+            get { return _depthType; }
+            set { _depthType = value; }
+        }
+
+        public enumPipeSectionType SectionType
+        {
+            get { return _sectionType; }
+            set { _sectionType = value; }
         }
 
         public string ValidateKeys
@@ -149,6 +164,8 @@ namespace Yutai.Pipeline.Config.Concretes
             _heightType = info.HeightType;
             _validateKeys = info.ValidateKeys;
             _templateName = info.TemplateName;
+            _depthType = info.DepthType;
+            _sectionType = info.SectionType;
             _fields = new List<IYTField>();
             foreach (IYTField infoField in info.Fields)
             {
@@ -181,6 +198,15 @@ namespace Yutai.Pipeline.Config.Concretes
                 _heightType = node.Attributes["HeightType"] == null
                     ? enumPipelineHeightType.Top
                     : EnumHelper.ConvertHeightTypeFromStr(node.Attributes["HeightType"].Value);
+
+                _depthType = node.Attributes["DepthType"] == null
+                   ? enumPipelineDepthType.Relative
+                   : EnumHelper.ConvertDepthTypeFromStr(node.Attributes["DepthType"].Value);
+
+                _sectionType = node.Attributes["SectionType"] == null
+                   ? enumPipeSectionType.WidthAndHeight
+                   : EnumHelper.ConvertSectionTypeFromStr(node.Attributes["SectionType"].Value);
+
                 _validateKeys = node.Attributes["ValidateKeys"] == null ? "" : node.Attributes["ValidateKeys"].Value;
                 _templateName = node.Attributes["TemplateName"] == null ? "" : node.Attributes["TemplateName"].Value;
                 _autoNames = node.Attributes["AutoNames"].Value;
@@ -221,6 +247,13 @@ namespace Yutai.Pipeline.Config.Concretes
             typeAttribute.Value = EnumHelper.ConvertDataTypeToString(_dataType);
             XmlAttribute heightAttribute = doc.CreateAttribute("HeightType");
             heightAttribute.Value = EnumHelper.ConvertHeightTypeToStr(_heightType);
+
+            XmlAttribute depthAttribute = doc.CreateAttribute("DepthType");
+            depthAttribute.Value = EnumHelper.ConvertDepthTypeToStr(_depthType);
+
+            XmlAttribute sectionAttribute = doc.CreateAttribute("SectionType");
+            sectionAttribute.Value = EnumHelper.ConvertSectionTypeToStr(_sectionType);
+
             XmlAttribute validateKeysAttribute = doc.CreateAttribute("ValidateKeys");
             validateKeysAttribute.Value = _validateKeys;
             XmlAttribute autoNamesAttribute = doc.CreateAttribute("AutoNames");
@@ -231,6 +264,8 @@ namespace Yutai.Pipeline.Config.Concretes
             layerNode.Attributes.Append(visibleAttribute);
             layerNode.Attributes.Append(typeAttribute);
             layerNode.Attributes.Append(heightAttribute);
+            layerNode.Attributes.Append(depthAttribute);
+            layerNode.Attributes.Append(sectionAttribute);
             layerNode.Attributes.Append(validateKeysAttribute);
             layerNode.Attributes.Append(autoNamesAttribute);
 

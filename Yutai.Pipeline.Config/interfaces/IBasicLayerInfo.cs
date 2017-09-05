@@ -14,6 +14,8 @@ namespace Yutai.Pipeline.Config.Interfaces
         bool Visible { get; set; }
         enumPipelineDataType DataType { get; set; }
         enumPipelineHeightType HeightType { get; set; }
+        enumPipelineDepthType DepthType { get; set; }
+        enumPipeSectionType SectionType { get; set; }
         //! 用来判断图层是否为合法的对应管线图层
         string ValidateKeys { get; set; }
         List<IYTField> Fields { get; set; }

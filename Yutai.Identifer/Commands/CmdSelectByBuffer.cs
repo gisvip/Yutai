@@ -139,7 +139,7 @@ namespace Yutai.Plugins.Identifer.Commands
                     base.m_toolTip = "选择包含在缓冲区中的要素";
                     base.m_name = "Query_SelectionTools_SelectFeatureContainers";
                     base.m_message = "选择包含在缓冲区中的要素";
-                    base.m_caption = "选择包含在缓冲区中的要素";
+                    base.m_caption = "缓冲区包含";
                     base.m_category = "Query";
                     base._key = "Query_SelectionTools_SelectFeatureContainers";
                     base._itemType = RibbonItemType.Button;
@@ -154,7 +154,7 @@ namespace Yutai.Plugins.Identifer.Commands
                     base.m_toolTip = "选择和缓冲区相交要素";
                     base.m_name = "Query_SelectionTools_SelectFeatureIntersects";
                     base.m_message = "选择和缓冲区相交要素";
-                    base.m_caption = "选择和缓冲区相交要素";
+                    base.m_caption = "缓冲区相交";
                     base.m_category = "Query";
                     base._key = "Query_SelectionTools_SelectFeatureIntersects";
                     base._itemType = RibbonItemType.Button;

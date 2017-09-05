@@ -24,8 +24,8 @@ namespace Yutai.Pipeline.Analysis.Forms
 {
     public partial class FormMaiShenAnalysis : XtraForm
     {
-        private IContainer icontainer_0 = null;
-
+        
+        private IAppContext _context;
         private IPipelineConfig _config;
 
         public RuleMs m_RuleMs; //= new RuleMs();

@@ -421,7 +421,8 @@ namespace Yutai.ArcGIS.Carto.UI
             base.ResumeLayout(false);
         }
 
-       
+        private bool bool_0 = false;
+        private Container container_0 = null;
         private Button button_printerAttribute;
         private ComboBox cboPageSize;
         private ComboBox cboPageToPrinterMapping;
@@ -458,9 +459,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private PrinterSettings printerSettings_0;
         private TextBox txtPageHeight;
         private TextBox txtPageWidth;
-            private System.Drawing.Printing.PaperSize paperSize_0;
-            private int int_0;
-            private string string_0;
+       
         
     }
 }

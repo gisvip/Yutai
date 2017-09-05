@@ -683,6 +683,11 @@ namespace Yutai.Plugins.Identifer.Views
                     for (int k = 0; k < identifyResult.Count; k++)
                     {
                         identifiedObjCount++;
+                        if (identifiedObjCount > 200)
+                        {
+                            MessageBox.Show("查询结果数量超出限制，不再继续查询!", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            break;
+                        }
                         IFeatureIdentifyObj identifiedFeatureObj = identifyResult.get_Element(k) as IFeatureIdentifyObj;
                         //闪烁要素
                         IFeature identifiedFeature = (identifiedFeatureObj as IRowIdentifyObject).Row as IFeature;
@@ -695,6 +700,10 @@ namespace Yutai.Plugins.Identifer.Views
                 }
                 //显示查询进度
                 //IdentifyProgress.Value = i + 1;
+                if (identifiedObjCount > 200)
+                {
+                    break;
+                }
                 Application.DoEvents();
             }
             //隐藏进度条

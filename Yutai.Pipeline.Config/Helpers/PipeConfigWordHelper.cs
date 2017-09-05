@@ -205,6 +205,11 @@ namespace Yutai.Pipeline.Config.Helpers
         {
             get { return "MSRQ"; }
         }
+        //!旋转角度
+        public string XZJD
+        {
+            get { return "XZJD"; }
+        }
     }
 
     public class PipeLineConfigWords

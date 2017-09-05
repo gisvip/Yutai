@@ -274,8 +274,8 @@ namespace Yutai.ArcGIS.Controls.Controls
             if (this.m_pSourcesPageLayout != null)
             {
             }
-            string fileName = System.IO.Path.Combine(Application.StartupPath, "ForMapPtinterMenu.xml");
-            this.LoadTools(this.m_pApp, fileName);
+            //string fileName = System.IO.Path.Combine(Application.StartupPath, "ForMapPtinterMenu.xml");
+            //this.LoadTools(this.m_pApp, fileName);
             this.CreateESRICommand();
             this.SetHook(this.axPageLayoutControl1.Object);
             DocumentManager.Register(this.axPageLayoutControl1.Object);

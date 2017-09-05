@@ -84,6 +84,7 @@ namespace Yutai.Pipeline.Analysis.Menu
                     new CmdQueryRoadIntersect(_context, _plugin),
                     new CmdStartClassForm(_context, _plugin),
                     new CmdStartReportForm(_context, _plugin),
+                    new Cmd3DBuilder(_context,_plugin),
                 };
             }
             catch (Exception ex)
