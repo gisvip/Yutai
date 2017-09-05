@@ -33,6 +33,7 @@ namespace Yutai.Pipeline.Config.Concretes
         private List<string> _styleFiles;
         private List<ICommonConfig> _commonConfigs;
         private List<IFunctionLayer> _functionLayers;
+        private string _projectFile;
 
         public PipelineConfig()
         {
@@ -217,14 +218,12 @@ namespace Yutai.Pipeline.Config.Concretes
             {
                 try
                 {
-                    layer = pipelineLayer.Layers.FirstOrDefault(c => c.FeatureClass.AliasName == classAliasName);
-                    if (layer != null)
+                    foreach (IBasicLayerInfo basicLayer in pipelineLayer.Layers)
                     {
-                        if (layer.DataType == dataType)
-                            return true;
+                        if (basicLayer.AliasName.Equals(classAliasName) && basicLayer.DataType == dataType) return true;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     return false;
                 }
@@ -237,13 +236,9 @@ namespace Yutai.Pipeline.Config.Concretes
             IBasicLayerInfo layer;
             foreach (IPipelineLayer pipelineLayer in _layers)
             {
-                layer =
-                    pipelineLayer.Layers.FirstOrDefault(
-                        c => c.FeatureClass.AliasName == classAliasName || c.EsriClassName == classAliasName);
-                if (layer != null)
+                foreach (IBasicLayerInfo basicLayer in pipelineLayer.Layers)
                 {
-                    if (layer.DataType == dataType)
-                        return pipelineLayer;
+                    if (basicLayer.AliasName.Equals(classAliasName) && basicLayer.DataType == dataType) return pipelineLayer;
                 }
             }
             return null;
@@ -254,10 +249,9 @@ namespace Yutai.Pipeline.Config.Concretes
             IBasicLayerInfo layer;
             foreach (IPipelineLayer pipelineLayer in _layers)
             {
-                layer = pipelineLayer.Layers.FirstOrDefault(c => c.FeatureClass == pClass);
-                if (layer != null)
+                foreach (IBasicLayerInfo basicLayer in pipelineLayer.Layers)
                 {
-                    return pipelineLayer;
+                    if (basicLayer.FeatureClass==pClass) return pipelineLayer;
                 }
             }
             return null;
@@ -268,8 +262,10 @@ namespace Yutai.Pipeline.Config.Concretes
             IBasicLayerInfo layer;
             foreach (IPipelineLayer pipelineLayer in _layers)
             {
-                layer = pipelineLayer.Layers.FirstOrDefault(c => c.FeatureClass == pClass);
-                if (layer != null) return layer;
+                foreach (IBasicLayerInfo basicLayer in pipelineLayer.Layers)
+                {
+                    if (basicLayer.FeatureClass == pClass) return basicLayer;
+                }
             }
             return null;
         }
@@ -279,8 +275,10 @@ namespace Yutai.Pipeline.Config.Concretes
             IBasicLayerInfo layer;
             foreach (IPipelineLayer pipelineLayer in _layers)
             {
-                layer = pipelineLayer.Layers.FirstOrDefault(c => c.FeatureClass.AliasName == pClassAliasName);
-                if (layer != null) return layer;
+                foreach (IBasicLayerInfo basicLayer in pipelineLayer.Layers)
+                {
+                    if (basicLayer.AliasName == pClassAliasName) return basicLayer;
+                }
             }
             return null;
         }
@@ -706,6 +704,12 @@ namespace Yutai.Pipeline.Config.Concretes
             Marshal.ReleaseComObject(tableSort);
             Marshal.ReleaseComObject(pCodeTable);
             return layers;
+        }
+
+        public string ProjectFile
+        {
+            get { return _projectFile; }
+            set { _projectFile = value; }
         }
     }
 }

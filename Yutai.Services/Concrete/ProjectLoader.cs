@@ -8,6 +8,7 @@ using ESRI.ArcGIS.Geometry;
 using Yutai.Plugins.Interfaces;
 using Yutai.Plugins.Services;
 using Yutai.Services.Serialization;
+using Yutai.Services.Views;
 using Yutai.Shared;
 
 namespace Yutai.Services.Concrete
@@ -36,7 +37,7 @@ namespace Yutai.Services.Concrete
         /// <summary>
         /// Restores the state of application by populating application _context after project file was deserialized.
         /// </summary>
-        public bool Restore(XmlProject project)
+        public bool Restore(XmlProject project, ProjectLoadingView loadingForm)
         {
             _context.MainView.Lock();
             System.IO.FileInfo fileInfo = new FileInfo(project.Settings.LoadAsFilename);
@@ -45,12 +46,13 @@ namespace Yutai.Services.Concrete
             try
             {
                 //因为插件引导的时候需要读取项目文档里面的配置，因此，这个参数必须在插件引导前赋值
+                loadingForm.ShowProgress(30,"正在加载地图");
                 _context.YutaiProject = project;
                 RestoreMxdDocument(project);
                 //  RestoreSxdDocument(project);
-
+                loadingForm.ShowProgress(70, "正在加载插件");
                 RestorePlugins(project);
-
+                loadingForm.ShowProgress(100, "正在设置视图范围");
                 RestoreExtents(project);
 
 

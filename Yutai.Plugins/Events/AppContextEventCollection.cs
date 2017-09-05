@@ -2,7 +2,7 @@
 using ESRI.ArcGIS.Carto;
 using Yutai.Plugins.Enums;
 
-namespace Yutai.Plugins.Events
+namespace Yutai.Plugins.Events 
 {
     public delegate void OnActiveHookChangedHandler(object object_0);
 
@@ -59,4 +59,7 @@ namespace Yutai.Plugins.Events
     public delegate void MapReplacedHandler(object object_0);
 
     public delegate void OnItemClickEventHandler(object object_0);
+
+    public delegate void OnProjectChangedHandler(object projectXml);
+
 }

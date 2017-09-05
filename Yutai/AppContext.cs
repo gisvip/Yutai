@@ -565,6 +565,15 @@ namespace Yutai
             //
         }
 
+        public event OnProjectChangedHandler OnProjectChanged;
+        public void ProjectChanged(object projectXML)
+        {
+            if (OnProjectChanged != null)
+            {
+                OnProjectChanged(projectXML);
+            }
+        }
+
         #endregion
     }
 }

@@ -240,6 +240,7 @@ namespace Yutai.Services.Concrete
             if (_fileService.Open(ProjectFilter, out filename, ProjectFilterIndex))
             {
                 Open(filename);
+                return true;
             }
 
             return false;
@@ -396,7 +397,7 @@ namespace Yutai.Services.Concrete
 
                 project.Settings.LoadAsFilename = filename;
 
-                if (!_projectLoader.Restore(project))
+                if (!_projectLoader.Restore(project,_loadingForm))
                 {
                     Clear();
                     SetEmptyProject();
@@ -413,7 +414,8 @@ namespace Yutai.Services.Concrete
                 }
 
                 Logger.Current.Info("项目被引导中: " + filename);
-
+                _context.ProjectChanged(project);
+                //OnProjectChanged();
                 return true;
             }
 

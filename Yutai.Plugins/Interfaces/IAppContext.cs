@@ -83,6 +83,7 @@ namespace Yutai.Plugins.Interfaces
         void MapClipChanged(object clip);
         void MapDocumentChanged();
         void MapDocumentSave(string fileName);
+        void ProjectChanged(object projectXML);
         void ResetCurrentTool();
 
         object Hook { get; set; }

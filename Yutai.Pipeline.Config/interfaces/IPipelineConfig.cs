@@ -15,6 +15,7 @@ namespace Yutai.Pipeline.Config.Interfaces
 {
     public interface IPipelineConfig
     {
+        string ProjectFile { get; set; }
         string ConfigDatabaseName { get; set; }
         List<string> StyleFiles { get; set; }
         List<ICommonConfig> CommonConfigs { get; set; }

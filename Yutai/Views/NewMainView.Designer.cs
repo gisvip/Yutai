@@ -28,22 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewMainView));
             this.ribbonManager = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.dockManager = new DevExpress.XtraBars.Docking.DockManager();
-            this.toolTipController1 = new DevExpress.Utils.ToolTipController();
+            this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
+            this.toolTipController1 = new DevExpress.Utils.ToolTipController(this.components);
             this.pageMap = new DevExpress.XtraTab.XtraTabPage();
-            this.axMapControl1 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.axLicenseControl1 = new ESRI.ArcGIS.Controls.AxLicenseControl();
+            this.axMapControl1 = new ESRI.ArcGIS.Controls.AxMapControl();
             this.pageLayout = new DevExpress.XtraTab.XtraTabPage();
             this.axPageLayoutControl1 = new ESRI.ArcGIS.Controls.AxPageLayoutControl();
             this.tabContent = new DevExpress.XtraTab.XtraTabControl();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
             this.pageMap.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).BeginInit();
             this.pageLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axPageLayoutControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabContent)).BeginInit();
@@ -52,6 +53,7 @@
             // 
             // ribbonManager
             // 
+            this.ribbonManager.ApplicationIcon = global::Yutai.Properties.Resources.icon_logo;
             this.ribbonManager.ExpandCollapseItem.Id = 0;
             this.ribbonManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbonManager.ExpandCollapseItem});
@@ -91,15 +93,6 @@
             this.pageMap.Size = new System.Drawing.Size(1122, 574);
             this.pageMap.Text = "地图窗口";
             // 
-            // axMapControl1
-            // 
-            this.axMapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.axMapControl1.Location = new System.Drawing.Point(0, 0);
-            this.axMapControl1.Name = "axMapControl1";
-            this.axMapControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl1.OcxState")));
-            this.axMapControl1.Size = new System.Drawing.Size(1122, 574);
-            this.axMapControl1.TabIndex = 1;
-            // 
             // axLicenseControl1
             // 
             this.axLicenseControl1.Enabled = true;
@@ -108,6 +101,15 @@
             this.axLicenseControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axLicenseControl1.OcxState")));
             this.axLicenseControl1.Size = new System.Drawing.Size(32, 32);
             this.axLicenseControl1.TabIndex = 0;
+            // 
+            // axMapControl1
+            // 
+            this.axMapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.axMapControl1.Location = new System.Drawing.Point(0, 0);
+            this.axMapControl1.Name = "axMapControl1";
+            this.axMapControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axMapControl1.OcxState")));
+            this.axMapControl1.Size = new System.Drawing.Size(1122, 574);
+            this.axMapControl1.TabIndex = 1;
             // 
             // pageLayout
             // 
@@ -150,11 +152,12 @@
             this.Ribbon = this.ribbonManager;
             this.StatusBar = this.ribbonStatusBar;
             this.Text = "NewMainView";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.ribbonManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
             this.pageMap.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axLicenseControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).EndInit();
             this.pageLayout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.axPageLayoutControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabContent)).EndInit();

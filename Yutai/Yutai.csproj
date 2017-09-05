@@ -678,6 +678,7 @@
     <None Include="Resources\icon_eeye.png" />
     <None Include="Resources\icon_exitsys.png" />
     <None Include="Resources\icon_export_map.png" />
+    <None Include="Resources\icon_logo.png" />
     <Content Include="Resources\icon_maplegend.png" />
     <None Include="Resources\icon_overview.png" />
     <None Include="Resources\icon_pagesetup.png" />

@@ -242,7 +242,7 @@ namespace Yutai.Pipeline.Analysis.Forms
                     if (this.PickBrokePipe(pMousePoint))
                     {
                         this.InitBrokePoint();
-                        this.btnStartAnalysis_Click(null, null);
+                      //  this.btnStartAnalysis_Click(null, null);
                     }
                 }
                 else if (this.btnAddThroughValve.Checked)

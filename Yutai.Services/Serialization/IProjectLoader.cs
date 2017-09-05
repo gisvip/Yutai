@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yutai.Plugins.Events;
+using Yutai.Services.Views;
 
 namespace Yutai.Services.Serialization
 {
@@ -13,6 +14,6 @@ namespace Yutai.Services.Serialization
 
     public interface IProjectLoader : IProjectLoaderBase
     {
-        bool Restore(XmlProject project);
+        bool Restore(XmlProject project, ProjectLoadingView loadingView);
     }
 }
