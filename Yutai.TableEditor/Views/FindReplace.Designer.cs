@@ -93,7 +93,6 @@
             this.txtFind.Name = "txtFind";
             this.txtFind.Size = new System.Drawing.Size(252, 20);
             this.txtFind.TabIndex = 0;
-            this.txtFind.TextChanged += new System.EventHandler(this.txtFind_TextChanged);
             // 
             // label3
             // 

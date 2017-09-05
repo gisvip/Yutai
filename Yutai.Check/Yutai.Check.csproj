@@ -186,11 +186,6 @@
     <Compile Include="Menu\YutaiCommands.cs" />
     <Compile Include="CheckPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Services\CheckResultDockPanelService.cs" />
     <Compile Include="Views\CheckResultDockPanel.cs">
       <SubType>UserControl</SubType>
@@ -255,18 +250,12 @@
     <EmbeddedResource Include="Menu\MenuLayout.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\CheckResultDockPanel.resx">
       <DependentUpon>CheckResultDockPanel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="CheckConfig.xml" />
-    <None Include="Resources\icon_CheckConfig.png" />
-    <None Include="Resources\icon_Check.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
