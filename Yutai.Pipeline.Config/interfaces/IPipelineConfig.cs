@@ -30,6 +30,7 @@ namespace Yutai.Pipeline.Config.Interfaces
         string XmlFile { get; set; }
 
         void Save();
+        void Clear();
 
         //! 通过依据数据库配置对地图内图层的自动识别创建有关配置
         void OrganizeMap(IMap pMap);

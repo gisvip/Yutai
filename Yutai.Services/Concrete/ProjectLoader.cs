@@ -50,19 +50,17 @@ namespace Yutai.Services.Concrete
                 _context.YutaiProject = project;
                 RestoreMxdDocument(project);
                 //  RestoreSxdDocument(project);
-                loadingForm.ShowProgress(70, "正在加载插件");
+                loadingForm.ShowProgress(100, "正在加载插件");
                 RestorePlugins(project);
-                loadingForm.ShowProgress(100, "正在设置视图范围");
-                RestoreExtents(project);
-
-
+                //loadingForm.ShowProgress(100, "正在设置视图范围");
+                //RestoreExtents(project);
                 return true;
             }
             finally
             {
                 _context.YutaiProject = project;
                 _context.MainView.Unlock();
-                _broadcaster.BroadcastEvent(p => p.ProjectOpened_, this, null);
+                //_broadcaster.BroadcastEvent(p => p.ProjectOpened_, this, null);
             }
         }
 

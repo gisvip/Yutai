@@ -167,6 +167,19 @@ namespace Yutai.Pipeline.Config.Concretes
             }
         }
 
+        public void Clear()
+        {
+            _layers.Clear();
+            _templates.Clear();
+            _functionLayers.Clear();
+            _projectFile = "";
+            if (this.viewEvents != null)
+            {
+                viewEvents.ItemAdded -= ViewEventsOnItemAdded;
+                viewEvents.ItemDeleted -= ViewEventsOnItemDeleted;
+            }
+        }
+
         public bool LinkMap(IMap pMap)
         {
             try

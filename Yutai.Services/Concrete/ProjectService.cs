@@ -29,6 +29,7 @@ namespace Yutai.Services.Concrete
         private readonly ProjectLoaderLegacy _projectLoaderLegacy;
         private string _filename = string.Empty;
         private bool _modified;
+        private string _title;
 
         public ProjectService(IAppContext context, IFileDialogService fileService,
             IBroadcasterService broadcaster, IProjectLoader projectLoader, ProjectLoaderLegacy projectLoaderLegacy)
@@ -54,6 +55,7 @@ namespace Yutai.Services.Concrete
         public string Filename
         {
             get { return _filename; }
+            set { _filename = value; }
         }
 
         public ProjectState GetState()
@@ -121,6 +123,7 @@ namespace Yutai.Services.Concrete
 
         private void Clear()
         {
+            _filename = "";
             /* _context.Map.GeometryEditor.Clear();
              _context.Legend.Groups.Clear();
              _context.Legend.Layers.Clear();
@@ -272,19 +275,11 @@ namespace Yutai.Services.Concrete
             bool result;
 
             _context.View.Lock();
-
-            //if (legacy)
-            //{
-            //    result = OpenLegacyProject(filename);
-            //}
-            //else
-            //{
             result = OpenCore(filename, silent);
-            //}
 
             // let's redraw map before hiding the progress
             _loadingForm.ShowProgress(100, "请等待，正在加载地图...");
-            //_context.Map.Redraw();
+          
             _context.View.Unlock();
 
             Application.DoEvents();
@@ -292,6 +287,9 @@ namespace Yutai.Services.Concrete
             loader.ProgressChanged -= OnLoadingProgressChanged;
 
             HideLoadingForm();
+            _context.Project.Filename = filename;
+
+            _broadcaster.BroadcastEvent(p => p.ProjectOpened_, this, null);
 
             return result;
         }
@@ -396,7 +394,7 @@ namespace Yutai.Services.Concrete
                 }
 
                 project.Settings.LoadAsFilename = filename;
-
+                _filename = filename;
                 if (!_projectLoader.Restore(project,_loadingForm))
                 {
                     Clear();
@@ -406,7 +404,7 @@ namespace Yutai.Services.Concrete
 
                 // AppConfig.Instance.AddRecentProject(filename);
 
-                _filename = filename;
+                
 
                 if (!silent)
                 {
@@ -414,7 +412,8 @@ namespace Yutai.Services.Concrete
                 }
 
                 Logger.Current.Info("项目被引导中: " + filename);
-                _context.ProjectChanged(project);
+                _title = project.Title;
+               // _context.ProjectChanged(project);
                 //OnProjectChanged();
                 return true;
             }
@@ -446,6 +445,12 @@ namespace Yutai.Services.Concrete
         {
             _filename = "";
             //OnProjectChanged();
+        }
+
+        public string Title
+        {
+            get { return _title; }
+            set { _title = value; }
         }
     }
 }

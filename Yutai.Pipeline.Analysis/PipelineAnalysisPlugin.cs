@@ -20,8 +20,8 @@ namespace Yutai.Pipeline.Analysis
         private MenuGenerator _menuGenerator;
         private IPipelineConfig _config;
         private DockPanelService _dockPanelService;
-        private IAppContextEvents _contextEvents;
-
+        
+        private ProjectListener _projectListener;
         public event EventHandler<QueryResultArgs> QueryResultChanged;
 
         protected override void RegisterServices(IApplicationContainer container)
@@ -43,23 +43,24 @@ namespace Yutai.Pipeline.Analysis
                 if (string.IsNullOrEmpty(fileName)) return;
                 fileName = FileHelper.GetFullPath(fileName);
                 _config.LoadFromXml(fileName);
+               
             }
 
-            _contextEvents=_context as IAppContextEvents;
-            _contextEvents.OnProjectChanged += _contextEvents_OnProjectChanged;
+            _projectListener = context.Container.GetInstance<ProjectListener>();
+            //_contextEvents.OnProjectChanged += _contextEvents_OnProjectChanged;
             //_menuListener = context.Container.GetInstance<MenuListener>();
             //_mapListener = context.Container.GetInstance<MapListener>();
             // _dockPanelService = context.Container.GetInstance<TemplateDockPanelService>();
         }
 
-        private void _contextEvents_OnProjectChanged(object projectXml)
-        {
-            if (_config.ProjectFile != _context.Project.Filename)
-            {
-                _config.LinkMap(_context.FocusMap);
-                _config.ProjectFile = _context.Project.Filename;
-            }
-        }
+        //private void _contextEvents_OnProjectChanged(object projectXml)
+        //{
+        //    if (_config.ProjectFile != _context.Project.Filename)
+        //    {
+        //        _config.LinkMap(_context.FocusMap);
+        //        _config.ProjectFile = _context.Project.Filename;
+        //    }
+        //}
 
         private void FireEvent<T>(EventHandler<T> handler, T args)
         {

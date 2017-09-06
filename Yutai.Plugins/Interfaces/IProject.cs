@@ -5,7 +5,8 @@
     {
         void SetModified();
         bool Modified { get; }
-        string Filename { get; }
+        string Filename { get; set; }
         bool IsEmpty { get; }
+        string Title { get; set; }
     }
 }
