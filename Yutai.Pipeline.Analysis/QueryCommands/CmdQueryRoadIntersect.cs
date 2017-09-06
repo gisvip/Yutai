@@ -100,21 +100,5 @@ namespace Yutai.Pipeline.Analysis.QueryCommands
             e.Cancel = true;
             this.QueryUI.Hide();
         }
-
-        public override bool Enabled
-        {
-            get
-            {
-                if (_plugin.PipeConfig?.Layers == null)
-                    return false;
-                if (_plugin.PipeConfig.Layers.Count <= 0)
-                    return false;
-                if (_plugin.PipeConfig.FunctionLayers.Count <= 0)
-                    return false;
-                if (_plugin.PipeConfig.GetFunctionLayer(enumFunctionLayerType.RoadCenterLine) == null)
-                    return false;
-                return true;
-            }
-        }
     }
 }

@@ -16,7 +16,7 @@ namespace Yutai.Pipeline.Config.Helpers
             return enumPipelineHeightType.Middle;
         }
 
-       
+
 
         public static string ConvertHeightTypeToStr(enumPipelineHeightType type)
         {
@@ -34,7 +34,7 @@ namespace Yutai.Pipeline.Config.Helpers
         public static string ConvertDepthTypeToStr(enumPipelineDepthType type)
         {
             if (type == enumPipelineDepthType.Absolute) return "高程";
-             return "埋深";
+            return "埋深";
         }
 
 
@@ -120,6 +120,10 @@ namespace Yutai.Pipeline.Config.Helpers
             {
                 case "ITEM":
                     return enumFunctionLayerType.Item;
+                case "ROADCENTERLINE":
+                    return enumFunctionLayerType.RoadCenterLine;
+                case "JMD":
+                    return enumFunctionLayerType.Jmd;
                 case "OTHER":
                 default:
                     return enumFunctionLayerType.Other;
@@ -132,6 +136,10 @@ namespace Yutai.Pipeline.Config.Helpers
             {
                 case enumFunctionLayerType.Item:
                     return "ITEM";
+                case enumFunctionLayerType.RoadCenterLine:
+                    return "ROADCENTERLINE";
+                case enumFunctionLayerType.Jmd:
+                    return "JMD";
                 case enumFunctionLayerType.Other:
                 default:
                     return "OTHER";

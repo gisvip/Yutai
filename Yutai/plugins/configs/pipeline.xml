@@ -742,5 +742,11 @@
     </PipelineLayer>
   </PipelineLayers>
   <LayerTemplates />
-  <FunctionLayers />
+  <FunctionLayers>
+    <FunctionLayer Name="道路中心线" AliasName="道路中心线" Visible="True" Type="ROADCENTERLINE">
+      <Fields>
+        <Field TypeName="DLMC" Name="NAME" AliasName="NAME" Length="60" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
+      </Fields>
+    </FunctionLayer>
+  </FunctionLayers>
 </PipelineConfig>

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Yutai.ArcGIS.Common.Helpers;
 using Yutai.Pipeline.Analysis.Helpers;
@@ -108,13 +109,43 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 int num = feature.Fields.FindField(layer.GetFieldName(PipeConfigWordHelper.FunctionLayerWorkds.DLMC));
                 if (num >= 0)
                 {
-                    List<string> values = new List<string>();
-                    CommonHelper.GetUniqueValues((ITable) featureClass,
-                        layer.GetFieldName(PipeConfigWordHelper.FunctionLayerWorkds.DLMC), values);
+                    List<ItemInfo> values = new List<ItemInfo>();
+                    GetUniqueValues(featureClass,layer.GetFieldName(PipeConfigWordHelper.FunctionLayerWorkds.DLMC), values);
+
                     this.comboRoad1.Items.AddRange(values.ToArray());
                     this.comboRoad2.Items.AddRange(values.ToArray());
                 }
             }
+        }
+        public static void GetUniqueValues(IFeatureClass featureClass, string string_0, List<ItemInfo> ilist_0, string whereClause = "")
+        {
+            try
+            {
+                IQueryFilter queryFilter = new QueryFilter();
+                (queryFilter as IQueryFilterDefinition).PostfixClause = "Order by " + string_0;
+                IFeatureCursor featureCursor = featureClass.Search(queryFilter, false);
+                int idx = featureCursor.FindField(string_0);
+                IFeature feature;
+                while ((feature = featureCursor.NextFeature()) != null)
+                {
+                    string value = ConvertToString(feature.Value[idx]);
+                    ilist_0.Add(new ItemInfo(feature.OID, value));
+                }
+                Marshal.ReleaseComObject(featureCursor);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        public static string ConvertToString(object obj)
+        {
+            if (obj == null || obj is DBNull)
+            {
+                return null;
+            }
+            return obj.ToString();
         }
 
         private void QueryIntersectionUI_Load(object sender, EventArgs e)
@@ -139,7 +170,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 {
                     QueryIntersectionUI.ItemInfo itemInfo = this.comboRoad1.Items[num] as QueryIntersectionUI.ItemInfo;
                     int oID = itemInfo.OID;
-                    num = this.comboRoad1.FindString(this.comboRoad2.Text);
+                    num = this.comboRoad2.FindString(this.comboRoad2.Text);
                     if (num < 0)
                     {
                         string text2 = $"道路名称[{this.comboRoad2.Text}]错误！";
@@ -147,7 +178,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                     }
                     else
                     {
-                        itemInfo = (this.comboRoad1.Items[num] as QueryIntersectionUI.ItemInfo);
+                        itemInfo = (this.comboRoad2.Items[num] as QueryIntersectionUI.ItemInfo);
                         int oID2 = itemInfo.OID;
                         IFeatureClass featureClass = this.m_pFtLayer.FeatureClass;
                         IFeature feature = featureClass.GetFeature(oID);
@@ -173,7 +204,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                                 envelope = this.m_MapControl.Extent;
                                 envelope.CenterAt(point);
                                 this.m_MapControl.Extent = (envelope);
-                                this.m_MapControl.Refresh((esriViewDrawPhase) 32, null, envelope);
+                                this.m_MapControl.Refresh((esriViewDrawPhase)32, null, envelope);
                                 this.m_nTimerCount = 0;
                                 QueryIntersectionUI.NewBasePointElement(this.m_MapControl, point);
                             }
@@ -217,7 +248,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 this.m_nTimerCount++;
             }
         }
-
+            
         public static void NewBasePointElement(IMapControl3 pMapCtrl, IPoint pPoint)
         {
             IGraphicsContainer graphicsContainer = (IGraphicsContainer) pMapCtrl.ActiveView;

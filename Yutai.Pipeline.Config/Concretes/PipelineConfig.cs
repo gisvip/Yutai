@@ -346,6 +346,14 @@ namespace Yutai.Pipeline.Config.Concretes
                     }
                 }
             }
+            foreach (IFunctionLayer functionLayer in _functionLayers)
+            {
+                IFeatureLayer layer = CommonHelper.GetFeatureLayerByFeatureClassName(_map, functionLayer.Name);
+                if (layer != null)
+                {
+                    functionLayer.FeatureClass = layer.FeatureClass;
+                }
+            }
         }
 
         private void ViewEventsOnItemDeleted(object item)
