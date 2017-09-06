@@ -19,6 +19,7 @@ using Yutai.Plugins.Enums;
 using Yutai.Plugins.Events;
 using Yutai.Plugins.Interfaces;
 using Yutai.Plugins.Mvp;
+using Yutai.Services.Serialization;
 using Yutai.Shared;
 using Yutai.UI.Helpers;
 using Yutai.UI.Menu;
@@ -395,9 +396,9 @@ namespace Yutai.Views
         {
             string caption = WindowTitle;
 
-            if (_context.Project != null && !_context.Project.IsEmpty)
+            if (_context.Project != null && !_context.Project.IsEmpty && ((ISecureContext)_context).YutaiProject!=null)
             {
-                caption += @" - " + _context.Project.Filename;
+                caption += @" - " + ((ISecureContext)_context).YutaiProject.Title;
             }
 
             return caption;

@@ -20,6 +20,7 @@ using Yutai.Plugins.Interfaces;
 
 namespace Yutai.Pipeline.Analysis.Forms
 {
+    //!关阀分析对应字段从FSW修改为TZW;
     public partial class frmBurstReport : Form
     {
         private struct NearestEdgeInfo
@@ -229,6 +230,25 @@ namespace Yutai.Pipeline.Analysis.Forms
             return arrayList;
         }
 
+        public ArrayList GetUVByQueryDef(IFeatureClass pFeatureClass, string strField)
+        {
+            IDataset dataset = (IDataset)pFeatureClass;
+            IFeatureWorkspace featureWorkspace = (IFeatureWorkspace)dataset.Workspace;
+            IQueryDef queryDef = featureWorkspace.CreateQueryDef();
+            queryDef.Tables = (dataset.Name);
+            queryDef.SubFields = ("DISTINCT(" + strField + ")");
+            ICursor cursor = queryDef.Evaluate();
+            IRow row = cursor.NextRow();
+            ArrayList arrayList = new ArrayList();
+            while (row != null)
+            {
+                object obj = row.get_Value(0);
+                arrayList.Add(obj.ToString());
+                row = cursor.NextRow();
+            }
+            return arrayList;
+        }
+
         public void SetMousePoint(int x, int y)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -346,7 +366,8 @@ namespace Yutai.Pipeline.Analysis.Forms
 
             cmbDomainValues.Items.Clear();
             IBasicLayerInfo pLayerInfo = _pipeLayer.GetLayers(enumPipelineDataType.Point)[0];
-            IYTField pField = pLayerInfo.GetField(PipeConfigWordHelper.PointWords.FSW);
+            //IYTField pField = pLayerInfo.GetField(PipeConfigWordHelper.PointWords.FSW);
+            IYTField pField = pLayerInfo.GetField(PipeConfigWordHelper.PointWords.TZW);
             this.label1.Text = pField.Name;
             if (!string.IsNullOrEmpty(pField.DomainValues))
             {
@@ -355,6 +376,21 @@ namespace Yutai.Pipeline.Analysis.Forms
                 {
                     cmbDomainValues.Items.Add(onePair);
                 }
+            }
+            else
+            {
+                //! 如果字段没有设置DomainValues，则直接从图层中读取
+                ArrayList uVByQueryDef = this.GetUVByQueryDef(pLayerInfo.FeatureClass, pField.Name);
+                for (int j = 0; j < uVByQueryDef.Count; j++)
+                {
+                    string text = uVByQueryDef[j].ToString();
+                    if (text.Trim() != "" && !this.cmbDomainValues.Items.Contains(text))
+                    {
+                        this.cmbDomainValues.Items.Add(text);
+                    }
+                   // this.cmbDomainValues.Items.Add(text);
+                }
+                this.cmbDomainValues.SelectedIndex = 0;
             }
             if (this.listFieldValues.Items.Count == 0)
             {
@@ -786,7 +822,8 @@ namespace Yutai.Pipeline.Analysis.Forms
             //IPipePoint pipePoint = m_Config.GetSubLayer(this._networkInfo.LayerPoint, enumPipelineDataType.Point) as IPipePoint;
 
             //string text = CRegOperator.GetRegistryKey().GetValue("节点性质字段值", "").ToString();
-            string text = pipePoint.GetField(PipeConfigWordHelper.PointWords.FSW).DomainValues;
+            // string text = pipePoint.GetField(PipeConfigWordHelper.PointWords.FSW).DomainValues;
+            string text = pipePoint.GetField(PipeConfigWordHelper.PointWords.TZW ).DomainValues;
             for (int num = text.IndexOf("/"); num != -1; num = text.IndexOf("/"))
             {
                 Values.Add(text.Substring(0, num));
