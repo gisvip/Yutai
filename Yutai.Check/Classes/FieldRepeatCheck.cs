@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,17 @@ namespace Yutai.Check.Classes
     class FieldRepeatCheck : IAttributeCheck
     {
         private IDataCheck _dataCheck;
+        private BackgroundWorker _worker;
+
         public FieldRepeatCheck(IDataCheck dataCheck)
         {
             _dataCheck = dataCheck;
+        }
+
+        public BackgroundWorker Worker
+        {
+            get { return _worker; }
+            set { _worker = value; }
         }
 
         public List<FeatureItem> Check()
@@ -23,6 +32,8 @@ namespace Yutai.Check.Classes
 
             foreach (IPipelineLayer pipelineLayer in _dataCheck.PipelineLayers)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 if (_dataCheck.CheckPipelineList.Contains(pipelineLayer.Code))
                 {
                     foreach (IBasicLayerInfo basicLayerInfo in pipelineLayer.Layers)
@@ -88,6 +99,8 @@ namespace Yutai.Check.Classes
             IFeature feature;
             while ((feature = featureCursor.NextFeature()) != null)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 object curValue = feature.Value[keyIndex];
 
                 if (curValue == null || curValue is DBNull || string.IsNullOrWhiteSpace(curValue.ToString()))

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -12,10 +13,17 @@ namespace Yutai.Check.Classes
     class PointRepeatCheck : IGeometryCheck
     {
         private IDataCheck _dataCheck;
+        private BackgroundWorker _worker;
 
         public PointRepeatCheck(IDataCheck dataCheck)
         {
             _dataCheck = dataCheck;
+        }
+
+        public BackgroundWorker Worker
+        {
+            get { return _worker; }
+            set { _worker = value; }
         }
 
         public List<FeatureItem> Check()
@@ -24,11 +32,15 @@ namespace Yutai.Check.Classes
 
             foreach (IPipelineLayer pipelineLayer in _dataCheck.PipelineLayers)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 if (_dataCheck.CheckPipelineList.Contains(pipelineLayer.Code))
                 {
                     List<IBasicLayerInfo> layerInfos = pipelineLayer.GetLayers(enumPipelineDataType.Point);
                     foreach (IBasicLayerInfo basicLayerInfo in layerInfos)
                     {
+                        if (_worker != null && _worker.CancellationPending)
+                            return list;
                         if (basicLayerInfo.FeatureClass == null)
                             continue;
                         list.AddRange(Check(basicLayerInfo.FeatureClass, pipelineLayer.Name));
@@ -49,6 +61,8 @@ namespace Yutai.Check.Classes
             IFeature feature;
             while ((feature = featureCursor.NextFeature()) != null)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 allOids.Add(feature.OID);
             }
             Marshal.ReleaseComObject(featureCursor);
@@ -60,6 +74,8 @@ namespace Yutai.Check.Classes
             spatialFilter.SpatialRel = esriSpatialRelEnum.esriSpatialRelIntersects;
             for (int i = 0; i < allOids.Count; i++)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 feature = featureClass.GetFeature(allOids[i]);
                 if (feature.Shape.IsEmpty)
                     continue;

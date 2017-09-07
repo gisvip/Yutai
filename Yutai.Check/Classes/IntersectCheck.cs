@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -18,6 +19,8 @@ namespace Yutai.Check.Classes
         private IDictionary<string, int> _qdgcFieldIndexDictionary;
         private IDictionary<string, int> _zdgcFieldIndexDictionary;
         private IDataCheck _dataCheck;
+        private BackgroundWorker _worker;
+
         public IntersectCheck(IDataCheck dataCheck)
         {
             _dataCheck = dataCheck;
@@ -26,12 +29,20 @@ namespace Yutai.Check.Classes
             _zdgcFieldIndexDictionary = new Dictionary<string, int>();
         }
 
+        public BackgroundWorker Worker
+        {
+            get { return _worker; }
+            set { _worker = value; }
+        }
+
         public List<FeatureItem> Check()
         {
             List<FeatureItem> list = new List<FeatureItem>();
 
             foreach (IPipelineLayer pipelineLayer in _dataCheck.PipelineLayers)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 if (_dataCheck.CheckPipelineList.Contains(pipelineLayer.Code))
                 {
                     IBasicLayerInfo lineBasicLayerInfo = pipelineLayer.Layers.FirstOrDefault(c => c.DataType == enumPipelineDataType.Line);
@@ -64,6 +75,8 @@ namespace Yutai.Check.Classes
 
             foreach (IPipelineLayer pipelineLayer in _dataCheck.PipelineLayers)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 if (_gjFieldIndexDictionary.ContainsKey(pipelineLayer.Code))
                 {
                     IBasicLayerInfo lineBasicLayerInfo = pipelineLayer.Layers.FirstOrDefault(c => c.DataType == enumPipelineDataType.Line);
@@ -88,6 +101,8 @@ namespace Yutai.Check.Classes
             IFeature feature;
             while ((feature = featureCursor.NextFeature()) != null)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 IPolyline polyline = feature.Shape as IPolyline;
                 if (polyline == null || polyline.IsEmpty)
                 {
@@ -116,6 +131,8 @@ namespace Yutai.Check.Classes
                 }
                 foreach (IPipelineLayer pipelineLayer in _dataCheck.PipelineLayers)
                 {
+                    if (_worker != null && _worker.CancellationPending)
+                        return list;
                     if (_gjFieldIndexDictionary.ContainsKey(pipelineLayer.Code))
                     {
                         IBasicLayerInfo lineBasicLayerInfo = pipelineLayer.Layers.FirstOrDefault(c => c.DataType == enumPipelineDataType.Line);

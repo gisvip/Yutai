@@ -1,6 +1,6 @@
 ﻿namespace Yutai.Check.Forms
 {
-    partial class FrmProgress
+    partial class WaitForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.btnBack = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.btnBack)).BeginInit();
             this.SuspendLayout();
             // 
             // progressPanel1
@@ -40,19 +42,33 @@
             this.progressPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.progressPanel1.Location = new System.Drawing.Point(0, 0);
             this.progressPanel1.Name = "progressPanel1";
-            this.progressPanel1.Size = new System.Drawing.Size(300, 70);
+            this.progressPanel1.Size = new System.Drawing.Size(350, 82);
             this.progressPanel1.TabIndex = 0;
+            // 
+            // btnBack
+            // 
+            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBack.Image = global::Yutai.Check.Properties.Resources.icon_Back;
+            this.btnBack.Location = new System.Drawing.Point(308, 40);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(30, 30);
+            this.btnBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnBack.TabIndex = 1;
+            this.btnBack.TabStop = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // FrmProgress
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 70);
+            this.ClientSize = new System.Drawing.Size(350, 82);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.progressPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmProgress";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmProgress";
+            ((System.ComponentModel.ISupportInitialize)(this.btnBack)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -60,5 +76,6 @@
         #endregion
 
         private DevExpress.XtraWaitForm.ProgressPanel progressPanel1;
+        private System.Windows.Forms.PictureBox btnBack;
     }
 }

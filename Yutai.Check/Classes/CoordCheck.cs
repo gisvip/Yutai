@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,21 +16,34 @@ namespace Yutai.Check.Classes
     class CoordCheck : IGeometryCheck
     {
         private IDataCheck _dataCheck;
+        private BackgroundWorker _worker;
+
         public CoordCheck(IDataCheck dataCheck)
         {
             _dataCheck = dataCheck;
         }
+
+        public BackgroundWorker Worker
+        {
+            get { return _worker; }
+            set { _worker = value; }
+        }
+
         public List<FeatureItem> Check()
         {
             List<FeatureItem> list = new List<FeatureItem>();
 
             foreach (IPipelineLayer pipelineLayer in _dataCheck.PipelineLayers)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 if (_dataCheck.CheckPipelineList.Contains(pipelineLayer.Code))
                 {
                     List<IBasicLayerInfo> layerInfos = pipelineLayer.GetLayers(enumPipelineDataType.Point);
                     foreach (IBasicLayerInfo basicLayerInfo in layerInfos)
                     {
+                        if (_worker != null && _worker.CancellationPending)
+                            return list;
                         if (basicLayerInfo.FeatureClass == null)
                             continue;
                         list.AddRange(Check(basicLayerInfo.FeatureClass, pipelineLayer.Name, basicLayerInfo.GetFieldName(PipeConfigWordHelper.PointWords.XZB), basicLayerInfo.GetFieldName(PipeConfigWordHelper.PointWords.YZB), basicLayerInfo.GetFieldName(PipeConfigWordHelper.PointWords.DMGC)));
@@ -63,6 +77,8 @@ namespace Yutai.Check.Classes
             IFeature feature;
             while ((feature = featureCursor.NextFeature()) != null)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 IPoint point = feature.Shape as IPoint;
                 if (point == null || point.IsEmpty)
                 {

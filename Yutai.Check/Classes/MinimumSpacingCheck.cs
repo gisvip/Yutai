@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -15,16 +16,27 @@ namespace Yutai.Check.Classes
     class MinimumSpacingCheck : IGeometryCheck
     {
         private IDataCheck _dataCheck;
+        private BackgroundWorker _worker;
+
         public MinimumSpacingCheck(IDataCheck dataCheck)
         {
             _dataCheck = dataCheck;
         }
+
+        public BackgroundWorker Worker
+        {
+            get { return _worker; }
+            set { _worker = value; }
+        }
+
         public List<FeatureItem> Check()
         {
             List<FeatureItem> list = new List<FeatureItem>();
 
             foreach (IPipelineLayer pipelineLayer in _dataCheck.PipelineLayers)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 if (_dataCheck.CheckPipelineList.Contains(pipelineLayer.Code))
                 {
                     IBasicLayerInfo pointBasicLayerInfo = pipelineLayer.Layers.FirstOrDefault(c => c.DataType == enumPipelineDataType.Point);
@@ -49,6 +61,8 @@ namespace Yutai.Check.Classes
             IFeature feature;
             while ((feature = featureCursor.NextFeature()) != null)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 IPoint point = feature.Shape as IPoint;
                 if (point == null || point.IsEmpty)
                 {
@@ -63,6 +77,8 @@ namespace Yutai.Check.Classes
                 }
                 foreach (IPipelineLayer checkPipelineLayer in _dataCheck.PipelineLayers)
                 {
+                    if (_worker != null && _worker.CancellationPending)
+                        return list;
                     if (_dataCheck.CheckPipelineList.Contains(checkPipelineLayer.Code))
                     {
                         IBasicLayerInfo pointBasicLayerInfo = checkPipelineLayer.Layers.FirstOrDefault(c => c.DataType == enumPipelineDataType.Point);
@@ -93,6 +109,8 @@ namespace Yutai.Check.Classes
             IFeature feature;
             while ((feature = featureCursor.NextFeature()) != null)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 IPolyline polyline = feature.Shape as IPolyline;
                 if (polyline == null || polyline.IsEmpty)
                 {
@@ -107,6 +125,8 @@ namespace Yutai.Check.Classes
                 }
                 foreach (IPipelineLayer checkPipelineLayer in _dataCheck.PipelineLayers)
                 {
+                    if (_worker != null && _worker.CancellationPending)
+                        return list;
                     if (_dataCheck.CheckPipelineList.Contains(checkPipelineLayer.Code))
                     {
                         IBasicLayerInfo lineBasicLayerInfo = checkPipelineLayer.Layers.FirstOrDefault(c => c.DataType == enumPipelineDataType.Line);

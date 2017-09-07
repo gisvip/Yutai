@@ -8,12 +8,14 @@
 // 更新时间 :  2017/08/15  15:16
 
 using System.Collections.Generic;
+using System.ComponentModel;
 using Yutai.Check.Enums;
 
 namespace Yutai.Check.Classes
 {
     public interface IAttributeCheck
     {
+        BackgroundWorker Worker { get; set; }
         List<FeatureItem> Check();
     }
 }

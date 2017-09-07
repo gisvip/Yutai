@@ -24,16 +24,14 @@ namespace Yutai.Check.Commands.CheckManager
         private CheckResultDockPanelService _dockPanelService;
         private List<FeatureItem> _featureItems;
         private IDataCheck _dataCheck;
-        private BackgroundWorker _backgroundWorker;
+        private WaitForm _waitForm;
         public CmdDataCheck(IAppContext context, CheckPlugin plugin)
         {
             OnCreate(context);
             _plugin = plugin;
-            _backgroundWorker = new BackgroundWorker();
-            _backgroundWorker.WorkerReportsProgress = true;
-            _backgroundWorker.WorkerSupportsCancellation = true;
-            _backgroundWorker.DoWork += BackgroundWorkerOnDoWork;
-            _backgroundWorker.RunWorkerCompleted += BackgroundWorkerOnRunWorkerCompleted;
+            _waitForm = new WaitForm();
+            _waitForm.Worker.DoWork += BackgroundWorkerOnDoWork;
+            _waitForm.Worker.RunWorkerCompleted += BackgroundWorkerOnRunWorkerCompleted;
         }
 
         private void BackgroundWorkerOnRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
@@ -51,12 +49,15 @@ namespace Yutai.Check.Commands.CheckManager
         {
             try
             {
+                BackgroundWorker worker = sender as BackgroundWorker;
+                if (worker == null)
+                    return;
                 _dataCheck.ProgressChanged += (o, s) =>
                 {
-                    _backgroundWorker.ReportProgress(0, s);
+                    worker.ReportProgress(0, s);
                 };
                 _dataCheck.CheckPipelineList = _frmDataCheck.GetCheckPipeline();
-                _featureItems = _dataCheck.Check(_frmDataCheck.GetCheckItems());
+                _featureItems = _dataCheck.Check(_frmDataCheck.GetCheckItems(), worker);
 
             }
             catch (Exception exception)
@@ -74,10 +75,9 @@ namespace Yutai.Check.Commands.CheckManager
             if (_frmDataCheck.ShowDialog() != DialogResult.OK)
                 return;
 
-            FrmProgress frmProgress = new FrmProgress(_backgroundWorker);
-            frmProgress.TopMost = true;
-            frmProgress.Show();
-            _backgroundWorker.RunWorkerAsync(this);
+            _waitForm.TopMost = true;
+            _waitForm.Show();
+            _waitForm.Worker.RunWorkerAsync();
         }
 
         public sealed override void OnCreate(object hook)

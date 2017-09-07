@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -14,16 +15,27 @@ namespace Yutai.Check.Classes
     class DepthCheck : IAttributeCheck
     {
         private IDataCheck _dataCheck;
+        private BackgroundWorker _worker;
+
         public DepthCheck(IDataCheck dataCheck)
         {
             _dataCheck = dataCheck;
         }
+
+        public BackgroundWorker Worker
+        {
+            get { return _worker; }
+            set { _worker = value; }
+        }
+
         public List<FeatureItem> Check()
         {
             List<FeatureItem> list = new List<FeatureItem>();
 
             foreach (IPipelineLayer pipelineLayer in _dataCheck.PipelineLayers)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 if (_dataCheck.CheckPipelineList.Contains(pipelineLayer.Code))
                 {
                     IBasicLayerInfo lineLayerInfo =
@@ -58,6 +70,8 @@ namespace Yutai.Check.Classes
             IFeature feature;
             while ((feature = featureCursor.NextFeature()) != null)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 double qdms = CommonHelper.ConvertToDouble(feature.Value[idxQdms]);
                 double zdms = CommonHelper.ConvertToDouble(feature.Value[idxZdms]);
                 if (double.IsNaN(qdms))

@@ -9,6 +9,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Yutai.Check.Enums;
 using Yutai.Pipeline.Config.Interfaces;
 using Yutai.Plugins.Interfaces;
@@ -19,7 +20,7 @@ namespace Yutai.Check.Classes
     {
         IAppContext AppContext { get; }
         IDataCheckConfig DataCheckConfig { get; }
-        List<FeatureItem> Check(List<EnumCheckItem> items);
+        List<FeatureItem> Check(List<EnumCheckItem> items, BackgroundWorker worker);
         List<IPipelineLayer> PipelineLayers { get; }
         List<string> CheckPipelineList { get; set; }
 

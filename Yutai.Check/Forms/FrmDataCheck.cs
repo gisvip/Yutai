@@ -67,7 +67,7 @@ namespace Yutai.Check.Forms
                 items.Add(EnumCheckItem.P_Standardization);
             if (checkBoxMaxLength.Checked)
                 items.Add(EnumCheckItem.P_MaxLength);
-            if (checkBoxDepth.Enabled)
+            if (checkBoxDepth.Checked)
                 items.Add(EnumCheckItem.P_Depth);
             if (checkBoxSinglePoint.Checked)
                 items.Add(EnumCheckItem.G_SinglePoint);

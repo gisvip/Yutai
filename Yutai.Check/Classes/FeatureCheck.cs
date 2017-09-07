@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -15,9 +16,17 @@ namespace Yutai.Check.Classes
     class FeatureCheck : IGeometryCheck
     {
         private IDataCheck _dataCheck;
+        private BackgroundWorker _worker;
+
         public FeatureCheck(IDataCheck dataCheck)
         {
             _dataCheck = dataCheck;
+        }
+
+        public BackgroundWorker Worker
+        {
+            get { return _worker; }
+            set { _worker = value; }
         }
 
         public List<FeatureItem> Check()
@@ -26,6 +35,8 @@ namespace Yutai.Check.Classes
 
             foreach (IPipelineLayer pipelineLayer in _dataCheck.PipelineLayers)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 if (_dataCheck.CheckPipelineList.Contains(pipelineLayer.Code))
                 {
                     IBasicLayerInfo pointLayerInfo =
@@ -61,6 +72,8 @@ namespace Yutai.Check.Classes
             IFeature feature;
             while ((feature = featureCursor.NextFeature()) != null)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 string tzw = CommonHelper.ConvertToString(feature.Value[idxTzw]);
                 if (string.IsNullOrWhiteSpace(tzw))
                     continue;

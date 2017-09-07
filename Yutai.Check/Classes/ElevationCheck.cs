@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -17,6 +18,8 @@ namespace Yutai.Check.Classes
     class ElevationCheck : IGeometryCheck
     {
         private IDataCheck _dataCheck;
+        private BackgroundWorker _worker;
+
         public ElevationCheck(IDataCheck dataCheck)
         {
             _dataCheck = dataCheck;
@@ -28,6 +31,8 @@ namespace Yutai.Check.Classes
 
             foreach (IPipelineLayer pipelineLayer in _dataCheck.PipelineLayers)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 if (_dataCheck.CheckPipelineList.Contains(pipelineLayer.Code))
                 {
                     IBasicLayerInfo pointLayerInfo =
@@ -59,6 +64,8 @@ namespace Yutai.Check.Classes
             IFeature feature;
             while ((feature = featureCursor.NextFeature()) != null)
             {
+                if (_worker != null && _worker.CancellationPending)
+                    return list;
                 IPoint point = feature.Shape as IPoint;
                 if (point == null || point.IsEmpty)
                 {
@@ -172,6 +179,12 @@ namespace Yutai.Check.Classes
             }
             Marshal.ReleaseComObject(featureCursor);
             return isUnusual;
+        }
+
+        public BackgroundWorker Worker
+        {
+            get { return _worker; }
+            set { _worker = value; }
         }
     }
 }
