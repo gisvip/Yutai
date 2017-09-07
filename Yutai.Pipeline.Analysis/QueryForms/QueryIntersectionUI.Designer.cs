@@ -28,10 +28,8 @@ namespace Yutai.Pipeline.Analysis.QueryForms
 	
 	private void InitializeComponent()
 		{
-            this.components = new System.ComponentModel.Container();
             this.btnQuery = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.comboRoad1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,24 +41,21 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             this.btnQuery.Location = new System.Drawing.Point(92, 64);
             this.btnQuery.Name = "btnQuery";
             this.btnQuery.Size = new System.Drawing.Size(75, 23);
-            this.btnQuery.TabIndex = 0;
+            this.btnQuery.TabIndex = 2;
             this.btnQuery.Text = "查询";
             this.btnQuery.UseVisualStyleBackColor = true;
             this.btnQuery.Click += new System.EventHandler(this.btnQuery_Click);
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(227, 64);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "关闭";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // comboRoad1
             // 
@@ -68,7 +63,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             this.comboRoad1.Location = new System.Drawing.Point(92, 12);
             this.comboRoad1.Name = "comboRoad1";
             this.comboRoad1.Size = new System.Drawing.Size(210, 20);
-            this.comboRoad1.TabIndex = 5;
+            this.comboRoad1.TabIndex = 0;
             // 
             // label3
             // 
@@ -94,12 +89,14 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             this.comboRoad2.Location = new System.Drawing.Point(92, 38);
             this.comboRoad2.Name = "comboRoad2";
             this.comboRoad2.Size = new System.Drawing.Size(210, 20);
-            this.comboRoad2.TabIndex = 5;
+            this.comboRoad2.TabIndex = 1;
             // 
             // QueryIntersectionUI
             // 
+            this.AcceptButton = this.btnQuery;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(310, 97);
             this.Controls.Add(this.comboRoad2);
             this.Controls.Add(this.comboRoad1);
@@ -111,12 +108,9 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "QueryIntersectionUI";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "道路交叉口查询";
-            this.Activated += new System.EventHandler(this.QueryIntersectionUI_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.QueryIntersectionUI_FormClosed);
             this.Load += new System.EventHandler(this.QueryIntersectionUI_Load);
-            this.Enter += new System.EventHandler(this.QueryIntersectionUI_Enter);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,12 +120,11 @@ namespace Yutai.Pipeline.Analysis.QueryForms
 		private IContainer components = null;
 		private Button btnQuery;
 		private Button btnCancel;
-		private Timer timer1;
 		private ComboBox comboRoad1;
 		private Label label3;
 		private Label label1;
 		private ComboBox comboRoad2;
 		private IFeatureLayer m_pFtLayer;
-		private IGeometry m_pGeoFlash;
+		private IPoint m_pGeoFlash;
     }
 }

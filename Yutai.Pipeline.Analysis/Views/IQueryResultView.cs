@@ -8,6 +8,7 @@ namespace Yutai.Pipeline.Analysis.Views
     public interface IQueryResultView : IMenuProvider
     {
         void Initialize(IAppContext context);
-        void SetResult(IFeatureCursor cursor, IFeatureSelection selection);
+        //void SetResult(IFeatureCursor cursor, IFeatureSelection selection);
+        void SetResult(IFeatureCursor cursor, IFeatureSelection selection, ISpatialFilter spatialFilter);
     }
 }

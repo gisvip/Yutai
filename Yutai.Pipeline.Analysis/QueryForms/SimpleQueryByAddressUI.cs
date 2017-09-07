@@ -392,7 +392,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             IL_101:
             spatialFilter.WhereClause = text;
             IFeatureCursor pFeatureCursor = featureClass.Search(spatialFilter, false);
-            _plugin.FireQueryResultChanged(new QueryResultArgs(pFeatureCursor, this.SelectLayer as IFeatureSelection));
+            _plugin.FireQueryResultChanged(new QueryResultArgs(pFeatureCursor, this.SelectLayer as IFeatureSelection, spatialFilter));
         }
 
         private void SimpleQueryByAddressUI_HelpRequested(object sender, HelpEventArgs hlpevent)

@@ -36,11 +36,12 @@ namespace Yutai.Pipeline.Analysis.Views
         private void PluginOnQueryResultChanged(object sender, QueryResultArgs queryResultArgs)
         {
             if (queryResultArgs == null)
-                View.SetResult(null, null);
+                View.SetResult(null, null, null);
             else
             {
                 ActivatePanel();
-                View.SetResult(queryResultArgs.Cursor, queryResultArgs.Selection);
+                //View.SetResult(queryResultArgs.Cursor, queryResultArgs.Selection);
+                View.SetResult(queryResultArgs.Cursor, queryResultArgs.Selection, queryResultArgs.SpatialFilter);
             }
         }
 

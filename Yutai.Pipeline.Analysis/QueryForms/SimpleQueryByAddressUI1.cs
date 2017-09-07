@@ -368,7 +368,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                     MessageBox.Show(@"查询条件过于复杂,请减少条件项。" + ex.Message);
                 }
                 //修改为插件事件，因为结果显示窗体为插件拥有。
-                _plugin.FireQueryResultChanged(new QueryResultArgs(pCursor, (IFeatureSelection) this.SelectLayer));
+                _plugin.FireQueryResultChanged(new QueryResultArgs(pCursor, (IFeatureSelection) this.SelectLayer, spatialFilter));
             }
         }
 

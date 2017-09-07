@@ -314,7 +314,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                             IFeatureCursor pCursor = featureClass.Search(spatialFilter, false);
                             //修改为插件事件，因为结果显示窗体为插件拥有。
                             _plugin.FireQueryResultChanged(new QueryResultArgs(pCursor,
-                                (IFeatureSelection) this.SelectLayer));
+                                (IFeatureSelection) this.SelectLayer, spatialFilter));
                         }
                     }
                 }

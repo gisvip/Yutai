@@ -239,7 +239,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 selectionSet.Search(queryFilter, false, out cursor);
                 IFeatureCursor pFeatureCursor = cursor as IFeatureCursor;
                 Splash.Close();
-                _plugin.FireQueryResultChanged(new QueryResultArgs(pFeatureCursor, featureSelection));
+                _plugin.FireQueryResultChanged(new QueryResultArgs(pFeatureCursor, featureSelection, queryFilter as ISpatialFilter));
             }
         }
 
@@ -276,7 +276,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 ICursor cursor;
                 selectionSet.Search(queryFilter, false, out cursor);
                 IFeatureCursor pFeatureCursor = cursor as IFeatureCursor;
-                _plugin.FireQueryResultChanged(new QueryResultArgs(pFeatureCursor, featureSelection));
+                _plugin.FireQueryResultChanged(new QueryResultArgs(pFeatureCursor, featureSelection, queryFilter as ISpatialFilter));
             }
         }
 

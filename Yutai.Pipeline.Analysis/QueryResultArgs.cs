@@ -8,6 +8,7 @@ namespace Yutai.Pipeline.Analysis
     {
         private IFeatureCursor _cursor;
         private IFeatureSelection _selection;
+        private ISpatialFilter _spatialFilter;
 
         public QueryResultArgs()
         {
@@ -15,10 +16,17 @@ namespace Yutai.Pipeline.Analysis
             _selection = null;
         }
 
-        public QueryResultArgs(IFeatureCursor cursor, IFeatureSelection pSelection)
+        //public QueryResultArgs(IFeatureCursor cursor, IFeatureSelection pSelection)
+        //{
+        //    _cursor = cursor;
+        //    _selection = pSelection;
+        //}
+
+        public QueryResultArgs(IFeatureCursor cursor, IFeatureSelection pSelection, ISpatialFilter spatialFilter)
         {
             _cursor = cursor;
             _selection = pSelection;
+            _spatialFilter = spatialFilter;
         }
 
         public IFeatureCursor Cursor
@@ -31,6 +39,12 @@ namespace Yutai.Pipeline.Analysis
         {
             get { return _selection; }
             set { _selection = value; }
+        }
+
+        public ISpatialFilter SpatialFilter
+        {
+            get { return _spatialFilter; }
+            set { _spatialFilter = value; }
         }
     }
 }

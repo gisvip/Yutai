@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Yutai.ArcGIS.Common.Helpers;
+using Yutai.Pipeline.Analysis.ConfigForms;
 using Yutai.Pipeline.Analysis.Helpers;
 using Yutai.Pipeline.Config.Helpers;
 using Yutai.Pipeline.Config.Interfaces;
@@ -46,27 +47,63 @@ namespace Yutai.Pipeline.Analysis.QueryForms
         public IMapControl3 m_MapControl;
         public IPipelineConfig m_pPipeCfg;
         public int m_nTimerCount;
+        private WaitForm _waitForm;
 
         public QueryIntersectionUI()
         {
             this.InitializeComponent();
         }
 
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            int[] oids = e.Argument as int[];
+            if (oids == null || oids.Length < 2)
+                return;
+            IFeatureClass featureClass = this.m_pFtLayer.FeatureClass;
+            IFeature feature = featureClass.GetFeature(oids[0]);
+            IFeature feature2 = featureClass.GetFeature(oids[1]);
+            IPolyline polyline = feature.Shape as IPolyline;
+            ITopologicalOperator topologicalOperator = polyline as ITopologicalOperator;
+            IGeometry geometry = null;
+            if (topologicalOperator != null)
+            {
+                geometry = topologicalOperator.Intersect(feature2.Shape, (esriGeometryDimension)1);
+            }
+            if (!geometry.IsEmpty)
+            {
+                IMultipoint multipoint = geometry as IMultipoint;
+                IPointCollection pointCollection = multipoint as IPointCollection;
+                m_pGeoFlash = pointCollection.get_Point(0);
+                if (m_pGeoFlash != null)
+                {
+                    NewBasePointElement();
+                }
+            }
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            CMapOperator.ShowFeatureWithWink(m_context.ActiveView.ScreenDisplay, this.m_pGeoFlash);
+            //EsriUtils.ZoomToGeometry(m_pGeoFlash, m_context.FocusMap, 3);
+            m_context.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
+            this.m_pGeoFlash = null;
+        }
+
         private void AddLayer(ILayer ipLay)
         {
             if (ipLay is IFeatureLayer)
             {
-                this.AddFeatureLayer((IFeatureLayer) ipLay);
+                this.AddFeatureLayer((IFeatureLayer)ipLay);
             }
             else if (ipLay is IGroupLayer)
             {
-                this.AddGroupLayer((IGroupLayer) ipLay);
+                this.AddGroupLayer((IGroupLayer)ipLay);
             }
         }
 
         private void AddGroupLayer(IGroupLayer iGLayer)
         {
-            ICompositeLayer compositeLayer = (ICompositeLayer) iGLayer;
+            ICompositeLayer compositeLayer = (ICompositeLayer)iGLayer;
             if (compositeLayer != null)
             {
                 int count = compositeLayer.Count;
@@ -110,14 +147,17 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 if (num >= 0)
                 {
                     List<ItemInfo> values = new List<ItemInfo>();
-                    GetUniqueValues(featureClass,layer.GetFieldName(PipeConfigWordHelper.FunctionLayerWorkds.DLMC), values);
+                    GetUniqueValues(featureClass, layer.GetFieldName(PipeConfigWordHelper.FunctionLayerWorkds.DLMC),
+                        values);
 
                     this.comboRoad1.Items.AddRange(values.ToArray());
                     this.comboRoad2.Items.AddRange(values.ToArray());
                 }
             }
         }
-        public static void GetUniqueValues(IFeatureClass featureClass, string string_0, List<ItemInfo> ilist_0, string whereClause = "")
+
+        public void GetUniqueValues(IFeatureClass featureClass, string string_0, List<ItemInfo> ilist_0,
+            string whereClause = "")
         {
             try
             {
@@ -139,7 +179,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             }
         }
 
-        public static string ConvertToString(object obj)
+        public string ConvertToString(object obj)
         {
             if (obj == null || obj is DBNull)
             {
@@ -158,100 +198,64 @@ namespace Yutai.Pipeline.Analysis.QueryForms
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
-            if (this.m_pFtLayer != null)
+            _waitForm = new WaitForm()
             {
-                int num = this.comboRoad1.FindString(this.comboRoad1.Text);
-                if (num < 0)
+                VisibleBackButton = false,
+                VisibleprogressBarControl = false,
+                TopMost = true
+            };
+            _waitForm.Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+            _waitForm.Worker.DoWork += Worker_DoWork;
+
+            _waitForm.Description = "状态：正在查询交叉口,请稍等...";
+            _waitForm.Show();
+
+            try
+            {
+                if (this.m_pFtLayer != null)
                 {
-                    string text = $"道路名称[{this.comboRoad1.Text}]错误！";
-                    MessageBox.Show(text);
-                }
-                else
-                {
-                    QueryIntersectionUI.ItemInfo itemInfo = this.comboRoad1.Items[num] as QueryIntersectionUI.ItemInfo;
-                    int oID = itemInfo.OID;
-                    num = this.comboRoad2.FindString(this.comboRoad2.Text);
+                    int num = this.comboRoad1.FindString(this.comboRoad1.Text);
                     if (num < 0)
                     {
-                        string text2 = $"道路名称[{this.comboRoad2.Text}]错误！";
-                        MessageBox.Show(text2);
+                        string text = $"道路名称[{this.comboRoad1.Text}]错误！";
+                        MessageBox.Show(text);
                     }
                     else
                     {
-                        itemInfo = (this.comboRoad2.Items[num] as QueryIntersectionUI.ItemInfo);
-                        int oID2 = itemInfo.OID;
-                        IFeatureClass featureClass = this.m_pFtLayer.FeatureClass;
-                        IFeature feature = featureClass.GetFeature(oID);
-                        IFeature feature2 = featureClass.GetFeature(oID2);
-                        IPolyline polyline = feature.Shape as IPolyline;
-                        ITopologicalOperator topologicalOperator = polyline as ITopologicalOperator;
-                        IGeometry geometry = null;
-                        if (topologicalOperator != null)
+                        QueryIntersectionUI.ItemInfo itemInfo = this.comboRoad1.Items[num] as QueryIntersectionUI.ItemInfo;
+                        int oID = itemInfo.OID;
+                        num = this.comboRoad2.FindString(this.comboRoad2.Text);
+                        if (num < 0)
                         {
-                            geometry = topologicalOperator.Intersect(feature2.Shape, (esriGeometryDimension) 1);
-                        }
-                        if (!geometry.IsEmpty)
-                        {
-                            IMultipoint multipoint = geometry as IMultipoint;
-                            IPointCollection pointCollection = multipoint as IPointCollection;
-                            IPoint point = pointCollection.get_Point(0);
-                            if (point != null)
-                            {
-                                this.m_pGeoFlash = point;
-                                this.timer1.Start();
-                                this.timer1.Interval = 100;
-                                IEnvelope envelope = new Envelope() as IEnvelope;
-                                envelope = this.m_MapControl.Extent;
-                                envelope.CenterAt(point);
-                                this.m_MapControl.Extent = (envelope);
-                                this.m_MapControl.Refresh((esriViewDrawPhase)32, null, envelope);
-                                this.m_nTimerCount = 0;
-                                QueryIntersectionUI.NewBasePointElement(this.m_MapControl, point);
-                            }
+                            string text2 = $"道路名称[{this.comboRoad2.Text}]错误！";
+                            MessageBox.Show(text2);
                         }
                         else
                         {
-                            MessageBox.Show(@"选择的道路没有交叉口!");
+                            itemInfo = (this.comboRoad2.Items[num] as QueryIntersectionUI.ItemInfo);
+                            int oID2 = itemInfo.OID;
+
+                            _waitForm.Worker.RunWorkerAsync(new int[] { oID, oID2 });
                         }
                     }
                 }
+            }
+            catch (Exception)
+            {
+                if (_waitForm != null && _waitForm.IsDisposed == false)
+                    _waitForm.Close();
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            QueryIntersectionUI.DeleteAllElements(this.m_MapControl);
+            DeleteAllElements();
             base.Close();
         }
 
-        private void QueryIntersectionUI_Activated(object sender, EventArgs e)
+        public void NewBasePointElement()
         {
-        }
-
-        private void QueryIntersectionUI_Enter(object sender, EventArgs e)
-        {
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (!base.Visible || this.m_nTimerCount > 1)
-            {
-                this.m_nTimerCount = 0;
-                this.timer1.Stop();
-                IActiveView activeView = m_context.ActiveView;
-                activeView.PartialRefresh((esriViewDrawPhase) 8, null, null);
-                this.m_pGeoFlash = null;
-            }
-            else
-            {
-                CMapOperator.ShowFeatureWithWink(m_context.ActiveView.ScreenDisplay, this.m_pGeoFlash);
-                this.m_nTimerCount++;
-            }
-        }
-            
-        public static void NewBasePointElement(IMapControl3 pMapCtrl, IPoint pPoint)
-        {
-            IGraphicsContainer graphicsContainer = (IGraphicsContainer) pMapCtrl.ActiveView;
+            IGraphicsContainer graphicsContainer = (IGraphicsContainer)m_context.FocusMap;
 
             ISimpleMarkerSymbol simpleMarkerSymbol = new SimpleMarkerSymbol();
             IRgbColor rgbColor = new RgbColor();
@@ -262,7 +266,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             rgbColor2.Red = 0;
             rgbColor2.Green = 0;
             rgbColor2.Blue = 0;
-            simpleMarkerSymbol.Style = (esriSimpleMarkerStyle) (3);
+            simpleMarkerSymbol.Style = (esriSimpleMarkerStyle)(3);
             simpleMarkerSymbol.Color = (rgbColor);
             simpleMarkerSymbol.Outline = (true);
             simpleMarkerSymbol.OutlineSize = (1.0);
@@ -271,22 +275,22 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             IElement element = new MarkerElement();
             IMarkerElement markerElement = element as IMarkerElement;
             markerElement.Symbol = (simpleMarkerSymbol);
-            element.Geometry = (pPoint);
+            element.Geometry = m_pGeoFlash;
             graphicsContainer.AddElement(element, 0);
         }
 
-        public static void DeleteAllElements(IMapControl3 pMapCtrl)
+        public void DeleteAllElements()
         {
-            IGraphicsContainer graphicsContainer = (IGraphicsContainer) pMapCtrl.Map;
+            IGraphicsContainer graphicsContainer = (IGraphicsContainer)m_context.FocusMap;
             graphicsContainer.DeleteAllElements();
-            IActiveView activeView = pMapCtrl.ActiveView;
-            activeView.PartialRefresh((esriViewDrawPhase) 8, null, null);
+            IActiveView activeView = m_context.ActiveView;
+            activeView.PartialRefresh((esriViewDrawPhase)8, null, null);
             activeView.Refresh();
         }
 
         private void QueryIntersectionUI_FormClosed(object sender, FormClosedEventArgs e)
         {
-            QueryIntersectionUI.DeleteAllElements(this.m_MapControl);
+            DeleteAllElements();
         }
     }
 }

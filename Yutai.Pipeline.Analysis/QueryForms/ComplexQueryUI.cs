@@ -114,9 +114,13 @@ namespace Yutai.Pipeline.Analysis.QueryForms
         {
             if (iFLayer != null)
             {
-                ComplexQueryUI.LayerboxItem layerboxItem = new ComplexQueryUI.LayerboxItem();
-                layerboxItem.m_pPipeLayer = iFLayer;
-                this.LayerBox.Items.Add(layerboxItem);
+                if (pPipeCfg.IsPipelineLayer(iFLayer.FeatureClass.AliasName, enumPipelineDataType.Point) ||
+                    pPipeCfg.IsPipelineLayer(iFLayer.FeatureClass.AliasName, enumPipelineDataType.Line))
+                {
+                    ComplexQueryUI.LayerboxItem layerboxItem = new ComplexQueryUI.LayerboxItem();
+                    layerboxItem.m_pPipeLayer = iFLayer;
+                    this.LayerBox.Items.Add(layerboxItem);
+                }
             }
         }
 
@@ -498,7 +502,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                     MessageBox.Show(@"查询值有误,请检查!");
                     return;
                 }
-                _plugin.FireQueryResultChanged(new QueryResultArgs(featureCursor, (IFeatureSelection) this.SelectLayer));
+                _plugin.FireQueryResultChanged(new QueryResultArgs(featureCursor, (IFeatureSelection) this.SelectLayer, spatialFilter));
             }
         }
 

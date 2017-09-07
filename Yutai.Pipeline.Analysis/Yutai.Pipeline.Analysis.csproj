@@ -100,6 +100,12 @@
     <Compile Include="Classes\Configuration.cs" />
     <Compile Include="Commands\Cmd3DBuilder.cs" />
     <Compile Include="ConfigCommands\CmdSavePipeConfig.cs" />
+    <Compile Include="ConfigForms\WaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigForms\WaitForm.Designer.cs">
+      <DependentUpon>WaitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DataGridViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -523,6 +529,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ConfigForms\WaitForm.resx">
+      <DependentUpon>WaitForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DataGridViewEx.resx">
       <DependentUpon>DataGridViewEx.cs</DependentUpon>
     </EmbeddedResource>
@@ -736,6 +745,7 @@
   <ItemGroup>
     <None Include="Resources\icon_warning_anlysis.png" />
     <None Include="Resources\icon_auto_config.png" />
+    <None Include="Resources\icon_Back.png" />
     <Content Include="Resources\icon_depth.png" />
     <None Include="Resources\icon_save_config.png" />
     <None Include="Resources\icon_prealarm.png" />
@@ -762,9 +772,7 @@
     <None Include="Resources\icon_statics_ms.png" />
     <Content Include="Resources\icon_valve.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ConfigForms\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
