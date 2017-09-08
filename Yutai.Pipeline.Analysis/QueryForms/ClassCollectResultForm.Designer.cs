@@ -27,24 +27,27 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             this.ToExcel = new System.Windows.Forms.Button();
             this.CloseBut = new System.Windows.Forms.Button();
             this.SaveExcelDlg = new System.Windows.Forms.SaveFileDialog();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // _dataGridView
             // 
             this._dataGridView.AllowUserToAddRows = false;
             this._dataGridView.AllowUserToDeleteRows = false;
-            this._dataGridView.Location = new System.Drawing.Point(0, 43);
+            this._dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._dataGridView.Location = new System.Drawing.Point(0, 44);
             this._dataGridView.Name = "_dataGridView";
             this._dataGridView.ReadOnly = true;
-            this._dataGridView.Size = new System.Drawing.Size(493, 261);
+            this._dataGridView.Size = new System.Drawing.Size(562, 330);
             this._dataGridView.TabIndex = 0;
             this._dataGridView.Text = "_dataGridView";
             this._dataGridView.Title = null;
             // 
             // PrintButton
             // 
-            this.PrintButton.Location = new System.Drawing.Point(4, 7);
+            this.PrintButton.Location = new System.Drawing.Point(12, 12);
             this.PrintButton.Name = "PrintButton";
             this.PrintButton.Size = new System.Drawing.Size(75, 23);
             this.PrintButton.TabIndex = 12;
@@ -54,7 +57,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             // 
             // ToExcel
             // 
-            this.ToExcel.Location = new System.Drawing.Point(81, 7);
+            this.ToExcel.Location = new System.Drawing.Point(89, 12);
             this.ToExcel.Name = "ToExcel";
             this.ToExcel.Size = new System.Drawing.Size(75, 23);
             this.ToExcel.TabIndex = 11;
@@ -65,7 +68,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             // CloseBut
             // 
             this.CloseBut.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CloseBut.Location = new System.Drawing.Point(409, 7);
+            this.CloseBut.Location = new System.Drawing.Point(417, 12);
             this.CloseBut.Name = "CloseBut";
             this.CloseBut.Size = new System.Drawing.Size(75, 23);
             this.CloseBut.TabIndex = 13;
@@ -79,20 +82,30 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             this.SaveExcelDlg.FileName = "Result.xls";
             this.SaveExcelDlg.Filter = "Excel文件|*.xls";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.PrintButton);
+            this.panel1.Controls.Add(this.CloseBut);
+            this.panel1.Controls.Add(this.ToExcel);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(562, 44);
+            this.panel1.TabIndex = 14;
+            // 
             // ClassCollectResultForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 304);
-            this.Controls.Add(this.CloseBut);
-            this.Controls.Add(this.PrintButton);
-            this.Controls.Add(this.ToExcel);
+            this.ClientSize = new System.Drawing.Size(562, 374);
             this.Controls.Add(this._dataGridView);
+            this.Controls.Add(this.panel1);
             this.Name = "ClassCollectResultForm";
             this.ShowIcon = false;
             this.Text = "汇总结果";
             this.Load += new System.EventHandler(this.ClassCollectResultForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
@@ -103,5 +116,6 @@ namespace Yutai.Pipeline.Analysis.QueryForms
 		private Button CloseBut;
 		private SaveFileDialog SaveExcelDlg;
         private DataGridViewEx _dataGridView;
+        private Panel panel1;
     }
 }

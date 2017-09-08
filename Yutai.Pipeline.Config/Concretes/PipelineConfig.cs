@@ -300,7 +300,7 @@ namespace Yutai.Pipeline.Config.Concretes
         {
             IBasicLayerInfo layer = GetBasicLayerInfo(classAliasName);
             if (layer == null) return null;
-            IYTField field = layer.Fields.FirstOrDefault(c => c.Name == typeWord);
+            IYTField field = layer.Fields.FirstOrDefault(c => c.TypeName == typeWord);
             return field;
         }
 

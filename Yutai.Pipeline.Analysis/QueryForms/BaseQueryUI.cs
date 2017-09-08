@@ -185,41 +185,6 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 this.ValueEdit.Text = "";
                 CommonHelper.GetUniqueValues((ITable) featureClass, this.FieldsBox.SelectedItem.ToString(), values);
                 this.ValueBox.Items.AddRange(values.ToArray());
-                //IQueryFilter queryFilter = new QueryFilter();
-                //IFeatureCursor featureCursor = featureClass.Search(queryFilter, false);
-                //IFeature feature = featureCursor.NextFeature();
-                //this.ValueBox.Items.Clear();
-                //this.ValueEdit.Text = "";
-                //while (feature != null)
-                //{
-                //	object obj = feature.get_Value(num);
-                //	string text;
-                //	if (obj is DBNull)
-                //	{
-                //		text = "NULL";
-                //	}
-                //	else if (field.Type ==esriFieldType.esriFieldTypeDate)
-                //	{
-                //		text = Convert.ToDateTime(obj).ToShortDateString();
-                //	}
-                //	else
-                //	{
-                //		text = feature.get_Value(num).ToString();
-                //		if (text.Length == 0)
-                //		{
-                //			text = "空字段值";
-                //		}
-                //	}
-                //	if (!this.ValueBox.Items.Contains(text))
-                //	{
-                //		this.ValueBox.Items.Add(text);
-                //	}
-                //	if (this.ValueBox.Items.Count > 100)
-                //	{
-                //		break;
-                //	}
-                //	feature = featureCursor.NextFeature();
-                //}
             }
         }
 
