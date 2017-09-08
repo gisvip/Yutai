@@ -34,6 +34,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             this.CloseBut = new System.Windows.Forms.Button();
             this.QueryBut = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.BtnGetUniqueValue = new System.Windows.Forms.Button();
             this.RevBut = new System.Windows.Forms.Button();
             this.NoneBut = new System.Windows.Forms.Button();
             this.AllBut = new System.Windows.Forms.Button();
@@ -41,7 +42,6 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.SqlBox = new System.Windows.Forms.TextBox();
             this.GeometrySet = new System.Windows.Forms.CheckBox();
-            this.BtnGetUniqueValue = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -100,6 +100,16 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "选择查询对象";
             // 
+            // BtnGetUniqueValue
+            // 
+            this.BtnGetUniqueValue.Location = new System.Drawing.Point(213, 17);
+            this.BtnGetUniqueValue.Name = "BtnGetUniqueValue";
+            this.BtnGetUniqueValue.Size = new System.Drawing.Size(76, 23);
+            this.BtnGetUniqueValue.TabIndex = 4;
+            this.BtnGetUniqueValue.Text = "获取唯一值";
+            this.BtnGetUniqueValue.UseVisualStyleBackColor = true;
+            this.BtnGetUniqueValue.Click += new System.EventHandler(this.BtnGetUniqueValue_Click);
+            // 
             // RevBut
             // 
             this.RevBut.Location = new System.Drawing.Point(213, 158);
@@ -134,10 +144,6 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             // 
             this.ValueBox.CheckOnClick = true;
             this.ValueBox.FormattingEnabled = true;
-            this.ValueBox.Items.AddRange(new object[] {
-            "sdfsfsfs",
-            "sdsdf",
-            "sfdsdf"});
             this.ValueBox.Location = new System.Drawing.Point(10, 17);
             this.ValueBox.Name = "ValueBox";
             this.ValueBox.Size = new System.Drawing.Size(192, 164);
@@ -172,16 +178,6 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             this.GeometrySet.TabIndex = 18;
             this.GeometrySet.Text = "空间范围";
             this.GeometrySet.UseVisualStyleBackColor = true;
-            // 
-            // BtnGetUniqueValue
-            // 
-            this.BtnGetUniqueValue.Location = new System.Drawing.Point(213, 17);
-            this.BtnGetUniqueValue.Name = "BtnGetUniqueValue";
-            this.BtnGetUniqueValue.Size = new System.Drawing.Size(76, 23);
-            this.BtnGetUniqueValue.TabIndex = 4;
-            this.BtnGetUniqueValue.Text = "获取唯一值";
-            this.BtnGetUniqueValue.UseVisualStyleBackColor = true;
-            this.BtnGetUniqueValue.Click += new System.EventHandler(this.BtnGetUniqueValue_Click);
             // 
             // SimpleQueryByMaterialUI
             // 

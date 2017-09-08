@@ -82,14 +82,14 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 string aliasName = iFLayer.FeatureClass.AliasName;
                 if (this.PointRadio.Checked)
                 {
-                    if (this.pPipeCfg.IsPipelineLayer(aliasName))
+                    if (this.pPipeCfg.IsPipelineLayer(aliasName, enumPipelineDataType.Point))
                     {
                         ClassCollectformsUI.LayerboxItem layerboxItem = new ClassCollectformsUI.LayerboxItem();
                         layerboxItem.m_pPipeLayer = iFLayer;
                         this.Layerbox.Items.Add(layerboxItem);
                     }
                 }
-                else if (this.pPipeCfg.IsPipelineLayer(aliasName))
+                else if (this.pPipeCfg.IsPipelineLayer(aliasName, enumPipelineDataType.Line))
                 {
                     ClassCollectformsUI.LayerboxItem layerboxItem2 = new ClassCollectformsUI.LayerboxItem();
                     layerboxItem2.m_pPipeLayer = iFLayer;
@@ -228,6 +228,8 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                     IFields fields = pPipeLayer.FeatureClass.Fields;
                     IYTField fieldInfo = pPipeCfg.GetSpecialField(pPipeLayer.FeatureClass.AliasName,
                         PipeConfigWordHelper.PointWords.TZW);
+                    if (fieldInfo == null)
+                        continue;
                     string pointTableFieldName = fieldInfo.Name;
                     int num4 = fields.FindField(pointTableFieldName);
                     if (num4 >= 0)
@@ -497,7 +499,10 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 dataTable.Rows.Add(array2);
             }
             Splash.Close();
-            ClassCollectResultForm classCollectResultForm = new ClassCollectResultForm();
+            ClassCollectResultForm classCollectResultForm = new ClassCollectResultForm()
+            {
+                TopMost = true
+            };
             if (this.PointRadio.Checked)
             {
                 classCollectResultForm.nType = 0;
@@ -916,7 +921,8 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 {
                     nType = 2,
                     HbCount = this.listBox1.Items.Count,
-                    ResultTable = dataTable
+                    ResultTable = dataTable,
+                    TopMost = true
                 }.ShowDialog();
             }
         }

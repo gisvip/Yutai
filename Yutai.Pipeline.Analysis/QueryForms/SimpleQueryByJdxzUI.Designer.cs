@@ -142,10 +142,6 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             // 
             this.ValueBox.CheckOnClick = true;
             this.ValueBox.FormattingEnabled = true;
-            this.ValueBox.Items.AddRange(new object[] {
-            "sdfsfsfs",
-            "sdsdf",
-            "sfdsdf"});
             this.ValueBox.Location = new System.Drawing.Point(10, 17);
             this.ValueBox.Name = "ValueBox";
             this.ValueBox.Size = new System.Drawing.Size(185, 180);

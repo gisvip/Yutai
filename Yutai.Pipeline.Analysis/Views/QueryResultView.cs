@@ -138,14 +138,19 @@ namespace Yutai.Pipeline.Analysis.Views
             }
             _waitForm.TopMost = true;
             _waitForm.Show();
-            this.pDataSet = new DataSet("总表");
-            this.stable = new DataTable("属性表");
-            this.Geotable = new DataTable("空间");
-            this.gridControl1.DataSource = (null);
-            this.cmbStatField.Items.Clear();
             try
             {
-                AddItems();
+                this.pDataSet = new DataSet("总表");
+                this.stable = new DataTable("属性表");
+                this.Geotable = new DataTable("空间");
+                this.gridControl1.DataSource = (null);
+                this.cmbStatField.Items.Clear();
+
+                if (AddItems() == false)
+                {
+                    _waitForm.Close();
+                    return;
+                }
 
                 IFeatureCursor pCursor = _layerInfo.FeatureClass.Search(_spatialFilter, false);
                 IDataStatistics dataStatistics = new DataStatisticsClass();
@@ -156,8 +161,10 @@ namespace Yutai.Pipeline.Analysis.Views
 
                 _waitForm.Worker.RunWorkerAsync();
             }
-            catch
+            catch(Exception exception)
             {
+                _waitForm.Close();
+                MessageBox.Show(exception.Message);
             }
         }
 
@@ -204,14 +211,14 @@ namespace Yutai.Pipeline.Analysis.Views
             }
         }
 
-        private void AddItems()
+        private bool AddItems()
         {
-            if (this._cursor == null)
-                return;
-            IFeature feature = this._cursor.NextFeature();
+            IFeature feature = _cursor?.NextFeature();
+            if (feature == null)
+                return false;
             _layerInfo = _plugin.PipeConfig.GetBasicLayerInfo(feature.Class.AliasName);
             if (_layerInfo == null)
-                return;
+                return false;
             IFields fields = this._cursor.Fields;
             int num = 0;
             this.OidField = 0;
@@ -279,6 +286,7 @@ namespace Yutai.Pipeline.Analysis.Views
             {
                 this.cmbStatWay.Items.Add("统计长度");
             }
+            return true;
         }
 
         private bool MakeData()

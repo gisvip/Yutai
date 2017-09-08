@@ -8,8 +8,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Yutai.ArcGIS.Common.Helpers;
+using Yutai.Pipeline.Analysis.ConfigForms;
 using Yutai.Pipeline.Config.Helpers;
 using Yutai.Pipeline.Config.Interfaces;
 using Yutai.Plugins.Interfaces;
@@ -18,6 +20,12 @@ namespace Yutai.Pipeline.Analysis.QueryForms
 {
     public partial class SimpleStatMyshUI : Form
     {
+        private int _idxQdms = -1;
+        private int _idxZdms = -1;
+        private WaitForm _waitForm;
+        private IDictionary<double, double> values;
+        private List<IFeatureLayer> _featureLayers;
+
         private partial class LayerboxItem
         {
             public IFeatureLayer m_pPipeLayer;
@@ -83,7 +91,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                     this.myfield = this.myfields.Field[num];
                     this.listBox1.Items.Clear();
                     List<string> values = new List<string>();
-                    CommonHelper.GetUniqueValues((ITable) featureClass,
+                    CommonHelper.GetUniqueValues((ITable)featureClass,
                         layerInfo.GetFieldName(PipeConfigWordHelper.LineWords.QDMS), values);
                     this.listBox1.Items.AddRange(values.ToArray());
                 }
@@ -94,17 +102,17 @@ namespace Yutai.Pipeline.Analysis.QueryForms
         {
             if (ipLay is IFeatureLayer)
             {
-                this.AddFeatureLayer((IFeatureLayer) ipLay);
+                this.AddFeatureLayer((IFeatureLayer)ipLay);
             }
             else if (ipLay is IGroupLayer)
             {
-                this.AddGroupLayer((IGroupLayer) ipLay);
+                this.AddGroupLayer((IGroupLayer)ipLay);
             }
         }
 
         private void AddGroupLayer(IGroupLayer iGLayer)
         {
-            ICompositeLayer compositeLayer = (ICompositeLayer) iGLayer;
+            ICompositeLayer compositeLayer = (ICompositeLayer)iGLayer;
             if (compositeLayer != null)
             {
                 int count = compositeLayer.Count;
@@ -137,123 +145,177 @@ namespace Yutai.Pipeline.Analysis.QueryForms
 
         private void CalButton_Click(object sender, EventArgs e)
         {
-            int count = this.checkedListBox1.CheckedItems.Count;
-            if (count == 0)
+            if (_idxQdms < 0 || _idxZdms < 0)
+                return;
+            _featureLayers = new List<IFeatureLayer>();
+            foreach (object checkedItem in checkedListBox1.CheckedItems)
+            {
+                LayerboxItem item = checkedItem as LayerboxItem;
+                if (item == null)
+                    continue;
+                _featureLayers.Add(item.m_pPipeLayer);
+            }
+            if (_featureLayers == null || _featureLayers.Count <= 0)
             {
                 MessageBox.Show(@"请选定需要统计的管线");
+                return;
             }
-            else
+            int rowCount = this.dataGridView1.RowCount;
+            if (rowCount <= 0)
             {
-                int rowCount = this.dataGridView1.RowCount;
-                if (rowCount <= 0)
+                MessageBox.Show(@"请确定上下限的值，其值不能为空");
+                return;
+            }
+            if (this.dataGridView1[0, 0].Value == null && this.dataGridView1[1, 0].Value == null)
+            {
+                MessageBox.Show(@"没有确定埋深的范围");
+                return;
+            }
+            values = new Dictionary<double, double>();
+            int count2 = this.dataGridView1.Rows.Count;
+
+            for (int j = 0; j < count2; j++)
+            {
+                this.DXArray.Clear();
+                string text = (string)this.dataGridView1[0, j].Value;
+                string text2 = (string)this.dataGridView1[1, j].Value;
+                if (text == null || text2 == null)
                 {
                     MessageBox.Show(@"请确定上下限的值，其值不能为空");
+                    return;
                 }
-                else if (this.dataGridView1[0, 0].Value == null && this.dataGridView1[1, 0].Value == null)
+                double num = 0.0;
+                double num2 = 0.0;
+                try
                 {
-                    MessageBox.Show(@"没有确定埋深的范围");
+                    num = Convert.ToDouble(text);
+                    num2 = Convert.ToDouble(text2);
+                    values.Add(num, num2);
                 }
-                else
+                catch (Exception)
                 {
-                    DataTable dataTable = new DataTable();
-                    dataTable.Columns.Clear();
-                    if (!dataTable.Columns.Contains("层名"))
-                    {
-                        dataTable.Columns.Add("层名", typeof(string));
-                    }
-                    if (!dataTable.Columns.Contains("统计范围"))
-                    {
-                        dataTable.Columns.Add("统计范围", typeof(string));
-                    }
-                    if (!dataTable.Columns.Contains("个数"))
-                    {
-                        dataTable.Columns.Add("个数", typeof(int));
-                    }
-                    int count2 = this.dataGridView1.Rows.Count;
-                    for (int i = 0; i < count; i++)
-                    {
-                        for (int j = 0; j < count2; j++)
-                        {
-                            this.DXArray.Clear();
-                            string text = (string) this.dataGridView1[0, j].Value;
-                            string text2 = (string) this.dataGridView1[1, j].Value;
-                            if (text == null || text2 == null)
-                            {
-                                MessageBox.Show(@"请确定上下限的值，其值不能为空");
-                                return;
-                            }
-                            double num = 0.0;
-                            double num2 = 0.0;
-                            try
-                            {
-                                num = Convert.ToDouble(text);
-                                num2 = Convert.ToDouble(text2);
-                            }
-                            catch (Exception)
-                            {
-                                MessageBox.Show(@"请确定上下限的值是否输入有误");
-                                return;
-                            }
-                            int num3 = 0;
-                            int num4 = 0;
-                            IFeatureLayer pPipeLayer =
-                                ((SimpleStatMyshUI.LayerboxItem) this.checkedListBox1.CheckedItems[i]).m_pPipeLayer;
-                            ISpatialFilter spatialFilter = new SpatialFilter();
-                            if (this.GeometrySet.Checked)
-                            {
-                                if (this.m_ipGeo != null)
-                                {
-                                    spatialFilter.Geometry = (this.m_ipGeo);
-                                }
-                                spatialFilter.SpatialRel = (esriSpatialRelEnum) (1);
-                            }
-                            IFeatureCursor featureCursor = pPipeLayer.FeatureClass.Search(spatialFilter, false);
-                            IFeature feature = featureCursor.NextFeature();
-                            string name = pPipeLayer.Name;
-                            while (feature != null)
-                            {
-                                if (feature.Shape == null)
-                                {
-                                    feature = featureCursor.NextFeature();
-                                }
-                                else
-                                {
-                                    IPolyline polyline = (IPolyline) feature.Shape;
-                                    IPointCollection pointCollection = (IPointCollection) polyline;
-                                    IPoint point = pointCollection.Point[0];
-                                    IPoint point2 = pointCollection.Point[1];
-                                    double m = point.M;
-                                    double m2 = point2.M;
-                                    if (m >= num && m < num2 && !this.DXArray.Contains(point))
-                                    {
-                                        this.DXArray.Add(point);
-                                        num3++;
-                                    }
-                                    if (m2 >= num && m2 < num2 && !this.DXArray.Contains(point2))
-                                    {
-                                        this.DXArray.Add(point2);
-                                        num4++;
-                                    }
-                                    feature = featureCursor.NextFeature();
-                                }
-                            }
-                            int num5 = num3 + num4;
-                            object obj = text + "-" + text2;
-                            dataTable.Rows.Add(new object[]
-                            {
-                                name,
-                                obj,
-                                num5
-                            });
-                        }
-                    }
-                    new ClassCollectResultForm
-                    {
-                        nType = 0,
-                        ResultTable = dataTable
-                    }.ShowDialog();
+                    MessageBox.Show(@"请确定上下限的值是否输入有误");
+                    return;
                 }
             }
+
+            if (values == null || values.Count <= 0)
+                return;
+
+            if (_waitForm == null || _waitForm.IsDisposed)
+            {
+                _waitForm = new WaitForm()
+                {
+                    VisibleBackButton = true,
+                    VisibleprogressBarControl = true,
+                    Description = "状态:准备统计，请稍等...",
+                    TopMost = true
+                };
+                _waitForm.Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+                _waitForm.Worker.DoWork += Worker_DoWork;
+            }
+            _waitForm.Show();
+            while (_waitForm.Worker.IsBusy)
+            {
+                System.Threading.Thread.Sleep(1000);
+                _waitForm.Description = "状态:任务正忙，请稍等...";
+            }
+            CalButton.Enabled = false;
+            _waitForm.Worker.RunWorkerAsync();
+
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                _waitForm.Worker.ReportProgress(0, "状态:正在创建数据表，请稍等...");
+                _waitForm.Count = values.Count * _featureLayers.Count;
+
+                DataTable dataTable = new DataTable();
+                dataTable.Columns.Clear();
+                if (!dataTable.Columns.Contains("层名"))
+                {
+                    dataTable.Columns.Add("层名", typeof(string));
+                }
+                if (!dataTable.Columns.Contains("统计范围"))
+                {
+                    dataTable.Columns.Add("统计范围", typeof(string));
+                }
+                if (!dataTable.Columns.Contains("个数"))
+                {
+                    dataTable.Columns.Add("个数", typeof(int));
+                }
+                
+                _waitForm.Worker.ReportProgress(0, "状态:开始统计，请稍等...");
+                int i = 0;
+                foreach (IFeatureLayer featureLayer in _featureLayers)
+                {
+                    IBasicLayerInfo layerInfo = pPipeCfg.GetBasicLayerInfo(featureLayer.FeatureClass.AliasName);
+                    if (layerInfo == null)
+                    {
+                        _waitForm.Worker.ReportProgress(i++, $"状态:正在统计 {featureLayer.Name}，请稍等...");
+                        continue;
+                    }
+
+                    ISpatialFilter spatialFilter = new SpatialFilter();
+                    if (this.GeometrySet.Checked)
+                    {
+                        if (this.m_ipGeo != null)
+                        {
+                            spatialFilter.Geometry = (this.m_ipGeo);
+                        }
+                        spatialFilter.SpatialRel = (esriSpatialRelEnum)(1);
+                    }
+                    string qdmsFieldName = layerInfo.GetFieldName(PipeConfigWordHelper.LineWords.QDMS);
+                    string zdmsFieldName = layerInfo.GetFieldName(PipeConfigWordHelper.LineWords.ZDMS);
+                    if (featureLayer.FeatureClass.FindField(qdmsFieldName) < 0 || featureLayer.FeatureClass.FindField(zdmsFieldName) < 0)
+                    {
+                        _waitForm.Worker.ReportProgress(i++, $"状态:正在统计 {featureLayer.Name}，请稍等...");
+                        continue;
+                    }
+                    foreach (KeyValuePair<double, double> pair in values)
+                    {
+                        _waitForm.Worker.ReportProgress(i++, $"状态:正在统计 {featureLayer.Name}，请稍等...");
+                        spatialFilter.WhereClause = $"( {qdmsFieldName} > {pair.Key} AND {zdmsFieldName} < {pair.Value}) OR ( {qdmsFieldName} > {pair.Key} AND {zdmsFieldName} < {pair.Value})";
+                        IFeatureCursor featureCursor = featureLayer.FeatureClass.Search(spatialFilter, false);
+                        IDataStatistics dataStatistics = new DataStatisticsClass();
+                        dataStatistics.Field = featureLayer.FeatureClass.OIDFieldName;
+                        dataStatistics.Cursor = featureCursor as ICursor;
+
+                        object obj = pair.Key + "-" + pair.Value;
+                        dataTable.Rows.Add(new object[]
+                        {
+                            featureLayer.Name,
+                            obj,
+                            dataStatistics.Statistics.Count
+                        });
+                        Marshal.ReleaseComObject(featureCursor);
+                    }
+                }
+                e.Result = dataTable;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            CalButton.Enabled = true;
+            DataTable dataTable = e.Result as DataTable;
+            if (dataTable == null)
+            {
+                MessageBox.Show(@"统计失败！");
+            }
+            new ClassCollectResultForm
+            {
+                nType = 0,
+                ResultTable = dataTable,
+                TopMost = true
+            }.Show();
         }
 
         private void AllBut_Click(object sender, EventArgs e)
@@ -271,7 +333,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 for (int j = 0; j < count; j++)
                 {
                     IFeatureLayer pPipeLayer =
-                        ((SimpleStatMyshUI.LayerboxItem) this.checkedListBox1.CheckedItems[j]).m_pPipeLayer;
+                        ((SimpleStatMyshUI.LayerboxItem)this.checkedListBox1.CheckedItems[j]).m_pPipeLayer;
                     this.FillFieldValuesToListBox(pPipeLayer, this.listBox1);
                 }
             }
@@ -288,11 +350,11 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             }
             else
             {
-                double num2 = (this.maxNum - this.minNum)/num;
+                double num2 = (this.maxNum - this.minNum) / num;
                 int num3 = 0;
-                while ((double) num3 < num + 1.0)
+                while ((double)num3 < num + 1.0)
                 {
-                    string text = (this.minNum + (double) num3*num2).ToString("f2");
+                    string text = (this.minNum + (double)num3 * num2).ToString("f2");
                     if (!this.listBox1.Items.Contains(text))
                     {
                         this.listBox1.Items.Add(text);
@@ -308,40 +370,31 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             IBasicLayerInfo layerInfo = pPipeCfg.GetBasicLayerInfo(featureClass);
             IQueryFilter queryFilter = new QueryFilter();
             IFeatureCursor featureCursor = featureClass.Search(queryFilter, false);
-            IFeature feature = featureCursor.NextFeature();
-            int num = featureClass.Fields.FindField(layerInfo.GetFieldName(PipeConfigWordHelper.LineWords.QDMS));
-            int num2 = featureClass.Fields.FindField(layerInfo.GetFieldName(PipeConfigWordHelper.LineWords.ZDMS));
-            if (num != -1 && num2 != -1)
+            IFeature feature;
+            _idxQdms = featureClass.Fields.FindField(layerInfo.GetFieldName(PipeConfigWordHelper.LineWords.QDMS));
+            _idxZdms = featureClass.Fields.FindField(layerInfo.GetFieldName(PipeConfigWordHelper.LineWords.ZDMS));
+            if (_idxQdms != -1 && _idxZdms != -1)
             {
                 double num3 = 2147483647.0;
                 double num4 = -2147483648.0;
                 this.minNum = 2147483647.0;
                 this.maxNum = -2147483648.0;
-                while (feature != null)
+                while ((feature = featureCursor.NextFeature()) != null)
                 {
                     try
                     {
-                        object obj = feature.Value[num].ToString();
-                        object obj2 = feature.Value[num2].ToString();
-                        if (Convert.IsDBNull(obj))
-                        {
+                        double num5 = ConvertToDouble(feature.Value[_idxQdms]);
+                        double num6 = ConvertToDouble(feature.Value[_idxZdms]);
+                        if (double.IsNaN(num5) || double.IsNaN(num6))
                             continue;
-                        }
-                        if (Convert.IsDBNull(obj2))
-                        {
-                            continue;
-                        }
-                        double num5 = Convert.ToDouble(obj);
-                        double num6 = Convert.ToDouble(obj2);
                         num3 = ((num3 < num5) ? num3 : num5);
                         num3 = ((num3 < num6) ? num3 : num6);
                         num4 = ((num4 > num5) ? num4 : num5);
                         num4 = ((num4 > num6) ? num4 : num6);
-                        feature = featureCursor.NextFeature();
                     }
-                    catch (Exception)
+                    catch (Exception exception)
                     {
-                        return;
+                        continue;
                     }
                     if (num3 < this.minNum)
                     {
@@ -354,6 +407,15 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 }
                 this.all();
             }
+        }
+        public double ConvertToDouble(object obj)
+        {
+            double value;
+            if (obj == null || obj is DBNull || double.TryParse(obj.ToString(), out value) == false)
+            {
+                value = Double.NaN;
+            }
+            return value;
         }
 
         private void NoneBut_Click(object sender, EventArgs e)
@@ -385,7 +447,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 for (int j = 0; j < count; j++)
                 {
                     IFeatureLayer pPipeLayer =
-                        ((SimpleStatMyshUI.LayerboxItem) this.checkedListBox1.CheckedItems[j]).m_pPipeLayer;
+                        ((SimpleStatMyshUI.LayerboxItem)this.checkedListBox1.CheckedItems[j]).m_pPipeLayer;
                     this.FillFieldValuesToListBox(pPipeLayer, this.listBox1);
                 }
             }
@@ -486,16 +548,11 @@ namespace Yutai.Pipeline.Analysis.QueryForms
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.listBox1.Items.Clear();
-            int count = this.checkedListBox1.CheckedItems.Count;
-            if (count != 0)
-            {
-                for (int i = 0; i < count; i++)
-                {
-                    IFeatureLayer pPipeLayer =
-                        ((SimpleStatMyshUI.LayerboxItem) this.checkedListBox1.CheckedItems[i]).m_pPipeLayer;
-                    this.FillFieldValuesToListBox(pPipeLayer, this.listBox1);
-                }
-            }
+            SimpleStatMyshUI.LayerboxItem item = checkedListBox1.SelectedItem as SimpleStatMyshUI.LayerboxItem;
+            if (item == null)
+                return;
+            IFeatureLayer featureLayer = item.m_pPipeLayer;
+            this.FillFieldValuesToListBox(featureLayer, this.listBox1);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -578,38 +635,38 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 object obj = null;
                 int selectionBufferInPixels = this.m_context.Config.SelectionEnvironment.SearchTolerance;
                 ISymbol symbol = null;
-                switch ((int) this.m_ipGeo.GeometryType)
+                switch ((int)this.m_ipGeo.GeometryType)
                 {
                     case 1:
-                    {
-                        ISimpleMarkerSymbol simpleMarkerSymbol = new SimpleMarkerSymbol();
-                        symbol = (ISymbol) simpleMarkerSymbol;
-                        symbol.ROP2 = esriRasterOpCode.esriROPNotXOrPen;
-                        simpleMarkerSymbol.Color = (rgbColor);
-                        simpleMarkerSymbol.Size =
-                            ((double) (selectionBufferInPixels + selectionBufferInPixels + selectionBufferInPixels));
-                        break;
-                    }
+                        {
+                            ISimpleMarkerSymbol simpleMarkerSymbol = new SimpleMarkerSymbol();
+                            symbol = (ISymbol)simpleMarkerSymbol;
+                            symbol.ROP2 = esriRasterOpCode.esriROPNotXOrPen;
+                            simpleMarkerSymbol.Color = (rgbColor);
+                            simpleMarkerSymbol.Size =
+                                ((double)(selectionBufferInPixels + selectionBufferInPixels + selectionBufferInPixels));
+                            break;
+                        }
                     case 3:
-                    {
-                        ISimpleLineSymbol simpleLineSymbol = new SimpleLineSymbol();
-                        symbol = (ISymbol) simpleLineSymbol;
-                        symbol.ROP2 = esriRasterOpCode.esriROPNotXOrPen;
-                        simpleLineSymbol.Color = rgbColor;
-                        simpleLineSymbol.Color.Transparency = 1;
-                        simpleLineSymbol.Width = ((double) selectionBufferInPixels);
-                        break;
-                    }
+                        {
+                            ISimpleLineSymbol simpleLineSymbol = new SimpleLineSymbol();
+                            symbol = (ISymbol)simpleLineSymbol;
+                            symbol.ROP2 = esriRasterOpCode.esriROPNotXOrPen;
+                            simpleLineSymbol.Color = rgbColor;
+                            simpleLineSymbol.Color.Transparency = 1;
+                            simpleLineSymbol.Width = ((double)selectionBufferInPixels);
+                            break;
+                        }
                     case 4:
                     case 5:
-                    {
-                        ISimpleFillSymbol simpleFillSymbol = new SimpleFillSymbol();
-                        symbol = (ISymbol) simpleFillSymbol;
-                        symbol.ROP2 = esriRasterOpCode.esriROPNotXOrPen;
-                        simpleFillSymbol.Color = rgbColor;
-                        simpleFillSymbol.Color.Transparency = 1;
-                        break;
-                    }
+                        {
+                            ISimpleFillSymbol simpleFillSymbol = new SimpleFillSymbol();
+                            symbol = (ISymbol)simpleFillSymbol;
+                            symbol.ROP2 = esriRasterOpCode.esriROPNotXOrPen;
+                            simpleFillSymbol.Color = rgbColor;
+                            simpleFillSymbol.Color.Transparency = 1;
+                            break;
+                        }
                 }
                 obj = symbol;
                 this.MapControl.DrawShape(this.m_ipGeo, ref obj);

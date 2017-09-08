@@ -58,17 +58,17 @@ namespace Yutai.Pipeline.Analysis.QueryForms
         {
             if (ipLay is IFeatureLayer)
             {
-                this.AddFeatureLayer((IFeatureLayer)ipLay);
+                this.AddFeatureLayer((IFeatureLayer) ipLay);
             }
             else if (ipLay is IGroupLayer)
             {
-                this.AddGroupLayer((IGroupLayer)ipLay);
+                this.AddGroupLayer((IGroupLayer) ipLay);
             }
         }
 
         private void AddGroupLayer(IGroupLayer iGLayer)
         {
-            ICompositeLayer compositeLayer = (ICompositeLayer)iGLayer;
+            ICompositeLayer compositeLayer = (ICompositeLayer) iGLayer;
             if (compositeLayer != null)
             {
                 int count = compositeLayer.Count;
@@ -112,14 +112,17 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 if (num >= 0)
                 {
                     List<ItemInfo> values = new List<ItemInfo>();
-                    GetUniqueValues(featureClass, layer.GetFieldName(PipeConfigWordHelper.FunctionLayerWorkds.DLMC), values);
+                    GetUniqueValues(featureClass, layer.GetFieldName(PipeConfigWordHelper.FunctionLayerWorkds.DLMC),
+                        values);
 
                     this.comboRoad1.Items.AddRange(values.ToArray());
                     this.comboRoad2.Items.AddRange(values.ToArray());
                 }
             }
         }
-        public static void GetUniqueValues(IFeatureClass featureClass, string string_0, List<ItemInfo> ilist_0, string whereClause = "")
+
+        public static void GetUniqueValues(IFeatureClass featureClass, string string_0, List<ItemInfo> ilist_0,
+            string whereClause = "")
         {
             try
             {
@@ -194,7 +197,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                         itemInfo = (this.comboRoad2.Items[num] as QueryIntersectionUI.ItemInfo);
                         int oID2 = itemInfo.OID;
 
-                        _waitForm.Worker.RunWorkerAsync(new int[] { oID, oID2 });
+                        _waitForm.Worker.RunWorkerAsync(new int[] {oID, oID2});
                     }
                 }
             }
@@ -202,26 +205,31 @@ namespace Yutai.Pipeline.Analysis.QueryForms
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            int[] oids = e.Argument as int[];
-            if (oids == null || oids.Length < 2)
-                return;
-            IFeatureClass featureClass = this.m_pFtLayer.FeatureClass;
-            IFeature feature = featureClass.GetFeature(oids[0]);
-            IFeature feature2 = featureClass.GetFeature(oids[1]);
-            IPolyline polyline = feature.Shape as IPolyline;
-            ITopologicalOperator topologicalOperator = polyline as ITopologicalOperator;
-            IGeometry geometry = null;
-            if (topologicalOperator != null)
+            try
             {
-                geometry = topologicalOperator.Intersect(feature2.Shape, (esriGeometryDimension)1);
+                e.Result = false;
+                int[] oids = e.Argument as int[];
+                if (oids == null || oids.Length < 2)
+                    return;
+                IFeatureClass featureClass = this.m_pFtLayer.FeatureClass;
+                IFeature feature = featureClass.GetFeature(oids[0]);
+                IFeature feature2 = featureClass.GetFeature(oids[1]);
+                IPolyline polyline = feature.Shape as IPolyline;
+                ITopologicalOperator topologicalOperator = polyline as ITopologicalOperator;
+                IGeometry geometry = null;
+                if (topologicalOperator != null)
+                {
+                    geometry = topologicalOperator.Intersect(feature2.Shape, (esriGeometryDimension)1);
+                }
+                if (!geometry.IsEmpty)
+                {
+                    IMultipoint multipoint = geometry as IMultipoint;
+                    IPointCollection pointCollection = multipoint as IPointCollection;
+                    this.m_pGeoFlash = pointCollection.get_Point(0);
+                    e.Result = true;
+                }
             }
-            if (!geometry.IsEmpty)
-            {
-                IMultipoint multipoint = geometry as IMultipoint;
-                IPointCollection pointCollection = multipoint as IPointCollection;
-                this.m_pGeoFlash = pointCollection.get_Point(0);
-            }
-            else
+            catch (Exception exception)
             {
                 e.Result = false;
             }
