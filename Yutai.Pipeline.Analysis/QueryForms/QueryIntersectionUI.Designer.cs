@@ -125,6 +125,6 @@ namespace Yutai.Pipeline.Analysis.QueryForms
 		private Label label1;
 		private ComboBox comboRoad2;
 		private IFeatureLayer m_pFtLayer;
-		private IPoint m_pGeoFlash;
+		private IGeometry m_pGeoFlash;
     }
 }

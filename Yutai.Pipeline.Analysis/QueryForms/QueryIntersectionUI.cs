@@ -54,41 +54,6 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             this.InitializeComponent();
         }
 
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            int[] oids = e.Argument as int[];
-            if (oids == null || oids.Length < 2)
-                return;
-            IFeatureClass featureClass = this.m_pFtLayer.FeatureClass;
-            IFeature feature = featureClass.GetFeature(oids[0]);
-            IFeature feature2 = featureClass.GetFeature(oids[1]);
-            IPolyline polyline = feature.Shape as IPolyline;
-            ITopologicalOperator topologicalOperator = polyline as ITopologicalOperator;
-            IGeometry geometry = null;
-            if (topologicalOperator != null)
-            {
-                geometry = topologicalOperator.Intersect(feature2.Shape, (esriGeometryDimension)1);
-            }
-            if (!geometry.IsEmpty)
-            {
-                IMultipoint multipoint = geometry as IMultipoint;
-                IPointCollection pointCollection = multipoint as IPointCollection;
-                m_pGeoFlash = pointCollection.get_Point(0);
-                if (m_pGeoFlash != null)
-                {
-                    NewBasePointElement();
-                }
-            }
-        }
-
-        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            CMapOperator.ShowFeatureWithWink(m_context.ActiveView.ScreenDisplay, this.m_pGeoFlash);
-            //EsriUtils.ZoomToGeometry(m_pGeoFlash, m_context.FocusMap, 3);
-            m_context.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
-            this.m_pGeoFlash = null;
-        }
-
         private void AddLayer(ILayer ipLay)
         {
             if (ipLay is IFeatureLayer)
@@ -147,17 +112,14 @@ namespace Yutai.Pipeline.Analysis.QueryForms
                 if (num >= 0)
                 {
                     List<ItemInfo> values = new List<ItemInfo>();
-                    GetUniqueValues(featureClass, layer.GetFieldName(PipeConfigWordHelper.FunctionLayerWorkds.DLMC),
-                        values);
+                    GetUniqueValues(featureClass, layer.GetFieldName(PipeConfigWordHelper.FunctionLayerWorkds.DLMC), values);
 
                     this.comboRoad1.Items.AddRange(values.ToArray());
                     this.comboRoad2.Items.AddRange(values.ToArray());
                 }
             }
         }
-
-        public void GetUniqueValues(IFeatureClass featureClass, string string_0, List<ItemInfo> ilist_0,
-            string whereClause = "")
+        public static void GetUniqueValues(IFeatureClass featureClass, string string_0, List<ItemInfo> ilist_0, string whereClause = "")
         {
             try
             {
@@ -179,7 +141,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             }
         }
 
-        public string ConvertToString(object obj)
+        public static string ConvertToString(object obj)
         {
             if (obj == null || obj is DBNull)
             {
@@ -209,41 +171,70 @@ namespace Yutai.Pipeline.Analysis.QueryForms
 
             _waitForm.Description = "状态：正在查询交叉口,请稍等...";
             _waitForm.Show();
-
-            try
+            if (this.m_pFtLayer != null)
             {
-                if (this.m_pFtLayer != null)
+                int num = this.comboRoad1.FindString(this.comboRoad1.Text);
+                if (num < 0)
                 {
-                    int num = this.comboRoad1.FindString(this.comboRoad1.Text);
+                    string text = $"道路名称[{this.comboRoad1.Text}]错误！";
+                    MessageBox.Show(text);
+                }
+                else
+                {
+                    QueryIntersectionUI.ItemInfo itemInfo = this.comboRoad1.Items[num] as QueryIntersectionUI.ItemInfo;
+                    int oID = itemInfo.OID;
+                    num = this.comboRoad2.FindString(this.comboRoad2.Text);
                     if (num < 0)
                     {
-                        string text = $"道路名称[{this.comboRoad1.Text}]错误！";
-                        MessageBox.Show(text);
+                        string text2 = $"道路名称[{this.comboRoad2.Text}]错误！";
+                        MessageBox.Show(text2);
                     }
                     else
                     {
-                        QueryIntersectionUI.ItemInfo itemInfo = this.comboRoad1.Items[num] as QueryIntersectionUI.ItemInfo;
-                        int oID = itemInfo.OID;
-                        num = this.comboRoad2.FindString(this.comboRoad2.Text);
-                        if (num < 0)
-                        {
-                            string text2 = $"道路名称[{this.comboRoad2.Text}]错误！";
-                            MessageBox.Show(text2);
-                        }
-                        else
-                        {
-                            itemInfo = (this.comboRoad2.Items[num] as QueryIntersectionUI.ItemInfo);
-                            int oID2 = itemInfo.OID;
+                        itemInfo = (this.comboRoad2.Items[num] as QueryIntersectionUI.ItemInfo);
+                        int oID2 = itemInfo.OID;
 
-                            _waitForm.Worker.RunWorkerAsync(new int[] { oID, oID2 });
-                        }
+                        _waitForm.Worker.RunWorkerAsync(new int[] { oID, oID2 });
                     }
                 }
             }
-            catch (Exception)
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            int[] oids = e.Argument as int[];
+            if (oids == null || oids.Length < 2)
+                return;
+            IFeatureClass featureClass = this.m_pFtLayer.FeatureClass;
+            IFeature feature = featureClass.GetFeature(oids[0]);
+            IFeature feature2 = featureClass.GetFeature(oids[1]);
+            IPolyline polyline = feature.Shape as IPolyline;
+            ITopologicalOperator topologicalOperator = polyline as ITopologicalOperator;
+            IGeometry geometry = null;
+            if (topologicalOperator != null)
             {
-                if (_waitForm != null && _waitForm.IsDisposed == false)
-                    _waitForm.Close();
+                geometry = topologicalOperator.Intersect(feature2.Shape, (esriGeometryDimension)1);
+            }
+            if (!geometry.IsEmpty)
+            {
+                IMultipoint multipoint = geometry as IMultipoint;
+                IPointCollection pointCollection = multipoint as IPointCollection;
+                this.m_pGeoFlash = pointCollection.get_Point(0);
+            }
+            else
+            {
+                e.Result = false;
+            }
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if ((bool)e.Result)
+            {
+                NewBasePointElement();
+                IActiveView activeView = m_context.ActiveView;
+                activeView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
+                this.m_pGeoFlash = null;
             }
         }
 
@@ -252,10 +243,10 @@ namespace Yutai.Pipeline.Analysis.QueryForms
             DeleteAllElements();
             base.Close();
         }
-
+        
         public void NewBasePointElement()
         {
-            IGraphicsContainer graphicsContainer = (IGraphicsContainer)m_context.FocusMap;
+            IGraphicsContainer graphicsContainer = (IGraphicsContainer)m_context.ActiveView;
 
             ISimpleMarkerSymbol simpleMarkerSymbol = new SimpleMarkerSymbol();
             IRgbColor rgbColor = new RgbColor();
@@ -281,7 +272,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
 
         public void DeleteAllElements()
         {
-            IGraphicsContainer graphicsContainer = (IGraphicsContainer)m_context.FocusMap;
+            IGraphicsContainer graphicsContainer = (IGraphicsContainer)m_context.ActiveView;
             graphicsContainer.DeleteAllElements();
             IActiveView activeView = m_context.ActiveView;
             activeView.PartialRefresh((esriViewDrawPhase)8, null, null);
