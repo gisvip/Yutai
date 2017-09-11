@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            this.detailGridView = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.mainGridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.cmbStatWay = new System.Windows.Forms.ToolStripComboBox();
@@ -39,15 +42,40 @@
             this.btnStatics = new System.Windows.Forms.ToolStripButton();
             this.btnPrint = new System.Windows.Forms.ToolStripButton();
             this.btnExportExcel = new System.Windows.Forms.ToolStripButton();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.mainGridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.detailGridView = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.detailGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.detailGridView)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // detailGridView
+            // 
+            this.detailGridView.GridControl = this.gridControl1;
+            this.detailGridView.Name = "detailGridView";
+            // 
+            // gridControl1
+            // 
+            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridLevelNode1.LevelTemplate = this.detailGridView;
+            gridLevelNode1.RelationName = "Level1";
+            this.gridControl1.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode1});
+            this.gridControl1.Location = new System.Drawing.Point(0, 25);
+            this.gridControl1.MainView = this.mainGridView;
+            this.gridControl1.Name = "gridControl1";
+            this.gridControl1.Size = new System.Drawing.Size(629, 432);
+            this.gridControl1.TabIndex = 1;
+            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.mainGridView,
+            this.detailGridView});
+            // 
+            // mainGridView
+            // 
+            this.mainGridView.GridControl = this.gridControl1;
+            this.mainGridView.Name = "mainGridView";
+            this.mainGridView.OptionsView.ColumnAutoWidth = false;
+            this.mainGridView.MasterRowGetLevelDefaultView += new DevExpress.XtraGrid.Views.Grid.MasterRowGetLevelDefaultViewEventHandler(this.mainGridView_MasterRowGetLevelDefaultView);
             // 
             // toolStrip1
             // 
@@ -142,33 +170,6 @@
             this.btnExportExcel.ToolTipText = "输出Excel";
             this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
             // 
-            // gridControl1
-            // 
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridLevelNode1.LevelTemplate = this.detailGridView;
-            gridLevelNode1.RelationName = "Level1";
-            this.gridControl1.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
-            this.gridControl1.Location = new System.Drawing.Point(0, 25);
-            this.gridControl1.MainView = this.mainGridView;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(629, 432);
-            this.gridControl1.TabIndex = 1;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.mainGridView,
-            this.detailGridView});
-            // 
-            // mainGridView
-            // 
-            this.mainGridView.GridControl = this.gridControl1;
-            this.mainGridView.Name = "mainGridView";
-            this.mainGridView.MasterRowGetLevelDefaultView += new DevExpress.XtraGrid.Views.Grid.MasterRowGetLevelDefaultViewEventHandler(this.mainGridView_MasterRowGetLevelDefaultView);
-            // 
-            // detailGridView
-            // 
-            this.detailGridView.GridControl = this.gridControl1;
-            this.detailGridView.Name = "detailGridView";
-            // 
             // QueryResultView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -177,11 +178,11 @@
             this.Controls.Add(this.toolStrip1);
             this.Name = "QueryResultView";
             this.Size = new System.Drawing.Size(629, 457);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.detailGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.detailGridView)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

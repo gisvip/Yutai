@@ -63,13 +63,15 @@ namespace Yutai.Pipeline.Analysis.Forms
                 {
                     string name = pLayer.Name;
                     IFeatureLayer featureLayer = pLayer as IFeatureLayer;
+                    if (featureLayer == null)
+                        return;
                     if (this.pPipeCfg.IsPipelineLayer(featureLayer.Name, enumPipelineDataType.Point))
                     {
                         this.LayerBox.Items.Add(name);
                     }
                 }
             }
-            catch
+            catch(Exception exception)
             {
             }
         }
@@ -261,6 +263,8 @@ namespace Yutai.Pipeline.Analysis.Forms
         {
             int selectedIndex = this.ValueBox.SelectedIndex;
             string str = "";
+            if (ValueBox.SelectedItem == null)
+                return;
             string item = this.ValueBox.SelectedItem.ToString();
             if (this.ValueBox.GetItemChecked(selectedIndex))
             {

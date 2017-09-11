@@ -24,7 +24,7 @@ namespace Yutai.Pipeline.Analysis.Forms
 {
     public partial class FormMaiShenAnalysis : XtraForm
     {
-        
+
         private IAppContext _context;
         private IPipelineConfig _config;
 
@@ -46,7 +46,7 @@ namespace Yutai.Pipeline.Analysis.Forms
 
         private void FormMaiShenAnalysis_Load(object obj, EventArgs eventArgs)
         {
-            IFeature feature = ((IEnumFeature) _context.FocusMap.FeatureSelection).Next();
+            IFeature feature = ((IEnumFeature)_context.FocusMap.FeatureSelection).Next();
             //if (feature == null || feature.Shape.GeometryType != esriGeometryType.esriGeometryPolygon)
             //{
             //	this.chkRegionAnalysis.Visible = false;
@@ -57,7 +57,7 @@ namespace Yutai.Pipeline.Analysis.Forms
             {
                 if (arrayList[i] is IFeatureLayer)
                 {
-                    IFeatureLayer featureLayer = (IFeatureLayer) arrayList[i];
+                    IFeatureLayer featureLayer = (IFeatureLayer)arrayList[i];
                     if (_config.IsPipelineLayer(featureLayer.Name, enumPipelineDataType.Line))
                     {
                         CheckListFeatureLayerItem class1 = new CheckListFeatureLayerItem();
@@ -136,8 +136,8 @@ namespace Yutai.Pipeline.Analysis.Forms
                         double ruleMS = this.m_RuleMs.GetRuleMS(lineConfig_Kind, sDepthMethod, sDepPosition);
                         if (isM)
                         {
-                            IPoint point = ((IPointCollection) feature.Shape).get_Point(0);
-                            IPoint point2 = ((IPointCollection) feature.Shape).get_Point(1);
+                            IPoint point = ((IPointCollection)feature.Shape).get_Point(0);
+                            IPoint point2 = ((IPointCollection)feature.Shape).get_Point(1);
                             if (point.M < ruleMS || point2.M < ruleMS)
                             {
                                 this.FillFeatureValue(pipeLine, lineConfig_Kind, feature, ruleMS, point.M, point2.M);
@@ -145,8 +145,8 @@ namespace Yutai.Pipeline.Analysis.Forms
                         }
                         else
                         {
-                            double qdms = qdmsIdx >= 0 ? Convert.ToDouble(feature.Value[qdmsIdx]) : 0;
-                            double zdms = qdmsIdx >= 0 ? Convert.ToDouble(feature.Value[zdmsIdx]) : 0;
+                            double qdms = qdmsIdx >= 0 ? ConvertToDouble(feature.Value[qdmsIdx]) : 0;
+                            double zdms = qdmsIdx >= 0 ? ConvertToDouble(feature.Value[zdmsIdx]) : 0;
                             if (qdms < ruleMS || zdms < ruleMS)
                             {
                                 this.FillFeatureValue(pipeLine, lineConfig_Kind, feature, ruleMS, qdms, zdms);
@@ -161,6 +161,16 @@ namespace Yutai.Pipeline.Analysis.Forms
             }
             this.Text = "覆土分析--记录数:" + _table.Rows.Count.ToString();
         }
+        public double ConvertToDouble(object obj)
+        {
+            double value;
+            if (obj == null || obj is DBNull || double.TryParse(obj.ToString(), out value) == false)
+            {
+                value = Double.NaN;
+            }
+            return value;
+        }
+
 
         private void BuildTable(IFeatureCursor pCursor)
         {
@@ -336,7 +346,7 @@ namespace Yutai.Pipeline.Analysis.Forms
                 this.m_nTimerCount = 0;
                 this.timer_0.Stop();
                 IActiveView activeView = _context.ActiveView;
-                activeView.PartialRefresh((esriViewDrawPhase) 8, null, null);
+                activeView.PartialRefresh((esriViewDrawPhase)8, null, null);
             }
             CMapOperator.ShowFeatureWithWink(_context.ActiveView.ScreenDisplay, this._curShape);
             this.m_nTimerCount++;
@@ -350,8 +360,8 @@ namespace Yutai.Pipeline.Analysis.Forms
                 IEnvelope extent = _context.ActiveView.Extent;
                 IEnvelope arg_B5_0 = extent;
                 IPoint pointClass = new ESRI.ArcGIS.Geometry.Point();
-                pointClass.X = ((feature.Envelope.XMin + feature.Envelope.XMax)/2.0);
-                pointClass.Y = ((feature.Envelope.YMin + feature.Envelope.YMax)/2.0);
+                pointClass.X = ((feature.Envelope.XMin + feature.Envelope.XMax) / 2.0);
+                pointClass.Y = ((feature.Envelope.YMin + feature.Envelope.YMax) / 2.0);
                 arg_B5_0.CenterAt(pointClass);
                 _context.MapControl.Extent = (extent);
                 this._curShape = feature;

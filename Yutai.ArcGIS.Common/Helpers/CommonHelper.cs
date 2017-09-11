@@ -948,6 +948,8 @@ namespace Yutai.ArcGIS.Common.Helpers
         {
             try
             {
+                if (itable_0.FindField(string_0)< 0)
+                    return;
                 IQueryFilter queryFilter = new QueryFilter
                 {
                     SubFields = string_0,
