@@ -106,7 +106,7 @@ namespace Yutai.Pipeline.Analysis.Commands
                 {
                     this.m_SectionControl.LayerName = "";
                     this.m_SectionControl.Clear();
-                    this._context.ActiveView.Refresh();
+                    this._context.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, _context.ActiveView.Extent);
                 }
             }
             else
@@ -199,15 +199,15 @@ namespace Yutai.Pipeline.Analysis.Commands
                 bool flag;
                 if (this.m_SectionControl.m_arrSortInfo.Count == 0)
                 {
-                    MessageBox.Show("没有选择到管线！", "纵断面分析");
+                    MessageBox.Show(@"没有选择到管线！", @"纵断面分析");
                 }
                 else if (!(flag = !this.method_1(this.m_SectionControl.m_arrSortInfo)))
                 {
-                    MessageBox.Show("有三通情况不能分析！", "纵断面分析");
+                    MessageBox.Show(@"有三通情况不能分析！", @"纵断面分析");
                 }
                 else if (!this.method_3(this.m_SectionControl.m_arrSortInfo))
                 {
-                    MessageBox.Show("所选择的管线不是连接的！", "纵断面分析");
+                    MessageBox.Show(@"所选择的管线不是连接的！", @"纵断面分析");
                 }
                 else
                 {
@@ -220,10 +220,10 @@ namespace Yutai.Pipeline.Analysis.Commands
                     }
                     else
                     {
-                        MessageBox.Show("没有首尾相接选择管线！", "纵断面分析");
+                        MessageBox.Show(@"没有首尾相接选择管线！", @"纵断面分析");
                     }
                     this._context.FocusMap.ClearSelection();
-                    this._context.ActiveView.Refresh();
+                    this._context.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, _context.ActiveView.Extent);
                     this.m_SectionControl.Clear();
                 }
             }

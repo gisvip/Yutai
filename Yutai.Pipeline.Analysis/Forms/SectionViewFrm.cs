@@ -6,6 +6,7 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geometry;
 using Yutai.Pipeline.Analysis.Classes;
 using Yutai.Pipeline.Config.Interfaces;
@@ -142,10 +143,8 @@ namespace Yutai.Pipeline.Analysis.Forms
 
         private void SectionViewFrm_FormClosed(object obj, FormClosedEventArgs formClosedEventArg)
         {
-            if (this.m_sectionType == SectionViewFrm.SectionType.SectionTypeTransect)
-            {
-                //_context.FocusMap.MousePointer=(0);
-            }
+            ((IGraphicsContainer)_context.ActiveView).DeleteAllElements();
+            _context.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, _context.ActiveView.Extent);
         }
 
         private void SectionViewFrm_KeyDown(object obj, KeyEventArgs keyEventArg)
@@ -222,8 +221,8 @@ namespace Yutai.Pipeline.Analysis.Forms
 
         private void SectionViewFrm_Resize(object obj, EventArgs eventArg)
         {
-            this.scaleWidth = (float) (this.pixWidth/base.Width);
-            this.scaleHeight = (float) (this.pixHeight/base.Height);
+            this.scaleWidth = (float)(this.pixWidth / base.Width);
+            this.scaleHeight = (float)(this.pixHeight / base.Height);
             int height = this.menuStrip1.Height;
             this.m_pSection.OnResize(height, 0, this.scaleWidth, this.scaleHeight);
         }

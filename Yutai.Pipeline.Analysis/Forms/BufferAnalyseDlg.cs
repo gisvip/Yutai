@@ -63,25 +63,19 @@ namespace Yutai.Pipeline.Analysis.Forms
                     {
                         m_pFeatureLayer = featureLayer
                     };
-                    IFeatureClass featureClass = featureLayer.FeatureClass;
+                    if (featureLayer?.FeatureClass == null)
+                        return;
                     if (featureLayer.FeatureClass.FeatureType != (esriFeatureType) 11)
                     {
-                        if ((!this.radBtnPt.Checked
-                            ? false
-                            : m_PipeConfig.IsPipelineLayer(featureLayer.Name, enumPipelineDataType.Point)))
+                        if (this.radBtnPt.Checked && m_PipeConfig.IsPipelineLayer(featureLayer.Name, enumPipelineDataType.Point))
                         {
                             this.chkLstLayers.Items.Add(checkListFeatureLayerItem);
                         }
-                        if ((!this.radBtnLn.Checked
-                            ? false
-                            : m_PipeConfig.IsPipelineLayer(featureLayer.Name, enumPipelineDataType.Line)))
+                        if (this.radBtnLn.Checked && m_PipeConfig.IsPipelineLayer(featureLayer.Name, enumPipelineDataType.Line))
                         {
                             this.chkLstLayers.Items.Add(checkListFeatureLayerItem);
                         }
-                        if ((!this.radBtnOther.Checked ||
-                             m_PipeConfig.IsPipelineLayer(featureLayer.Name, enumPipelineDataType.Line)
-                            ? false
-                            : !m_PipeConfig.IsPipelineLayer(featureLayer.Name, enumPipelineDataType.Point)))
+                        if (this.radBtnOther.Checked && !m_PipeConfig.IsPipelineLayer(featureLayer.Name, enumPipelineDataType.Line) && !m_PipeConfig.IsPipelineLayer(featureLayer.Name, enumPipelineDataType.Point))
                         {
                             this.chkLstLayers.Items.Add(checkListFeatureLayerItem);
                         }
@@ -109,7 +103,7 @@ namespace Yutai.Pipeline.Analysis.Forms
         private void btnAnalyse_Click(object obj, EventArgs eventArg)
         {
             double num = Convert.ToDouble(this.txBoxRadius.Text.Trim());
-            CommonUtils.DeleteAllElements(this.m_app.FocusMap);
+            ((IGraphicsContainer)this.m_app.FocusMap).DeleteAllElements();
             this.method_0(num);
             this.bDrawRed = false;
         }
@@ -117,7 +111,7 @@ namespace Yutai.Pipeline.Analysis.Forms
         private void btnClose_Click(object obj, EventArgs eventArg)
         {
             base.Visible = false;
-            CommonUtils.DeleteAllElements(this.m_app.FocusMap);
+            //CommonUtils.DeleteAllElements(this.m_app.FocusMap);
             base.Close();
         }
 
@@ -187,7 +181,8 @@ namespace Yutai.Pipeline.Analysis.Forms
         {
             this.method_3();
             double num = Convert.ToDouble(this.txBoxRadius.Text.Trim());
-            CommonUtils.DeleteAllElements(this.m_app.FocusMap);
+            //CommonUtils.DeleteAllElements(this.m_app.FocusMap);
+            ((IGraphicsContainer)this.m_app.FocusMap).DeleteAllElements();
             this.method_0(num);
             this.XbwqoohXht();
         }
@@ -211,6 +206,7 @@ namespace Yutai.Pipeline.Analysis.Forms
 
         public void DrawSelGeometry()
         {
+            ((IGraphicsContainer)this.m_app.FocusMap).DeleteAllElements();
             if (this.m_pDrawGeo != null)
             {
                 IRgbColor rgbColor = new RgbColor();
@@ -256,6 +252,7 @@ namespace Yutai.Pipeline.Analysis.Forms
                     }
                 }
                 obj = symbol;
+
                 this.m_app.MapControl.DrawShape(this.m_pDrawGeo, ref obj);
             }
         }
