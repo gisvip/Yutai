@@ -29,6 +29,11 @@ namespace Yutai.Pipeline.Analysis.Commands
 
         public override void OnClick()
         {
+        }
+
+
+        public override void OnClick(object sender, EventArgs args)
+        {
             _context.SetCurrentTool(this);
 
             if (this.m_dmd == null)
@@ -42,12 +47,6 @@ namespace Yutai.Pipeline.Analysis.Commands
                 this.m_dmd.InitMeasureDlg();
                 this.m_dmd.Visible = true;
             }
-        }
-
-
-        public override void OnClick(object sender, EventArgs args)
-        {
-            OnClick();
         }
 
         public override void OnCreate(object hook)

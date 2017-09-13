@@ -32,8 +32,8 @@ namespace Yutai.Pipeline.Analysis.Commands
             _plugin = plugin;
             mapControl = _context.MapControl as IMapControl3;
         }
-
-        public override void OnClick()
+        
+        public override void OnClick(object sender, EventArgs args)
         {
             _context.SetCurrentTool(this);
             if (this.trackingAnalyForm == null || this.trackingAnalyForm.IsDisposed)
@@ -42,7 +42,7 @@ namespace Yutai.Pipeline.Analysis.Commands
                 this.trackingAnalyForm.MapControl = this._context.MapControl as IMapControl3;
                 this.trackingAnalyForm.pPipeCfg = this._plugin.PipeConfig;
                 this.trackingAnalyForm.m_iApp = _context;
-                this.trackingAnalyForm.Show((Form) this.object_0);
+                this.trackingAnalyForm.Show((Form)this.object_0);
             }
             else if (!this.trackingAnalyForm.Visible)
             {
@@ -56,12 +56,6 @@ namespace Yutai.Pipeline.Analysis.Commands
             this.trackingAnalyForm.pPipeCfg = this._plugin.PipeConfig;
             ;
             this.trackingAnalyForm.Show();
-        }
-
-
-        public override void OnClick(object sender, EventArgs args)
-        {
-            OnClick();
         }
 
         public override void OnCreate(object hook)

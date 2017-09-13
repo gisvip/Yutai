@@ -24,8 +24,8 @@ namespace Yutai.Pipeline.Analysis.QueryCommands
             OnCreate(context);
             _plugin = plugin;
         }
-
-        public override void OnClick()
+        
+        public override void OnClick(object sender, EventArgs args)
         {
             _context.SetCurrentTool(this);
             if (this.QueryUI == null || this.QueryUI.IsDisposed)
@@ -36,7 +36,7 @@ namespace Yutai.Pipeline.Analysis.QueryCommands
                 this.QueryUI.MaximizeBox = false;
                 this.QueryUI.TopMost = true;
                 this.QueryUI.Plugin = _plugin;
-                this.QueryUI.MapControl = (IMapControl3) _context.MapControl;
+                this.QueryUI.MapControl = (IMapControl3)_context.MapControl;
                 this.QueryUI.pPipeCfg = _plugin.PipeConfig;
                 this.QueryUI.m_context = this._context;
 
@@ -52,12 +52,6 @@ namespace Yutai.Pipeline.Analysis.QueryCommands
                     this.QueryUI.WindowState = FormWindowState.Normal;
                 }
             }
-        }
-
-
-        public override void OnClick(object sender, EventArgs args)
-        {
-            OnClick();
         }
 
         public override void OnCreate(object hook)

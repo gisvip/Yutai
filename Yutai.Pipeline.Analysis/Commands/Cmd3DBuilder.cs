@@ -16,17 +16,11 @@ namespace Yutai.Pipeline.Analysis.Commands
             OnCreate(context);
             _plugin = plugin;
         }
-
-        public override void OnClick()
+        
+        public override void OnClick(object sender, EventArgs args)
         {
             frm3DBuilder frm = new frm3DBuilder(_context, _plugin.PipeConfig);
             frm.Show();
-        }
-
-
-        public override void OnClick(object sender, EventArgs args)
-        {
-            OnClick();
         }
 
         public override void OnCreate(object hook)

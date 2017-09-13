@@ -35,18 +35,11 @@ namespace Yutai.Pipeline.Analysis.Commands
             OnCreate(context);
             _plugin = plugin;
         }
-
-
-        public override void OnClick()
+        
+        public override void OnClick(object sender, EventArgs args)
         {
             _inLine = false;
             _context.SetCurrentTool(this);
-        }
-
-
-        public override void OnClick(object sender, EventArgs args)
-        {
-            OnClick();
         }
 
         public override void OnCreate(object hook)

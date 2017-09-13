@@ -17,16 +17,10 @@ namespace Yutai.Pipeline.Analysis.Commands
             OnCreate(context);
             _plugin = plugin;
         }
-
-        public override void OnClick()
-        {
-            new PoPointAlarmForm(_context, _plugin.PipeConfig).ShowDialog();
-        }
-
-
+        
         public override void OnClick(object sender, EventArgs args)
         {
-            OnClick();
+            new PoPointAlarmForm(_context, _plugin.PipeConfig).ShowDialog();
         }
 
         public override void OnCreate(object hook)

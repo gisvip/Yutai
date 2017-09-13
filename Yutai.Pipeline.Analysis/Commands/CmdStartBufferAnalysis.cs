@@ -30,8 +30,16 @@ namespace Yutai.Pipeline.Analysis.Commands
             OnCreate(context);
             _plugin = plugin;
         }
+        
+        private void AnalyseDlgOnClosing(object sender, CancelEventArgs cancelEventArgs)
+        {
+            cancelEventArgs.Cancel = true;
+            this.Deactivate();
+            this._analyseDlg.Hide();
+        }
 
-        public override void OnClick()
+
+        public override void OnClick(object sender, EventArgs args)
         {
             _inLine = false;
             _context.SetCurrentTool(this);
@@ -49,19 +57,6 @@ namespace Yutai.Pipeline.Analysis.Commands
             {
                 _analyseDlg.Visible = true;
             }
-        }
-
-        private void AnalyseDlgOnClosing(object sender, CancelEventArgs cancelEventArgs)
-        {
-            cancelEventArgs.Cancel = true;
-            this.Deactivate();
-            this._analyseDlg.Hide();
-        }
-
-
-        public override void OnClick(object sender, EventArgs args)
-        {
-            OnClick();
         }
 
         public override void OnCreate(object hook)

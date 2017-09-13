@@ -16,17 +16,11 @@ namespace Yutai.Pipeline.Analysis.Commands
             OnCreate(context);
             _plugin = plugin;
         }
-
-        public override void OnClick()
+        
+        public override void OnClick(object sender, EventArgs args)
         {
             FormMaiShenAnalysis formMaiShenAnalysis = new FormMaiShenAnalysis(_context, _plugin.PipeConfig);
             formMaiShenAnalysis.Show();
-        }
-
-
-        public override void OnClick(object sender, EventArgs args)
-        {
-            OnClick();
         }
 
         public override void OnCreate(object hook)

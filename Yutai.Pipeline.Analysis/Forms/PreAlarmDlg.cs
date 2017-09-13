@@ -89,7 +89,7 @@ namespace Yutai.Pipeline.Analysis.Forms
             if (pLayer is IFeatureLayer)
             {
                 IFeatureLayer featureLayer = pLayer as IFeatureLayer;
-                if (this.pPipeCfg.IsPipelineLayer(featureLayer.FeatureClass))
+                if (this.pPipeCfg.IsPipelineLayer(featureLayer.FeatureClass.AliasName, enumPipelineDataType.Line))
                 {
                     CheckListFeatureLayerItem pclass = new CheckListFeatureLayerItem();
                     pclass.m_pFeatureLayer = featureLayer;
