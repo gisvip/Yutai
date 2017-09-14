@@ -2,8 +2,9 @@
   <MainMenu>
     <Pages>
       <Page Key="PipelineEditor" Caption="管线编辑" Index="0" Visible="true">
-        <PageGroup Key="Pipeline_Editor_Setting" Caption="设置" Visible="true" Index="1">
+        <PageGroup Key="Pipeline_Editor_Setting" Caption="设置" Visible="true" Index="0">
           <BarItem Key="PipelineEditor_SetLayer" Visible="true"/>
+          <BarItem Key="PipelineEditor_ReloadLayer" Visible="true"/>
         </PageGroup>
         <PageGroup Key="Pipeline_Editor_Common" Caption="常用" Visible="true" Index="1">
           <BarItem Key="PipelineEditor_CreateLine" Visible="true"/>

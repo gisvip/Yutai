@@ -173,6 +173,7 @@
     <Compile Include="Commands\Mark\CmdDeleteAll.cs" />
     <Compile Include="Commands\Mark\CmdDuoYaoSuCheQi.cs" />
     <Compile Include="Commands\Mark\CmdDuoYaoSuCheQiSheZhi.cs" />
+    <Compile Include="Commands\Setting\CmdReloadLayer.cs" />
     <Compile Include="Commands\Setting\CmdSetLayer.cs" />
     <Compile Include="Commands\Version\CmdVersionManagement.cs" />
     <Compile Include="Commands\Version\CmdVersionQuery.cs" />
@@ -571,6 +572,7 @@
   <ItemGroup>
     <Content Include="DLL\Aspose.Cells.dll" />
     <Content Include="DLL\ClosedXML.dll" />
+    <None Include="Resources\icon_reload.png" />
     <None Include="Resources\icon_pipe_access.png" />
     <None Include="Resources\icon_pipe_exportexcel.png" />
     <None Include="Resources\Image1.png" />

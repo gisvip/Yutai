@@ -31,7 +31,6 @@ namespace Yutai.Pipeline.Editor.Commands.Setting
         private List<object> _items;
         private string _selectedText;
         private BarEditItem _linkComboBox;
-        private List<IFeatureLayer> _featureLayers;
 
         public CmdSetLayer(IAppContext context, PipelineEditorPlugin plugin)
         {
@@ -62,46 +61,16 @@ namespace Yutai.Pipeline.Editor.Commands.Setting
         {
             get
             {
-                if (_context.FocusMap == null)
-                    return false;
-                if (_context.FocusMap.LayerCount <= 0)
-                    return false;
-                if (ArcGIS.Common.Editor.Editor.EditMap == null)
-                    return false;
-                if (ArcGIS.Common.Editor.Editor.EditMap != _context.FocusMap)
-                    return false;
-                if (ArcGIS.Common.Editor.Editor.EditWorkspace == null)
-                    return false;
-                if (_plugin.PipeConfig.Layers.Count <= 0)
+                if (_plugin.EditLayers == null)
                     return false;
                 if (_linkComboBox == null)
                     return false;
                 if (_plugin.PipeConfig.Layers.Count <= 0)
                     return false;
-                _items.Clear();
-                _featureLayers = MapHelper.GetFeatureLayers(_context.FocusMap);
-                foreach (IPipelineLayer pipelineLayer in _plugin.PipeConfig.Layers)
-                {
-                    bool noExist = pipelineLayer.Layers.Count <= 0;
-                    foreach (IBasicLayerInfo basicLayerInfo in pipelineLayer.Layers)
-                    {
-
-                        if (_featureLayers.All(c => c.Name != basicLayerInfo.AliasName))
-                        {
-                            noExist = true;
-                            break;
-                        }
-                    }
-                    if (noExist == false)
-                    {
-                        LayerItem item = new LayerItem(pipelineLayer.Name, pipelineLayer);
-                        _items.Add(item);
-                    }
-                }
-
+                _items = _plugin.EditLayers;
 
                 ((RepositoryItemComboBox)_linkComboBox.Edit).Items.Clear();
-                ((RepositoryItemComboBox)_linkComboBox.Edit).Items.AddRange(_items.ToArray());
+                ((RepositoryItemComboBox)_linkComboBox.Edit).Items.AddRange(_plugin.EditLayers.ToArray());
                 return true;
             }
         }

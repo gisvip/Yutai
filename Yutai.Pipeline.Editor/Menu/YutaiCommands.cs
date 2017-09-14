@@ -46,6 +46,7 @@ namespace Yutai.Pipeline.Editor.Menu
                 _commands = new List<YutaiCommand>()
                 {
                     new CmdSetLayer(_context, _plugin),
+                    new CmdReloadLayer(_context, _plugin),
 
                     new CmdCreateLine(_context, _plugin),
                     new CmdCreateLineWithPoint(_context, _plugin),

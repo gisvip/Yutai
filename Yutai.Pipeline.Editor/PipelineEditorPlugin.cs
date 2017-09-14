@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Yutai.Pipeline.Config.Concretes;
 using Yutai.Pipeline.Config.Interfaces;
 using Yutai.Pipeline.Editor.Classes;
@@ -21,6 +22,7 @@ namespace Yutai.Pipeline.Editor
         private ICheQiConfig _cheQiConfig;
         private IMultiCheQiConfig _multiCheQiConfig;
         private IPipelineLayer _pipelineLayer;
+        private List<object> _editLayers;
         //private DockPanelService _dockPanelService;
 
         // public event EventHandler<QueryResultArgs> QueryResultChanged;
@@ -71,6 +73,12 @@ namespace Yutai.Pipeline.Editor
         {
             get { return _pipelineLayer; }
             set { _pipelineLayer = value; }
+        }
+
+        public List<object> EditLayers
+        {
+            get { return _editLayers; }
+            set { _editLayers = value; }
         }
     }
 }
