@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using ESRI.ArcGIS.Analyst3D;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
-using Syncfusion.Windows.Forms;
 using Yutai.Plugins.Identifer.Common;
 using Yutai.Plugins.Identifer.Enums;
 using Yutai.Plugins.Identifer.Helpers;
@@ -19,7 +19,7 @@ using Yutai.Shared;
 
 namespace Yutai.Plugins.Identifer.Query
 {
-    public partial class frmAttributeQueryBuilder : MetroForm
+    public partial class frmAttributeQueryBuilder : XtraForm
     {
         //后期可能改命令可以同时对二维和三维窗口进行查询
 

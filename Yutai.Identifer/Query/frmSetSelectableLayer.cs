@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using ESRI.ArcGIS.Carto;
-using Syncfusion.Windows.Forms;
 using Yutai.Plugins.Identifer.Common;
 
 namespace Yutai.Plugins.Identifer.Query
 {
-    public partial class frmSetSelectableLayer : MetroForm
+    public partial class frmSetSelectableLayer : XtraForm
     {
         private IMap _mMap;
 

@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ESRI.ArcGIS.Catalog;
-using ESRI.ArcGIS.CatalogUI;
 using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.Geodatabase;
 using Yutai.ArcGIS.Catalog;

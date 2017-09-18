@@ -8,7 +8,6 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Controls;
-using Syncfusion.Windows.Forms.Tools;
 using Yutai.Plugins.Concrete;
 using Yutai.Plugins.Enums;
 using Yutai.Plugins.Identifer.Query;

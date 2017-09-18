@@ -1,6 +1,4 @@
-﻿using Syncfusion.Windows.Forms.Tools;
-
-
+﻿
 namespace Yutai.Plugins.Identifer.Views
 {
     partial class IdentifierDockPanel
@@ -34,16 +32,16 @@ namespace Yutai.Plugins.Identifer.Views
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this._cboIdentifierMode = new System.Windows.Forms.ComboBox();
-            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.trvFeatures = new System.Windows.Forms.TreeView();
-            this.txtCoords = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
-            this.lstAttribute = new System.Windows.Forms.ListView();
             this.btnClear = new DevExpress.XtraEditors.SimpleButton();
             this.btnZoom = new DevExpress.XtraEditors.CheckButton();
+            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.trvFeatures = new System.Windows.Forms.TreeView();
+            this.txtCoords = new DevExpress.XtraEditors.TextEdit();
+            this.lstAttribute = new System.Windows.Forms.ListView();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCoords)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCoords.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -85,6 +83,22 @@ namespace Yutai.Plugins.Identifer.Views
             this._cboIdentifierMode.Size = new System.Drawing.Size(132, 20);
             this._cboIdentifierMode.TabIndex = 1;
             // 
+            // btnClear
+            // 
+            this.btnClear.Image = global::Yutai.Plugins.Identifer.Properties.Resources.img_clear24;
+            this.btnClear.Location = new System.Drawing.Point(231, 3);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(34, 30);
+            this.btnClear.TabIndex = 3;
+            // 
+            // btnZoom
+            // 
+            this.btnZoom.Image = global::Yutai.Plugins.Identifer.Properties.Resources.ZoomSelection;
+            this.btnZoom.Location = new System.Drawing.Point(191, 3);
+            this.btnZoom.Name = "btnZoom";
+            this.btnZoom.Size = new System.Drawing.Size(34, 30);
+            this.btnZoom.TabIndex = 4;
+            // 
             // splitContainerControl1
             // 
             this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -105,21 +119,18 @@ namespace Yutai.Plugins.Identifer.Views
             this.trvFeatures.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trvFeatures.Location = new System.Drawing.Point(0, 0);
             this.trvFeatures.Name = "trvFeatures";
-            this.trvFeatures.Size = new System.Drawing.Size(268, 78);
+            this.trvFeatures.Size = new System.Drawing.Size(268, 80);
             this.trvFeatures.TabIndex = 1;
             this.trvFeatures.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trvFeatures_NodeMouseClick);
             // 
             // txtCoords
             // 
-            this.txtCoords.BeforeTouchSize = new System.Drawing.Size(268, 22);
             this.txtCoords.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtCoords.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtCoords.Location = new System.Drawing.Point(0, 78);
-            this.txtCoords.Metrocolor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
+            this.txtCoords.Location = new System.Drawing.Point(0, 80);
             this.txtCoords.Name = "txtCoords";
-            this.txtCoords.ReadOnly = true;
-            this.txtCoords.Size = new System.Drawing.Size(268, 22);
-            this.txtCoords.Style = Syncfusion.Windows.Forms.Tools.TextBoxExt.theme.Default;
+            this.txtCoords.Properties.ReadOnly = true;
+            this.txtCoords.Size = new System.Drawing.Size(268, 20);
             this.txtCoords.TabIndex = 0;
             // 
             // lstAttribute
@@ -131,22 +142,6 @@ namespace Yutai.Plugins.Identifer.Views
             this.lstAttribute.TabIndex = 0;
             this.lstAttribute.UseCompatibleStateImageBehavior = false;
             this.lstAttribute.View = System.Windows.Forms.View.Details;
-            // 
-            // btnClear
-            // 
-            this.btnClear.Image = global::Yutai.Plugins.Identifer.Properties.Resources.img_clear24;
-            this.btnClear.Location = new System.Drawing.Point(231, 3);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(34, 30);
-            this.btnClear.TabIndex = 3;
-            // 
-            // btnZoom
-            // 
-            this.btnZoom.Image = global::Yutai.Plugins.Identifer.Properties.Resources.ZoomSelection;
-            this.btnZoom.Location = new System.Drawing.Point(191, 3);
-            this.btnZoom.Name = "btnZoom";
-            this.btnZoom.Size = new System.Drawing.Size(34, 30);
-            this.btnZoom.TabIndex = 4;
             // 
             // IdentifierDockPanel
             // 
@@ -160,7 +155,7 @@ namespace Yutai.Plugins.Identifer.Views
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtCoords)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCoords.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -171,7 +166,7 @@ namespace Yutai.Plugins.Identifer.Views
         private System.Windows.Forms.ComboBox _cboIdentifierMode;
         private DevExpress.XtraEditors.SimpleButton btnClear;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
-        private TextBoxExt txtCoords;
+        private DevExpress.XtraEditors.TextEdit txtCoords;
         private System.Windows.Forms.TreeView trvFeatures;
         private System.Windows.Forms.ListView lstAttribute;
         private DevExpress.XtraEditors.CheckButton btnZoom;
