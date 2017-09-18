@@ -31,6 +31,7 @@ namespace Yutai.Pipeline.Editor.Commands.Setting
         private List<object> _items;
         private string _selectedText;
         private BarEditItem _linkComboBox;
+        private int _width;
 
         public CmdSetLayer(IAppContext context, PipelineEditorPlugin plugin)
         {
@@ -55,6 +56,7 @@ namespace Yutai.Pipeline.Editor.Commands.Setting
             _items = new List<object>();
             _layoutType = 0;
             _showCaption = true;
+            _width = 120;
         }
 
         public override bool Enabled
@@ -114,6 +116,7 @@ namespace Yutai.Pipeline.Editor.Commands.Setting
                 _plugin.CurrentLayer = layerItem.Value as IPipelineLayer;
             else
                 _plugin.CurrentLayer = null;
+            _context.View.Update();
         }
 
         public string SelectedText
@@ -131,6 +134,12 @@ namespace Yutai.Pipeline.Editor.Commands.Setting
         public bool DropDownList
         {
             get { return true; }
+        }
+
+        public int Width
+        {
+            get { return _width; }
+            set { _width = value; }
         }
     }
 }

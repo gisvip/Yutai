@@ -33,6 +33,7 @@ namespace Yutai.Pipeline.Editor.Commands.Setting
                 items.Add(new LayerItem(pipelineLayer.Name, pipelineLayer));
             }
             _plugin.EditLayers = items;
+            _context.View.Update();
         }
 
         public override void OnCreate(object hook)

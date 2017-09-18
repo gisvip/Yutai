@@ -80,15 +80,7 @@ namespace Yutai.Pipeline.Editor.Commands.Common
         {
             get
             {
-                if (_context.FocusMap == null)
-                    return false;
-                if (_context.FocusMap.LayerCount <= 0)
-                    return false;
-                if (ArcGIS.Common.Editor.Editor.EditMap == null)
-                    return false;
-                if (ArcGIS.Common.Editor.Editor.EditMap != _context.FocusMap)
-                    return false;
-                if (ArcGIS.Common.Editor.Editor.EditWorkspace == null)
+                if (_plugin.CurrentLayer == null)
                     return false;
                 return true;
             }

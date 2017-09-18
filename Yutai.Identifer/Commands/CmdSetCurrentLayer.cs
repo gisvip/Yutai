@@ -28,6 +28,7 @@ namespace Yutai.Plugins.Identifer.Commands
         private IActiveViewEvents_Event _activeViewEvents;
         private string _selectedText;
         private BarEditItem _linkCombo;
+        private int _width;
 
         public CmdSetCurrentLayer(IAppContext context, BasePlugin plugin)
         {
@@ -55,6 +56,12 @@ namespace Yutai.Plugins.Identifer.Commands
             get { return true; }
         }
 
+        public int Width
+        {
+            get { return _width; }
+            set { _width = value; }
+        }
+
         public override void OnCreate(object hook)
         {
             _context = hook as IAppContext;
@@ -70,6 +77,7 @@ namespace Yutai.Plugins.Identifer.Commands
             _items = new List<object>();
             _layoutType = 0;
             _showCaption = true;
+            _width = 230;
             InitEventListener();
         }
 
