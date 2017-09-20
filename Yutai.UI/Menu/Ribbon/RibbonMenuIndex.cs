@@ -18,7 +18,6 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.SystemUI;
-using Syncfusion.Windows.Forms.Tools;
 using Yutai.Plugins.Concrete;
 using Yutai.Plugins.Enums;
 using Yutai.Plugins.Events;

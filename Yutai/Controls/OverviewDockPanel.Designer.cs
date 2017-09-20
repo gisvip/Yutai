@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OverviewDockPanel));
             this.axMapControl1 = new ESRI.ArcGIS.Controls.AxMapControl();
-            this.contextMenuOverview = new Syncfusion.Windows.Forms.Tools.ContextMenuStripEx();
+            this.contextMenuOverview = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuFullExtent = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCurrent = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.axMapControl1)).BeginInit();
@@ -54,10 +55,8 @@
             this.contextMenuOverview.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuFullExtent,
             this.mnuCurrent});
-            this.contextMenuOverview.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(236)))), ((int)(((byte)(249)))));
             this.contextMenuOverview.Name = "contextMenuOverview";
-            this.contextMenuOverview.Size = new System.Drawing.Size(153, 70);
-            this.contextMenuOverview.Style = Syncfusion.Windows.Forms.Tools.ContextMenuStripEx.ContextMenuStyle.Default;
+            this.contextMenuOverview.Size = new System.Drawing.Size(101, 48);
             // 
             // mnuFullExtent
             // 
@@ -85,7 +84,7 @@
         #endregion
 
         private ESRI.ArcGIS.Controls.AxMapControl axMapControl1;
-        private Syncfusion.Windows.Forms.Tools.ContextMenuStripEx contextMenuOverview;
+        private System.Windows.Forms.ContextMenuStrip contextMenuOverview;
         private System.Windows.Forms.ToolStripMenuItem mnuFullExtent;
         private System.Windows.Forms.ToolStripMenuItem mnuCurrent;
     }

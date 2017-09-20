@@ -14,7 +14,6 @@ using ESRI.ArcGIS.DataSourcesOleDB;
 using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
-using Syncfusion.Windows.Forms.Tools;
 using Yutai.ArcGIS.Catalog;
 using Yutai.UI.Controls;
 

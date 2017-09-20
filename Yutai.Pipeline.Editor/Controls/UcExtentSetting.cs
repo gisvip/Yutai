@@ -174,7 +174,8 @@ namespace Yutai.Pipeline.Editor.Controls
         {
             _polygonFeedback = null;
             this.Cursor = Cursors.Default;
-            _graphicsContainer?.DeleteAllElements();
+            if(_graphicsContainer!=null)
+                _graphicsContainer?.DeleteAllElements();
             ((IMapControlEvents2_Event)_context.MapControl).OnKeyDown -= OnOnKeyDown;
             ((IMapControlEvents2_Event)_context.MapControl).OnMouseDown -= OnOnMouseDown;
             ((IMapControlEvents2_Event)_context.MapControl).OnDoubleClick -= OnOnDoubleClick;

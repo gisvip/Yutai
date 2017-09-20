@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using Syncfusion.Windows.Forms.Tools;
+
 
 namespace Yutai.UI.Controls
 {
@@ -11,5 +11,12 @@ namespace Yutai.UI.Controls
         }
 
         public ToolTipInfo ToolTip { get; private set; }
+    }
+
+    public class ToolTipInfo
+    {
+        public string Title { get; set; }
+        public string Text { get; set; }
+        
     }
 }

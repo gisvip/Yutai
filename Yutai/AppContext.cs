@@ -13,7 +13,6 @@ using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.Display;
 using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.SystemUI;
-using Syncfusion.Windows.Forms.Tools;
 using Yutai.ArcGIS.Catalog;
 using Yutai.ArcGIS.Common;
 using Yutai.Controls;

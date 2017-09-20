@@ -373,7 +373,11 @@ namespace Yutai.Controls
         private void axMapControl1_OnMouseUp(object sender, IMapControlEvents2_OnMouseUpEvent e)
         {
             if (e.button == 2)
-                this.contextMenuOverview.Show(this.axMapControl1, new System.Drawing.Point(e.x, e.y));
+            {
+                if(this.axMapControl1.Map.LayerCount>0)
+                    this.contextMenuOverview.Show(this.axMapControl1, new System.Drawing.Point(e.x, e.y));
+               // this.contextMenuOverview.Show();
+            }
         }
 
         public void DrawRectangle(IActiveView pActiveView)

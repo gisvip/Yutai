@@ -5,7 +5,6 @@ using System.Drawing.Text;
 using System.Linq;
 using System.Windows.Forms;
 using ESRI.ArcGIS.Geodatabase;
-using Syncfusion.Windows.Forms.Tools;
 using Yutai.Shared;
 
 namespace Yutai.UI.Helpers
@@ -18,7 +17,7 @@ namespace Yutai.UI.Helpers
             return items.Select(item => new ComboBoxEnumItem<T>(item, EnumHelper.GetToStringFunction<T>()));
         }
 
-        public static void AddItemsFromEnum<T>(this ComboBoxAdv box, IEnumerable<T> items)
+        public static void AddItemsFromEnum<T>(this ComboBox box, IEnumerable<T> items)
             where T : struct, IConvertible
         {
             if (items == null)
@@ -33,7 +32,7 @@ namespace Yutai.UI.Helpers
             }
         }
 
-        public static void AddItemsFromEnum<T>(this ComboBoxAdv box) where T : struct, IConvertible
+        public static void AddItemsFromEnum<T>(this ComboBox box) where T : struct, IConvertible
         {
             var t = new T();
             var items = GetComboItems(Enum.GetValues(t.GetType()).OfType<T>());
@@ -43,7 +42,7 @@ namespace Yutai.UI.Helpers
             }
         }
 
-        public static T GetValue<T>(this ComboBoxAdv box) where T : struct, IConvertible
+        public static T GetValue<T>(this ComboBox box) where T : struct, IConvertible
         {
             if (box.SelectedItem == null)
             {
@@ -58,7 +57,7 @@ namespace Yutai.UI.Helpers
             return item.GetValue();
         }
 
-        public static void SetValue<T>(this ComboBoxAdv box, T value) where T : struct, IConvertible
+        public static void SetValue<T>(this ComboBox box, T value) where T : struct, IConvertible
         {
             foreach (var item in box.Items)
             {
@@ -75,7 +74,7 @@ namespace Yutai.UI.Helpers
             }
         }
 
-        public static bool SetValue(this ComboBoxAdv box, string value)
+        public static bool SetValue(this ComboBox box, string value)
         {
             foreach (var item in box.Items)
             {
@@ -89,7 +88,7 @@ namespace Yutai.UI.Helpers
             return false;
         }
 
-        public static void SetSelectedIndexSafe(this ComboBoxAdv comboBox, int selectedIndex)
+        public static void SetSelectedIndexSafe(this ComboBox comboBox, int selectedIndex)
         {
             if (selectedIndex >= 0 && selectedIndex < comboBox.Items.Count)
             {

@@ -43,15 +43,13 @@
             this.btnNewGDB = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cboShowType = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
-            this.txtName = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            this.cboShowType = new System.Windows.Forms.ComboBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.ColumnHeader_0 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gisDataComboBox1 = new Yutai.UI.Controls.GISDataComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.cboShowType)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtName)).BeginInit();
             this.SuspendLayout();
             // 
             // listView1
@@ -196,25 +194,23 @@
             // cboShowType
             // 
             this.cboShowType.BackColor = System.Drawing.Color.White;
-            this.cboShowType.BeforeTouchSize = new System.Drawing.Size(367, 20);
+           
             this.cboShowType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboShowType.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cboShowType.Location = new System.Drawing.Point(90, 325);
             this.cboShowType.Name = "cboShowType";
             this.cboShowType.Size = new System.Drawing.Size(367, 20);
-            this.cboShowType.Style = Syncfusion.Windows.Forms.VisualStyle.Metro;
+           
             this.cboShowType.TabIndex = 13;
             this.cboShowType.SelectedIndexChanged += new System.EventHandler(this.cboShowType_SelectedIndexChanged);
             // 
             // txtName
             // 
-            this.txtName.BeforeTouchSize = new System.Drawing.Size(365, 21);
+          
             this.txtName.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtName.Location = new System.Drawing.Point(91, 295);
-            this.txtName.Metrocolor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(211)))), ((int)(((byte)(212)))));
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(365, 21);
-            this.txtName.Style = Syncfusion.Windows.Forms.Tools.TextBoxExt.theme.Default;
             this.txtName.TabIndex = 14;
             // 
             // imageList2
@@ -265,8 +261,6 @@
             this.Name = "frmExplorerData";
             this.Text = "frmExplorerData";
             this.Load += new System.EventHandler(this.frmExplorerData_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.cboShowType)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtName)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,8 +282,8 @@
         private System.Windows.Forms.Button btnNewGDB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private Syncfusion.Windows.Forms.Tools.ComboBoxAdv cboShowType;
-        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtName;
+        private System.Windows.Forms.ComboBox cboShowType;
+        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.ImageList imageList2;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.ColumnHeader ColumnHeader_0;

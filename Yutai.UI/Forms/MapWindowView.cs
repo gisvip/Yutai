@@ -8,8 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using Syncfusion.Windows.Forms;
-using Syncfusion.Windows.Forms.Tools;
 using Yutai.Plugins.Mvp;
 using Yutai.Shared;
 using Yutai.UI.Properties;

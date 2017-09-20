@@ -5,14 +5,13 @@ using System.Windows.Forms;
 using System.Xml;
 using DevExpress.XtraBars;
 using ESRI.ArcGIS.SystemUI;
-using Syncfusion.Windows.Forms.Tools;
 using Yutai.Plugins;
 using Yutai.Plugins.Concrete;
 using Yutai.Plugins.Enums;
 using Yutai.Plugins.Interfaces;
 using Yutai.UI.Helpers;
 using ICommandSubType = Yutai.Plugins.Interfaces.ICommandSubType;
-using RibbonTabItem = Syncfusion.Windows.Forms.Tools.RibbonTabItem;
+
 
 namespace Yutai.UI.Menu.Ribbon
 {

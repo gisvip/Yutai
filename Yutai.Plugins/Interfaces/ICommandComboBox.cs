@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DevExpress.XtraBars;
-using Syncfusion.Windows.Forms.Tools;
 
 namespace Yutai.Plugins.Interfaces
 {

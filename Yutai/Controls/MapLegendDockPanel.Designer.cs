@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MapLegendDockPanel));
             this.axTOCControl1 = new ESRI.ArcGIS.Controls.AxTOCControl();
-            this.contextMenuLayer = new Syncfusion.Windows.Forms.Tools.ContextMenuStripEx();
+            this.contextMenuLayer = new System.Windows.Forms.ContextMenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.axTOCControl1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,10 +46,9 @@
             // 
             // contextMenuLayer
             // 
-            this.contextMenuLayer.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(236)))), ((int)(((byte)(249)))));
+          
             this.contextMenuLayer.Name = "contextMenuLayer";
             this.contextMenuLayer.Size = new System.Drawing.Size(61, 4);
-            this.contextMenuLayer.Style = Syncfusion.Windows.Forms.Tools.ContextMenuStripEx.ContextMenuStyle.Default;
             this.contextMenuLayer.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuLayer_Opening);
             // 
             // MapLegendDockPanel
@@ -65,6 +64,6 @@
         #endregion
 
         private ESRI.ArcGIS.Controls.AxTOCControl axTOCControl1;
-        private Syncfusion.Windows.Forms.Tools.ContextMenuStripEx contextMenuLayer;
+        private System.Windows.Forms.ContextMenuStrip contextMenuLayer;
     }
 }

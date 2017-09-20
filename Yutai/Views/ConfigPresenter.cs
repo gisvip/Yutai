@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Syncfusion.Windows.Forms.Tools;
-using Syncfusion.Windows.Forms.Tools.XPMenus;
 using Yutai.Plugins.Concrete;
 using Yutai.Plugins.Enums;
 using Yutai.Plugins.Interfaces;
@@ -54,11 +52,11 @@ namespace Yutai.Views
                     if (MessageService.Current.Ask("Do you want to restore default location of toolbars?"))
                     {
                         var view = _context.Container.Resolve<IMainView>();
-                        var manager = view.MenuManager as MainFrameBarManager;
-                        if (manager != null)
-                        {
-                            manager.RestoreLayout(NewMainView.SerializationKey, true);
-                        }
+                        //var manager = view.MenuManager as MainFrameBarManager;
+                        //if (manager != null)
+                        //{
+                        //    manager.RestoreLayout(NewMainView.SerializationKey, true);
+                        //}
                     }
                     break;
                 case ConfigCommand.RestorePlugins:
@@ -110,8 +108,8 @@ namespace Yutai.Views
 
                 // restoring layout
                 var view = _context.Container.Resolve<IMainView>();
-                var manager = view.DockingManager as DockingManager;
-                manager.RestoreLayout(NewMainView.SerializationKey, true);
+                //var manager = view.DockingManager as DockingManager;
+                //manager.RestoreLayout(NewMainView.SerializationKey, true);
             }
             catch (Exception ex)
             {

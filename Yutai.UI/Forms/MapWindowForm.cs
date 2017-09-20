@@ -13,11 +13,11 @@ using Yutai.UI.Properties;
 
 namespace Yutai.UI.Forms
 {
-#if STYLE2010
-    public partial class MapWindowForm : Office2010Form
-#else
+//#if STYLE2010
+//    public partial class MapWindowForm : Office2010Form
+//#else
     public class MapWindowForm : XtraForm
-#endif
+//#endif
     {
         protected readonly IAppContext _context;
 

@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Syncfusion.Drawing;
-using Syncfusion.Windows.Forms;
 using Yutai.Plugins.Concrete;
 using Yutai.Plugins.Interfaces;
 using Yutai.Shared;
@@ -39,8 +37,8 @@ namespace Yutai.Views
 
         private void InitTreeViewStyle()
         {
-            _treeViewAdv1.SelectedNodeBackground = new BrushInfo(Color.FromKnownColor(KnownColor.Control));
-            _treeViewAdv1.FullRowSelect = true;
+            //_treeViewAdv1.SelectedNodeBackground = new BrushInfo(Color.FromKnownColor(KnownColor.Control));
+            //_treeViewAdv1.FullRowSelect = true;
         }
 
         public bool PreFilterMessage(ref Message m)
@@ -64,16 +62,16 @@ namespace Yutai.Views
 
         public void Initialize()
         {
-            _treeViewAdv1.Initialize(Model);
-            _treeViewAdv1.AfterSelect += (s, e) => DisplaySelectedPage();
+            treeViewAdv1.Initialize(Model);
+            treeViewAdv1.SelectionChanged += (s, e) => DisplaySelectedPage();
 
             if (Model.UseSelectedPage)
             {
-                _treeViewAdv1.SetSelectedPage(Model.SelectedPage);
+                treeViewAdv1.SetSelectedPage(Model.SelectedPage);
             }
             else
             {
-                _treeViewAdv1.RestoreSelectedNode(AppConfig.Instance.LastConfigPage);
+                treeViewAdv1.RestoreSelectedNode(AppConfig.Instance.LastConfigPage);
             }
         }
 
@@ -81,7 +79,7 @@ namespace Yutai.Views
         {
             get
             {
-                var node = _treeViewAdv1.SelectedNode;
+                var node = treeViewAdv1.Selection[0];
                 if (node != null)
                 {
                     return node.Tag as IConfigPage;
@@ -120,7 +118,7 @@ namespace Yutai.Views
 
             Invoke(PageShown);
 
-            _treeViewAdv1.SelectedNode.Expand();
+            treeViewAdv1.Selection[0].Expanded=true;
         }
 
         public ButtonBase OkButton
@@ -130,7 +128,11 @@ namespace Yutai.Views
 
         public IEnumerable<ToolStripItemCollection> ToolStrips
         {
-            get { yield return toolOptions.DropDownItems; }
+            get
+            {
+                yield return null;
+                //yield return toolOptions.DropDownItems; 
+            }
         }
 
         public IEnumerable<Control> Buttons

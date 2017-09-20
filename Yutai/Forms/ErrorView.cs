@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Syncfusion.Windows.Forms.Tools;
 using Yutai.Plugins.Services;
 using Yutai.Shared;
 
@@ -23,9 +22,9 @@ namespace Yutai.Forms
 
             _exception = ex;
 
-            treeViewAdv1.HScroll = false;
-            treeViewAdv1.AutoScrolling = ScrollBars.Vertical;
-            treeViewAdv1.HideSelection = false;
+            //treeView1.Scrollable  = false;
+           // treeView1.AutoScrolling = ScrollBars.Vertical;
+            treeView1.HideSelection = false;
 
             ShowMessage(needClose);
 
@@ -36,27 +35,28 @@ namespace Yutai.Forms
         {
             if (ex == null)
             {
-                textBoxExt1.Text = @"No information about the error was provided.";
+                textBox1.Text = @"No information about the error was provided.";
                 return;
             }
 
-            var node = new TreeNodeAdv {Text = @"Details", Expanded = true};
+            TreeNode node = new TreeNode {Text = @"Details"};
 
-            treeViewAdv1.Nodes.Add(node);
+            treeView1.Nodes.Add(node);
+            node.Expand();
 
             AddExceptionNodesToTree(ex, node);
 
             if (node.Nodes.Count > 0)
             {
-                treeViewAdv1.SelectedNode = node.Nodes[0];
+                treeView1.SelectedNode = node.Nodes[0];
             }
         }
 
-        private void AddExceptionNodesToTree(Exception ex, TreeNodeAdv parent)
+        private void AddExceptionNodesToTree(Exception ex, TreeNode parent)
         {
-            var node = new TreeNodeAdv {Text = ex.Message, MultiLine = true, Tag = ex, Expanded = true};
-
+            TreeNode node = new TreeNode {Text = ex.Message};
             parent.Nodes.Add(node);
+            node.Expand();
 
             if (ex.InnerException != null)
             {
@@ -64,15 +64,15 @@ namespace Yutai.Forms
             }
         }
 
-        private void OntreeViewAdvAfterSelect(object sender, EventArgs e)
+        private void OntreeViewAfterSelect(object sender, EventArgs e)
         {
-            var node = treeViewAdv1.SelectedNode;
+            var node = treeView1.SelectedNode;
             if (node != null)
             {
                 var ex = node.Tag as Exception;
                 if (ex != null)
                 {
-                    textBoxExt1.Text = ex.StackTrace;
+                    textBox1.Text = ex.StackTrace;
                 }
             }
         }
@@ -120,6 +120,19 @@ namespace Yutai.Forms
             catch (Exception ex)
             {
                 MessageService.Current.Info("Sorry, failed to do this either.");
+            }
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            var node = e.Node;
+            if (node != null)
+            {
+                var ex = node.Tag as Exception;
+                if (ex != null)
+                {
+                    textBox1.Text = ex.StackTrace;
+                }
             }
         }
     }
