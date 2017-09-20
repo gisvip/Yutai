@@ -217,9 +217,8 @@
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Yutai.Plugins\Yutai.Plugins.csproj">
-      <Project>{800F2EE4-47AB-4CD4-934D-A64980D98A23}</Project>
+      <Project>{800f2ee4-47ab-4cd4-934d-a64980d98a23}</Project>
       <Name>Yutai.Plugins</Name>
-      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Yutai.Shared\Yutai.Shared.csproj">
       <Project>{4A9B3243-2B0A-4E87-9B23-71A58C1F318D}</Project>

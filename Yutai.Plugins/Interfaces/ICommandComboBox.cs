@@ -21,5 +21,6 @@ namespace Yutai.Plugins.Interfaces
         BarEditItem LinkComboBox { get; set; }
 
         bool DropDownList { get; }
+        int Width { get; set; }
     }
 }

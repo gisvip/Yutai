@@ -710,7 +710,7 @@ namespace Yutai.UI.Menu.Ribbon
             {
                 Name = item.Key,
                 Caption = item.Caption,
-                Width = 230
+                Width = comboSetting.Width
             };
 
             RepositoryItemComboBox cmbEdit = new RepositoryItemComboBox()

@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ESRI.ArcGIS.Catalog;
-using ESRI.ArcGIS.CatalogUI;
 using ESRI.ArcGIS.Geodatabase;
 using Yutai.Plugins.Concrete;
 using Yutai.Plugins.Enums;

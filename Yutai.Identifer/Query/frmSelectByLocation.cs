@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using ESRI.ArcGIS.Carto;
-using Syncfusion.Windows.Forms;
 using Yutai.Plugins.Interfaces;
 
 namespace Yutai.Plugins.Identifer.Query
 {
-    public partial class frmSelectByLocation : MetroForm
+    public partial class frmSelectByLocation : XtraForm
     {
         private UcSelectByLocation _ucSelectByLocation = new UcSelectByLocation();
 

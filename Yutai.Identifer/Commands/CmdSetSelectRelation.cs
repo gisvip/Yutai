@@ -8,7 +8,6 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Controls;
-using Syncfusion.Windows.Forms.Tools;
 using Yutai.Plugins.Concrete;
 using Yutai.Plugins.Enums;
 using Yutai.Plugins.Identifer.Query;
@@ -25,6 +24,7 @@ namespace Yutai.Plugins.Identifer.Commands
         private string _selectedText;
         private object[] _items;
         private BarEditItem _linkCombo;
+        private int _width;
 
         public CmdSetSelectRelation(IAppContext context, BasePlugin plugin)
         {
@@ -52,6 +52,12 @@ namespace Yutai.Plugins.Identifer.Commands
             get { return true; }
         }
 
+        public int Width
+        {
+            get { return _width; }
+            set { _width = value; }
+        }
+
         public override void OnCreate(object hook)
         {
             _context = hook as IAppContext;
@@ -66,6 +72,7 @@ namespace Yutai.Plugins.Identifer.Commands
             base._itemType = RibbonItemType.ComboBox;
             _layoutType = 0;
             _showCaption = true;
+            _width = 230;
         }
 
 

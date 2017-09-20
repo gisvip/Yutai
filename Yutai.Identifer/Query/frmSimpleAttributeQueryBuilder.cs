@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
-using Syncfusion.Windows.Forms;
 
 namespace Yutai.Plugins.Identifer.Query
 {
-    public partial class frmSimpleAttributeQueryBuilder : MetroForm
+    public partial class frmSimpleAttributeQueryBuilder : XtraForm
     {
         private string _whereCaluse = "";
 

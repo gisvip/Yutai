@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using ESRI.ArcGIS.Analyst3D;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
-using Syncfusion.Windows.Forms.Tools;
 using Yutai.Plugins.Identifer.Common;
 using Yutai.Shared;
 

@@ -27,6 +27,7 @@ namespace Yutai.Plugins.Editor.Commands.Topology
         private string _selectedText;
         private BarEditItem _linkComboBox;
         private bool _dropDownList;
+        private int _width;
         internal static ITopologyGraph m_TopologyGraph;
         internal static ITopology m_Topology;
         internal static ITopologyLayer m_TopologyLayer;
@@ -85,6 +86,7 @@ namespace Yutai.Plugins.Editor.Commands.Topology
             _showCaption = true;
             _dropDownList = true;
             _layoutType = 0;
+            _width = 230;
         }
 
         public override bool Enabled
@@ -243,6 +245,12 @@ namespace Yutai.Plugins.Editor.Commands.Topology
         public bool DropDownList
         {
             get { return _dropDownList; }
+        }
+
+        public int Width
+        {
+            get { return _width; }
+            set { _width = value; }
         }
     }
 }
