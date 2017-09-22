@@ -19,6 +19,12 @@
           <!--<BarItem Key="File_Document_SaveProject" Visible="true"></BarItem>
           <BarItem Key="File_Common_CloseProject" Visible="true"></BarItem>-->
        </PageGroup>
+        <PageGroup Key="File_Security" Caption="配置" Visible="true" Index="0">
+          <BarItem Key="Security_UserManageCommand" Visible="true"></BarItem>
+          <BarItem Key="Security_RoleManageCommand" Visible="true"></BarItem>
+          <BarItem Key="Setting_OpenSetting" Visible="true"></BarItem>
+          
+        </PageGroup>
            <!--<PageGroup Key="File_Common" Caption="常用" Visible="true" Index="0">
           <BarItem Key="File_Print" Visible="true"></BarItem>
           <BarItem Key="File_PrintPageSetup" Visible="true"></BarItem>

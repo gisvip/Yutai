@@ -163,6 +163,14 @@
     <Compile Include="Commands\MapLegend\CmdSwitchSelectedFeature.cs" />
     <Compile Include="Commands\MapLegend\CmdZoomToLayer.cs" />
     <Compile Include="Commands\MapLegend\CmdZoomToSelectFeatures.cs" />
+    <Compile Include="Commands\Security\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Commands\Security\frmLogin.designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\Security\CmdRoleManage.cs" />
+    <Compile Include="Commands\Security\CmdUserManage.cs" />
     <Compile Include="Commands\Settings\CmdOpenSetting.cs" />
     <Compile Include="Commands\Views\CmdDisplayCoordinates.cs" />
     <Compile Include="Commands\Views\CmdStartMapFrameProps.cs" />
@@ -259,6 +267,9 @@
     <Compile Include="Views\NewMainView.Designer.cs">
       <DependentUpon>NewMainView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Commands\Security\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Configuration\GeneralConfigPage.resx">
       <DependentUpon>GeneralConfigPage.cs</DependentUpon>
     </EmbeddedResource>
@@ -692,6 +703,8 @@
     <None Include="Resources\icon_preview.png" />
     <None Include="Resources\icon_print.png" />
     <None Include="Resources\icon_view_swipe.png" />
+    <None Include="Resources\icon_role.png" />
+    <None Include="Resources\icon_user.png" />
     <Content Include="Resources\icon_zoom_in_fixed.bmp" />
     <Content Include="Resources\icon_zoom_out_fixed.bmp" />
     <None Include="Resources\save_16.png" />

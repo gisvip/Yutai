@@ -458,6 +458,7 @@ namespace Yutai
         #region 事件处理
 
         private IActiveViewEvents_Event iactiveViewEvents_Event_0 = null;
+        private string _userId;
 
 
         public event MapReplacedHandler MapReplaced;
@@ -562,6 +563,12 @@ namespace Yutai
         public void DockWindows(object object_0, Bitmap bitmap_0)
         {
             //
+        }
+
+        public string UserID
+        {
+            get { return _userId; }
+            set { _userId = value; }
         }
 
         //public event OnProjectChangedHandler OnProjectChanged;

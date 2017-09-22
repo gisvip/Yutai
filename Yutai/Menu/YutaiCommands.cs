@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Yutai.Commands.Data;
 using Yutai.Commands.Document;
+using Yutai.Commands.Security;
 using Yutai.Commands.Settings;
 using Yutai.Commands.Views;
 using Yutai.Commands.Windows;
@@ -129,6 +130,9 @@ namespace Yutai.Menu
 
                     new CmdSwipeTool(_context),
                     new CmdViewSwipe(_context),
+
+                    new CmdUserManage(_context),
+                    new CmdRoleManage(_context),
                 };
                 _commandKeys = new List<string>();
                 foreach (var command in _commands)
