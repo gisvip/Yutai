@@ -33,8 +33,9 @@ namespace Yutai.Commands.Security
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Image = global::Yutai.Properties.Resources.background_login;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(709, 358);
@@ -92,6 +93,10 @@ namespace Yutai.Commands.Security
             // 
             // frmLogin
             // 
+            this.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.Appearance.ForeColor = System.Drawing.Color.Transparent;
+            this.Appearance.Options.UseBackColor = true;
+            this.Appearance.Options.UseForeColor = true;
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 15);
             this.ClientSize = new System.Drawing.Size(709, 358);
             this.Controls.Add(this.btnCancel);
