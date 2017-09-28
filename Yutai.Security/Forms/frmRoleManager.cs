@@ -30,7 +30,7 @@ namespace Yutai.Security.Forms
             foreach (ORGRole oRGRole in oRGRoles)
             {
                 roleName[0] = oRGRole.RoleName;
-                roleName[1] = "";
+                roleName[1] = oRGRole.DESCRIPT;
                 ListViewItem listViewItem = new ListViewItem(roleName)
                 {
                     Tag = oRGRole
