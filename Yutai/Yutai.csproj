@@ -335,7 +335,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Yutai.Api\Yutai.Api.csproj">
@@ -373,6 +375,10 @@
     <ProjectReference Include="..\Yutai.Printing\Yutai.Printing.csproj">
       <Project>{5E933989-B5A4-4A45-A5B7-2D9DED61DF0F}</Project>
       <Name>Yutai.Printing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Yutai.Security\Yutai.Security.csproj">
+      <Project>{37D7539A-FC5D-49A3-9458-711C80FBDA94}</Project>
+      <Name>Yutai.Security</Name>
     </ProjectReference>
     <ProjectReference Include="..\Yutai.Services\Yutai.Services.csproj">
       <Project>{e95b46f1-a8d7-41d8-9f5a-b57bd748a62b}</Project>
@@ -650,6 +656,9 @@
     <EmbeddedResource Include="Resource\Cursor\ZoomOut.cur" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Yutai.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\NewIcons\logo.png" />
     <None Include="Resources\NewIcons\icon_scale_small.png" />
     <None Include="Resources\NewIcons\icon_coordinates.png" />

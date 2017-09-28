@@ -7,6 +7,7 @@ using Yutai.Commands.Security;
 using Yutai.Plugins.Concrete;
 using Yutai.Plugins.Enums;
 using Yutai.Plugins.Interfaces;
+using Yutai.Security.Forms;
 
 namespace Yutai.Commands.Security
 {
@@ -20,7 +21,7 @@ namespace Yutai.Commands.Security
         public override void OnCreate(object context)
         {
             _context = context as IAppContext;
-            this.m_caption = "角色管理";
+            this.m_caption = "用户管理";
             base.m_category = "Security";
             base.m_bitmap = Properties.Resources.icon_user;
             base.m_name = "Security_UserManageCommand";
@@ -35,21 +36,21 @@ namespace Yutai.Commands.Security
 
         public override void OnClick()
 		{
-			//if (AppConfigInfo.UserID == "admin")
-			//{
-			//	frmUserManage frmUserManage = new frmUserManage();
-			//	frmUserManage.ShowDialog();
-			//}
-			//else
-			//{
-			//	frmLogin frmLogin = new frmLogin();
-			//	if (frmLogin.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-			//	{
-			//		frmUserManage frmUserManage = new frmUserManage();
-			//		frmUserManage.ShowDialog();
-			//	}
-			//}
-		}
+            if (_context.UserID == "admin")
+            {
+                frmUserManage frmUserManage = new frmUserManage();
+                frmUserManage.ShowDialog();
+            }
+            else
+            {
+                frmLogin frmLogin = new frmLogin(_context);
+                if (frmLogin.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    frmUserManage frmUserManage = new frmUserManage();
+                    frmUserManage.ShowDialog();
+                }
+            }
+        }
 
         public override void OnClick(object sender, EventArgs args)
         {

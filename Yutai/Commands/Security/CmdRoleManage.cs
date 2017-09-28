@@ -1,8 +1,10 @@
 using System;
 using System.Windows.Forms;
+using Yutai.ArcGIS.Common.BaseClasses;
 using Yutai.Plugins.Concrete;
 using Yutai.Plugins.Enums;
 using Yutai.Plugins.Interfaces;
+using Yutai.Security.Forms;
 
 namespace Yutai.Commands.Security
 {
@@ -32,21 +34,21 @@ namespace Yutai.Commands.Security
 
 		public override void OnClick()
 		{
-			//if (_context.UserID == "admin")
-			//{
-			//	frmRoleManager frmRoleManager = new frmRoleManager();
-			//	frmRoleManager.ShowDialog();
-			//}
-			//else
-			//{
-			//	frmLogin frmLogin = new frmLogin();
-			//	if (frmLogin.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-			//	{
-			//		frmRoleManager frmRoleManager = new frmRoleManager();
-			//		frmRoleManager.ShowDialog();
-			//	}
-			//}
-		}
+            if (_context.UserID == "admin")
+            {
+                frmRoleManager frmRoleManager = new frmRoleManager();
+                frmRoleManager.ShowDialog();
+            }
+            else
+            {
+                frmLogin frmLogin = new frmLogin(_context);
+                if (frmLogin.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    frmRoleManager frmRoleManager = new frmRoleManager();
+                    frmRoleManager.ShowDialog();
+                }
+            }
+        }
 
 	    public override void OnClick(object sender, EventArgs args)
 	    {
