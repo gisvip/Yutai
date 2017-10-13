@@ -53,8 +53,11 @@ namespace Yutai.Commands.Security
             // 
             this.txtPassword.Location = new System.Drawing.Point(437, 198);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Properties.PasswordChar = '*';
+            this.txtPassword.Properties.UseSystemPasswordChar = true;
             this.txtPassword.Size = new System.Drawing.Size(239, 20);
             this.txtPassword.TabIndex = 14;
+            this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyDown);
             // 
             // btnOK
             // 
@@ -90,6 +93,7 @@ namespace Yutai.Commands.Security
             this.btnCancel.TabIndex = 16;
             this.btnCancel.Text = "取 消";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // frmLogin
             // 

@@ -13,9 +13,9 @@ using ESRI.ArcGIS.CatalogUI;
 using ESRI.ArcGIS.Geodatabase;
 using Yutai.ArcGIS.Catalog;
 using Yutai.ArcGIS.Catalog.UI;
-using Yutai.Pipeline.Analysis.Class3D;
 using Yutai.Pipeline.Config.Concretes;
 using Yutai.Pipeline.Config.Interfaces;
+using Yutai.Pipeline3D;
 using Yutai.Plugins.Interfaces;
 using Yutai.Plugins.Services;
 using Cursor = System.Windows.Forms.Cursor;
@@ -30,6 +30,7 @@ namespace Yutai.Pipeline.Analysis.Forms
         private bool _isBasic;
         private int _parentID = -1;
         private int _subID = -1;
+
         public frm3DBuilder(IAppContext context, IPipelineConfig config)
         {
             this.InitializeComponent();
@@ -40,7 +41,7 @@ namespace Yutai.Pipeline.Analysis.Forms
 
         private void BuildDataTable()
         {
-            _sourceTable=new DataTable();
+            _sourceTable = new DataTable();
             DataColumn KeyID = new DataColumn("KeyFieldID", Type.GetType("System.Int32"));
             DataColumn ParentID = new DataColumn("ParentID", Type.GetType("System.Int32"));
             DataColumn Selected = new DataColumn("Selected", Type.GetType("System.Boolean"));
@@ -48,16 +49,16 @@ namespace Yutai.Pipeline.Analysis.Forms
             DataColumn SubID = new DataColumn("SubID", Type.GetType("System.Int32"));
             NodeName.Caption = "图层名称";
             _sourceTable.Columns.Add(KeyID);
-            KeyID.SetOrdinal(0);//设置为第一列
+            KeyID.SetOrdinal(0); //设置为第一列
             _sourceTable.Columns.Add(ParentID);
-            ParentID.SetOrdinal(1);//设置为第二列
+            ParentID.SetOrdinal(1); //设置为第二列
             _sourceTable.Columns.Add(Selected);
-            Selected.SetOrdinal(2);//设置为第二列
+            Selected.SetOrdinal(2); //设置为第二列
             NodeName.ReadOnly = true;
             _sourceTable.Columns.Add(NodeName);
-            NodeName.SetOrdinal(3);//设置为第三列
+            NodeName.SetOrdinal(3); //设置为第三列
             _sourceTable.Columns.Add(SubID);
-            SubID.SetOrdinal(4);//设置为第三列
+            SubID.SetOrdinal(4); //设置为第三列
             treeList1.DataSource = _sourceTable;
             treeList1.ExpandAll();
             treeList1.RefreshDataSource();
@@ -77,7 +78,7 @@ namespace Yutai.Pipeline.Analysis.Forms
 
             int parentCount = _config.Layers.Count;
             int startIndex = 0;
-            
+
             for (int i = 0; i < _config.Layers.Count; i++)
             {
                 startIndex = i + 1;
@@ -102,11 +103,11 @@ namespace Yutai.Pipeline.Analysis.Forms
                     row["LayerName"] = layer.Layers[j].Name;
                     _sourceTable.Rows.Add(row);
                 }
-               
+
             }
             treeList1.ExpandAll();
             treeList1.RefreshDataSource();
-           
+
         }
 
         private void treeList1_BeforeCheckNode(object sender, DevExpress.XtraTreeList.CheckNodeEventArgs e)
@@ -128,7 +129,7 @@ namespace Yutai.Pipeline.Analysis.Forms
                 CheckState state;
                 for (int i = 0; i < eNode.ParentNode.Nodes.Count; i++)
                 {
-                    state = (CheckState) eNode.ParentNode.Nodes[i].CheckState;
+                    state = (CheckState)eNode.ParentNode.Nodes[i].CheckState;
                     if (!nodeCheckState.Equals(state))
                     {
                         b = !b;
@@ -152,7 +153,7 @@ namespace Yutai.Pipeline.Analysis.Forms
         private void treeList1_FocusedNodeChanged(object sender, DevExpress.XtraTreeList.FocusedNodeChangedEventArgs e)
         {
             TreeListNode node = e.Node;
-            if (node.Level == 0)
+            if (node == null || node.Level == 0)
             {
                 _isBasic = false;
                 return;
@@ -161,17 +162,17 @@ namespace Yutai.Pipeline.Analysis.Forms
             _parentID = Convert.ToInt32(node["ParentID"]);
             _subID = Convert.ToInt32(node["SubID"]);
             IBasicLayerInfo layer = _config.Layers[_parentID].Layers[_subID];
-            cmbDepthType.SelectedIndex = (int) layer.DepthType;
-            cmbHeightType.SelectedIndex = (int) layer.HeightType;
-            cmbSectionType.SelectedIndex = (int) layer.SectionType;
+            cmbDepthType.SelectedIndex = (int)layer.DepthType;
+            cmbHeightType.SelectedIndex = (int)layer.HeightType;
+            cmbSectionType.SelectedIndex = (int)layer.SectionType;
         }
 
         private void cmbHeightType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_isBasic == false) return;
-          
+
             IBasicLayerInfo layer = _config.Layers[_parentID].Layers[_subID];
-            layer.HeightType = (enumPipelineHeightType) cmbHeightType.SelectedIndex;
+            layer.HeightType = (enumPipelineHeightType)cmbHeightType.SelectedIndex;
         }
 
         private void cmbSectionType_SelectedIndexChanged(object sender, EventArgs e)
@@ -207,7 +208,7 @@ namespace Yutai.Pipeline.Analysis.Forms
                 Cursor.Current = Cursors.WaitCursor;
                 this.txtSaveAt.Text = _frmOpenFile.SelectedItems[0].ToString();
                 this.txtSaveAt.Tag =
-                    ((IGxObject) _frmOpenFile.SelectedItems[0]).InternalObjectName.Open() as IWorkspace;
+                    ((IGxObject)_frmOpenFile.SelectedItems[0]).InternalObjectName.Open() as IWorkspace;
                 Cursor.Current = Cursors.Default;
             }
 
@@ -240,38 +241,36 @@ namespace Yutai.Pipeline.Analysis.Forms
             //        _saveType = EnumSaveType.Dataset;
             //    }
             //    txtPath.Text = gxObject.FullName;
-        
+
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            Pipeline3DBuilderProperty property=new Pipeline3DBuilderProperty();
+            Pipeline3DBuilderProperty property = new Pipeline3DBuilderProperty();
             property.Division = Convert.ToInt32(cmbDivision.Text);
             property.IsExtentOnly = chkExtent.Checked;
             property.Envelope = _context.ActiveView.Extent;
             property.NameSuf = txtNameSuf.Text.Trim();
-            property.SaveType=(enumMultiSaveType)comboBox1.SelectedIndex;
-            property.DefaultDepthType = (enumPipelineDepthType) cmbDefaultDepthType.SelectedIndex;
-            property.DefaultSectionType = (enumPipeSectionType) cmbDefaultSectionType.SelectedIndex;
+            property.SaveType = (enumMultiSaveType)comboBox1.SelectedIndex;
+            property.DefaultDepthType = (enumPipelineDepthType)cmbDefaultDepthType.SelectedIndex;
+            property.DefaultSectionType = (enumPipeSectionType)cmbDefaultSectionType.SelectedIndex;
             property.IsCreateJXJ = chkJXJ.Checked;
             property.IsCreateLJD = chkLJD.Checked;
             property.SaveWorkspace = txtSaveAt.Tag as IWorkspace;
-
-            List<IPipelineLayer> pipelineLayers=new List<IPipelineLayer>();
+            
             //! 开始遍历选择的对象
             for (int i = 0; i < treeList1.Nodes.Count; i++)
             {
                 TreeListNode pipelineNode = treeList1.Nodes[i];
                 if (pipelineNode.Checked == false) continue;
                 int startIndex = Convert.ToInt32(pipelineNode["KeyFieldID"]);
-                IPipelineLayer layer=new PipelineLayer(_config.Layers[startIndex],true);
-                for (int j =  layer.Layers.Count-1;i>=0; j--)
+                IPipelineLayer layer = new PipelineLayer(_config.Layers[startIndex - 1], true);
+                for (int j = layer.Layers.Count - 1; j >= 0; j--)
                 {
-                    IBasicLayerInfo basicLayer = layer.Layers[j];
                     bool bFind = false;
                     for (int k = 0; k < pipelineNode.Nodes.Count; k++)
                     {
-                        int subID= Convert.ToInt32(pipelineNode.Nodes[k]["SubID"]);
+                        int subID = Convert.ToInt32(pipelineNode.Nodes[k]["SubID"]);
                         if (subID == j)
                         {
                             bFind = true;
@@ -282,19 +281,29 @@ namespace Yutai.Pipeline.Analysis.Forms
                             }
                         }
                     }
-                    if(bFind==false) layer.Layers.RemoveAt(j);
+                    if (bFind == false) layer.Layers.RemoveAt(j);
                 }
-                pipelineLayers.Add(layer);
-            }
-
-            Pipeline3DBuilder builder = new Pipeline3DBuilder();
-            builder.BuildProperty = property;
-            for (int i = 0; i < pipelineLayers.Count; i++)
-            {
-                builder.PipelineLayer = pipelineLayers[i];
-                builder.Build();
+                property.BuilderItems.Add(new Pipeline3DBuilderItem(property, layer));
             }
             
+            //Pipeline3DBuilder builder = new Pipeline3DBuilder();
+            //builder.BuildProperty = property;
+            //for (int i = 0; i < pipelineLayers.Count; i++)
+            //{
+            //    builder.PipelineLayer = pipelineLayers[i];
+            //    builder.Build();
+            //}
+            try
+            {
+                Pipeline3DBuilder builder = new Pipeline3DBuilder();
+                builder.BuilderPropertie = property;
+                builder.Build();
+                MessageBox.Show(@"执行完成！");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
     }
 }

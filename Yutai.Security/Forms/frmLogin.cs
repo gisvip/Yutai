@@ -1,17 +1,11 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
 using Yutai.Plugins.Interfaces;
 using Yutai.Plugins.Mvp;
-using Yutai.Security;
 
-namespace Yutai.Commands.Security
+namespace Yutai.Security.Forms
 {
-    public partial class frmLogin : XtraForm
+    public partial class frmLogin : System.Windows.Forms.Form
     {
         private IAppContext _context;
         private IList ilist_0;
@@ -53,19 +47,6 @@ namespace Yutai.Commands.Security
                     System.Windows.Forms.MessageBox.Show("密码错误!");
                 }
             }
-        }
-
-        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnOK_Click(null, null);
-            }
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ESRI.ArcGIS;
 using ESRI.ArcGIS.esriSystem;
+using Yutai.Commands.Security;
 using Yutai.DI.Castle;
 using Yutai.Forms;
 using Yutai.Plugins.Mvp;
 using Yutai.Plugins.Services;
+using Yutai.Security;
 using Yutai.Services.Concrete;
 using Yutai.Shared;
 using Yutai.Views;
@@ -92,7 +94,16 @@ namespace Yutai
 
             var container = CreateContainer();
             CompositionRoot.Compose(container);
-
+            if (ORGStaffHelper.IsValide())
+            {
+                frmLogin frmLogin = new frmLogin(container);
+                SplashView.Instance.Visible = false;
+                if (frmLogin.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                {
+                    return;
+                }
+            }
+            SplashView.Instance.Visible = true;
             SplashView.Instance.ShowStatus("引导配置...");
             LoadConfig(container);
 

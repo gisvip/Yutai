@@ -214,8 +214,8 @@
             <Field TypeName="GJ" Name="管径" AliasName="管径" Length="15" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="QDBH" Name="起点编号" AliasName="起点编号" Length="12" AllowNull="False" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="ZDBH" Name="终点编号" AliasName="终点编号" Length="12" AllowNull="False" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
-            <Field TypeName="QDMS" Name="S_Deep" AliasName="起点埋深" Length="8" AllowNull="True" FieldType="字符串" Precision="2" DomainValues="" Visible="True" />
-            <Field TypeName="ZDMS" Name="E_Deep" AliasName="终点埋深" Length="8" AllowNull="True" FieldType="字符串" Precision="2" DomainValues="" Visible="True" />
+            <Field TypeName="QDMS" Name="新起点埋深" AliasName="新起点埋深" Length="8" AllowNull="True" FieldType="字符串" Precision="2" DomainValues="" Visible="True" />
+            <Field TypeName="ZDMS" Name="新终点埋深" AliasName="新终点埋深" Length="8" AllowNull="True" FieldType="字符串" Precision="2" DomainValues="" Visible="True" />
             <Field TypeName="QDGC" Name="起点高程" AliasName="起点高程" Length="8" AllowNull="True" FieldType="字符串" Precision="2" DomainValues="" Visible="True" />
             <Field TypeName="ZDGC" Name="终点高程" AliasName="终点高程" Length="8" AllowNull="True" FieldType="字符串" Precision="2" DomainValues="" Visible="True" />
             <Field TypeName="GXCZ" Name="材质" AliasName="材质" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
