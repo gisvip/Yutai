@@ -97,7 +97,7 @@ namespace Yutai.Pipeline.Analysis.Class3D
                 //开始获取特殊字段索引
                 int heightIndex = pCursor.FindField(basicLayer.GetFieldName(PipeConfigWordHelper.PointWords.DMGC));
                 int depthIndex = pCursor.FindField(basicLayer.GetFieldName(PipeConfigWordHelper.PointWords.JDSD));
-                int angleIndex = pCursor.FindField(basicLayer.GetFieldName(PipeConfigWordHelper.PointWords.XZJD));
+                int angleIndex = pCursor.FindField(basicLayer.GetFieldName(PipeConfigWordHelper.PointWords.FHJD));
                 int standardIndex = pCursor.FindField(basicLayer.GetFieldName(PipeConfigWordHelper.PointWords.JGGG));
 
                 //! 如果存在井底埋深，则进行竖直管线生成，包括窖井，雨水篦子等，如果没有井底深度，则只生成球体

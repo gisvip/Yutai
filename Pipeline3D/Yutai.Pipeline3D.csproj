@@ -99,6 +99,7 @@
     <Compile Include="PipeElevHelper.cs" />
     <Compile Include="PipeFieldType.cs" />
     <Compile Include="Pipeline3DBuilder.cs" />
+    <Compile Include="Pipeline3DBuilderProperty.cs" />
     <Compile Include="PipeSpecialFieldInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -123,6 +124,12 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Yutai.Pipeline.Config\Yutai.Pipeline.Config.csproj">
+      <Project>{0aa42995-a1ce-49fd-bb98-f94eed2d7289}</Project>
+      <Name>Yutai.Pipeline.Config</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

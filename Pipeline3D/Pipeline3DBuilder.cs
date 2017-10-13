@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
@@ -12,51 +13,31 @@ namespace Yutai.Pipeline3D
     public class Pipeline3DBuilder
     {
         private ISpatialReference _defaultReference;
-        private List<PipeClassInfo> _pipeClasses;
-        private List<IFeatureClass> _patchClasses;
-        public Pipeline3DBuilder()
+        private Pipeline3DBuilderProperty _builderPropertie;
+
+        public Pipeline3DBuilderProperty BuilderPropertie
         {
-            _pipeClasses = new List<PipeClassInfo>();
-            _patchClasses = new List<IFeatureClass>();
-        }
-        public void AddPipeClass(PipeClassInfo pipeClassInfo)
-        {
-            _pipeClasses.Add(pipeClassInfo);
-        }
-        public void AddPipeClasses(List<PipeClassInfo> pipeClassInfos)
-        {
-            _pipeClasses.AddRange(pipeClassInfos);
+            get { return _builderPropertie; }
+            set { _builderPropertie = value; }
         }
 
-
-        public void AddPipeClass(IFeatureClass pipeClass, PipeElevationType elevationType,
-            string groundElevationFieldName0, string underGroundElevationFieldName0, string groundElevationFieldName1, string underGroundElevationFieldName1, string standFieldName,
-            string materialFieldName, string justPointTypeFieldName)
+        public bool Build()
         {
-            _pipeClasses.Add(new PipeClassInfo(pipeClass, elevationType, groundElevationFieldName0, underGroundElevationFieldName0, groundElevationFieldName1, underGroundElevationFieldName1, standFieldName, materialFieldName, justPointTypeFieldName));
-        }
-
-        public List<IFeatureClass> PatchClasses
-        {
-            get { return _patchClasses; }
-        }
-
-        public bool Build(IWorkspace outWorkspace, string suffixName = "_3D")
-        {
-            if (_pipeClasses.Count == 0) return false;
-            foreach (PipeClassInfo pipeClass in _pipeClasses)
+            if (_builderPropertie == null || _builderPropertie.BuilderItems.Count == 0) return false;
+            foreach (Pipeline3DBuilderItem builderItem in _builderPropertie.BuilderItems)
             {
-                //创建对应的MultiPatch要素类
-                IFeatureClass oneClass = CreatePatchClass((IWorkspace2)outWorkspace, null, pipeClass.PipeClass, suffixName);
-                ImportPipeClassToPatch(outWorkspace, pipeClass, oneClass);
+                ImportPipeClassToPointPatch(_builderPropertie.SaveWorkspace, builderItem);
+                ImportPipeClassToLinePatch(_builderPropertie.SaveWorkspace, builderItem);
             }
             return true;
         }
 
-        private void ImportPipeClassToPatch(IWorkspace outWorkspace, PipeClassInfo pipeInfo, IFeatureClass patchClass, IGeometry boundary = null)
+        private void ImportPipeClassToPointPatch(IWorkspace outWorkspace, Pipeline3DBuilderItem builderItem, IGeometry boundary = null)
         {
             try
             {
+                if (builderItem.PointLayerInfo == null)
+                    return;
                 IWorkspaceEdit workspaceEdit = outWorkspace as IWorkspaceEdit;
                 workspaceEdit.StartEditing(false);
                 workspaceEdit.StartEditOperation();
@@ -64,17 +45,19 @@ namespace Yutai.Pipeline3D
                 IFeatureCursor pCursor = null;
                 if (boundary == null || boundary.IsEmpty == true)
                 {
-                    pCursor = pipeInfo.PipeClass.Search(null, false);
+                    pCursor = builderItem.PointLayerInfo.FeatureClass.Search(null, false);
                 }
                 else
                 {
                     ISpatialFilter pFilter = new SpatialFilterClass();
                     pFilter.Geometry = boundary;
                     pFilter.SpatialRel = esriSpatialRelEnum.esriSpatialRelIntersects;
-                    pCursor = pipeInfo.PipeClass.Search((IQueryFilter)pFilter, false);
+                    pCursor = builderItem.PointLayerInfo.FeatureClass.Search((IQueryFilter)pFilter, false);
                 }
                 IFeature sFeature = null;
-                int linkOIDIdx = patchClass.FindField("LinkOID");
+                IFeatureCursor insertCursor = builderItem.PointPatchClass.Insert(true);
+                IFeatureBuffer featureBuffer;
+                int count = 0;
                 while ((sFeature = pCursor.NextFeature()) != null)
                 {
                     try
@@ -82,26 +65,82 @@ namespace Yutai.Pipeline3D
                         //开始读取原始数据
                         IGeometry pShape = sFeature.Shape;
                         if (pShape.IsEmpty) continue;
-                        if (pipeInfo.ClassType == PipeClassType.Point)
+                        IGeometry patchGeometry = CreatePointPatch(sFeature, builderItem);
+                        featureBuffer = builderItem.PointPatchClass.CreateFeatureBuffer();
+                        featureBuffer.Shape = patchGeometry;
+                        featureBuffer.Value[builderItem.IdxPointLinkOidField] = sFeature.OID;
+
+                        insertCursor.InsertFeature(featureBuffer);
+                        count++;
+                        if (count >= 500)
                         {
-                            IGeometry patch = CreatePointPatch(sFeature, pipeInfo);
-                            IFeature newFeature = patchClass.CreateFeature();
-                            newFeature.Shape = patch;
-                            newFeature.Value[linkOIDIdx] = sFeature.OID;
-                            newFeature.Store();
+                            insertCursor.Flush();
+                            count = 0;
                         }
-                        else if (pipeInfo.ClassType == PipeClassType.Line)
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception(string.Format("OBJECTID:{0}\r\n{1}", sFeature.OID, e.Message));
+                    }
+                }
+                insertCursor.Flush();
+                Marshal.ReleaseComObject(insertCursor);
+                Marshal.ReleaseComObject(pCursor);
+                workspaceEdit.StopEditOperation();
+                workspaceEdit.StopEditing(true);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(string.Format("{0}\r\n{1}", builderItem.PointLayerInfo.AliasName, e.Message));
+            }
+        }
+
+        private void ImportPipeClassToLinePatch(IWorkspace outWorkspace, Pipeline3DBuilderItem builderItem, IGeometry boundary = null)
+        {
+            try
+            {
+                if (builderItem.LineLayerInfo == null)
+                    return;
+                IWorkspaceEdit workspaceEdit = outWorkspace as IWorkspaceEdit;
+                workspaceEdit.StartEditing(false);
+                workspaceEdit.StartEditOperation();
+                IFeatureClassLoad featureClassLoad = builderItem.LinePatchClass as IFeatureClassLoad;
+                featureClassLoad.LoadOnlyMode = true;
+                IFeatureCursor pCursor = null;
+                if (boundary == null || boundary.IsEmpty == true)
+                {
+                    pCursor = builderItem.LineLayerInfo.FeatureClass.Search(null, false);
+                }
+                else
+                {
+                    ISpatialFilter pFilter = new SpatialFilterClass();
+                    pFilter.Geometry = boundary;
+                    pFilter.SpatialRel = esriSpatialRelEnum.esriSpatialRelIntersects;
+                    pCursor = builderItem.LineLayerInfo.FeatureClass.Search((IQueryFilter)pFilter, false);
+                }
+                IFeature sFeature = null;
+                IFeatureCursor insertCursor = builderItem.LinePatchClass.Insert(true);
+                IFeatureBuffer featureBuffer;
+                int count = 0;
+                while ((sFeature = pCursor.NextFeature()) != null)
+                {
+                    try
+                    {
+                        IGeometry pShape = sFeature.Shape;
+                        if (pShape.IsEmpty) continue;
+                        CustomPipeline customPipeline = new CustomPipeline(sFeature, builderItem);
+                        for (int i = 0; i < customPipeline.StandardList.Count; i++)
                         {
-                            if (sFeature.OID == 1)
-                            { }
-                            CustomPipeline customPipeline = new CustomPipeline(sFeature, pipeInfo);
-                            for (int i = 0; i < customPipeline.StandardList.Count; i++)
+                            IGeometry patchGeometry = customPipeline.CreateLinePatch(i);
+                            featureBuffer = builderItem.LinePatchClass.CreateFeatureBuffer();
+                            featureBuffer.Shape = patchGeometry;
+                            featureBuffer.Value[builderItem.IdxLineLinkOidField] = sFeature.OID;
+                            insertCursor.InsertFeature(featureBuffer);
+                            count++;
+                            if (count >= 500)
                             {
-                                IGeometry patch = customPipeline.CreateLinePatch(i); 
-                                IFeature newFeature = patchClass.CreateFeature();
-                                newFeature.Shape = patch;
-                                newFeature.Value[linkOIDIdx] = sFeature.OID;
-                                newFeature.Store();
+                                insertCursor.Flush();
+                                count = 0;
                             }
                         }
                     }
@@ -110,60 +149,37 @@ namespace Yutai.Pipeline3D
                         throw new Exception(string.Format("OBJECTID:{0}\r\n{1}", sFeature.OID, e.Message));
                     }
                 }
+                insertCursor.Flush();
+                Marshal.ReleaseComObject(insertCursor);
+                Marshal.ReleaseComObject(pCursor);
+                featureClassLoad.LoadOnlyMode = false;
                 workspaceEdit.StopEditOperation();
                 workspaceEdit.StopEditing(true);
             }
             catch (Exception e)
             {
-                throw new Exception(string.Format("{0}\r\n{1}", pipeInfo.PipeClass.AliasName, e.Message));
+                throw new Exception(string.Format("{0}\r\n{1}", builderItem.LineLayerInfo.AliasName, e.Message));
             }
         }
-
-        private IGeometry CreatePointPatch(IFeature pFeature, PipeClassInfo pipeInfo)
+        
+        private IGeometry CreatePointPatch(IFeature pFeature, Pipeline3DBuilderItem builderItem)
         {
             try
             {
-                double jinZoom = 2.5;
-                double nullDepth = 2;
-                double nullElev = 151;
-                string nullStandard = "70";
+                string nullStandard = "0.01";
                 IPoint oPoint = pFeature.Shape as IPoint;
                 IPoint startPoint = new PointClass()
                 {
                     X = oPoint.X,
                     Y = oPoint.Y
                 };
-                double depth = 0;
-                if (pipeInfo.ElevationType == PipeElevationType.Absolute)
-                {
-                    startPoint.Z = pFeature.Value[pipeInfo.StartUnderGroundElevationField.Index] != DBNull.Value ? Convert.ToDouble(pFeature.Value[pipeInfo.StartUnderGroundElevationField.Index]) : nullElev;
-                    depth = Convert.ToDouble(pFeature.Value[pipeInfo.StartGroundElevationField.Index]) - Convert.ToDouble(pFeature.Value[pipeInfo.StartUnderGroundElevationField.Index]);
-                }
-                else
-                {
-                    if (pFeature.Value[pipeInfo.StartGroundElevationField.Index] != DBNull.Value &&
-                        pFeature.Value[pipeInfo.StartUnderGroundElevationField.Index] != DBNull.Value)
-                    {
-                        startPoint.Z = Convert.ToDouble(pFeature.Value[pipeInfo.StartGroundElevationField.Index]) -
-                                       Convert.ToDouble(pFeature.Value[pipeInfo.StartUnderGroundElevationField.Index]);
-                        depth = Convert.ToDouble(pFeature.Value[pipeInfo.StartUnderGroundElevationField.Index]);
-                    }
-                    else if (pFeature.Value[pipeInfo.StartGroundElevationField.Index] != DBNull.Value &&
-                            pFeature.Value[pipeInfo.StartUnderGroundElevationField.Index] == DBNull.Value)
-                    {
-                        startPoint.Z = Convert.ToDouble(pFeature.Value[pipeInfo.StartGroundElevationField.Index]) -
-                                       nullDepth;
-                        depth = nullDepth;
-                    }
-                    else if (pFeature.Value[pipeInfo.StartGroundElevationField.Index] == DBNull.Value &&
-                             pFeature.Value[pipeInfo.StartUnderGroundElevationField.Index] == DBNull.Value)
-                    {
-                        startPoint.Z = nullElev;
-                        depth = nullDepth;
-                    }
-                }
-
-
+                startPoint.Z = ConvertToDouble(pFeature.Value[builderItem.IdxDmgcField]);
+                if (double.IsNaN(startPoint.Z))
+                    startPoint.Z = 0;
+                double depth = ConvertToDouble(pFeature.Value[builderItem.IdxJdsdField]);
+                if (double.IsNaN(depth))
+                    depth = 0.01;
+                startPoint.Z = startPoint.Z - depth;
                 object _missing = Type.Missing;
                 IPointCollection pointCollection = new PolygonClass() as IPointCollection;
                 IVector3D pVectorZ = new Vector3DClass();
@@ -171,8 +187,10 @@ namespace Yutai.Pipeline3D
                 IVector3D VectorXOY = new Vector3DClass();
                 VectorXOY.SetComponents(1, 0, 0);
                 string standard;
-                object objStandard = pFeature.Value[pipeInfo.StandardField.Index];
-                if (objStandard is DBNull || objStandard == null)
+                object objStandard = pFeature.Value[builderItem.IdxJgggField];
+                if (objStandard is DBNull)
+                    standard = nullStandard;
+                else if (objStandard == null)
                     standard = nullStandard;
                 else
                 {
@@ -182,8 +200,8 @@ namespace Yutai.Pipeline3D
                 string[] standards = standard.Split('*');
                 if (standards.Length > 1)
                 {
-                    double xl = jinZoom * Convert.ToDouble(standards[0]) / 1000;
-                    double yl = jinZoom * Convert.ToDouble(standards[1]) / 1000;
+                    double xl = Convert.ToDouble(standards[0]) / 100;
+                    double yl = Convert.ToDouble(standards[1]) / 100;
                     IPoint pnt = new PointClass();
                     pnt.X = -xl / 2;
                     pnt.Y = -yl / 2;
@@ -208,11 +226,11 @@ namespace Yutai.Pipeline3D
                 }
                 else
                 {
-                    if (standards[0] == "") standards[0] = nullStandard;
-                    double angle = 2 * Math.PI / pipeInfo.Division;
-                    for (int i = 0; i < pipeInfo.Division; i++)
+                    if (standards[0] == "" || standards[0] == "<空>") standards[0] = nullStandard;
+                    double angle = 2 * Math.PI / _builderPropertie.Division;
+                    for (int i = 0; i < _builderPropertie.Division; i++)
                     {
-                        double xl = jinZoom * Convert.ToDouble(standards[0]) / 1000;
+                        double xl = Convert.ToDouble(standards[0]) / 100;
                         IPoint pPoint = new PointClass();
                         pPoint.X = xl * Math.Cos(angle * i) / 2;
                         pPoint.Y = xl * Math.Sin(angle * i) / 2;
@@ -236,95 +254,23 @@ namespace Yutai.Pipeline3D
             }
         }
 
-        private IFeatureClass CreatePatchClass(IWorkspace2 workspace, IFeatureDataset featureDataset, IFeatureClass sourceClass, string suffixName, bool isAddAttr = false)
+        public static double ConvertToDouble(object obj)
         {
-            IDataset pDataset = sourceClass as IDataset;
-            string featureClassName = pDataset.Name + suffixName;
-
-            IFeatureClass featureClass;
-            IFeatureWorkspace featureWorkspace = (IFeatureWorkspace)workspace; // Explicit Cast
-
-            if (workspace.get_NameExists(esriDatasetType.esriDTFeatureClass, featureClassName)) //feature class with that name already exists 
+            double value;
+            if (obj == null || obj is DBNull || double.TryParse(obj.ToString(), out value) == false)
             {
-                featureClass = featureWorkspace.OpenFeatureClass(featureClassName);
-                return featureClass;
+                value = Double.NaN;
             }
+            return value;
+        }
 
-            UID CLSID = new UIDClass();
-            CLSID.Value = "esriGeoDatabase.Feature";
-
-
-            IObjectClassDescription objectClassDescription = new FeatureClassDescriptionClass();
-            IFields fields;
-
-            fields = objectClassDescription.RequiredFields;
-            IFieldsEdit fieldsEdit = fields as IFieldsEdit;
-            ISpatialReference sSpatial = null;
-
-            for (int i = 0; i < sourceClass.Fields.FieldCount; i++)
+        public static string ConvertToString(object obj)
+        {
+            if (obj == null || obj is DBNull)
             {
-                IField sField = sourceClass.Fields.Field[i];
-                if (sField.Type == esriFieldType.esriFieldTypeBlob) continue;
-                if (sField.Type == esriFieldType.esriFieldTypeGeometry)
-                {
-                    IGeometryDef def = sField.GeometryDef;
-                    sSpatial = def.SpatialReference;
-                    continue;
-                }
-                if (sField.Type == esriFieldType.esriFieldTypeOID) continue;
-                if (sField.Type == esriFieldType.esriFieldTypeRaster) continue;
-                if (sField.Editable == false) continue;
-                if (isAddAttr)
-                {
-                    IClone pClone = sField as IClone;
-                    fieldsEdit.AddField(pClone.Clone() as IField);
-                }
+                return null;
             }
-
-            IField newField = new FieldClass();
-            IFieldEdit newFieldEdit = newField as IFieldEdit;
-            newFieldEdit.Name_2 = "LinkOID";
-            newFieldEdit.Type_2 = esriFieldType.esriFieldTypeInteger;
-            newFieldEdit.AliasName_2 = "原始OID";
-            fieldsEdit.AddField(newField);
-
-            String strShapeField = "";
-
-            // locate the shape field
-            for (int j = 0; j < fields.FieldCount; j++)
-            {
-                if (fields.get_Field(j).Type == esriFieldType.esriFieldTypeGeometry)
-                {
-                    strShapeField = fields.get_Field(j).Name;
-                    IGeometryDef def = fields.get_Field(j).GeometryDef;
-                    IGeometryDefEdit defEdit = def as IGeometryDefEdit;
-                    defEdit.GeometryType_2 = esriGeometryType.esriGeometryMultiPatch;
-                    if (featureDataset == null)
-                    {
-                        defEdit.SpatialReference_2 = sSpatial;
-                    }
-                    defEdit.HasZ_2 = true;
-                }
-            }
-
-            // Use IFieldChecker to create a validated fields collection.
-            IFieldChecker fieldChecker = new FieldCheckerClass();
-            IEnumFieldError enumFieldError = null;
-            IFields validatedFields = null;
-            fieldChecker.ValidateWorkspace = (IWorkspace)workspace;
-            fieldChecker.Validate(fields, out enumFieldError, out validatedFields);
-
-
-            // finally create and return the feature class
-            if (featureDataset == null)// if no feature dataset passed in, create at the workspace level
-            {
-                featureClass = featureWorkspace.CreateFeatureClass(featureClassName, validatedFields, CLSID, null, esriFeatureType.esriFTSimple, strShapeField, "");
-            }
-            else
-            {
-                featureClass = featureDataset.CreateFeatureClass(featureClassName, validatedFields, CLSID, null, esriFeatureType.esriFTSimple, strShapeField, "");
-            }
-            return featureClass;
+            return obj.ToString();
         }
     }
 }

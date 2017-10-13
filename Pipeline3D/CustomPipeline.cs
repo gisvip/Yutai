@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
+using Yutai.Pipeline.Config.Interfaces;
 using Yutai.Pipeline3D;
 
 namespace Yutai.Pipeline3D
@@ -12,12 +13,12 @@ namespace Yutai.Pipeline3D
         private IPoint _endPoint;   // 终点坐标
         private string _standard;   // 规格
         private List<string> _standardList; // 多条管线 管径
-        private PipeClassInfo _pipeClassInfo;
+        private Pipeline3DBuilderItem _builderItem;
         private IPoint _targetPoint;    // 三维模型移动到的目标位置
 
-        public CustomPipeline(IFeature feature, PipeClassInfo pipeClassInfo)
+        public CustomPipeline(IFeature feature, Pipeline3DBuilderItem builderItem)
         {
-            _pipeClassInfo = pipeClassInfo;
+            _builderItem = builderItem;
             IPolyline polyline = feature.ShapeCopy as IPolyline;
             _startPoint = new PointClass
             {
@@ -30,38 +31,26 @@ namespace Yutai.Pipeline3D
                 Y = polyline.ToPoint.Y
             };
 
-            if (pipeClassInfo.ElevationType == PipeElevationType.Absolute)
-            {
-                _startPoint.Z = feature.Value[pipeClassInfo.StartUnderGroundElevationField.Index] != DBNull.Value ? Convert.ToDouble(feature.Value[pipeClassInfo.StartUnderGroundElevationField.Index]) : 0;
-                _endPoint.Z = feature.Value[pipeClassInfo.EndUnderGroundElevationField.Index] != DBNull.Value ? Convert.ToDouble(feature.Value[pipeClassInfo.EndUnderGroundElevationField.Index]) : 0;
-            }
-            else
-            {
-                if (feature.Value[pipeClassInfo.StartGroundElevationField.Index] != DBNull.Value && feature.Value[pipeClassInfo.StartUnderGroundElevationField.Index] != DBNull.Value)
-                {
-                    _startPoint.Z = Convert.ToDouble(feature.Value[pipeClassInfo.StartGroundElevationField.Index]) - Convert.ToDouble(feature.Value[pipeClassInfo.StartUnderGroundElevationField.Index]);
-                }
-                else
-                {
-                    _startPoint.Z = feature.Value[pipeClassInfo.StartGroundElevationField.Index] != DBNull.Value ? Convert.ToDouble(feature.Value[pipeClassInfo.StartGroundElevationField.Index]) : 0;
-                }
-                if (feature.Value[pipeClassInfo.EndGroundElevationField.Index] != DBNull.Value && feature.Value[pipeClassInfo.EndUnderGroundElevationField.Index] != DBNull.Value)
-                {
-                    _endPoint.Z = Convert.ToDouble(feature.Value[pipeClassInfo.EndGroundElevationField.Index]) - Convert.ToDouble(feature.Value[pipeClassInfo.EndUnderGroundElevationField.Index]);
-                }
-                else
-                {
-                    _endPoint.Z = feature.Value[pipeClassInfo.EndGroundElevationField.Index] != DBNull.Value ? Convert.ToDouble(feature.Value[pipeClassInfo.EndGroundElevationField.Index]) : 0;
-                }
-            }
-
-            if (_startPoint.Z == 0)
+            _startPoint.Z = ConvertToDouble(feature.Value[_builderItem.IdxQdgcField]);
+            _endPoint.Z = ConvertToDouble(feature.Value[_builderItem.IdxZdgcField]);
+            
+            if (_startPoint.Z == 0 || double.IsNaN(_startPoint.Z))
                 _startPoint.Z = _endPoint.Z;
-            if (_endPoint.Z == 0)
+            if (_endPoint.Z == 0 || double.IsNaN(_endPoint.Z))
                 _endPoint.Z = _startPoint.Z;
 
-            _standard = feature.get_Value(pipeClassInfo.StandardField.Index).ToString().Replace(" ","");
+            _standard = feature.get_Value(_builderItem.IdxGjField).ToString().Replace(" ", "");
             GetStandardList();
+        }
+
+        public static double ConvertToDouble(object obj)
+        {
+            double value;
+            if (obj == null || obj is DBNull || double.TryParse(obj.ToString(), out value) == false)
+            {
+                value = Double.NaN;
+            }
+            return value;
         }
 
         public IPoint StartPoint
@@ -87,14 +76,7 @@ namespace Yutai.Pipeline3D
             get { return _standardList; }
             set { _standardList = value; }
         }
-
-        public PipeClassInfo ClassInfo
-        {
-            get { return _pipeClassInfo; }
-            set { _pipeClassInfo = value; }
-        }
-
-
+        
         private void GetStandardList()
         {
             _standardList = new List<string>();
@@ -159,10 +141,10 @@ namespace Yutai.Pipeline3D
 
         private IPointCollection CreatePointCollectionForCircle(double radius, ref object missing)
         {
-            radius = radius / 2;
+            //radius = radius / 2;
             IPointCollection pointCollection = new PolygonClass();
-            double angle = 2 * Math.PI / _pipeClassInfo.Division;
-            for (int i = 0; i < _pipeClassInfo.Division; i++)
+            double angle = 2 * Math.PI / _builderItem.BuilderProperty.Division;
+            for (int i = 0; i < _builderItem.BuilderProperty.Division; i++)
             {
                 IPoint point = new PointClass();
                 point.X = radius * Math.Cos(angle * i) / 2;
@@ -183,16 +165,16 @@ namespace Yutai.Pipeline3D
                 double xl = Convert.ToDouble(standards[0]) / 1000;
                 double yl = Convert.ToDouble(standards[1]) / 1000;
                 if (num == 0)
-                    switch (_pipeClassInfo.DepthType)
+                    switch (_builderItem.LineLayerInfo.HeightType)
                     {
-                        case PipeDepthType.Top:
-                            switch (_pipeClassInfo.SectionType)
+                        case enumPipelineHeightType.Top:
+                            switch (_builderItem.LineLayerInfo.SectionType)
                             {
-                                case PipeSectionType.HeightAndWidth:
+                                case enumPipeSectionType.HeightAndWidth:
                                     _startPoint.Z = _startPoint.Z - xl / 2;
                                     _endPoint.Z = _endPoint.Z - xl / 2;
                                     break;
-                                case PipeSectionType.WidthAndHeight:
+                                case enumPipeSectionType.WidthAndHeight:
                                     _startPoint.Z = _startPoint.Z - yl / 2;
                                     _endPoint.Z = _endPoint.Z - yl / 2;
                                     break;
@@ -201,14 +183,14 @@ namespace Yutai.Pipeline3D
                             }
                             GetTargetPoint(yl / 2);
                             break;
-                        case PipeDepthType.Bottom:
-                            switch (_pipeClassInfo.SectionType)
+                        case enumPipelineHeightType.Bottom:
+                            switch (_builderItem.LineLayerInfo.SectionType)
                             {
-                                case PipeSectionType.HeightAndWidth:
+                                case enumPipeSectionType.HeightAndWidth:
                                     _startPoint.Z = _startPoint.Z + xl / 2;
                                     _endPoint.Z = _endPoint.Z + xl / 2;
                                     break;
-                                case PipeSectionType.WidthAndHeight:
+                                case enumPipeSectionType.WidthAndHeight:
                                     _startPoint.Z = _startPoint.Z + yl / 2;
                                     _endPoint.Z = _endPoint.Z + yl / 2;
                                     break;
@@ -228,13 +210,13 @@ namespace Yutai.Pipeline3D
                     _standardList[num] = "100";
                 double xl = Convert.ToDouble(_standardList[num]) / 1000;
                 if (num == 0)
-                    switch (_pipeClassInfo.DepthType)
+                    switch (_builderItem.LineLayerInfo.HeightType)
                     {
-                        case PipeDepthType.Top:
+                        case enumPipelineHeightType.Top:
                             _startPoint.Z = _startPoint.Z - xl / 2;
                             _endPoint.Z = _endPoint.Z - xl / 2;
                             break;
-                        case PipeDepthType.Bottom:
+                        case enumPipelineHeightType.Bottom:
                             _startPoint.Z = _startPoint.Z + xl / 2;
                             _endPoint.Z = _endPoint.Z + xl / 2;
                             break;

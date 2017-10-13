@@ -95,8 +95,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class3D\CustomPipeline.cs" />
-    <Compile Include="Class3D\Pipeline3DBuilder.cs" />
     <Compile Include="Classes\Configuration.cs" />
     <Compile Include="Commands\Cmd3DBuilder.cs" />
     <Compile Include="ConfigCommands\CmdSavePipeConfig.cs" />
@@ -493,6 +491,10 @@
     <Compile Include="Views\QueryResultViewCommand.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pipeline3D\Yutai.Pipeline3D.csproj">
+      <Project>{3975d6ea-4e4f-45ea-bcef-2b357093e322}</Project>
+      <Name>Yutai.Pipeline3D</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Yutai.ArcGIS.Catalog\Yutai.ArcGIS.Catalog.csproj">
       <Project>{A71076F2-B2ED-4522-8DBF-BCA1689EB637}</Project>
       <Name>Yutai.ArcGIS.Catalog</Name>
