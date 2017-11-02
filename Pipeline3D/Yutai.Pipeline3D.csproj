@@ -59,6 +59,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ESRI.ArcGIS.Carto, Version=10.2.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="ESRI.ArcGIS.DataSourcesFile, Version=10.2.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>False</EmbedInteropTypes>
@@ -84,6 +87,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -92,15 +97,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomPipeline.cs" />
+    <Compile Include="Forms\Frm3DBuilder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Frm3DBuilder.Designer.cs">
+      <DependentUpon>Frm3DBuilder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmValueSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmValueSelect.Designer.cs">
+      <DependentUpon>FrmValueSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Geometry3DBase.cs" />
     <Compile Include="GeometryUtilities.cs" />
+    <Compile Include="I3DBuilder.cs" />
+    <Compile Include="I3DGeometry.cs" />
+    <Compile Include="I3DItem.cs" />
+    <Compile Include="I3DLine.cs" />
+    <Compile Include="I3DPoint.cs" />
     <Compile Include="PipeClassInfo.cs" />
     <Compile Include="PipeClassType.cs" />
     <Compile Include="PipeElevationType.cs" />
     <Compile Include="PipeElevHelper.cs" />
     <Compile Include="PipeFieldType.cs" />
     <Compile Include="Pipeline3DBuilder.cs" />
-    <Compile Include="Pipeline3DBuilderProperty.cs" />
+    <Compile Include="Pipeline3DItem.cs" />
     <Compile Include="PipeSpecialFieldInfo.cs" />
+    <Compile Include="Point3DCylinder.cs" />
+    <Compile Include="Point3DSquare.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -126,10 +151,26 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Yutai.ArcGIS.Catalog\Yutai.ArcGIS.Catalog.csproj">
+      <Project>{A71076F2-B2ED-4522-8DBF-BCA1689EB637}</Project>
+      <Name>Yutai.ArcGIS.Catalog</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Yutai.Pipeline.Config\Yutai.Pipeline.Config.csproj">
       <Project>{0aa42995-a1ce-49fd-bb98-f94eed2d7289}</Project>
       <Name>Yutai.Pipeline.Config</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Yutai.Plugins\Yutai.Plugins.csproj">
+      <Project>{800F2EE4-47AB-4CD4-934D-A64980D98A23}</Project>
+      <Name>Yutai.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\Frm3DBuilder.resx">
+      <DependentUpon>Frm3DBuilder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmValueSelect.resx">
+      <DependentUpon>FrmValueSelect.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

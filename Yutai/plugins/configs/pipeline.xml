@@ -100,7 +100,7 @@
             <Field TypeName="JGCZ" Name="地面点材质" AliasName="地面点材质" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGGG" Name="地面点规格" AliasName="地面点规格" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGLX" Name="井盖类型" AliasName="井盖类型" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
-            <Field TypeName="FSW" Name="附属物子类" AliasName="附属物子类" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="变电站/配电房/变压器/检修井/控制柜/灯杆/线杆/上杆/接线箱/窨井/环网柜/通风孔/塔架/预留口/起止点/三分支点/四分支点/五分支点/六分支点/多分支点/变径点/变材点/变坡点/转折点/出地点/直线点/架空点/偏心点/井边点（一井多盖）/辅助点/非普查/信号灯/探测点/" Visible="True" />
+            <Field TypeName="FSW" Name="附属设施" AliasName="附属设施" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="变电站/配电房/变压器/检修井/控制柜/灯杆/线杆/上杆/接线箱/窨井/环网柜/通风孔/塔架/预留口/起止点/三分支点/四分支点/五分支点/六分支点/多分支点/变径点/变材点/变坡点/转折点/出地点/直线点/架空点/偏心点/井边点（一井多盖）/辅助点/非普查/信号灯/探测点/" Visible="True" />
             <Field TypeName="QSDW" Name="BCode" AliasName="权属单位代码" Length="2" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="DMGC" Name="地面高程" AliasName="地面高程" Length="8" AllowNull="True" FieldType="字符串" Precision="2" DomainValues="" Visible="True" />
             <Field TypeName="XZB" Name="X坐标" AliasName="X坐标" Length="15" AllowNull="True" FieldType="字符串" Precision="3" DomainValues="" Visible="True" />
@@ -182,7 +182,7 @@
             <Field TypeName="JGCZ" Name="地面点材质" AliasName="地面点材质" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGGG" Name="地面点规格" AliasName="地面点规格" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGLX" Name="井盖类型" AliasName="井盖类型" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
-            <Field TypeName="FSW" Name="附属物子类" AliasName="附属物子类" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="检修井/阀门井/水表(井)/排气阀(井)/排污阀(井)/消防栓/消防井/阀门/水源井/水塔/水池/泵站/进水口/沉淀池/节点/空气门/截水门/撤水门/加压站/测压点/测量计/窨井/预留口/管帽/起止点/弯头/变径点/变材点/变坡点/直线点/三通点/四通点/五通点/六通点/多通点/出地点/架空点/偏心点/井边点/辅助点/非普查/出水口/水鹤/探测点/" Visible="True" />
+            <Field TypeName="FSW" Name="附属设施" AliasName="附属设施" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="检修井/阀门井/水表(井)/排气阀(井)/排污阀(井)/消防栓/消防井/阀门/水源井/水塔/水池/泵站/进水口/沉淀池/节点/空气门/截水门/撤水门/加压站/测压点/测量计/窨井/预留口/管帽/起止点/弯头/变径点/变材点/变坡点/直线点/三通点/四通点/五通点/六通点/多通点/出地点/架空点/偏心点/井边点/辅助点/非普查/出水口/水鹤/探测点/" Visible="True" />
             <Field TypeName="QSDW" Name="BCode" AliasName="权属单位代码" Length="2" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="DMGC" Name="地面高程" AliasName="地面高程" Length="8" AllowNull="True" FieldType="字符串" Precision="2" DomainValues="" Visible="True" />
             <Field TypeName="XZB" Name="X坐标" AliasName="X坐标" Length="15" AllowNull="True" FieldType="字符串" Precision="3" DomainValues="" Visible="True" />
@@ -264,7 +264,7 @@
             <Field TypeName="JGCZ" Name="地面点材质" AliasName="地面点材质" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGGG" Name="地面点规格" AliasName="地面点规格" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGLX" Name="井盖类型" AliasName="井盖类型" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
-            <Field TypeName="FSW" Name="附属物子类" AliasName="附属物子类" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="人孔/手孔/接线箱/线杆/上杆/预留口/起止点/转折点/变径点/变材点/变坡点/出地点/三分支点/四分支点/五分支点/六分支点/多分支点/直线点/架空点/偏心点/井边点/辅助点/非普查/监控器/电话亭/广告牌/监控摄像头/探测点/" Visible="True" />
+            <Field TypeName="FSW" Name="附属设施" AliasName="附属设施" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="人孔/手孔/接线箱/线杆/上杆/预留口/起止点/转折点/变径点/变材点/变坡点/出地点/三分支点/四分支点/五分支点/六分支点/多分支点/直线点/架空点/偏心点/井边点/辅助点/非普查/监控器/电话亭/广告牌/监控摄像头/探测点/" Visible="True" />
             <Field TypeName="QSDW" Name="BCode" AliasName="权属单位代码" Length="2" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="DMGC" Name="地面高程" AliasName="地面高程" Length="8" AllowNull="True" FieldType="字符串" Precision="2" DomainValues="" Visible="True" />
             <Field TypeName="XZB" Name="X坐标" AliasName="X坐标" Length="15" AllowNull="True" FieldType="字符串" Precision="3" DomainValues="" Visible="True" />
@@ -346,7 +346,7 @@
             <Field TypeName="JGCZ" Name="地面点材质" AliasName="地面点材质" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGGG" Name="地面点规格" AliasName="地面点规格" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGLX" Name="井盖类型" AliasName="井盖类型" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
-            <Field TypeName="FSW" Name="附属物子类" AliasName="附属物子类" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="变电站/配电房/变压器/检修井/控制柜/灯杆/线杆/上杆/接线箱/窨井/环网柜/通风孔/塔架/预留口/起止点/三分支点/四分支点/五分支点/六分支点/多分支点/变径点/变材点/变坡点/转折点/出地点/直线点/架空点/偏心点/井边点（一井多盖）/辅助点/非普查/信号灯/探测点/" Visible="True" />
+            <Field TypeName="FSW" Name="附属设施" AliasName="附属设施" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="变电站/配电房/变压器/检修井/控制柜/灯杆/线杆/上杆/接线箱/窨井/环网柜/通风孔/塔架/预留口/起止点/三分支点/四分支点/五分支点/六分支点/多分支点/变径点/变材点/变坡点/转折点/出地点/直线点/架空点/偏心点/井边点（一井多盖）/辅助点/非普查/信号灯/探测点/" Visible="True" />
             <Field TypeName="QSDW" Name="BCode" AliasName="权属单位代码" Length="2" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="DMGC" Name="地面高程" AliasName="地面高程" Length="8" AllowNull="True" FieldType="字符串" Precision="2" DomainValues="" Visible="True" />
             <Field TypeName="XZB" Name="X坐标" AliasName="X坐标" Length="15" AllowNull="True" FieldType="字符串" Precision="3" DomainValues="" Visible="True" />
@@ -428,7 +428,7 @@
             <Field TypeName="JGCZ" Name="地面点材质" AliasName="地面点材质" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGGG" Name="地面点规格" AliasName="地面点规格" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGLX" Name="井盖类型" AliasName="井盖类型" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
-            <Field TypeName="FSW" Name="附属物子类" AliasName="附属物子类" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="污水检修井/雨篦/出水口/污篦/进水口/出气井/雨水检修井/雨污合流井/跌水井/水封井/冲洗井/沉泥井/排污装置/预留口/化粪池/起止点/弯头/变径点/变材点/三通点/四通点/五通点/六通点/多通点/变坡点/直线点/出地点/架空点/偏心点/井边点/辅助点/非普查/再生水检修井/阀门井/水表(井)/排气阀(井)/排污阀(井)/消防栓/消防井/阀门/水源井/水塔/水池/泵站/沉淀池/节点/空气门/截水门/撤水门/加压站/测压点/测量计/窨井/管帽/探测点/" Visible="True" />
+            <Field TypeName="FSW" Name="附属设施" AliasName="附属设施" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="污水检修井/雨篦/出水口/污篦/进水口/出气井/雨水检修井/雨污合流井/跌水井/水封井/冲洗井/沉泥井/排污装置/预留口/化粪池/起止点/弯头/变径点/变材点/三通点/四通点/五通点/六通点/多通点/变坡点/直线点/出地点/架空点/偏心点/井边点/辅助点/非普查/再生水检修井/阀门井/水表(井)/排气阀(井)/排污阀(井)/消防栓/消防井/阀门/水源井/水塔/水池/泵站/沉淀池/节点/空气门/截水门/撤水门/加压站/测压点/测量计/窨井/管帽/探测点/" Visible="True" />
             <Field TypeName="QSDW" Name="BCode" AliasName="权属单位代码" Length="2" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="DMGC" Name="地面高程" AliasName="地面高程" Length="8" AllowNull="True" FieldType="字符串" Precision="2" DomainValues="" Visible="True" />
             <Field TypeName="XZB" Name="X坐标" AliasName="X坐标" Length="15" AllowNull="True" FieldType="字符串" Precision="3" DomainValues="" Visible="True" />
@@ -510,7 +510,7 @@
             <Field TypeName="JGCZ" Name="地面点材质" AliasName="地面点材质" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGGG" Name="地面点规格" AliasName="地面点规格" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGLX" Name="井盖类型" AliasName="井盖类型" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
-            <Field TypeName="FSW" Name="附属物子类" AliasName="附属物子类" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="阀门井/阀门/凝水缸/调压箱/调压站/连接器/过滤器/除污器/调压柜/绝缘接头/平衡阀/补偿器/检修井/管帽/预留口/起止点/弯头/变径点/变材点/变坡点/直线点/出地点/架空点/三通点/四通点/五通点/六通点/多通点/偏心点/井边点/辅助点/非普查/探测点/" Visible="True" />
+            <Field TypeName="FSW" Name="附属设施" AliasName="附属设施" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="阀门井/阀门/凝水缸/调压箱/调压站/连接器/过滤器/除污器/调压柜/绝缘接头/平衡阀/补偿器/检修井/管帽/预留口/起止点/弯头/变径点/变材点/变坡点/直线点/出地点/架空点/三通点/四通点/五通点/六通点/多通点/偏心点/井边点/辅助点/非普查/探测点/" Visible="True" />
             <Field TypeName="QSDW" Name="BCode" AliasName="权属单位代码" Length="2" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="DMGC" Name="地面高程" AliasName="地面高程" Length="8" AllowNull="True" FieldType="字符串" Precision="2" DomainValues="" Visible="True" />
             <Field TypeName="XZB" Name="X坐标" AliasName="X坐标" Length="15" AllowNull="True" FieldType="字符串" Precision="3" DomainValues="" Visible="True" />
@@ -592,7 +592,7 @@
             <Field TypeName="JGCZ" Name="地面点材质" AliasName="地面点材质" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGGG" Name="地面点规格" AliasName="地面点规格" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGLX" Name="井盖类型" AliasName="井盖类型" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
-            <Field TypeName="FSW" Name="附属物子类" AliasName="附属物子类" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="阀门井/阀门/检修井/补偿器/泄水井/排气阀/管帽/预留口/起止点/弯头/变径点/变材点/变坡点/直线点/出地点/架空点/三通点/四通点/五通点/六通点/多通点/偏心点/井边点/辅助点/非普查/换热站/探测点/" Visible="True" />
+            <Field TypeName="FSW" Name="附属设施" AliasName="附属设施" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="阀门井/阀门/检修井/补偿器/泄水井/排气阀/管帽/预留口/起止点/弯头/变径点/变材点/变坡点/直线点/出地点/架空点/三通点/四通点/五通点/六通点/多通点/偏心点/井边点/辅助点/非普查/换热站/探测点/" Visible="True" />
             <Field TypeName="QSDW" Name="BCode" AliasName="权属单位代码" Length="2" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="DMGC" Name="地面高程" AliasName="地面高程" Length="8" AllowNull="True" FieldType="字符串" Precision="2" DomainValues="" Visible="True" />
             <Field TypeName="XZB" Name="X坐标" AliasName="X坐标" Length="15" AllowNull="True" FieldType="字符串" Precision="3" DomainValues="" Visible="True" />
@@ -674,7 +674,7 @@
             <Field TypeName="JGCZ" Name="地面点材质" AliasName="地面点材质" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGGG" Name="地面点规格" AliasName="地面点规格" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="JGLX" Name="井盖类型" AliasName="井盖类型" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
-            <Field TypeName="FSW" Name="附属物子类" AliasName="附属物子类" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="人孔/手孔/接线箱/线杆/上杆/预留口/起止点/转折点/变径点/变材点/变坡点/出地点/三分支点/四分支点/五分支点/六分支点/多分支点/直线点/架空点/偏心点/井边点/辅助点/非普查/监控器/电话亭/广告牌/监控摄像头/探测点/" Visible="True" />
+            <Field TypeName="FSW" Name="附属设施" AliasName="附属设施" Length="20" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="人孔/手孔/接线箱/线杆/上杆/预留口/起止点/转折点/变径点/变材点/变坡点/出地点/三分支点/四分支点/五分支点/六分支点/多分支点/直线点/架空点/偏心点/井边点/辅助点/非普查/监控器/电话亭/广告牌/监控摄像头/探测点/" Visible="True" />
             <Field TypeName="QSDW" Name="BCode" AliasName="权属单位代码" Length="2" AllowNull="True" FieldType="字符串" Precision="0" DomainValues="" Visible="True" />
             <Field TypeName="DMGC" Name="地面高程" AliasName="地面高程" Length="8" AllowNull="True" FieldType="字符串" Precision="2" DomainValues="" Visible="True" />
             <Field TypeName="XZB" Name="X坐标" AliasName="X坐标" Length="15" AllowNull="True" FieldType="字符串" Precision="3" DomainValues="" Visible="True" />

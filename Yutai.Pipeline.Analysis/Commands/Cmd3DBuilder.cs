@@ -1,6 +1,7 @@
 ﻿using System;
 using Yutai.Pipeline.Analysis.Forms;
 using Yutai.Pipeline.Analysis.Helpers;
+using Yutai.Pipeline3D.Forms;
 using Yutai.Plugins.Concrete;
 using Yutai.Plugins.Enums;
 using Yutai.Plugins.Interfaces;
@@ -19,8 +20,10 @@ namespace Yutai.Pipeline.Analysis.Commands
         
         public override void OnClick(object sender, EventArgs args)
         {
-            frm3DBuilder frm = new frm3DBuilder(_context, _plugin.PipeConfig);
-            frm.Show();
+            //frm3DBuilder frm = new frm3DBuilder(_context, _plugin.PipeConfig);
+            //frm.Show();
+            Frm3DBuilder builder = new Frm3DBuilder(_plugin.PipeConfig);
+            builder.Show();
         }
 
         public override void OnCreate(object hook)

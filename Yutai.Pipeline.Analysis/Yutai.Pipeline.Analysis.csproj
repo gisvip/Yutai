@@ -117,12 +117,6 @@
     <Compile Include="Controls\PrintPreviewDialogEx.Designer.cs">
       <DependentUpon>PrintPreviewDialogEx.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frm3DBuilder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frm3DBuilder.Designer.cs">
-      <DependentUpon>frm3DBuilder.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\frmMapLayerOrganize.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -557,9 +551,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMaiShenAnalysis.resx">
       <DependentUpon>FormMaiShenAnalysis.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frm3DBuilder.resx">
-      <DependentUpon>frm3DBuilder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBurstReport.resx">
       <DependentUpon>frmBurstReport.cs</DependentUpon>

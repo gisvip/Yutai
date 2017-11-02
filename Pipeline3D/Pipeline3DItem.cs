@@ -1,60 +1,24 @@
-﻿// 项目名称 :  Yutai
-// 项目描述 :  
-// 类 名 称 :  Pipeline3DBuilderProperty.cs
-// 版 本 号 :  
-// 说    明 :  
-// 作    者 :  
-// 创建时间 :  2017/10/12  10:09
-// 更新时间 :  2017/10/12  10:09
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
+using Yutai.ArcGIS.Catalog;
 using Yutai.Pipeline.Config.Helpers;
 using Yutai.Pipeline.Config.Interfaces;
 
 namespace Yutai.Pipeline3D
 {
-    public class Pipeline3DBuilderProperty
+    class Pipeline3DItem : I3DItem
     {
-        private int _division;
-        private List<Pipeline3DBuilderItem> _builderItems;
-
-        public Pipeline3DBuilderProperty()
-        {
-            _builderItems = new List<Pipeline3DBuilderItem>();
-        }
-        public int Division
-        {
-            get { return _division; }
-            set { _division = value; }
-        }
-
-        public string NameSuf { get; set; }
-        public enumPipelineDepthType DefaultDepthType { get; set; }
-        public enumPipeSectionType DefaultSectionType { get; set; }
-        public IWorkspace SaveWorkspace { get; set; }
-        public enumMultiSaveType SaveType { get; set; }
-        public bool IsCreateJXJ { get; set; }
-        public bool IsCreateLJD { get; set; }
-        public IEnvelope Envelope { get; set; }
-        public bool IsExtentOnly { get; set; }
-
-        public List<Pipeline3DBuilderItem> BuilderItems
-        {
-            get { return _builderItems; }
-            set { _builderItems = value; }
-        }
-    }
-
-    public class Pipeline3DBuilderItem
-    {
-        private Pipeline3DBuilderProperty _builderProperty;
+        private I3DBuilder _3DBuilder;
+        private enumPipelineHeightType _heightType;
+        private enumPipeSectionType _sectionType;
+        private enumRotationAngleType _rotationAngleType;
         private IPipelineLayer _pipelineLayer;
-
         private IBasicLayerInfo _pointLayerInfo;
         private IBasicLayerInfo _lineLayerInfo;
         private IFeatureClass _pointPatchClass;
@@ -62,19 +26,56 @@ namespace Yutai.Pipeline3D
         private int _idxDmgcField = -1;
         private int _idxJdsdField = -1;
         private int _idxJgggField = -1;
-        private int _idxPointLinkOidField = -1;
-
+        private int _idxPointLinkField = -1;
         private int _idxQdgcField = -1;
         private int _idxZdgcField = -1;
         private int _idxQdmsField = -1;
         private int _idxZdmsField = -1;
         private int _idxGjField = -1;
-        private int _idxLineLinkOidField = -1;
+        private int _idxLineLinkField = -1;
+        private string _dmgcFieldName;
+        private string _jdsdFieldName;
+        private string _jgggFieldName;
+        private string _qdgcFieldName;
+        private string _zdgcFieldName;
+        private string _qdmsFieldName;
+        private string _zdmsFieldName;
+        private string _gjFieldName;
+        private string _xzjdFieldName;
+        private int _idxXzjdField = -1;
+        private string _fswFieldName;
+        private int _idxFswField = -1;
+        private List<string> _fswValueList;
+        private List<string> _cylinderSubs;
+        private List<string> _squareSubs;
 
-        public Pipeline3DBuilderItem(Pipeline3DBuilderProperty builderProperty, IPipelineLayer pipelineLayer)
+        public Pipeline3DItem(I3DBuilder builder, IPipelineLayer pipelineLayer)
         {
-            _builderProperty = builderProperty;
+            _3DBuilder = builder;
             _pipelineLayer = pipelineLayer;
+        }
+
+        public string Name
+        {
+            get { return _pipelineLayer.Name; }
+        }
+
+        public enumPipelineHeightType HeightType
+        {
+            get { return _heightType; }
+            set { _heightType = value; }
+        }
+
+        public enumPipeSectionType SectionType
+        {
+            get { return _sectionType; }
+            set { _sectionType = value; }
+        }
+
+        public enumRotationAngleType RotationAngleType
+        {
+            get { return _rotationAngleType; }
+            set { _rotationAngleType = value; }
         }
 
         public IPipelineLayer PipelineLayer
@@ -95,7 +96,7 @@ namespace Yutai.Pipeline3D
                 return _pointLayerInfo;
             }
         }
-        
+
         public IBasicLayerInfo LineLayerInfo
         {
             get
@@ -116,8 +117,8 @@ namespace Yutai.Pipeline3D
             {
                 if (_pointPatchClass == null)
                 {
-                    _pointPatchClass = CreatePatchClass(_builderProperty.SaveWorkspace as IWorkspace2, null, _pointLayerInfo.FeatureClass,
-                        _builderProperty.NameSuf);
+                    _pointPatchClass = CreatePatchClass(_3DBuilder.SaveWorkspace as IWorkspace2, null,
+                        _pointLayerInfo.FeatureClass, _3DBuilder.NameSuf);
                 }
                 return _pointPatchClass;
             }
@@ -129,11 +130,54 @@ namespace Yutai.Pipeline3D
             {
                 if (_linePatchClass == null)
                 {
-                    _linePatchClass = CreatePatchClass(_builderProperty.SaveWorkspace as IWorkspace2, null, _lineLayerInfo.FeatureClass,
-                        _builderProperty.NameSuf);
+                    _linePatchClass = CreatePatchClass(_3DBuilder.SaveWorkspace as IWorkspace2, null,
+                        _lineLayerInfo.FeatureClass, _3DBuilder.NameSuf);
                 }
                 return _linePatchClass;
             }
+        }
+
+        public List<string> FswValueList
+        {
+            get
+            {
+                if (IdxFswField < 0)
+                    return null;
+                if (_fswValueList == null)
+                {
+                    _fswValueList = new List<string>();
+                    CommonHelper.GetUniqueValues((ITable)_pointLayerInfo.FeatureClass, _fswFieldName, _fswValueList);
+                }
+                return _fswValueList;
+            }
+        }
+
+        public List<string> CylinderSubs
+        {
+            get
+            {
+                if (_cylinderSubs == null)
+                    _cylinderSubs = new List<string>();
+                return _cylinderSubs;
+            }
+            set { _cylinderSubs = value; }
+        }
+
+        public List<string> SquareSubs
+        {
+            get
+            {
+                if (_squareSubs == null)
+                    _squareSubs = new List<string>();
+                return _squareSubs;
+            }
+            set { _squareSubs = value; }
+        }
+
+        public string DmgcFieldName
+        {
+            get { return _dmgcFieldName; }
+            set { _dmgcFieldName = value; }
         }
 
         public int IdxDmgcField
@@ -145,11 +189,16 @@ namespace Yutai.Pipeline3D
                     if (_pointLayerInfo == null)
                         return -1;
                     _idxDmgcField =
-                        _pointLayerInfo.FeatureClass.FindField(
-                            _pointLayerInfo.GetFieldName(PipeConfigWordHelper.PointWords.DMGC));
+                        _pointLayerInfo.FeatureClass.FindField(_dmgcFieldName);
                 }
                 return _idxDmgcField;
             }
+        }
+
+        public string JdsdFieldName
+        {
+            get { return _jdsdFieldName; }
+            set { _jdsdFieldName = value; }
         }
 
         public int IdxJdsdField
@@ -161,11 +210,16 @@ namespace Yutai.Pipeline3D
                     if (_pointLayerInfo == null)
                         return -1;
                     _idxJdsdField =
-                        _pointLayerInfo.FeatureClass.FindField(
-                            _pointLayerInfo.GetFieldName(PipeConfigWordHelper.PointWords.JDSD));
+                        _pointLayerInfo.FeatureClass.FindField(_jdsdFieldName);
                 }
                 return _idxJdsdField;
             }
+        }
+
+        public string JgggFieldName
+        {
+            get { return _jgggFieldName; }
+            set { _jgggFieldName = value; }
         }
 
         public int IdxJgggField
@@ -177,23 +231,70 @@ namespace Yutai.Pipeline3D
                     if (_pointLayerInfo == null)
                         return -1;
                     _idxJgggField =
-                        _pointLayerInfo.FeatureClass.FindField(
-                            _pointLayerInfo.GetFieldName(PipeConfigWordHelper.PointWords.JGGG));
+                        _pointLayerInfo.FeatureClass.FindField(_jgggFieldName);
                 }
                 return _idxJgggField;
             }
         }
 
-        public int IdxPointLinkOidField
+        public string XzjdFieldName
+        {
+            get { return _xzjdFieldName; }
+            set { _xzjdFieldName = value; }
+        }
+
+        public int IdxXzjdField
         {
             get
             {
-                if (_idxPointLinkOidField < 0)
+                if (_idxXzjdField < 0)
                 {
-                    _idxPointLinkOidField = _pointPatchClass.FindField("LinkOID");
+                    if (_pointLayerInfo == null)
+                        return -1;
+                    _idxXzjdField = _pointLayerInfo.FeatureClass.FindField(_xzjdFieldName);
                 }
-                return _idxPointLinkOidField;
+                return _idxXzjdField;
             }
+        }
+
+        public string FswFieldName
+        {
+            get { return _fswFieldName; }
+            set { _fswFieldName = value; }
+        }
+
+        public int IdxFswField
+        {
+            get
+            {
+                if (_idxFswField < 0)
+                {
+                    if (_pointLayerInfo == null)
+                        return -1;
+                    if (string.IsNullOrEmpty(_fswFieldName))
+                        return -1;
+                    _idxFswField = _pointLayerInfo.FeatureClass.FindField(_fswFieldName);
+                }
+                return _idxFswField;
+            }
+        }
+
+        public int IdxPointLinkField
+        {
+            get
+            {
+                if (_idxPointLinkField < 0)
+                {
+                    _idxPointLinkField = _pointPatchClass.FindField("LinkOID");
+                }
+                return _idxPointLinkField;
+            }
+        }
+
+        public string QdgcFieldName
+        {
+            get { return _qdgcFieldName; }
+            set { _qdgcFieldName = value; }
         }
 
         public int IdxQdgcField
@@ -203,11 +304,16 @@ namespace Yutai.Pipeline3D
                 if (_idxQdgcField < 0)
                 {
                     _idxQdgcField =
-                        _lineLayerInfo.FeatureClass.FindField(
-                            _lineLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.QDGC));
+                        _lineLayerInfo.FeatureClass.FindField(_qdgcFieldName);
                 }
                 return _idxQdgcField;
             }
+        }
+
+        public string ZdgcFieldName
+        {
+            get { return _zdgcFieldName; }
+            set { _zdgcFieldName = value; }
         }
 
         public int IdxZdgcField
@@ -216,10 +322,15 @@ namespace Yutai.Pipeline3D
             {
                 if (_idxZdgcField < 0)
                     _idxZdgcField =
-                        _lineLayerInfo.FeatureClass.FindField(
-                            _lineLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.ZDGC));
+                        _lineLayerInfo.FeatureClass.FindField(_zdgcFieldName);
                 return _idxZdgcField;
             }
+        }
+
+        public string QdmsFieldName
+        {
+            get { return _qdmsFieldName; }
+            set { _qdmsFieldName = value; }
         }
 
         public int IdxQdmsField
@@ -228,10 +339,15 @@ namespace Yutai.Pipeline3D
             {
                 if (_idxQdmsField < 0)
                     _idxQdmsField =
-                        _lineLayerInfo.FeatureClass.FindField(
-                            _lineLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.QDMS));
+                        _lineLayerInfo.FeatureClass.FindField(_qdmsFieldName);
                 return _idxQdmsField;
             }
+        }
+
+        public string ZdmsFieldName
+        {
+            get { return _zdmsFieldName; }
+            set { _zdmsFieldName = value; }
         }
 
         public int IdxZdmsField
@@ -240,10 +356,15 @@ namespace Yutai.Pipeline3D
             {
                 if (_idxZdmsField < 0)
                     _idxZdmsField =
-                        _lineLayerInfo.FeatureClass.FindField(
-                            _lineLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.ZDMS));
+                        _lineLayerInfo.FeatureClass.FindField(_zdmsFieldName);
                 return _idxZdmsField;
             }
+        }
+
+        public string GjFieldName
+        {
+            get { return _gjFieldName; }
+            set { _gjFieldName = value; }
         }
 
         public int IdxGjField
@@ -252,25 +373,24 @@ namespace Yutai.Pipeline3D
             {
                 if (_idxGjField < 0)
                     _idxGjField =
-                        _lineLayerInfo.FeatureClass.FindField(
-                            _lineLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.GJ));
+                        _lineLayerInfo.FeatureClass.FindField(_gjFieldName);
                 return _idxGjField;
             }
         }
 
-        public int IdxLineLinkOidField
+        public int IdxLineLinkField
         {
             get
             {
-                if (_idxLineLinkOidField < 0)
-                    _idxLineLinkOidField = _linePatchClass.FindField("LinkOID");
-                return _idxLineLinkOidField;
+                if (_idxLineLinkField < 0)
+                    _idxLineLinkField = _linePatchClass.FindField("LinkOID");
+                return _idxLineLinkField;
             }
         }
 
-        public Pipeline3DBuilderProperty BuilderProperty
+        public I3DBuilder Builder
         {
-            get { return _builderProperty; }
+            get { return _3DBuilder; }
         }
 
         private IFeatureClass CreatePatchClass(IWorkspace2 workspace, IFeatureDataset featureDataset, IFeatureClass sourceClass, string suffixName, bool isAddAttr = false)
@@ -364,10 +484,5 @@ namespace Yutai.Pipeline3D
             return featureClass;
         }
 
-    }
-    public enum enumMultiSaveType
-    {
-        Follow = 0,
-        Collection = 1
     }
 }

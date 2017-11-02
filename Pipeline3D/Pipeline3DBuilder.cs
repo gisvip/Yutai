@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
+using Yutai.Pipeline.Config.Interfaces;
 using Yutai.Pipeline3D;
 
 namespace Yutai.Pipeline3D
@@ -12,27 +13,32 @@ namespace Yutai.Pipeline3D
 
     public class Pipeline3DBuilder
     {
-        private ISpatialReference _defaultReference;
-        private Pipeline3DBuilderProperty _builderPropertie;
-
-        public Pipeline3DBuilderProperty BuilderPropertie
+        private I3DBuilder _3DBuilder;
+        private List<string> _checkedList;
+        public Pipeline3DBuilder(I3DBuilder builder)
         {
-            get { return _builderPropertie; }
-            set { _builderPropertie = value; }
+            _3DBuilder = builder;
+            _checkedList = _3DBuilder.GetCheckPipeline();
         }
 
-        public bool Build()
+        public void Build()
         {
-            if (_builderPropertie == null || _builderPropertie.BuilderItems.Count == 0) return false;
-            foreach (Pipeline3DBuilderItem builderItem in _builderPropertie.BuilderItems)
+            if (_checkedList == null || _checkedList.Any() == false)
+                return;
+            if (_3DBuilder.Items == null || _3DBuilder.Items.Any() == false)
+                return;
+            foreach (I3DItem item in _3DBuilder.Items)
             {
-                ImportPipeClassToPointPatch(_builderPropertie.SaveWorkspace, builderItem);
-                ImportPipeClassToLinePatch(_builderPropertie.SaveWorkspace, builderItem);
+                if (_checkedList.Contains(item.Name) == false)
+                    continue;
+                ImportPipeClassToPointPatch(_3DBuilder.SaveWorkspace, item);
+                ImportPipeClassToLinePatch(_3DBuilder.SaveWorkspace, item);
             }
-            return true;
+
+            return;
         }
 
-        private void ImportPipeClassToPointPatch(IWorkspace outWorkspace, Pipeline3DBuilderItem builderItem, IGeometry boundary = null)
+        private void ImportPipeClassToPointPatch(IWorkspace outWorkspace, I3DItem builderItem, IGeometry boundary = null)
         {
             try
             {
@@ -56,7 +62,7 @@ namespace Yutai.Pipeline3D
                 }
                 IFeature sFeature = null;
                 IFeatureCursor insertCursor = builderItem.PointPatchClass.Insert(true);
-                IFeatureBuffer featureBuffer;
+                IFeatureBuffer featureBuffer = builderItem.PointPatchClass.CreateFeatureBuffer();
                 int count = 0;
                 while ((sFeature = pCursor.NextFeature()) != null)
                 {
@@ -66,16 +72,20 @@ namespace Yutai.Pipeline3D
                         IGeometry pShape = sFeature.Shape;
                         if (pShape.IsEmpty) continue;
                         IGeometry patchGeometry = CreatePointPatch(sFeature, builderItem);
-                        featureBuffer = builderItem.PointPatchClass.CreateFeatureBuffer();
+                        if (patchGeometry == null)
+                            continue;
                         featureBuffer.Shape = patchGeometry;
-                        featureBuffer.Value[builderItem.IdxPointLinkOidField] = sFeature.OID;
+                        featureBuffer.Value[builderItem.IdxPointLinkField] = sFeature.OID;
 
                         insertCursor.InsertFeature(featureBuffer);
                         count++;
-                        if (count >= 500)
+                        if (count >= 1000)
                         {
-                            insertCursor.Flush();
                             count = 0;
+                            insertCursor.Flush();
+                            Marshal.ReleaseComObject(insertCursor);
+                            insertCursor = builderItem.PointPatchClass.Insert(true);
+                            featureBuffer = builderItem.PointPatchClass.CreateFeatureBuffer();
                         }
                     }
                     catch (Exception e)
@@ -95,7 +105,7 @@ namespace Yutai.Pipeline3D
             }
         }
 
-        private void ImportPipeClassToLinePatch(IWorkspace outWorkspace, Pipeline3DBuilderItem builderItem, IGeometry boundary = null)
+        private void ImportPipeClassToLinePatch(IWorkspace outWorkspace, I3DItem builderItem, IGeometry boundary = null)
         {
             try
             {
@@ -104,8 +114,6 @@ namespace Yutai.Pipeline3D
                 IWorkspaceEdit workspaceEdit = outWorkspace as IWorkspaceEdit;
                 workspaceEdit.StartEditing(false);
                 workspaceEdit.StartEditOperation();
-                IFeatureClassLoad featureClassLoad = builderItem.LinePatchClass as IFeatureClassLoad;
-                featureClassLoad.LoadOnlyMode = true;
                 IFeatureCursor pCursor = null;
                 if (boundary == null || boundary.IsEmpty == true)
                 {
@@ -120,7 +128,7 @@ namespace Yutai.Pipeline3D
                 }
                 IFeature sFeature = null;
                 IFeatureCursor insertCursor = builderItem.LinePatchClass.Insert(true);
-                IFeatureBuffer featureBuffer;
+                IFeatureBuffer featureBuffer = builderItem.LinePatchClass.CreateFeatureBuffer();
                 int count = 0;
                 while ((sFeature = pCursor.NextFeature()) != null)
                 {
@@ -132,15 +140,18 @@ namespace Yutai.Pipeline3D
                         for (int i = 0; i < customPipeline.StandardList.Count; i++)
                         {
                             IGeometry patchGeometry = customPipeline.CreateLinePatch(i);
-                            featureBuffer = builderItem.LinePatchClass.CreateFeatureBuffer();
                             featureBuffer.Shape = patchGeometry;
-                            featureBuffer.Value[builderItem.IdxLineLinkOidField] = sFeature.OID;
+                            featureBuffer.Value[builderItem.IdxLineLinkField] = sFeature.OID;
                             insertCursor.InsertFeature(featureBuffer);
                             count++;
-                            if (count >= 500)
+
+                            if (count >= 1000)
                             {
-                                insertCursor.Flush();
                                 count = 0;
+                                insertCursor.Flush();
+                                Marshal.ReleaseComObject(insertCursor);
+                                insertCursor = builderItem.LinePatchClass.Insert(true);
+                                featureBuffer = builderItem.LinePatchClass.CreateFeatureBuffer();
                             }
                         }
                     }
@@ -152,7 +163,6 @@ namespace Yutai.Pipeline3D
                 insertCursor.Flush();
                 Marshal.ReleaseComObject(insertCursor);
                 Marshal.ReleaseComObject(pCursor);
-                featureClassLoad.LoadOnlyMode = false;
                 workspaceEdit.StopEditOperation();
                 workspaceEdit.StopEditing(true);
             }
@@ -161,92 +171,65 @@ namespace Yutai.Pipeline3D
                 throw new Exception(string.Format("{0}\r\n{1}", builderItem.LineLayerInfo.AliasName, e.Message));
             }
         }
-        
-        private IGeometry CreatePointPatch(IFeature pFeature, Pipeline3DBuilderItem builderItem)
+
+        private IGeometry CreatePointPatch(IFeature pFeature, I3DItem builderItem)
         {
             try
             {
-                string nullStandard = "0.01";
                 IPoint oPoint = pFeature.Shape as IPoint;
-                IPoint startPoint = new PointClass()
-                {
-                    X = oPoint.X,
-                    Y = oPoint.Y
-                };
-                startPoint.Z = ConvertToDouble(pFeature.Value[builderItem.IdxDmgcField]);
-                if (double.IsNaN(startPoint.Z))
-                    startPoint.Z = 0;
+                if (oPoint == null)
+                    return null;
+                double z = ConvertToDouble(pFeature.Value[builderItem.IdxDmgcField]);
+                if (double.IsNaN(z))
+                    z = 0;
                 double depth = ConvertToDouble(pFeature.Value[builderItem.IdxJdsdField]);
                 if (double.IsNaN(depth))
                     depth = 0.01;
-                startPoint.Z = startPoint.Z - depth;
-                object _missing = Type.Missing;
-                IPointCollection pointCollection = new PolygonClass() as IPointCollection;
-                IVector3D pVectorZ = new Vector3DClass();
-                pVectorZ.SetComponents(0, 0, 1);
-                IVector3D VectorXOY = new Vector3DClass();
-                VectorXOY.SetComponents(1, 0, 0);
-                string standard;
-                object objStandard = pFeature.Value[builderItem.IdxJgggField];
-                if (objStandard is DBNull)
-                    standard = nullStandard;
-                else if (objStandard == null)
-                    standard = nullStandard;
-                else
-                {
-                    standard = objStandard.ToString().Trim();
-                }
-                if (string.IsNullOrEmpty(standard)) standard = nullStandard;
-                string[] standards = standard.Split('*');
-                if (standards.Length > 1)
-                {
-                    double xl = Convert.ToDouble(standards[0]) / 100;
-                    double yl = Convert.ToDouble(standards[1]) / 100;
-                    IPoint pnt = new PointClass();
-                    pnt.X = -xl / 2;
-                    pnt.Y = -yl / 2;
-                    pnt.Z = 0;
-                    pointCollection.AddPoint(pnt, ref _missing, ref _missing);
-                    pnt = new PointClass();
-                    pnt.X = -xl / 2;
-                    pnt.Y = yl / 2;
-                    pnt.Z = 0;
-                    pointCollection.AddPoint(pnt, ref _missing, ref _missing);
-                    pnt = new PointClass();
-                    pnt.X = xl / 2;
-                    pnt.Y = yl / 2;
-                    pnt.Z = 0;
-                    pointCollection.AddPoint(pnt, ref _missing, ref _missing);
-                    pnt = new PointClass();
-                    pnt.X = xl / 2;
-                    pnt.Y = -yl / 2;
-                    pnt.Z = 0;
-                    pointCollection.AddPoint(pnt, ref _missing, ref _missing);
-                    ((IPolygon)pointCollection).Close();
-                }
-                else
-                {
-                    if (standards[0] == "" || standards[0] == "<Пе>") standards[0] = nullStandard;
-                    double angle = 2 * Math.PI / _builderPropertie.Division;
-                    for (int i = 0; i < _builderPropertie.Division; i++)
-                    {
-                        double xl = Convert.ToDouble(standards[0]) / 100;
-                        IPoint pPoint = new PointClass();
-                        pPoint.X = xl * Math.Cos(angle * i) / 2;
-                        pPoint.Y = xl * Math.Sin(angle * i) / 2;
-                        pPoint.Z = 0;
-                        pointCollection.AddPoint(pPoint, ref _missing, ref _missing);
-                    }
-                    ((IPolygon)pointCollection).Close();
-                }
 
-                IConstructMultiPatch patch = new MultiPatchClass();
-                IZAware zAware = pointCollection as IZAware;
-                zAware.ZAware = true;
-                patch.ConstructExtrude(depth, pointCollection as IGeometry);
-                ITransform3D transform3D = patch as ITransform3D;
-                transform3D.Move3D(startPoint.X, startPoint.Y, startPoint.Z);
-                return patch as IGeometry;
+                string gg = ConvertToString(pFeature.Value[builderItem.IdxJgggField]);
+
+                string fsw = ConvertToString(pFeature.Value[builderItem.IdxFswField]).Trim();
+                if (builderItem.CylinderSubs.Contains(fsw))
+                {
+                    if (string.IsNullOrEmpty(gg) || gg == "<Пе>")
+                        gg = "50";
+                    if (gg.Contains("*"))
+                    {
+                        gg = gg.Split('*')[0];
+                    }
+                    double diameter;
+                    if (double.TryParse(gg, out diameter) == false)
+                        return null;
+                    diameter = diameter / 100;
+                    return new Point3DCylinder(oPoint.X, oPoint.Y, z, depth, diameter, _3DBuilder.Division).CreateGeometry();
+                }
+                if (builderItem.SquareSubs.Contains(fsw))
+                {
+                    if (string.IsNullOrEmpty(gg) || gg == "<Пе>")
+                        gg = "50*50";
+                    double length, width;
+                    if (gg.Split('*').Length <= 0)
+                        return null;
+                    if (double.TryParse(gg.Split('*')[0], out length) == false)
+                        return null;
+                    if (gg.Split('*').Length == 1)
+                        width = length;
+                    else if (double.TryParse(gg.Split('*')[1], out width) == false)
+                        return null;
+                    length /= 100;
+                    width /= 100;
+                    double angle = ConvertToDouble(pFeature.Value[builderItem.IdxXzjdField]);
+                    if (double.IsNaN(angle))
+                        angle = 0;
+
+                    if (builderItem.RotationAngleType == enumRotationAngleType.Angle)
+                    {
+                        angle = angle * Math.PI / 180;
+                    }
+
+                    return new Point3DSquare(oPoint.X, oPoint.Y, z, depth, length, width, angle, _3DBuilder.Division).CreateGeometry();
+                }
+                return null;
             }
             catch (Exception e)
             {
@@ -268,7 +251,7 @@ namespace Yutai.Pipeline3D
         {
             if (obj == null || obj is DBNull)
             {
-                return null;
+                return "";
             }
             return obj.ToString();
         }

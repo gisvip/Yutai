@@ -80,7 +80,7 @@ namespace Yutai.Pipeline.Analysis.QueryForms
 
         private void AddFeatureLayer(IFeatureLayer iFLayer)
         {
-            if (iFLayer != null)
+            if (iFLayer != null && iFLayer.FeatureClass != null)
             {
                 string aliasName = iFLayer.FeatureClass.AliasName;
                 if (this.pPipeCfg.IsPipelineLayer(iFLayer.Name, enumPipelineDataType.Line))
