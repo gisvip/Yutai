@@ -48,6 +48,7 @@ namespace Yutai.Pipeline3D
         private List<string> _fswValueList;
         private List<string> _cylinderSubs;
         private List<string> _squareSubs;
+        private List<string> _sphereSubs;
 
         public Pipeline3DItem(I3DBuilder builder, IPipelineLayer pipelineLayer)
         {
@@ -172,6 +173,17 @@ namespace Yutai.Pipeline3D
                 return _squareSubs;
             }
             set { _squareSubs = value; }
+        }
+
+        public List<string> SphereSubs
+        {
+            get
+            {
+                if (_sphereSubs == null)
+                    _sphereSubs = new List<string>();
+                return _sphereSubs;
+            }
+            set { _sphereSubs = value; }
         }
 
         public string DmgcFieldName

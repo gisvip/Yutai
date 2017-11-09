@@ -143,16 +143,31 @@ namespace Yutai.Pipeline3D
                             featureBuffer.Shape = patchGeometry;
                             featureBuffer.Value[builderItem.IdxLineLinkField] = sFeature.OID;
                             insertCursor.InsertFeature(featureBuffer);
-                            count++;
+                        }
+                        //! 生成连接段球体
+                        if (customPipeline.StandardList.Count > 0)
+                        {
+                            if (string.IsNullOrEmpty(customPipeline.StandardList[0]))
+                                customPipeline.StandardList[0] = "100";
+                            double radius = Convert.ToDouble(customPipeline.StandardList[0]) / 1000.0;
+                            featureBuffer.Shape = customPipeline.CreateStartSphere(radius, 10);
+                            featureBuffer.Value[builderItem.IdxLineLinkField] = sFeature.OID;
+                            insertCursor.InsertFeature(featureBuffer);
 
-                            if (count >= 1000)
-                            {
-                                count = 0;
-                                insertCursor.Flush();
-                                Marshal.ReleaseComObject(insertCursor);
-                                insertCursor = builderItem.LinePatchClass.Insert(true);
-                                featureBuffer = builderItem.LinePatchClass.CreateFeatureBuffer();
-                            }
+                            featureBuffer.Shape = customPipeline.CreateEndSphere(radius, 10);
+                            featureBuffer.Value[builderItem.IdxLineLinkField] = sFeature.OID;
+                            insertCursor.InsertFeature(featureBuffer);
+                        }
+
+                        count++;
+
+                        if (count >= 1000)
+                        {
+                            count = 0;
+                            insertCursor.Flush();
+                            Marshal.ReleaseComObject(insertCursor);
+                            insertCursor = builderItem.LinePatchClass.Insert(true);
+                            featureBuffer = builderItem.LinePatchClass.CreateFeatureBuffer();
                         }
                     }
                     catch (Exception e)
@@ -229,6 +244,11 @@ namespace Yutai.Pipeline3D
 
                     return new Point3DSquare(oPoint.X, oPoint.Y, z, depth, length, width, angle, _3DBuilder.Division).CreateGeometry();
                 }
+                if (builderItem.SphereSubs.Contains(fsw))
+                {
+                    double maxDiameter = GetDiameter(oPoint, builderItem);
+                    return new Point3DSphere(oPoint.X, oPoint.Y, z, depth, maxDiameter, _3DBuilder.Division).CreateGeometry();
+                }
                 return null;
             }
             catch (Exception e)
@@ -236,6 +256,34 @@ namespace Yutai.Pipeline3D
                 throw new Exception(e.Message);
             }
         }
+
+        private double GetDiameter(IPoint point, I3DItem item)
+        {
+            ISpatialFilter spatialFilter = new SpatialFilterClass();
+            spatialFilter.Geometry = point;
+            spatialFilter.SpatialRel = esriSpatialRelEnum.esriSpatialRelIntersects;
+            IFeatureCursor featureCursor = item.LineLayerInfo.FeatureClass.Search(spatialFilter, false);
+            IFeature lineFeature;
+            double maxDiameter = 0;
+            while ((lineFeature = featureCursor.NextFeature()) != null)
+            {
+                string gg = ConvertToString(lineFeature.Value[item.IdxGjField]); if (string.IsNullOrEmpty(gg) || gg == "<空>")
+                    gg = "50";
+                if (gg.Contains("*"))
+                {
+                    gg = gg.Split('*')[0];
+                }
+                double diameter;
+                if (double.TryParse(gg, out diameter) == false)
+                    diameter = 0;
+                diameter = diameter / 1000;
+
+                if (maxDiameter < diameter)
+                    maxDiameter = diameter;
+            }
+            return maxDiameter;
+        }
+
 
         public static double ConvertToDouble(object obj)
         {

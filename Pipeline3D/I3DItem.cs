@@ -22,6 +22,7 @@ namespace Yutai.Pipeline3D
         List<string> FswValueList { get; }
         List<string> CylinderSubs { get; set; }
         List<string> SquareSubs { get; set; }
+        List<string> SphereSubs { get; set; }
 
 
         string DmgcFieldName { get; set; }

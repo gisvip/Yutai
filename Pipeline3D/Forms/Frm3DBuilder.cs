@@ -162,6 +162,7 @@ namespace Yutai.Pipeline3D.Forms
 
             txtCylinderSubs.Text = string.Join(";", item.CylinderSubs);
             txtSquareSubs.Text = string.Join(";", item.SquareSubs);
+            txtSphereSubs.Text = string.Join(";", item.SphereSubs);
         }
 
         private void Register()
@@ -330,7 +331,7 @@ namespace Yutai.Pipeline3D.Forms
         {
             if (_currentItem.FswValueList == null || _currentItem.FswValueList.Count <= 0)
                 return;
-            FrmValueSelect frm = new FrmValueSelect(_currentItem.FswValueList.Where(c=>_currentItem.CylinderSubs.Contains(c)==false && _currentItem.SquareSubs.Contains(c) == false).ToList(), _currentItem.CylinderSubs);
+            FrmValueSelect frm = new FrmValueSelect(_currentItem.FswValueList.Where(c=>_currentItem.CylinderSubs.Contains(c)==false && _currentItem.SquareSubs.Contains(c) == false && _currentItem.SphereSubs.Contains(c) == false).ToList(), _currentItem.CylinderSubs);
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 _currentItem.CylinderSubs = frm.GetSelectedFsw();
@@ -342,11 +343,23 @@ namespace Yutai.Pipeline3D.Forms
         {
             if (_currentItem.FswValueList == null || _currentItem.FswValueList.Count <= 0)
                 return;
-            FrmValueSelect frm = new FrmValueSelect(_currentItem.FswValueList.Where(c=>_currentItem.CylinderSubs.Contains(c) == false && _currentItem.SquareSubs.Contains(c) == false).ToList(), _currentItem.SquareSubs);
+            FrmValueSelect frm = new FrmValueSelect(_currentItem.FswValueList.Where(c=>_currentItem.CylinderSubs.Contains(c) == false && _currentItem.SquareSubs.Contains(c) == false && _currentItem.SphereSubs.Contains(c) == false).ToList(), _currentItem.SquareSubs);
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 _currentItem.SquareSubs = frm.GetSelectedFsw();
                 txtSquareSubs.Text = string.Join(";", _currentItem.SquareSubs);
+            }
+        }
+
+        private void btnSelectSpheres_Click(object sender, EventArgs e)
+        {
+            if (_currentItem.FswValueList == null || _currentItem.FswValueList.Count <= 0)
+                return;
+            FrmValueSelect frm = new FrmValueSelect(_currentItem.FswValueList.Where(c => _currentItem.CylinderSubs.Contains(c) == false && _currentItem.SquareSubs.Contains(c) == false && _currentItem.SphereSubs.Contains(c) == false).ToList(), _currentItem.SphereSubs);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                _currentItem.SphereSubs = frm.GetSelectedFsw();
+                txtSphereSubs.Text = string.Join(";", _currentItem.SphereSubs);
             }
         }
     }

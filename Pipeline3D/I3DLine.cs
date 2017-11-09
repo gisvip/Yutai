@@ -8,7 +8,7 @@
 // 更新时间 :  2017/10/24  17:06
 namespace Yutai.Pipeline3D
 {
-    public interface I3DLine
+    public interface I3DLine : I3DGeometry
     {
         
     }

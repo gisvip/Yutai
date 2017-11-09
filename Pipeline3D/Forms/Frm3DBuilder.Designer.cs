@@ -47,9 +47,12 @@
             this._nameSuf = new System.Windows.Forms.TextBox();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.btnSelectSpheres = new System.Windows.Forms.Button();
             this.btnSelectSquares = new System.Windows.Forms.Button();
+            this.txtSphereSubs = new System.Windows.Forms.TextBox();
             this.btnSelectCylinders = new System.Windows.Forms.Button();
             this.txtSquareSubs = new System.Windows.Forms.TextBox();
             this.txtCylinderSubs = new System.Windows.Forms.TextBox();
@@ -291,9 +294,12 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.label19);
             this.groupBox5.Controls.Add(this.label17);
             this.groupBox5.Controls.Add(this.label16);
+            this.groupBox5.Controls.Add(this.btnSelectSpheres);
             this.groupBox5.Controls.Add(this.btnSelectSquares);
+            this.groupBox5.Controls.Add(this.txtSphereSubs);
             this.groupBox5.Controls.Add(this.btnSelectCylinders);
             this.groupBox5.Controls.Add(this.txtSquareSubs);
             this.groupBox5.Controls.Add(this.txtCylinderSubs);
@@ -309,10 +315,19 @@
             this.groupBox5.Controls.Add(this.cmbDmgcField);
             this.groupBox5.Location = new System.Drawing.Point(233, 93);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(375, 222);
+            this.groupBox5.Size = new System.Drawing.Size(375, 154);
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "管点配置";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(6, 157);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(65, 12);
+            this.label19.TabIndex = 4;
+            this.label19.Text = "折 点 类：";
             // 
             // label17
             // 
@@ -332,6 +347,16 @@
             this.label16.TabIndex = 4;
             this.label16.Text = "检修井类：";
             // 
+            // btnSelectSpheres
+            // 
+            this.btnSelectSpheres.Location = new System.Drawing.Point(286, 153);
+            this.btnSelectSpheres.Name = "btnSelectSpheres";
+            this.btnSelectSpheres.Size = new System.Drawing.Size(75, 23);
+            this.btnSelectSpheres.TabIndex = 3;
+            this.btnSelectSpheres.Text = "选择";
+            this.btnSelectSpheres.UseVisualStyleBackColor = true;
+            this.btnSelectSpheres.Click += new System.EventHandler(this.btnSelectSpheres_Click);
+            // 
             // btnSelectSquares
             // 
             this.btnSelectSquares.Location = new System.Drawing.Point(286, 124);
@@ -341,6 +366,14 @@
             this.btnSelectSquares.Text = "选择";
             this.btnSelectSquares.UseVisualStyleBackColor = true;
             this.btnSelectSquares.Click += new System.EventHandler(this.btnSelectSquares_Click);
+            // 
+            // txtSphereSubs
+            // 
+            this.txtSphereSubs.Location = new System.Drawing.Point(77, 154);
+            this.txtSphereSubs.Name = "txtSphereSubs";
+            this.txtSphereSubs.ReadOnly = true;
+            this.txtSphereSubs.Size = new System.Drawing.Size(203, 21);
+            this.txtSphereSubs.TabIndex = 2;
             // 
             // btnSelectCylinders
             // 
@@ -470,9 +503,9 @@
             this.groupBox4.Controls.Add(this.cmbGjField);
             this.groupBox4.Controls.Add(this.cmbQdmsField);
             this.groupBox4.Controls.Add(this.cmbQdgcField);
-            this.groupBox4.Location = new System.Drawing.Point(233, 321);
+            this.groupBox4.Location = new System.Drawing.Point(233, 253);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(375, 103);
+            this.groupBox4.Size = new System.Drawing.Size(375, 171);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "管线配置";
@@ -642,5 +675,8 @@
         private System.Windows.Forms.TextBox txtCylinderSubs;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox cmbRotationAngleType;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button btnSelectSpheres;
+        private System.Windows.Forms.TextBox txtSphereSubs;
     }
 }
