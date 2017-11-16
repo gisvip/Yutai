@@ -213,8 +213,7 @@ namespace Yutai.Pipeline3D
             ((IPolygon)pointCollection).Close();
             return pointCollection;
         }
-
-
+        
         public IGeometry CreateStartSphere(double radius, int step)
         {
             IPoint centerPoint = new PointClass();

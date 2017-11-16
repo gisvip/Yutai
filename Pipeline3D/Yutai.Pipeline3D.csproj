@@ -117,6 +117,7 @@
     <Compile Include="I3DLine.cs" />
     <Compile Include="I3DPoint.cs" />
     <Compile Include="Line3DCylinder.cs" />
+    <Compile Include="Line3DSquare.cs" />
     <Compile Include="PipeClassInfo.cs" />
     <Compile Include="PipeClassType.cs" />
     <Compile Include="PipeElevationType.cs" />
