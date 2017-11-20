@@ -24,6 +24,10 @@ namespace Yutai.Pipeline3D
         List<string> SquareSubs { get; set; }
         List<string> SphereSubs { get; set; }
 
+        List<string> MsfsValueList { get; set; }
+        List<string> LCylinderSubs { get; set; }
+        List<string> LSquareSubs { get; set; }
+
 
         string DmgcFieldName { get; set; }
         int IdxDmgcField { get; }
@@ -47,6 +51,10 @@ namespace Yutai.Pipeline3D
         int IdxZdmsField { get; }
         string GjFieldName { get; set; }
         int IdxGjField { get; }
+        int IdxMsfsField { get; set; }
+        string MsfsFieldName { get; set; }
+        int IdxGgField { get; set; }
+        string GgFieldName { get; set; }
         int IdxLineLinkField { get; }
     }
 }

@@ -41,7 +41,7 @@ namespace Yutai.Pipeline3D.Forms
             Register();
         }
 
-        public int Division => (int) numDivision.Value;
+        public int Division => (int)numDivision.Value;
 
         public string NameSuf => _nameSuf.Text;
 
@@ -88,7 +88,7 @@ namespace Yutai.Pipeline3D.Forms
             {
                 Cursor.Current = Cursors.WaitCursor;
                 this.txtSaveAt.Text = frmOpenFile.SelectedItems[0].ToString();
-                _saveWorkspace = ((IGxObject) frmOpenFile.SelectedItems[0]).InternalObjectName.Open() as IWorkspace;
+                _saveWorkspace = ((IGxObject)frmOpenFile.SelectedItems[0]).InternalObjectName.Open() as IWorkspace;
                 Cursor.Current = Cursors.Default;
             }
         }
@@ -159,10 +159,20 @@ namespace Yutai.Pipeline3D.Forms
                 string.IsNullOrEmpty(item.GjFieldName)
                     ? item.LineLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.GJ)
                     : item.GjFieldName);
+            AddItemsFromFields(item.LineLayerInfo.FeatureClass.Fields, cmbMsfsField,
+                string.IsNullOrEmpty(item.MsfsFieldName)
+                    ? item.LineLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.MSFS)
+                    : item.MsfsFieldName);
+            AddItemsFromFields(item.LineLayerInfo.FeatureClass.Fields, cmbGgField,
+                string.IsNullOrEmpty(item.GgFieldName)
+                    ? item.LineLayerInfo.GetFieldName(PipeConfigWordHelper.LineWords.GG)
+                    : item.GgFieldName);
 
             txtCylinderSubs.Text = string.Join(";", item.CylinderSubs);
             txtSquareSubs.Text = string.Join(";", item.SquareSubs);
             txtSphereSubs.Text = string.Join(";", item.SphereSubs);
+            txtLCylinderSubs.Text = string.Join(";", item.LCylinderSubs);
+            txtLSquareSubs.Text = string.Join(";", item.LSquareSubs);
         }
 
         private void Register()
@@ -182,6 +192,18 @@ namespace Yutai.Pipeline3D.Forms
             cmbQdmsField.SelectedIndexChanged += CmbQdmsFieldOnSelectedIndexChanged;
             cmbZdmsField.SelectedIndexChanged += CmbZdmsFieldOnSelectedIndexChanged;
             cmbGjField.SelectedIndexChanged += CmbGjFieldOnSelectedIndexChanged;
+            cmbMsfsField.SelectedIndexChanged += CmbMsfsFieldOnSelectedIndexChanged;
+            cmbGgField.SelectedIndexChanged += CmbGgFieldOnSelectedIndexChanged;
+        }
+
+        private void CmbGgFieldOnSelectedIndexChanged(object sender, EventArgs eventArgs)
+        {
+            _currentItem.GgFieldName = ((ComboBox)sender).SelectedItem.ToString();
+        }
+
+        private void CmbMsfsFieldOnSelectedIndexChanged(object sender, EventArgs eventArgs)
+        {
+            _currentItem.MsfsFieldName = ((ComboBox)sender).SelectedItem.ToString();
         }
 
         private void CmbRotationAngleTypeOnSelectedIndexChanged(object sender, EventArgs eventArgs)
@@ -217,11 +239,11 @@ namespace Yutai.Pipeline3D.Forms
 
         private void CmbSectionTypeOnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
-            if (((ComboBox) sender).SelectedItem.ToString() == "高*宽")
+            if (((ComboBox)sender).SelectedItem.ToString() == "高*宽")
             {
                 _currentItem.SectionType = enumPipeSectionType.HeightAndWidth;
             }
-            if (((ComboBox) sender).SelectedItem.ToString() == "宽*高")
+            if (((ComboBox)sender).SelectedItem.ToString() == "宽*高")
             {
                 _currentItem.SectionType = enumPipeSectionType.WidthAndHeight;
             }
@@ -234,15 +256,15 @@ namespace Yutai.Pipeline3D.Forms
 
         private void CmbHeightTypeOnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
-            if (((ComboBox) sender).SelectedItem.ToString() == "管顶")
+            if (((ComboBox)sender).SelectedItem.ToString() == "管顶")
             {
                 _currentItem.HeightType = enumPipelineHeightType.Top;
             }
-            if (((ComboBox) sender).SelectedItem.ToString() == "管中")
+            if (((ComboBox)sender).SelectedItem.ToString() == "管中")
             {
                 _currentItem.HeightType = enumPipelineHeightType.Middle;
             }
-            if (((ComboBox) sender).SelectedItem.ToString() == "管底")
+            if (((ComboBox)sender).SelectedItem.ToString() == "管底")
             {
                 _currentItem.HeightType = enumPipelineHeightType.Bottom;
             }
@@ -250,47 +272,47 @@ namespace Yutai.Pipeline3D.Forms
 
         private void CmbGjFieldOnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
-            _currentItem.GjFieldName = ((ComboBox) sender).SelectedItem.ToString();
+            _currentItem.GjFieldName = ((ComboBox)sender).SelectedItem.ToString();
         }
 
         private void CmbZdmsFieldOnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
-            _currentItem.ZdmsFieldName = ((ComboBox) sender).SelectedItem.ToString();
+            _currentItem.ZdmsFieldName = ((ComboBox)sender).SelectedItem.ToString();
         }
 
         private void CmbQdmsFieldOnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
-            _currentItem.QdmsFieldName = ((ComboBox) sender).SelectedItem.ToString();
+            _currentItem.QdmsFieldName = ((ComboBox)sender).SelectedItem.ToString();
         }
 
         private void CmbZdgcFieldOnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
-            _currentItem.ZdgcFieldName = ((ComboBox) sender).SelectedItem.ToString();
+            _currentItem.ZdgcFieldName = ((ComboBox)sender).SelectedItem.ToString();
         }
 
         private void CmbQdgcFieldOnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
-            _currentItem.QdgcFieldName = ((ComboBox) sender).SelectedItem.ToString();
+            _currentItem.QdgcFieldName = ((ComboBox)sender).SelectedItem.ToString();
         }
 
         private void CmbXzjdFieldOnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
-            _currentItem.XzjdFieldName = ((ComboBox) sender).SelectedItem.ToString();
+            _currentItem.XzjdFieldName = ((ComboBox)sender).SelectedItem.ToString();
         }
 
         private void CmbJdsdFieldOnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
-            _currentItem.JdsdFieldName = ((ComboBox) sender).SelectedItem.ToString();
+            _currentItem.JdsdFieldName = ((ComboBox)sender).SelectedItem.ToString();
         }
 
         private void CmbJgggFieldOnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
-            _currentItem.JgggFieldName = ((ComboBox) sender).SelectedItem.ToString();
+            _currentItem.JgggFieldName = ((ComboBox)sender).SelectedItem.ToString();
         }
 
         private void CmbDmgcFieldOnSelectedIndexChanged(object sender, EventArgs eventArgs)
         {
-            _currentItem.DmgcFieldName = ((ComboBox) sender).SelectedItem.ToString();
+            _currentItem.DmgcFieldName = ((ComboBox)sender).SelectedItem.ToString();
         }
 
         public void AddItemsFromFields(IFields fields, ComboBox comboBox, string defaultValue = null)
@@ -331,11 +353,11 @@ namespace Yutai.Pipeline3D.Forms
         {
             if (_currentItem.FswValueList == null || _currentItem.FswValueList.Count <= 0)
                 return;
-            FrmValueSelect frm = new FrmValueSelect(_currentItem.FswValueList.Where(c=>_currentItem.CylinderSubs.Contains(c)==false && _currentItem.SquareSubs.Contains(c) == false && _currentItem.SphereSubs.Contains(c) == false).ToList(), _currentItem.CylinderSubs);
+            FrmValueSelect frm = new FrmValueSelect(_currentItem.FswValueList.Where(c => _currentItem.CylinderSubs.Contains(c) == false && _currentItem.SquareSubs.Contains(c) == false && _currentItem.SphereSubs.Contains(c) == false).ToList(), _currentItem.CylinderSubs);
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                _currentItem.CylinderSubs = frm.GetSelectedFsw();
-                txtCylinderSubs.Text = string.Join(";",_currentItem.CylinderSubs);
+                _currentItem.CylinderSubs = frm.GetSelectedValues();
+                txtCylinderSubs.Text = string.Join(";", _currentItem.CylinderSubs);
             }
         }
 
@@ -343,10 +365,10 @@ namespace Yutai.Pipeline3D.Forms
         {
             if (_currentItem.FswValueList == null || _currentItem.FswValueList.Count <= 0)
                 return;
-            FrmValueSelect frm = new FrmValueSelect(_currentItem.FswValueList.Where(c=>_currentItem.CylinderSubs.Contains(c) == false && _currentItem.SquareSubs.Contains(c) == false && _currentItem.SphereSubs.Contains(c) == false).ToList(), _currentItem.SquareSubs);
+            FrmValueSelect frm = new FrmValueSelect(_currentItem.FswValueList.Where(c => _currentItem.CylinderSubs.Contains(c) == false && _currentItem.SquareSubs.Contains(c) == false && _currentItem.SphereSubs.Contains(c) == false).ToList(), _currentItem.SquareSubs);
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                _currentItem.SquareSubs = frm.GetSelectedFsw();
+                _currentItem.SquareSubs = frm.GetSelectedValues();
                 txtSquareSubs.Text = string.Join(";", _currentItem.SquareSubs);
             }
         }
@@ -358,8 +380,32 @@ namespace Yutai.Pipeline3D.Forms
             FrmValueSelect frm = new FrmValueSelect(_currentItem.FswValueList.Where(c => _currentItem.CylinderSubs.Contains(c) == false && _currentItem.SquareSubs.Contains(c) == false && _currentItem.SphereSubs.Contains(c) == false).ToList(), _currentItem.SphereSubs);
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                _currentItem.SphereSubs = frm.GetSelectedFsw();
+                _currentItem.SphereSubs = frm.GetSelectedValues();
                 txtSphereSubs.Text = string.Join(";", _currentItem.SphereSubs);
+            }
+        }
+
+        private void btnSelectLCylinders_Click(object sender, EventArgs e)
+        {
+            if (_currentItem.MsfsValueList == null || _currentItem.MsfsValueList.Count <= 0)
+                return;
+            FrmValueSelect frm = new FrmValueSelect(_currentItem.MsfsValueList.Where(c => _currentItem.LCylinderSubs.Contains(c) == false && _currentItem.LSquareSubs.Contains(c) == false).ToList(), _currentItem.LCylinderSubs);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                _currentItem.LCylinderSubs = frm.GetSelectedValues();
+                txtLCylinderSubs.Text = string.Join(";", _currentItem.LCylinderSubs);
+            }
+        }
+
+        private void btnSelectLSquares_Click(object sender, EventArgs e)
+        {
+            if (_currentItem.MsfsValueList == null || _currentItem.MsfsValueList.Count <= 0)
+                return;
+            FrmValueSelect frm = new FrmValueSelect(_currentItem.MsfsValueList.Where(c => _currentItem.LCylinderSubs.Contains(c) == false && _currentItem.LSquareSubs.Contains(c) == false).ToList(), _currentItem.LSquareSubs);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                _currentItem.LSquareSubs = frm.GetSelectedValues();
+                txtLSquareSubs.Text = string.Join(";", _currentItem.LSquareSubs);
             }
         }
     }

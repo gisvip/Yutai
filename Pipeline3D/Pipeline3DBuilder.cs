@@ -193,41 +193,14 @@ namespace Yutai.Pipeline3D
                 if (Math.Abs(zdgc) < 0.01 || double.IsNaN(zdgc))
                     zdgc = qdgc;
 
-                string standard = ConvertToString(feature.Value[builderItem.IdxGjField]).Replace(" ", "");
-                List<string> standardList = GetStandardList(standard);
-
-                string[] standards = standardList[0].Split('*');
-                if (standards.Length > 1)
+                string msfs = ConvertToString(feature.Value[builderItem.IdxMsfsField]).Trim();
+                if (builderItem.LCylinderSubs.Contains(msfs))
                 {
-                    double height = 0, width = 0;
-                    switch (builderItem.LineLayerInfo.SectionType)
-                    {
-                        case enumPipeSectionType.HeightAndWidth:
-                            height = ConvertToDouble(standards[0]) / 1000;
-                            width = ConvertToDouble(standards[1]) / 1000;
-                            break;
-                        case enumPipeSectionType.WidthAndHeight:
-                            width = ConvertToDouble(standards[0]) / 1000;
-                            height = ConvertToDouble(standards[1]) / 1000;
-                            break;
-                    }
+                    string standard = ConvertToString(feature.Value[builderItem.IdxGjField]).Replace(" ", "");
+                    List<string> standardList = GetStandardList(standard);
 
-                    switch (builderItem.LineLayerInfo.HeightType)
-                    {
-                        case enumPipelineHeightType.Top:
-                            qdgc = qdgc - height / 2;
-                            zdgc = zdgc - height / 2;
-                            break;
-                        case enumPipelineHeightType.Bottom:
-                            qdgc = qdgc + height / 2;
-                            zdgc = zdgc + height / 2;
-                            break;
-                    }
-                    I3DLine line = new Line3DSquare(polyline, qdgc, zdgc, width, height, builderItem.Builder.Division);
-                    list.Add(line.CreateGeometry());
-                }
-                else
-                {
+                    string[] standards = standardList[0].Split('*');
+
                     if (string.IsNullOrEmpty(standards[0]))
                         standards[0] = "100";
                     double diameter = ConvertToDouble(standards[0]) / 1000;
@@ -246,8 +219,42 @@ namespace Yutai.Pipeline3D
                     list.Add(line.CreateGeometry());
                     list.Add(line.CreateStartSphere());
                     list.Add(line.CreateEndSphere());
-                }
 
+                }
+                else if (builderItem.LSquareSubs.Contains(msfs))
+                {
+                    string standard = ConvertToString(feature.Value[builderItem.IdxGgField]).Replace(" ", "");
+                    List<string> standardList = GetStandardList(standard);
+
+                    string[] standards = standardList[0].Split('*');
+
+                    double height = 0, width = 0;
+                    switch (builderItem.LineLayerInfo.SectionType)
+                    {
+                        case enumPipeSectionType.HeightAndWidth:
+                            height = ConvertToDouble(standards[0]) / 100;
+                            width = ConvertToDouble(standards[1]) / 100;
+                            break;
+                        case enumPipeSectionType.WidthAndHeight:
+                            width = ConvertToDouble(standards[0]) / 100;
+                            height = ConvertToDouble(standards[1]) / 100;
+                            break;
+                    }
+
+                    switch (builderItem.LineLayerInfo.HeightType)
+                    {
+                        case enumPipelineHeightType.Top:
+                            qdgc = qdgc - height / 2;
+                            zdgc = zdgc - height / 2;
+                            break;
+                        case enumPipelineHeightType.Bottom:
+                            qdgc = qdgc + height / 2;
+                            zdgc = zdgc + height / 2;
+                            break;
+                    }
+                    I3DLine line = new Line3DSquare(polyline, qdgc, zdgc, width, height, builderItem.Builder.Division);
+                    list.Add(line.CreateGeometry());
+                }
                 return list;
             }
             catch (Exception)
@@ -255,7 +262,6 @@ namespace Yutai.Pipeline3D
                 return list;
             }
         }
-
 
         private List<string> GetStandardList(string standard)
         {
@@ -279,7 +285,6 @@ namespace Yutai.Pipeline3D
             }
             return standardList;
         }
-
 
         private IGeometry CreatePointPatch(IFeature pFeature, I3DItem builderItem)
         {
@@ -312,7 +317,7 @@ namespace Yutai.Pipeline3D
                     diameter = diameter / 100;
                     return new Point3DCylinder(oPoint.X, oPoint.Y, z, depth, diameter, _3DBuilder.Division).CreateGeometry();
                 }
-                if (builderItem.SquareSubs.Contains(fsw))
+                else if (builderItem.SquareSubs.Contains(fsw))
                 {
                     if (string.IsNullOrEmpty(gg) || gg == "<Пе>")
                         gg = "50*50";
@@ -377,7 +382,6 @@ namespace Yutai.Pipeline3D
             }
             return maxDiameter;
         }
-
 
         public static double ConvertToDouble(object obj)
         {

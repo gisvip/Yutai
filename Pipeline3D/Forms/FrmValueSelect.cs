@@ -76,7 +76,7 @@ namespace Yutai.Pipeline3D.Forms
             }
         }
 
-        public List<string> GetSelectedFsw()
+        public List<string> GetSelectedValues()
         {
             List<string> list = new List<string>();
             for (int i = 0; i < _selectedFsw.Count; i++)

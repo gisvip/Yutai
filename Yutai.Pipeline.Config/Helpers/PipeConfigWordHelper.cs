@@ -379,6 +379,11 @@ namespace Yutai.Pipeline.Config.Helpers
         {
             get { return "SYZK"; }
         }
+        // !规格
+        public string GG
+        {
+            get { return "GG"; }
+        }
     }
 
     public class AssPointConfigWords

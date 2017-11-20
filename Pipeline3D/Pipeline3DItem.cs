@@ -49,6 +49,13 @@ namespace Yutai.Pipeline3D
         private List<string> _cylinderSubs;
         private List<string> _squareSubs;
         private List<string> _sphereSubs;
+        private int _idxMsfsField = -1;
+        private string _msfsFieldName;
+        private int _idxGgField = -1;
+        private string _ggFieldName;
+        private List<string> _msfsValueList;
+        private List<string> _lCylinderSubs;
+        private List<string> _lSquareSubs;
 
         public Pipeline3DItem(I3DBuilder builder, IPipelineLayer pipelineLayer)
         {
@@ -184,6 +191,44 @@ namespace Yutai.Pipeline3D
                 return _sphereSubs;
             }
             set { _sphereSubs = value; }
+        }
+
+        public List<string> MsfsValueList
+        {
+            get
+            {
+                if (IdxMsfsField < 0)
+                    return null;
+                if (_msfsValueList == null)
+                {
+                    _msfsValueList = new List<string>();
+                    CommonHelper.GetUniqueValues((ITable)_lineLayerInfo.FeatureClass, _msfsFieldName, _msfsValueList);
+                }
+                return _msfsValueList;
+            }
+            set { _msfsValueList = value; }
+        }
+
+        public List<string> LCylinderSubs
+        {
+            get
+            {
+                if (_lCylinderSubs == null)
+                    _lCylinderSubs = new List<string>();
+                return _lCylinderSubs;
+            }
+            set { _lCylinderSubs = value; }
+        }
+
+        public List<string> LSquareSubs
+        {
+            get
+            {
+                if (_lSquareSubs == null)
+                    _lSquareSubs = new List<string>();
+                return _lSquareSubs;
+            }
+            set { _lSquareSubs = value; }
         }
 
         public string DmgcFieldName
@@ -388,6 +433,40 @@ namespace Yutai.Pipeline3D
                         _lineLayerInfo.FeatureClass.FindField(_gjFieldName);
                 return _idxGjField;
             }
+        }
+
+        public int IdxMsfsField
+        {
+            get
+            {
+                if (_idxMsfsField < 0)
+                    _idxMsfsField = _lineLayerInfo.FeatureClass.FindField(_msfsFieldName);
+                return _idxMsfsField;
+            }
+            set { _idxMsfsField = value; }
+        }
+
+        public string MsfsFieldName
+        {
+            get { return _msfsFieldName; }
+            set { _msfsFieldName = value; }
+        }
+
+        public int IdxGgField
+        {
+            get
+            {
+                if (_idxGgField < 0)
+                    _idxGgField = _lineLayerInfo.FeatureClass.FindField(_ggFieldName);
+                return _idxGgField;
+            }
+            set { _idxGgField = value; }
+        }
+
+        public string GgFieldName
+        {
+            get { return _ggFieldName; }
+            set { _ggFieldName = value; }
         }
 
         public int IdxLineLinkField

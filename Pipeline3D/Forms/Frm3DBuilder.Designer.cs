@@ -77,6 +77,16 @@
             this.cmbGjField = new System.Windows.Forms.ComboBox();
             this.cmbQdmsField = new System.Windows.Forms.ComboBox();
             this.cmbQdgcField = new System.Windows.Forms.ComboBox();
+            this.txtLCylinderSubs = new System.Windows.Forms.TextBox();
+            this.btnSelectLCylinders = new System.Windows.Forms.Button();
+            this.label20 = new System.Windows.Forms.Label();
+            this.txtLSquareSubs = new System.Windows.Forms.TextBox();
+            this.btnSelectLSquares = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
+            this.cmbMsfsField = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.cmbGgField = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -90,7 +100,7 @@
             this.groupBox1.Controls.Add(this.checkedListBoxPipelineLayers);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(211, 412);
+            this.groupBox1.Size = new System.Drawing.Size(211, 470);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "数据源";
@@ -103,7 +113,7 @@
             this.checkedListBoxPipelineLayers.FormattingEnabled = true;
             this.checkedListBoxPipelineLayers.Location = new System.Drawing.Point(3, 17);
             this.checkedListBoxPipelineLayers.Name = "checkedListBoxPipelineLayers";
-            this.checkedListBoxPipelineLayers.Size = new System.Drawing.Size(205, 392);
+            this.checkedListBoxPipelineLayers.Size = new System.Drawing.Size(205, 450);
             this.checkedListBoxPipelineLayers.TabIndex = 0;
             this.checkedListBoxPipelineLayers.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxPipelineLayers_SelectedIndexChanged);
             // 
@@ -195,7 +205,7 @@
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.txtSaveAt);
             this.groupBox3.Controls.Add(this._nameSuf);
-            this.groupBox3.Location = new System.Drawing.Point(12, 430);
+            this.groupBox3.Location = new System.Drawing.Point(12, 488);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(495, 104);
             this.groupBox3.TabIndex = 2;
@@ -284,7 +294,7 @@
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(513, 501);
+            this.btnGenerate.Location = new System.Drawing.Point(513, 559);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(95, 33);
             this.btnGenerate.TabIndex = 3;
@@ -495,17 +505,27 @@
             // 
             this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.label21);
+            this.groupBox4.Controls.Add(this.label20);
+            this.groupBox4.Controls.Add(this.label22);
+            this.groupBox4.Controls.Add(this.label23);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Controls.Add(this.cmbZdgcField);
+            this.groupBox4.Controls.Add(this.btnSelectLSquares);
+            this.groupBox4.Controls.Add(this.btnSelectLCylinders);
             this.groupBox4.Controls.Add(this.cmbZdmsField);
+            this.groupBox4.Controls.Add(this.cmbMsfsField);
+            this.groupBox4.Controls.Add(this.cmbGgField);
             this.groupBox4.Controls.Add(this.cmbGjField);
+            this.groupBox4.Controls.Add(this.txtLSquareSubs);
+            this.groupBox4.Controls.Add(this.txtLCylinderSubs);
             this.groupBox4.Controls.Add(this.cmbQdmsField);
             this.groupBox4.Controls.Add(this.cmbQdgcField);
             this.groupBox4.Location = new System.Drawing.Point(233, 253);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(375, 171);
+            this.groupBox4.Size = new System.Drawing.Size(375, 226);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "管线配置";
@@ -600,11 +620,101 @@
             this.cmbQdgcField.Size = new System.Drawing.Size(100, 20);
             this.cmbQdgcField.TabIndex = 0;
             // 
+            // txtLCylinderSubs
+            // 
+            this.txtLCylinderSubs.Location = new System.Drawing.Point(77, 124);
+            this.txtLCylinderSubs.Name = "txtLCylinderSubs";
+            this.txtLCylinderSubs.ReadOnly = true;
+            this.txtLCylinderSubs.Size = new System.Drawing.Size(203, 21);
+            this.txtLCylinderSubs.TabIndex = 2;
+            // 
+            // btnSelectLCylinders
+            // 
+            this.btnSelectLCylinders.Location = new System.Drawing.Point(286, 123);
+            this.btnSelectLCylinders.Name = "btnSelectLCylinders";
+            this.btnSelectLCylinders.Size = new System.Drawing.Size(75, 23);
+            this.btnSelectLCylinders.TabIndex = 3;
+            this.btnSelectLCylinders.Text = "选择";
+            this.btnSelectLCylinders.UseVisualStyleBackColor = true;
+            this.btnSelectLCylinders.Click += new System.EventHandler(this.btnSelectLCylinders_Click);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(6, 127);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(65, 12);
+            this.label20.TabIndex = 4;
+            this.label20.Text = "管    类：";
+            // 
+            // txtLSquareSubs
+            // 
+            this.txtLSquareSubs.Location = new System.Drawing.Point(77, 151);
+            this.txtLSquareSubs.Name = "txtLSquareSubs";
+            this.txtLSquareSubs.ReadOnly = true;
+            this.txtLSquareSubs.Size = new System.Drawing.Size(203, 21);
+            this.txtLSquareSubs.TabIndex = 2;
+            // 
+            // btnSelectLSquares
+            // 
+            this.btnSelectLSquares.Location = new System.Drawing.Point(286, 150);
+            this.btnSelectLSquares.Name = "btnSelectLSquares";
+            this.btnSelectLSquares.Size = new System.Drawing.Size(75, 23);
+            this.btnSelectLSquares.TabIndex = 3;
+            this.btnSelectLSquares.Text = "选择";
+            this.btnSelectLSquares.UseVisualStyleBackColor = true;
+            this.btnSelectLSquares.Click += new System.EventHandler(this.btnSelectLSquares_Click);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(6, 154);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(65, 12);
+            this.label21.TabIndex = 4;
+            this.label21.Text = "管 沟 类：";
+            // 
+            // cmbMsfsField
+            // 
+            this.cmbMsfsField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMsfsField.FormattingEnabled = true;
+            this.cmbMsfsField.Location = new System.Drawing.Point(261, 72);
+            this.cmbMsfsField.Name = "cmbMsfsField";
+            this.cmbMsfsField.Size = new System.Drawing.Size(100, 20);
+            this.cmbMsfsField.TabIndex = 0;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(190, 75);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(65, 12);
+            this.label22.TabIndex = 1;
+            this.label22.Text = "埋设方式：";
+            // 
+            // cmbGgField
+            // 
+            this.cmbGgField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbGgField.FormattingEnabled = true;
+            this.cmbGgField.Location = new System.Drawing.Point(77, 98);
+            this.cmbGgField.Name = "cmbGgField";
+            this.cmbGgField.Size = new System.Drawing.Size(100, 20);
+            this.cmbGgField.TabIndex = 0;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(6, 101);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(65, 12);
+            this.label23.TabIndex = 1;
+            this.label23.Text = "规    格：";
+            // 
             // Frm3DBuilder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(620, 546);
+            this.ClientSize = new System.Drawing.Size(620, 604);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
@@ -678,5 +788,15 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button btnSelectSpheres;
         private System.Windows.Forms.TextBox txtSphereSubs;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button btnSelectLSquares;
+        private System.Windows.Forms.Button btnSelectLCylinders;
+        private System.Windows.Forms.TextBox txtLSquareSubs;
+        private System.Windows.Forms.TextBox txtLCylinderSubs;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox cmbMsfsField;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.ComboBox cmbGgField;
     }
 }

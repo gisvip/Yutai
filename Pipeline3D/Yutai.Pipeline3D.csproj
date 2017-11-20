@@ -96,7 +96,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomPipeline.cs" />
     <Compile Include="Forms\Frm3DBuilder.cs">
       <SubType>Form</SubType>
     </Compile>
