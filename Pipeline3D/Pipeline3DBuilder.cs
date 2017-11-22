@@ -15,6 +15,7 @@ namespace Yutai.Pipeline3D
     {
         private I3DBuilder _3DBuilder;
         private List<string> _checkedList;
+
         public Pipeline3DBuilder(I3DBuilder builder)
         {
             _3DBuilder = builder;
@@ -136,23 +137,26 @@ namespace Yutai.Pipeline3D
                     {
                         IGeometry pShape = sFeature.Shape;
                         if (pShape.IsEmpty) continue;
-                        CustomPipeline customPipeline = new CustomPipeline(sFeature, builderItem);
-                        for (int i = 0; i < customPipeline.StandardList.Count; i++)
+
+                        List<IGeometry> geometrys = CreateLinePatch(sFeature, builderItem);
+                        foreach (IGeometry geometry in geometrys)
                         {
-                            IGeometry patchGeometry = customPipeline.CreateLinePatch(i);
-                            featureBuffer.Shape = patchGeometry;
+                            if (geometry == null)
+                                continue;
+                            featureBuffer.Shape = geometry;
                             featureBuffer.Value[builderItem.IdxLineLinkField] = sFeature.OID;
                             insertCursor.InsertFeature(featureBuffer);
-                            count++;
+                        }
 
-                            if (count >= 1000)
-                            {
-                                count = 0;
-                                insertCursor.Flush();
-                                Marshal.ReleaseComObject(insertCursor);
-                                insertCursor = builderItem.LinePatchClass.Insert(true);
-                                featureBuffer = builderItem.LinePatchClass.CreateFeatureBuffer();
-                            }
+                        count++;
+
+                        if (count >= 1000)
+                        {
+                            count = 0;
+                            insertCursor.Flush();
+                            Marshal.ReleaseComObject(insertCursor);
+                            insertCursor = builderItem.LinePatchClass.Insert(true);
+                            featureBuffer = builderItem.LinePatchClass.CreateFeatureBuffer();
                         }
                     }
                     catch (Exception e)
@@ -171,6 +175,111 @@ namespace Yutai.Pipeline3D
                 throw new Exception(string.Format("{0}\r\n{1}", builderItem.LineLayerInfo.AliasName, e.Message));
             }
         }
+
+        private List<IGeometry> CreateLinePatch(IFeature feature, I3DItem builderItem)
+        {
+            List<IGeometry> list = new List<IGeometry>();
+            try
+            {
+                IPolyline polyline = feature.Shape as IPolyline;
+                if (polyline == null || polyline.IsEmpty)
+                    return list;
+
+                double qdgc = ConvertToDouble(feature.Value[builderItem.IdxQdgcField]);
+                double zdgc = ConvertToDouble(feature.Value[builderItem.IdxZdgcField]);
+
+                if (Math.Abs(qdgc) < 0.01 || double.IsNaN(qdgc))
+                    qdgc = zdgc;
+                if (Math.Abs(zdgc) < 0.01 || double.IsNaN(zdgc))
+                    zdgc = qdgc;
+
+                string standard = ConvertToString(feature.Value[builderItem.IdxGjField]).Replace(" ", "");
+                List<string> standardList = GetStandardList(standard);
+
+                string[] standards = standardList[0].Split('*');
+                if (standards.Length > 1)
+                {
+                    double height = 0, width = 0;
+                    switch (builderItem.LineLayerInfo.SectionType)
+                    {
+                        case enumPipeSectionType.HeightAndWidth:
+                            height = ConvertToDouble(standards[0]) / 1000;
+                            width = ConvertToDouble(standards[1]) / 1000;
+                            break;
+                        case enumPipeSectionType.WidthAndHeight:
+                            width = ConvertToDouble(standards[0]) / 1000;
+                            height = ConvertToDouble(standards[1]) / 1000;
+                            break;
+                    }
+
+                    switch (builderItem.LineLayerInfo.HeightType)
+                    {
+                        case enumPipelineHeightType.Top:
+                            qdgc = qdgc - height / 2;
+                            zdgc = zdgc - height / 2;
+                            break;
+                        case enumPipelineHeightType.Bottom:
+                            qdgc = qdgc + height / 2;
+                            zdgc = zdgc + height / 2;
+                            break;
+                    }
+                    I3DLine line = new Line3DSquare(polyline, qdgc, zdgc, width, height, builderItem.Builder.Division);
+                    list.Add(line.CreateGeometry());
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(standards[0]))
+                        standards[0] = "100";
+                    double diameter = ConvertToDouble(standards[0]) / 1000;
+                    switch (builderItem.LineLayerInfo.HeightType)
+                    {
+                        case enumPipelineHeightType.Top:
+                            qdgc = qdgc - diameter / 2;
+                            zdgc = zdgc - diameter / 2;
+                            break;
+                        case enumPipelineHeightType.Bottom:
+                            qdgc = qdgc + diameter / 2;
+                            zdgc = zdgc + diameter / 2;
+                            break;
+                    }
+                    I3DLine line = new Line3DCylinder(polyline, qdgc, zdgc, diameter, builderItem.Builder.Division);
+                    list.Add(line.CreateGeometry());
+                    list.Add(line.CreateStartSphere());
+                    list.Add(line.CreateEndSphere());
+                }
+
+                return list;
+            }
+            catch (Exception)
+            {
+                return list;
+            }
+        }
+
+
+        private List<string> GetStandardList(string standard)
+        {
+            List<string> standardList = new List<string>();
+            string[] standards = standard.Split(',', '£¬');
+            for (int i = 0; i < standards.Length; i++)
+            {
+                string[] subStandards = standards[i].Split('*');
+                if (subStandards.Length > 1 && subStandards[1].Length == 1)
+                {
+                    int count = Convert.ToInt32(subStandards[1]);
+                    for (int j = 0; j < count; j++)
+                    {
+                        standardList.Add(subStandards[0]);
+                    }
+                }
+                else
+                {
+                    standardList.Add(standards[i]);
+                }
+            }
+            return standardList;
+        }
+
 
         private IGeometry CreatePointPatch(IFeature pFeature, I3DItem builderItem)
         {
@@ -229,6 +338,11 @@ namespace Yutai.Pipeline3D
 
                     return new Point3DSquare(oPoint.X, oPoint.Y, z, depth, length, width, angle, _3DBuilder.Division).CreateGeometry();
                 }
+                if (builderItem.SphereSubs.Contains(fsw))
+                {
+                    double maxDiameter = GetDiameter(oPoint, builderItem);
+                    return new Point3DSphere(oPoint.X, oPoint.Y, z, depth, maxDiameter, _3DBuilder.Division).CreateGeometry();
+                }
                 return null;
             }
             catch (Exception e)
@@ -236,6 +350,34 @@ namespace Yutai.Pipeline3D
                 throw new Exception(e.Message);
             }
         }
+
+        private double GetDiameter(IPoint point, I3DItem item)
+        {
+            ISpatialFilter spatialFilter = new SpatialFilterClass();
+            spatialFilter.Geometry = point;
+            spatialFilter.SpatialRel = esriSpatialRelEnum.esriSpatialRelIntersects;
+            IFeatureCursor featureCursor = item.LineLayerInfo.FeatureClass.Search(spatialFilter, false);
+            IFeature lineFeature;
+            double maxDiameter = 0;
+            while ((lineFeature = featureCursor.NextFeature()) != null)
+            {
+                string gg = ConvertToString(lineFeature.Value[item.IdxGjField]); if (string.IsNullOrEmpty(gg) || gg == "<¿Õ>")
+                    gg = "50";
+                if (gg.Contains("*"))
+                {
+                    gg = gg.Split('*')[0];
+                }
+                double diameter;
+                if (double.TryParse(gg, out diameter) == false)
+                    diameter = 0;
+                diameter = diameter / 1000;
+
+                if (maxDiameter < diameter)
+                    maxDiameter = diameter;
+            }
+            return maxDiameter;
+        }
+
 
         public static double ConvertToDouble(object obj)
         {

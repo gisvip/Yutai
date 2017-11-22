@@ -6,10 +6,14 @@
 // 作    者 :  
 // 创建时间 :  2017/10/24  17:06
 // 更新时间 :  2017/10/24  17:06
+
+using ESRI.ArcGIS.Geometry;
+
 namespace Yutai.Pipeline3D
 {
-    public interface I3DLine
+    public interface I3DLine : I3DGeometry
     {
-        
+        IGeometry CreateStartSphere();
+        IGeometry CreateEndSphere();
     }
 }
