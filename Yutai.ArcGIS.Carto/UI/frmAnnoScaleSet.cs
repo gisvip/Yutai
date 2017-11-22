@@ -10,7 +10,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class frmAnnoScaleSet : Form
     {
-        private Container container_0 = null;
+       
         private IAnnotateLayerProperties iannotateLayerProperties_0 = null;
 
         public frmAnnoScaleSet()

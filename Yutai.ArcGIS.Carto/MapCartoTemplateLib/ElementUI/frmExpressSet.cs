@@ -5,7 +5,7 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib.ElementUI
 {
     public class frmExpressSet : Form
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
 
         public frmExpressSet()
         {
@@ -14,16 +14,16 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib.ElementUI
 
         protected override void Dispose(bool bool_0)
         {
-            if (bool_0 && (this.icontainer_0 != null))
+            if (bool_0 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_0);
         }
 
         private void method_0()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             base.AutoScaleMode = AutoScaleMode.Font;
             this.Text = "frmExpressSet";
         }

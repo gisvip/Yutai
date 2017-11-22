@@ -8,7 +8,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class frmLabelRotateAngles : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private double[] double_0 = null;
 
         public frmLabelRotateAngles()

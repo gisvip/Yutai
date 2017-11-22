@@ -8,7 +8,7 @@ namespace Yutai.ArcGIS.Carto.Library
 {
     public partial class frmCartoConfig : Form
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IMap imap_0 = null;
         private int int_0 = -1;
         private ListViewItem.ListViewSubItem listViewSubItem_0 = null;

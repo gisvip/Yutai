@@ -12,9 +12,9 @@ namespace Yutai.ArcGIS.Carto.DesignLib
     {
         protected override void Dispose(bool bool_2)
         {
-            if (bool_2 && (this.icontainer_0 != null))
+            if (bool_2 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_2);
         }
@@ -204,7 +204,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
 
        
 
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private GroupBox groupBox1;
         private Label label1;
         private Label label2;

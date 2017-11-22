@@ -7,7 +7,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
 {
     public partial class YTWizardForm : Form
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private int int_0 = 0;
         private TemplatePropertyPage templatePropertyPage_0 = new TemplatePropertyPage();
         private TFInfoPage tfinfoPage_0 = new TFInfoPage();

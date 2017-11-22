@@ -9,7 +9,7 @@ namespace Yutai.ArcGIS.Carto.UI
     internal partial class frmTKWizard : Form
     {
         private IActiveView iactiveView_0 = null;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private YTTKAssiatant jlktkassiatant_0 = new YTTKAssiatant();
         private short short_0 = 1;
         private TFInfoPage tfinfoPage_0 = new TFInfoPage();

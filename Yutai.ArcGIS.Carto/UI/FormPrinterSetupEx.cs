@@ -16,7 +16,7 @@ namespace Yutai.ArcGIS.Carto.UI
     public partial class FormPrinterSetupEx : Form
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+      
         private frmPageLayoutTemp frmPageLayoutTemp_0 = new frmPageLayoutTemp();
         private IPage ipage_0 = null;
         private IPrinter iprinter_0 = null;

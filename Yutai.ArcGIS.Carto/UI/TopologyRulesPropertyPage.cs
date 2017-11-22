@@ -12,7 +12,7 @@ namespace Yutai.ArcGIS.Carto.UI
     public partial class TopologyRulesPropertyPage : UserControl, ILayerAndStandaloneTablePropertyPage
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private ITopology itopology_0 = null;
         private ITopologyLayer itopologyLayer_0 = null;
 

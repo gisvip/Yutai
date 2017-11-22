@@ -12,7 +12,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private BufferGeometrySetCtrl bufferGeometrySetCtrl_0 = new BufferGeometrySetCtrl();
         private BufferOutputSetCtrl bufferOutputSetCtrl_0 = new BufferOutputSetCtrl();
         private BufferParameterSetCtrl bufferParameterSetCtrl_0 = new BufferParameterSetCtrl();
-        private Container container_0 = null;
+        private Container components = null;
         private int int_0 = 0;
 
         public frmBufferWizard()

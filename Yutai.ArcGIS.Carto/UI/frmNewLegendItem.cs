@@ -11,7 +11,7 @@ namespace Yutai.ArcGIS.Carto.UI
     internal partial class frmNewLegendItem : Form
     {
         private bool bool_0 = false;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IFillSymbol ifillSymbol_0 = new SimpleFillSymbolClass();
         private ILineSymbol ilineSymbol_0 = new SimpleLineSymbolClass();
         private IMarkerSymbol imarkerSymbol_0 = new SimpleMarkerSymbolClass();

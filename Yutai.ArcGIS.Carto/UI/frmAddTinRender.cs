@@ -12,7 +12,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class frmAddTinRender : Form
     {
-        private IContainer icontainer_0 = null;
+      
         private ITin itin_0 = null;
         private ITinLayer itinLayer_0 = null;
         private ITinRenderer itinRenderer_0 = null;

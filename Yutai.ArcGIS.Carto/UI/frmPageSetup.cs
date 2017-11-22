@@ -9,7 +9,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class frmPageSetup : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         protected IMapFrame m_pMapFrame = null;
         private PageSetupControl pageSetupControl_0 = new PageSetupControl();
 

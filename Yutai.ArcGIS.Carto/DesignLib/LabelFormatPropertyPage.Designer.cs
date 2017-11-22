@@ -19,9 +19,9 @@ namespace Yutai.ArcGIS.Carto.DesignLib
     {
         protected override void Dispose(bool bool_2)
         {
-            if (bool_2 && (this.icontainer_0 != null))
+            if (bool_2 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_2);
         }
@@ -29,7 +29,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
        
         private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LabelFormatPropertyPage));
             this.groupBox3 = new GroupBox();
             this.chkverticalRight = new CheckEdit();
@@ -47,7 +47,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
             this.cboFontSize = new ComboBoxEdit();
             this.colorEdit1 = new ColorEdit();
             this.chkUnderLine = new CheckBox();
-            this.imageList_0 = new ImageList(this.icontainer_0);
+            this.imageList_0 = new ImageList(this.components);
             this.chkIta = new CheckBox();
             this.chkBold = new CheckBox();
             this.cboFontName = new System.Windows.Forms.ComboBox();
@@ -323,7 +323,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
-        private IContainer icontainer_0;
+        private IContainer components;
         private ImageList imageList_0;
         private Label label1;
         private Label label10;

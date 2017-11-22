@@ -7,7 +7,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
 {
     public partial class LegendInfoPage : UserControl
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
 
         public LegendInfoPage()
         {

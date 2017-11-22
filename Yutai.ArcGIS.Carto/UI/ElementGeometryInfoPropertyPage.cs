@@ -12,7 +12,7 @@ namespace Yutai.ArcGIS.Carto.UI
     public partial class ElementGeometryInfoPropertyPage : UserControl, IPropertyPage, IPropertyPageEvents
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+      
         private IElement ielement_0 = null;
         private string string_0 = "面积";
 

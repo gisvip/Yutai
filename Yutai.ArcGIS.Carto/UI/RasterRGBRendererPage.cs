@@ -17,7 +17,7 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         private bool bool_0 = false;
         private IColorRamp icolorRamp_0 = null;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IEnumColors ienumColors_0 = null;
         private IRasterLayer irasterLayer_0 = null;
         private IRasterRGBRenderer irasterRGBRenderer_0 = null;

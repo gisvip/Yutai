@@ -7,51 +7,51 @@ namespace Yutai.ArcGIS.Carto
 {
     public class RepresentationAssist
     {
-        internal static IBasicSymbol CreateBasicSymbol(IFeatureClass ifeatureClass_0)
+        internal static IBasicSymbol CreateBasicSymbol(IFeatureClass pFeatureClass)
         {
             IBasicSymbol symbol = null;
-            if ((ifeatureClass_0.ShapeType == esriGeometryType.esriGeometryMultipoint) ||
-                (ifeatureClass_0.ShapeType == esriGeometryType.esriGeometryPoint))
+            if ((pFeatureClass.ShapeType == esriGeometryType.esriGeometryMultipoint) ||
+                (pFeatureClass.ShapeType == esriGeometryType.esriGeometryPoint))
             {
                 return new BasicMarkerSymbolClass();
             }
-            if (ifeatureClass_0.ShapeType == esriGeometryType.esriGeometryPolyline)
+            if (pFeatureClass.ShapeType == esriGeometryType.esriGeometryPolyline)
             {
                 return new BasicLineSymbolClass();
             }
-            if (ifeatureClass_0.ShapeType == esriGeometryType.esriGeometryPolygon)
+            if (pFeatureClass.ShapeType == esriGeometryType.esriGeometryPolygon)
             {
                 symbol = new BasicFillSymbolClass();
             }
             return symbol;
         }
 
-        public IRepresentationClass CreateRepClass(IFeatureClass ifeatureClass_0)
+        public IRepresentationClass CreateRepClass(IFeatureClass pFeatureClass)
         {
-            IDataset dataset = ifeatureClass_0 as IDataset;
+            IDataset dataset = pFeatureClass as IDataset;
             IRepresentationWorkspaceExtension repWSExt = GetRepWSExt(dataset.Workspace);
             if (repWSExt != null)
             {
                 IRepresentationRules rules = new RepresentationRulesClass();
-                return repWSExt.CreateRepresentationClass(ifeatureClass_0, ifeatureClass_0.AliasName + "_Rep",
+                return repWSExt.CreateRepresentationClass(pFeatureClass, pFeatureClass.AliasName + "_Rep",
                     "My_RuleID", "My_Override", false, rules, null);
             }
             return null;
         }
 
-        public static IRepresentationRule CreateRepresentationRule(IFeatureClass ifeatureClass_0)
+        public static IRepresentationRule CreateRepresentationRule(IFeatureClass pFeatureClass)
         {
-            IBasicSymbol symbol = CreateBasicSymbol(ifeatureClass_0);
+            IBasicSymbol symbol = CreateBasicSymbol(pFeatureClass);
             IRepresentationRule rule = new RepresentationRuleClass();
             rule.InsertLayer(0, symbol);
             return rule;
         }
 
-        public static IRepresentationWorkspaceExtension GetRepWSExt(IWorkspace iworkspace_0)
+        public static IRepresentationWorkspaceExtension GetRepWSExt(IWorkspace pWorkspace)
         {
             try
             {
-                IWorkspaceExtensionManager manager = iworkspace_0 as IWorkspaceExtensionManager;
+                IWorkspaceExtensionManager manager = pWorkspace as IWorkspaceExtensionManager;
                 UID gUID = new UIDClass
                 {
                     Value = "{FD05270A-8E0B-4823-9DEE-F149347C32B6}"
@@ -64,11 +64,11 @@ namespace Yutai.ArcGIS.Carto
             return null;
         }
 
-        public static IRepresentationWorkspaceExtension GetRepWSExtFromFClass(IFeatureClass ifeatureClass_0)
+        public static IRepresentationWorkspaceExtension GetRepWSExtFromFClass(IFeatureClass pFeatureClass)
         {
             try
             {
-                IDataset dataset = ifeatureClass_0 as IDataset;
+                IDataset dataset = pFeatureClass as IDataset;
                 IWorkspaceExtensionManager workspace = dataset.Workspace as IWorkspaceExtensionManager;
                 UID gUID = new UIDClass
                 {
@@ -82,13 +82,13 @@ namespace Yutai.ArcGIS.Carto
             return null;
         }
 
-        public static bool HasRepresentation(IFeatureClass ifeatureClass_0)
+        public static bool HasRepresentation(IFeatureClass pFeatureClass)
         {
-            if (ifeatureClass_0 != null)
+            if (pFeatureClass != null)
             {
                 try
                 {
-                    IDataset dataset = ifeatureClass_0 as IDataset;
+                    IDataset dataset = pFeatureClass as IDataset;
                     IWorkspaceExtensionManager workspace = dataset.Workspace as IWorkspaceExtensionManager;
                     UID gUID = new UIDClass
                     {
@@ -100,7 +100,7 @@ namespace Yutai.ArcGIS.Carto
                     {
                         return false;
                     }
-                    return extension.get_FeatureClassHasRepresentations(ifeatureClass_0);
+                    return extension.get_FeatureClassHasRepresentations(pFeatureClass);
                 }
                 catch
                 {

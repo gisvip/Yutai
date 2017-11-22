@@ -24,7 +24,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private ComboBoxEdit cboLayers;
         private ComboBoxEdit cboSearchString;
         private CheckEdit chkContains;
-        private Container container_0 = null;
+        private Container components = null;
         private IActiveViewEvents_Event iactiveViewEvents_Event_0;
         private IApplication iapplication_0 = null;
         private ILayer ilayer_0 = null;
@@ -138,13 +138,14 @@ namespace Yutai.ArcGIS.Carto.UI
             }
         }
 
-        protected override void Dispose(bool bool_1)
+      
+        protected override void Dispose(bool disposing)
         {
-            if (bool_1 && (this.container_0 != null))
+            if (disposing && (this.components != null))
             {
-                this.container_0.Dispose();
+                this.components.Dispose();
             }
-            base.Dispose(bool_1);
+            base.Dispose(disposing);
         }
 
         public IArray Find()

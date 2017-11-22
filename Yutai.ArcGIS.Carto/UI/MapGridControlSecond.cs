@@ -11,7 +11,7 @@ namespace Yutai.ArcGIS.Carto.UI
     internal partial class MapGridControlSecond : UserControl
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private IMapFrame imapFrame_0 = null;
         private IMapGrid imapGrid_0 = null;
 

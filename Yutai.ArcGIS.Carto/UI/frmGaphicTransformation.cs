@@ -11,7 +11,7 @@ namespace Yutai.ArcGIS.Carto.UI
     public partial class frmGaphicTransformation : Form
     {
         private bool bool_0 = false;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
 
         private IGeoTransformation[] igeoTransformation_0 = new IGeoTransformation[]
         {

@@ -10,7 +10,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class frmScaleSet : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private IMap imap_0 = null;
         private IMapFrame imapFrame_0 = null;
 

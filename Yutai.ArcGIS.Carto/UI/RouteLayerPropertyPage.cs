@@ -8,7 +8,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class RouteLayerPropertyPage : UserControl
     {
-        private Container container_0 = null;
+        private Container components = null;
 
         public RouteLayerPropertyPage()
         {

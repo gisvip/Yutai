@@ -9,7 +9,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class frmBookMark : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private IMap imap_0 = null;
         private static int nIndex;
 

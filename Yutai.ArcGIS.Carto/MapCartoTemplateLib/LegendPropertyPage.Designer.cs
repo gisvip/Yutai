@@ -20,9 +20,9 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
     {
         protected override void Dispose(bool bool_2)
         {
-            if (bool_2 && (this.icontainer_0 != null))
+            if (bool_2 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_2);
         }
@@ -30,7 +30,7 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
        
  private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             ListViewItem item = new ListViewItem(new string[] { "标题和项", "8" }, -1);
             ListViewItem item2 = new ListViewItem(new string[] { "项", "5" }, -1);
             ListViewItem item3 = new ListViewItem(new string[] { "列", "5" }, -1);
@@ -47,8 +47,8 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
             this.chkShow = new CheckEdit();
             this.txtTitle = new MemoEdit();
             this.groupBox2 = new GroupBox();
-            this.cboAreaPatches = new StyleComboBox(this.icontainer_0);
-            this.cboLinePatches = new StyleComboBox(this.icontainer_0);
+            this.cboAreaPatches = new StyleComboBox(this.components);
+            this.cboLinePatches = new StyleComboBox(this.components);
             this.label6 = new Label();
             this.label7 = new Label();
             this.label5 = new Label();
@@ -267,7 +267,7 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
-        private IContainer icontainer_0;
+        private IContainer components;
         private Label label1;
         private Label label2;
         private Label label3;

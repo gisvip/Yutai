@@ -14,7 +14,7 @@ namespace Yutai.ArcGIS.Carto.UI
     public partial class CADDrawingLayersPropertyPage : UserControl, ILayerAndStandaloneTablePropertyPage
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+       
         private ICadDrawingLayers icadDrawingLayers_0 = null;
 
         public CADDrawingLayersPropertyPage()

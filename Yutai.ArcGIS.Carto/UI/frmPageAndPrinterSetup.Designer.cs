@@ -13,9 +13,9 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         protected override void Dispose(bool bool_1)
         {
-            if (bool_1 && (this.container_0 != null))
+            if (bool_1 && (this.components != null))
             {
-                this.container_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_1);
         }
@@ -422,7 +422,7 @@ namespace Yutai.ArcGIS.Carto.UI
         }
 
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private Button button_printerAttribute;
         private ComboBox cboPageSize;
         private ComboBox cboPageToPrinterMapping;

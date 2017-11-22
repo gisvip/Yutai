@@ -11,7 +11,7 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         private bool bool_0 = false;
         private bool bool_1 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private short short_0 = 0;
 
         public event OnApplyEventHandler OnApply;

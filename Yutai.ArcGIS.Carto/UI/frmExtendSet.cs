@@ -12,7 +12,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class frmExtendSet : Form
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
 
         public frmExtendSet()
         {

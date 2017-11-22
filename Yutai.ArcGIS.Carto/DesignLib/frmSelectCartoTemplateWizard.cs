@@ -10,7 +10,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
     {
         private CartoTemplateData cartoTemplateData_0 = null;
         private CatoTemplateApplySelect catoTemplateApplySelect_0 = new CatoTemplateApplySelect();
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private int int_0 = 0;
         private TemplateParamSetPage templateParamSetPage_0 = new TemplateParamSetPage();
 

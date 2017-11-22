@@ -14,7 +14,7 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         private bool bool_0 = false;
         private bool bool_1 = false;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private ILayerFields ilayerFields_0 = null;
 
         public LayerFieldsPageExtend()

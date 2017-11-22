@@ -14,7 +14,7 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
     internal partial class LegendTitleUserControl : UserControl
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private ILegend ilegend_0 = null;
         private ITextSymbol itextSymbol_0 = null;
 

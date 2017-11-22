@@ -6,7 +6,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
 {
     public partial class LabelSetPage : UserControl
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
 
         public LabelSetPage()
         {

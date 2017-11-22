@@ -10,7 +10,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class frmLayerPropertyExtend : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private IBasicMap ibasicMap_0 = null;
         private IStyleGallery istyleGallery_0 = null;
         private object object_0 = null;

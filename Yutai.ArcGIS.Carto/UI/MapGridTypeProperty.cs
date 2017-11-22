@@ -11,7 +11,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class MapGridTypeProperty : UserControl
     {
-        private Container container_0 = null;
+        private Container components = null;
         protected IMapFrame m_pMapFrame = null;
         private string[] string_0 = new string[] {"经纬网", "方里网", "索引格网"};
 

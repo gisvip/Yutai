@@ -15,7 +15,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class frmTLConfig : Form
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private Image image_0 = null;
         private Image image_1 = null;
         private Image image_2 = null;

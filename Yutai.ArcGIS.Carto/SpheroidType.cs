@@ -4,6 +4,7 @@
     {
         WGS1984,
         Xian1980,
-        Beijing54
+        Beijing54,
+        GCS2000
     }
 }

@@ -16,7 +16,7 @@ namespace Yutai.ArcGIS.Carto.UI
     public partial class frmPrint : Form
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private IActiveView iactiveView_0 = null;
         private IPageLayoutControl ipageLayoutControl_0 = null;
         private IPrinter iprinter_0 = null;

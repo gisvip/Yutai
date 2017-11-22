@@ -8,23 +8,23 @@ namespace Yutai.ArcGIS.Carto
 {
     internal class JoiningRelatingHelper
     {
-        public static void JoinTableLayer(ILayer ilayer_0, string string_0, ITable itable_0, string string_1)
+        public static void JoinTableLayer(ILayer pLayer, string pJoinFieldName, ITable pTable, string pToFieldName)
         {
             try
             {
-                IAttributeTable table = ilayer_0 as IAttributeTable;
+                IAttributeTable table = pLayer as IAttributeTable;
                 if (table != null)
                 {
                     ITable attributeTable = table.AttributeTable;
-                    if (itable_0 is IStandaloneTable)
+                    if (pTable is IStandaloneTable)
                     {
-                        itable_0 = (itable_0 as IStandaloneTable).Table;
+                        pTable = (pTable as IStandaloneTable).Table;
                     }
                     IMemoryRelationshipClassFactory factory = new MemoryRelationshipClassFactoryClass();
-                    IRelationshipClass relClass = factory.Open("TabletoLayer", (IObjectClass) itable_0, string_1,
-                        (IObjectClass) attributeTable, string_0, "forward", "backward",
+                    IRelationshipClass relClass = factory.Open("TabletoLayer", (IObjectClass) pTable, pToFieldName,
+                        (IObjectClass) attributeTable, pJoinFieldName, "forward", "backward",
                         esriRelCardinality.esriRelCardinalityOneToMany);
-                    ((IDisplayRelationshipClass) ilayer_0).DisplayRelationshipClass(relClass,
+                    ((IDisplayRelationshipClass) pLayer).DisplayRelationshipClass(relClass,
                         esriJoinType.esriLeftOuterJoin);
                 }
             }
@@ -39,13 +39,13 @@ namespace Yutai.ArcGIS.Carto
             }
         }
 
-        public static void JoinTableLayer(ITable itable_0, string string_0, ITable itable_1, string string_1)
+        public static void JoinTableLayer(ITable pSrcTable, string pSrcFieldName, ITable pToTable, string pToFieldName)
         {
             try
             {
                 ITable attributeTable = null;
                 ITable displayTable = null;
-                IDisplayTable table3 = itable_0 as IDisplayTable;
+                IDisplayTable table3 = pSrcTable as IDisplayTable;
                 if (table3 != null)
                 {
                     displayTable = table3.DisplayTable;
@@ -56,22 +56,22 @@ namespace Yutai.ArcGIS.Carto
                 }
                 else
                 {
-                    IAttributeTable table4 = itable_0 as IAttributeTable;
+                    IAttributeTable table4 = pSrcTable as IAttributeTable;
                     if (table4 == null)
                     {
                         return;
                     }
                     attributeTable = table4.AttributeTable;
                 }
-                if (itable_1 is IStandaloneTable)
+                if (pToTable is IStandaloneTable)
                 {
-                    itable_1 = (itable_1 as IStandaloneTable).Table;
+                    pToTable = (pToTable as IStandaloneTable).Table;
                 }
                 IMemoryRelationshipClassFactory factory = new MemoryRelationshipClassFactoryClass();
-                IRelationshipClass relClass = factory.Open("TabletoLayer", (IObjectClass) itable_1, string_1,
-                    (IObjectClass) attributeTable, string_0, "forward", "backward",
+                IRelationshipClass relClass = factory.Open("TabletoLayer", (IObjectClass) pToTable, pToFieldName,
+                    (IObjectClass) attributeTable, pSrcFieldName, "forward", "backward",
                     esriRelCardinality.esriRelCardinalityOneToMany);
-                ((IDisplayRelationshipClass) itable_0).DisplayRelationshipClass(relClass, esriJoinType.esriLeftOuterJoin);
+                ((IDisplayRelationshipClass) pSrcTable).DisplayRelationshipClass(relClass, esriJoinType.esriLeftOuterJoin);
             }
             catch (COMException exception)
             {
@@ -84,23 +84,23 @@ namespace Yutai.ArcGIS.Carto
             }
         }
 
-        public static void RelateTableLayer(ILayer ilayer_0, string string_0, ITable itable_0, string string_1)
+        public static void RelateTableLayer(ILayer pSrcLayer, string pSrcFieldName, ITable pToTable, string pToFieldName)
         {
             try
             {
-                IAttributeTable table = ilayer_0 as IAttributeTable;
+                IAttributeTable table = pSrcLayer as IAttributeTable;
                 if (table != null)
                 {
                     ITable attributeTable = table.AttributeTable;
-                    if (itable_0 is IStandaloneTable)
+                    if (pToTable is IStandaloneTable)
                     {
-                        itable_0 = (itable_0 as IStandaloneTable).Table;
+                        pToTable = (pToTable as IStandaloneTable).Table;
                     }
                     IMemoryRelationshipClassFactory factory = new MemoryRelationshipClassFactoryClass();
-                    IRelationshipClass relationshipClass = factory.Open("TabletoLayer", (IObjectClass) itable_0,
-                        string_1, (IObjectClass) attributeTable, string_0, "forward", "backward",
+                    IRelationshipClass relationshipClass = factory.Open("TabletoLayer", (IObjectClass) pToTable,
+                        pToFieldName, (IObjectClass) attributeTable, pSrcFieldName, "forward", "backward",
                         esriRelCardinality.esriRelCardinalityOneToMany);
-                    ((IRelationshipClassCollectionEdit) ilayer_0).AddRelationshipClass(relationshipClass);
+                    ((IRelationshipClassCollectionEdit) pSrcLayer).AddRelationshipClass(relationshipClass);
                 }
             }
             catch (COMException exception)
@@ -114,20 +114,20 @@ namespace Yutai.ArcGIS.Carto
             }
         }
 
-        public static void RelateTableLayer(string string_0, ITable itable_0, string string_1, ITable itable_1,
-            string string_2)
+        public static void RelateTableLayer(string pRelName, ITable pSrcTable, string pSrcFieldName, ITable pToTable,
+            string pToFieldName)
         {
             try
             {
-                IAttributeTable table = itable_0 as IAttributeTable;
+                IAttributeTable table = pSrcTable as IAttributeTable;
                 if (table != null)
                 {
                     ITable attributeTable = table.AttributeTable;
                     IMemoryRelationshipClassFactory factory = new MemoryRelationshipClassFactoryClass();
-                    IRelationshipClass relationshipClass = factory.Open(string_0, (IObjectClass) itable_1, string_2,
-                        (IObjectClass) attributeTable, string_1, "forward", "backward",
+                    IRelationshipClass relationshipClass = factory.Open(pRelName, (IObjectClass) pToTable, pToFieldName,
+                        (IObjectClass) attributeTable, pSrcFieldName, "forward", "backward",
                         esriRelCardinality.esriRelCardinalityOneToMany);
-                    ((IRelationshipClassCollectionEdit) itable_0).AddRelationshipClass(relationshipClass);
+                    ((IRelationshipClassCollectionEdit) pSrcTable).AddRelationshipClass(relationshipClass);
                 }
             }
             catch (COMException exception)
@@ -141,15 +141,15 @@ namespace Yutai.ArcGIS.Carto
             }
         }
 
-        public static bool TableIsJoinLayer(ILayer ilayer_0, ITable itable_0)
+        public static bool TableIsJoinLayer(ILayer pLayer, ITable pTable)
         {
             try
             {
-                IDisplayTable table = ilayer_0 as IDisplayTable;
+                IDisplayTable table = pLayer as IDisplayTable;
                 if (table != null)
                 {
                     ITable displayTable = table.DisplayTable;
-                    string str = (itable_0 as IDataset).Name.ToLower();
+                    string str = (pTable as IDataset).Name.ToLower();
                     while (displayTable is IRelQueryTable)
                     {
                         IRelQueryTable table3 = displayTable as IRelQueryTable;
@@ -174,15 +174,15 @@ namespace Yutai.ArcGIS.Carto
             return false;
         }
 
-        public static bool TableIsJoinLayer(ITable itable_0, ITable itable_1)
+        public static bool TableIsJoinLayer(ITable pTable, ITable pRelTable)
         {
             try
             {
-                IDisplayTable table = itable_0 as IDisplayTable;
+                IDisplayTable table = pTable as IDisplayTable;
                 if (table != null)
                 {
                     ITable displayTable = table.DisplayTable;
-                    string str = (itable_1 as IDataset).Name.ToLower();
+                    string str = (pRelTable as IDataset).Name.ToLower();
                     while (displayTable is IRelQueryTable)
                     {
                         IRelQueryTable table3 = displayTable as IRelQueryTable;
@@ -207,14 +207,14 @@ namespace Yutai.ArcGIS.Carto
             return false;
         }
 
-        public static bool TableIsRelateLayer(ILayer ilayer_0, ITable itable_0)
+        public static bool TableIsRelateLayer(ILayer pSrcLayer, ITable pRelTable)
         {
             try
             {
-                IRelationshipClassCollection classs = ilayer_0 as IRelationshipClassCollection;
+                IRelationshipClassCollection classs = pSrcLayer as IRelationshipClassCollection;
                 if (classs != null)
                 {
-                    IEnumRelationshipClass class2 = classs.FindRelationshipClasses(itable_0 as IObjectClass,
+                    IEnumRelationshipClass class2 = classs.FindRelationshipClasses(pRelTable as IObjectClass,
                         esriRelRole.esriRelRoleAny);
                     class2.Reset();
                     if (class2.Next() != null)
@@ -236,14 +236,14 @@ namespace Yutai.ArcGIS.Carto
             return false;
         }
 
-        public static bool TableIsRelateLayer(ITable itable_0, ITable itable_1)
+        public static bool TableIsRelateLayer(ITable pSrcTable, ITable pRelTable)
         {
             try
             {
-                IRelationshipClassCollection classs = itable_0 as IRelationshipClassCollection;
+                IRelationshipClassCollection classs = pSrcTable as IRelationshipClassCollection;
                 if (classs != null)
                 {
-                    IEnumRelationshipClass class2 = classs.FindRelationshipClasses(itable_1 as IObjectClass,
+                    IEnumRelationshipClass class2 = classs.FindRelationshipClasses(pRelTable as IObjectClass,
                         esriRelRole.esriRelRoleAny);
                     class2.Reset();
                     if (class2.Next() != null)

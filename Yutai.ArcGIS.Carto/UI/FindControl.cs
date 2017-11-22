@@ -12,7 +12,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class FindControl : UserControl
     {
-        private Container container_0 = null;
+      
         private ILayer ilayer_0 = null;
         private IMap imap_0 = null;
         public string m_strFindField = "";

@@ -13,7 +13,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public class RepresentationruleListBox : ListBox
     {
-        private Container container_0 = null;
+        private Container components = null;
         private esriGeometryType esriGeometryType_0 = esriGeometryType.esriGeometryPolygon;
         private IRepresentationRules irepresentationRules_0 = null;
 
@@ -24,9 +24,9 @@ namespace Yutai.ArcGIS.Carto.UI
 
         protected override void Dispose(bool bool_0)
         {
-            if (bool_0 && (this.container_0 != null))
+            if (bool_0 && (this.components != null))
             {
-                this.container_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_0);
         }

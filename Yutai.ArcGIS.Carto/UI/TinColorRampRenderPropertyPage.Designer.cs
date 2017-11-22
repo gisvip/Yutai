@@ -17,9 +17,9 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         protected override void Dispose(bool bool_1)
         {
-            if (bool_1 && (this.icontainer_0 != null))
+            if (bool_1 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_1);
         }
@@ -27,8 +27,8 @@ namespace Yutai.ArcGIS.Carto.UI
        
  private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
-            this.colorRampComboBox1 = new StyleComboBox(this.icontainer_0);
+            this.components = new Container();
+            this.colorRampComboBox1 = new StyleComboBox(this.components);
             this.groupBox1 = new GroupBox();
             this.lblLabelInfo = new Label();
             this.label3 = new Label();

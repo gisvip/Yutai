@@ -13,7 +13,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private bool bool_0 = false;
         private bool bool_1 = false;
         private IBasicMap ibasicMap_0 = null;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IRasterLayer irasterLayer_0 = null;
         private IRasterLayer irasterLayer_1 = null;
         private IStyleGallery istyleGallery_0 = null;

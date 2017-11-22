@@ -18,7 +18,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class BufferOutputSetCtrl : UserControl
     {
-        private Container container_0 = null;
+       
         private SysGrants sysGrants_0 = new SysGrants();
 
         public BufferOutputSetCtrl()

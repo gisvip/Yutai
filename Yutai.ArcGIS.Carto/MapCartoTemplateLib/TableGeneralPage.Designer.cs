@@ -9,12 +9,12 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
 {
     partial class TableGeneralPage
     {
-        private IContainer icontainer_0;
+        private IContainer components;
         protected override void Dispose(bool bool_3)
         {
-            if (bool_3 && (this.icontainer_0 != null))
+            if (bool_3 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_3);
         }

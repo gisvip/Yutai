@@ -15,7 +15,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private ArrayList arrayList_0 = null;
         private ArrayList arrayList_1 = null;
         private bool bool_0 = false;
-        private Container container_0 = null;
+       
         private ILayer ilayer_0 = null;
         private IList ilist_0 = new ArrayList();
         private IUniqueValueRenderer iuniqueValueRenderer_0 = null;

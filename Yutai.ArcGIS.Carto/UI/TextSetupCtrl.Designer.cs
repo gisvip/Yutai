@@ -19,9 +19,9 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         protected override void Dispose(bool bool_2)
         {
-            if (bool_2 && (this.icontainer_0 != null))
+            if (bool_2 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_2);
         }
@@ -29,12 +29,12 @@ namespace Yutai.ArcGIS.Carto.UI
        
  private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextSetupCtrl));
             this.label1 = new Label();
             this.txtString = new MemoEdit();
             this.rdoTHAFul = new RadioButton();
-            this.imageList_0 = new ImageList(this.icontainer_0);
+            this.imageList_0 = new ImageList(this.components);
             this.rdoTHALeft = new RadioButton();
             this.rdoTHACenter = new RadioButton();
             this.rdoTHARight = new RadioButton();
@@ -221,7 +221,7 @@ namespace Yutai.ArcGIS.Carto.UI
        
         private SimpleButton btnSymbolSelector;
         private esriTextHorizontalAlignment esriTextHorizontalAlignment_0;
-        private IContainer icontainer_0;
+        private IContainer components;
         private ImageList imageList_0;
         private Label label1;
         private Label label2;

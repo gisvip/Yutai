@@ -13,17 +13,18 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     partial class CADDrawingLayersPropertyPage
     {
-        protected override void Dispose(bool bool_1)
+        private Container components = null;
+        protected override void Dispose(bool disposing)
         {
-            if (bool_1 && (this.container_0 != null))
+            if (disposing && (this.components != null))
             {
-                this.container_0.Dispose();
+                this.components.Dispose();
             }
-            base.Dispose(bool_1);
+            base.Dispose(disposing);
         }
 
-       
- private void InitializeComponent()
+
+        private void InitializeComponent()
         {
             this.label1 = new Label();
             this.checkedListBoxControl1 = new CheckedListBoxControl();

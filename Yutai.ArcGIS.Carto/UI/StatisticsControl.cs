@@ -8,7 +8,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class StatisticsControl : UserControl
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IStatsHistogram istatsHistogram_0 = null;
 
         public StatisticsControl()

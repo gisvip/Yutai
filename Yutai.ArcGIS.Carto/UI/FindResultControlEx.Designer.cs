@@ -17,19 +17,20 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     partial class FindResultControlEx
     {
-        protected override void Dispose(bool bool_0)
+        private Container components = null;
+        protected override void Dispose(bool disposing)
         {
-            if (bool_0 && (this.icontainer_0 != null))
+            if (disposing && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
-            base.Dispose(bool_0);
+            base.Dispose(disposing);
         }
 
-       
+
         private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             this.panel1 = new Panel();
             this.label1 = new Label();
             this.panel2 = new Panel();
@@ -48,7 +49,7 @@ namespace Yutai.ArcGIS.Carto.UI
             this.UnSelectFeature = new BarButtonItem();
             this.Identify = new BarButtonItem();
             this.popupMenu1 = new PopupMenu();
-            this.barAndDockingController_0 = new BarAndDockingController(this.icontainer_0);
+            this.barAndDockingController_0 = new BarAndDockingController(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.barManager_0.BeginInit();
@@ -148,7 +149,6 @@ namespace Yutai.ArcGIS.Carto.UI
         private ColumnHeader columnHeader_1;
         private ColumnHeader columnHeader_2;
         private BarButtonItem FlashFeature;
-        private IContainer icontainer_0;
         private BarButtonItem Identify;
         private Label label1;
         private ListView listView1;

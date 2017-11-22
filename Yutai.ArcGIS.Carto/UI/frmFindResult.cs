@@ -8,7 +8,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class frmFindResult : Form
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
 
         public frmFindResult()
         {

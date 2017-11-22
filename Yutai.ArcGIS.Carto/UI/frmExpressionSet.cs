@@ -9,7 +9,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class frmExpressionSet : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private LabelExpressionSetPropertyPage labelExpressionSetPropertyPage_0 = new LabelExpressionSetPropertyPage();
 
         public frmExpressionSet()

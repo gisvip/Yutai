@@ -9,7 +9,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class frmLayerProperty : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private JoiningAndRelatingPropertyPage joiningAndRelatingPropertyPage_0 = new JoiningAndRelatingPropertyPage();
         private LayerDefinitionExpressionCtrl layerDefinitionExpressionCtrl_0 = new LayerDefinitionExpressionCtrl();
         private LayerDisplaySetCtrl layerDisplaySetCtrl_0 = new LayerDisplaySetCtrl();

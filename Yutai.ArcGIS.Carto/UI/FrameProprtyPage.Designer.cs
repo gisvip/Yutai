@@ -19,19 +19,20 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     partial class FrameProprtyPage
     {
-        protected override void Dispose(bool bool_2)
+        private Container components = null;
+        protected override void Dispose(bool disposing)
         {
-            if (bool_2 && (this.icontainer_0 != null))
+            if (disposing && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
-            base.Dispose(bool_2);
+            base.Dispose(disposing);
         }
 
-       
+
         private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrameProprtyPage));
             this.groupBox1 = new GroupBox();
             this.txtBorderCornerRounding = new SpinEdit();
@@ -44,9 +45,9 @@ namespace Yutai.ArcGIS.Carto.UI
             this.label1 = new Label();
             this.colorBorder = new ColorEdit();
             this.btnBorderInfo = new SimpleButton();
-            this.imageList_0 = new ImageList(this.icontainer_0);
+            this.imageList_0 = new ImageList(this.components);
             this.btnBorderSelector = new SimpleButton();
-            this.cboBorder = new StyleComboBox(this.icontainer_0);
+            this.cboBorder = new StyleComboBox(this.components);
             this.groupBox2 = new GroupBox();
             this.txtBackgroundCornerRounding = new SpinEdit();
             this.label6 = new Label();
@@ -59,7 +60,7 @@ namespace Yutai.ArcGIS.Carto.UI
             this.colorBackground = new ColorEdit();
             this.btnBackgroundInfo = new SimpleButton();
             this.btnBackgroundSelector = new SimpleButton();
-            this.cboBackground = new StyleComboBox(this.icontainer_0);
+            this.cboBackground = new StyleComboBox(this.components);
             this.groupBox3 = new GroupBox();
             this.txtShadowCornerRounding = new SpinEdit();
             this.label11 = new Label();
@@ -72,7 +73,7 @@ namespace Yutai.ArcGIS.Carto.UI
             this.colorShadow = new ColorEdit();
             this.btnshadowInfo = new SimpleButton();
             this.btnShadowSelector = new SimpleButton();
-            this.cboShadow = new StyleComboBox(this.icontainer_0);
+            this.cboShadow = new StyleComboBox(this.components);
             this.groupBox1.SuspendLayout();
             this.txtBorderCornerRounding.Properties.BeginInit();
             this.txtBorderGapy.Properties.BeginInit();
@@ -482,7 +483,6 @@ namespace Yutai.ArcGIS.Carto.UI
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private GroupBox groupBox3;
-        private IContainer icontainer_0;
         private ImageList imageList_0;
         private Label label1;
         private Label label10;

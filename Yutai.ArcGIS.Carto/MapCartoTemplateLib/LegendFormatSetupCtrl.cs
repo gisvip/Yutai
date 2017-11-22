@@ -11,7 +11,7 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
     internal partial class LegendFormatSetupCtrl : UserControl
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private ILegend ilegend_0 = null;
 
         public LegendFormatSetupCtrl()

@@ -16,7 +16,7 @@ namespace Yutai.ArcGIS.Carto.UI
     public partial class LayerDataSourcePropertyPage : UserControl, ILayerAndStandaloneTablePropertyPage
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private IBasicMap ibasicMap_0 = null;
         private IDataLayer idataLayer_0 = null;
 

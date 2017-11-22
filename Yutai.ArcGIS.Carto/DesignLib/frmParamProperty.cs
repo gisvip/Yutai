@@ -8,7 +8,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
     public partial class frmParamProperty : Form
     {
         private bool bool_0 = false;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private ParamInfo paramInfo_0 = null;
 
         public frmParamProperty()

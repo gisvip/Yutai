@@ -13,7 +13,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
     public partial class ElementSizeAndPositionCtrl : UserControl, IPropertyPage, IPropertyPageEvents
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private IElement ielement_0 = null;
         private string string_0 = "大小和位置";
 

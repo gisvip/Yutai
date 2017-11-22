@@ -19,7 +19,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private bool bool_0 = false;
         private bool bool_1 = false;
         private IColorRamp icolorRamp_0 = null;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IEnumColors ienumColors_0 = null;
         private IList ilist_0 = new ArrayList();
         private int int_0 = 10;

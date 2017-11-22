@@ -13,7 +13,7 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
     {
         private bool bool_0 = false;
         private bool bool_1 = true;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IFillSymbol ifillSymbol_0 = new SimpleFillSymbolClass();
         private IFillSymbol ifillSymbol_1 = new SimpleFillSymbolClass();
         private ILineSymbol ilineSymbol_0 = new SimpleLineSymbolClass();

@@ -12,7 +12,7 @@ namespace Yutai.ArcGIS.Carto.UI
     public partial class frmLabelManager : Form
     {
         private AddClassCtrl addClassCtrl_0 = new AddClassCtrl();
-        private Container container_0 = null;
+        private Container components = null;
         private FillLabelSetCtrl fillLabelSetCtrl_0 = new FillLabelSetCtrl();
         private IMap imap_0 = null;
         private LineLabelSetCtrl lineLabelSetCtrl_0 = new LineLabelSetCtrl();

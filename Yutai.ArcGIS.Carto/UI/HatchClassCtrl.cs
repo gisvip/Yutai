@@ -12,7 +12,7 @@ namespace Yutai.ArcGIS.Carto.UI
     internal partial class HatchClassCtrl : UserControl
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private IFields ifields_0 = null;
         private IHatchClass ihatchClass_0 = null;
 

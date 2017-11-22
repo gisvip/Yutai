@@ -19,9 +19,9 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         protected override void Dispose(bool bool_4)
         {
-            if (bool_4 && (this.container_0 != null))
+            if (bool_4 && (this.components != null))
             {
-                this.container_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_4);
         }

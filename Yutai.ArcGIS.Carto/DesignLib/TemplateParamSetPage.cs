@@ -9,7 +9,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
     public partial class TemplateParamSetPage : UserControl
     {
         private System.Collections.Hashtable hashtable_0 = null;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private int int_0 = -1;
 
         public TemplateParamSetPage()

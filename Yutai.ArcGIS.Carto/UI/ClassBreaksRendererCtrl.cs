@@ -17,7 +17,7 @@ namespace Yutai.ArcGIS.Carto.UI
     internal partial class ClassBreaksRendererCtrl : UserControl, IUserControl
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+      
         private IClassBreaksRenderer iclassBreaksRenderer_0 = null;
         private IColorRamp icolorRamp_0 = null;
         private IEnumColors ienumColors_0 = null;

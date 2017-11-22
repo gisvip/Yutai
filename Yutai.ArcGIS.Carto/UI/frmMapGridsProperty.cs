@@ -11,7 +11,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class frmMapGridsProperty : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private IMapGrids imapGrids_0 = null;
         private IPageLayout ipageLayout_0 = null;
 

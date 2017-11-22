@@ -10,7 +10,7 @@ namespace Yutai.ArcGIS.Carto.Library
 {
     public partial class frmClipOutSet : Form
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private int int_0 = 0;
         private int int_1 = 0;
         private IWorkspace iworkspace_0 = null;

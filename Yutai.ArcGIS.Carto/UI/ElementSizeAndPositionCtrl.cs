@@ -14,7 +14,7 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         private bool bool_0 = false;
         private bool bool_1 = false;
-        private Container container_0 = null;
+      
         private IElement ielement_0 = null;
         private string string_0 = "大小和位置";
 

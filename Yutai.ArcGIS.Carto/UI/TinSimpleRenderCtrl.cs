@@ -13,7 +13,7 @@ namespace Yutai.ArcGIS.Carto.UI
     internal partial class TinSimpleRenderCtrl : UserControl, IUserControl
     {
         private bool bool_0 = false;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IStyleGallery istyleGallery_0 = null;
         private ITinLayer itinLayer_0 = null;
 

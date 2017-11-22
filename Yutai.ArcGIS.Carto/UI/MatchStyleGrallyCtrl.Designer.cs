@@ -20,9 +20,9 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         protected override void Dispose(bool bool_2)
         {
-            if (bool_2 && (this.icontainer_0 != null))
+            if (bool_2 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_2);
         }
@@ -30,7 +30,7 @@ namespace Yutai.ArcGIS.Carto.UI
        
         private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MatchStyleGrallyCtrl));
             this.label1 = new Label();
             this.label2 = new Label();
@@ -48,7 +48,7 @@ namespace Yutai.ArcGIS.Carto.UI
             this.cboLookupStyleset = new ComboBoxEdit();
             this.btnMoveDown = new SimpleButton();
             this.btnMoveUp = new SimpleButton();
-            this.contextMenuStrip1 = new ContextMenuStrip(this.icontainer_0);
+            this.contextMenuStrip1 = new ContextMenuStrip(this.components);
             this.menuitemGroup = new ToolStripMenuItem();
             this.menuitemUnGroup = new ToolStripMenuItem();
             this.cboFields.Properties.BeginInit();
@@ -191,7 +191,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private ColumnHeader columnHeader_2;
         private ColumnHeader columnHeader_3;
         private ContextMenuStrip contextMenuStrip1;
-        private IContainer icontainer_0;
+        private IContainer components;
         private Label label1;
         private Label label2;
         private RenderInfoListView listView1;

@@ -11,7 +11,7 @@ namespace Yutai.ArcGIS.Carto.Library
 {
     public partial class frmInputCoordinate : Form
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IGeometry igeometry_0 = null;
         private IMap imap_0 = null;
 

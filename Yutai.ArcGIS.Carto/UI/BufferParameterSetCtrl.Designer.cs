@@ -11,16 +11,16 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     partial class BufferParameterSetCtrl
     {
-        protected override void Dispose(bool bool_0)
+        private Container components = null;
+        protected override void Dispose(bool disposing)
         {
-            if (bool_0 && (this.container_0 != null))
+            if (disposing && (this.components != null))
             {
-                this.container_0.Dispose();
+                this.components.Dispose();
             }
-            base.Dispose(bool_0);
+            base.Dispose(disposing);
         }
 
-       
         private void InitializeComponent()
         {
             this.groupBox1 = new GroupBox();

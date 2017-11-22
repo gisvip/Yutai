@@ -12,7 +12,7 @@ namespace Yutai.ArcGIS.Carto.UI
     public partial class JoiningAndRelatingPropertyPage : UserControl, ILayerAndStandaloneTablePropertyPage
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private IBasicMap ibasicMap_0 = null;
         private ITable itable_0 = null;
 

@@ -13,7 +13,7 @@ namespace Yutai.ArcGIS.Carto.UI
     public partial class RepresentationRendererPage : UserControl, IUserControl
     {
         private bool bool_0 = false;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IGeoFeatureLayer igeoFeatureLayer_0 = null;
         private IRepresentationClass irepresentationClass_0 = null;
         private IRepresentationRenderer irepresentationRenderer_0 = null;

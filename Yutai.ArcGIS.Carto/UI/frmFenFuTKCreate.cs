@@ -14,7 +14,7 @@ namespace Yutai.ArcGIS.Carto.UI
         public string connectStr = "";
         private FenFuMapClass fenFuMapClass_0 = new FenFuMapClass();
         private IActiveView iactiveView_0 = null;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         public string styleFile = "";
 
         public frmFenFuTKCreate()
@@ -142,7 +142,7 @@ namespace Yutai.ArcGIS.Carto.UI
                     this.fenFuMapClass_0.MapTM = this.txtTM.Text.Trim();
                     this.fenFuMapClass_0.MapTH = this.txtTH.Text.Trim();
                     this.fenFuMapClass_0.MapRightUpText = this.txtRightUpTxt.Text.Trim();
-                    this.fenFuMapClass_0.MapRightLowTex = this.txtRightLowTxt.Text.Trim();
+                    this.fenFuMapClass_0.MapRightLowText = this.txtRightLowTxt.Text.Trim();
                     this.fenFuMapClass_0.MapLeftLowText = this.txtLeftLowTxt.Text.Trim();
                     this.fenFuMapClass_0.MapLeftBorderOutText = this.txtZTDW.Text.Trim();
                     this.fenFuMapClass_0.MapScaleText = this.cmbScale.Text.Trim();

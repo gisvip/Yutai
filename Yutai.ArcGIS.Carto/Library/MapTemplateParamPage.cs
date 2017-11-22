@@ -10,7 +10,7 @@ namespace Yutai.ArcGIS.Carto.Library
 {
     public partial class MapTemplateParamPage : UserControl
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private int int_0 = -1;
         private List<string> m_lstString = new List<string>();
         private List<ITextElement> m_lstTextElements = new List<ITextElement>();
