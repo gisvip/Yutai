@@ -20,9 +20,9 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         protected override void Dispose(bool bool_2)
         {
-            if (bool_2 && (this.icontainer_0 != null))
+            if (bool_2 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_2);
         }
@@ -30,7 +30,7 @@ namespace Yutai.ArcGIS.Carto.UI
        
         private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UniqueValueRendererMoreAttributeCtrl));
             this.btnAddAllValues = new SimpleButton();
             this.btnAddValue = new SimpleButton();
@@ -46,10 +46,10 @@ namespace Yutai.ArcGIS.Carto.UI
             this.cboFields2 = new ComboBoxEdit();
             this.cboFields1 = new ComboBoxEdit();
             this.groupBox2 = new GroupBox();
-            this.cboColorRamp = new StyleComboBox(this.icontainer_0);
+            this.cboColorRamp = new StyleComboBox(this.components);
             this.btnMoveDown = new SimpleButton();
             this.btnMoveUp = new SimpleButton();
-            this.contextMenuStrip1 = new ContextMenuStrip(this.icontainer_0);
+            this.contextMenuStrip1 = new ContextMenuStrip(this.components);
             this.menuitemGroup = new ToolStripMenuItem();
             this.menuitemUnGroup = new ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
@@ -210,7 +210,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private ContextMenuStrip contextMenuStrip1;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
-        private IContainer icontainer_0;
+        private IContainer components;
         private RenderInfoListView listView1;
         private ToolStripMenuItem menuitemGroup;
         private ToolStripMenuItem menuitemUnGroup;

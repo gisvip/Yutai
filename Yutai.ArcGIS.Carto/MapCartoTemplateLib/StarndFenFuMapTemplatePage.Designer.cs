@@ -18,9 +18,9 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
     {
         protected override void Dispose(bool bool_2)
         {
-            if (bool_2 && (this.icontainer_0 != null))
+            if (bool_2 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_2);
         }

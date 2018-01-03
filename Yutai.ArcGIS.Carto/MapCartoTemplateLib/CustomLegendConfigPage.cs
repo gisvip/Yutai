@@ -18,7 +18,7 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
     {
         private bool bool_0 = false;
         private bool bool_1 = false;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private Image image_0 = null;
         private Image image_1 = null;
         private Image image_2 = null;

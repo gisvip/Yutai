@@ -10,7 +10,7 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
     public partial class TableCellSetPage : UserControl, IPropertyPage, IPropertyPageEvents
     {
         private bool bool_0 = false;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private SortedList<int, SortedList<int, string>> sortedList_0 = new SortedList<int, SortedList<int, string>>();
 
         public event OnValueChangeEventHandler OnValueChange;

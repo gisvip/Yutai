@@ -15,7 +15,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class FindResultControl : UserControl
     {
-        private Container container_0 = null;
+       
         private IActiveView iactiveView_0 = null;
         private IArray iarray_0 = null;
 

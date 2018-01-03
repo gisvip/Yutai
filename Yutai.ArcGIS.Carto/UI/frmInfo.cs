@@ -12,7 +12,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class frmInfo : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private FeatureInfoControl featureInfoControl_0 = new FeatureInfoControl();
 
         public event IdentifyLayerChangedHandler IdentifyLayerChanged;

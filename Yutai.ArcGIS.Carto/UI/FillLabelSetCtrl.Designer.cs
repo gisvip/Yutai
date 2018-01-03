@@ -15,16 +15,17 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     partial class FillLabelSetCtrl
     {
-        protected override void Dispose(bool bool_3)
+        private Container components = null;
+        protected override void Dispose(bool disposing)
         {
-            if (bool_3 && (this.container_0 != null))
+            if (disposing && (this.components != null))
             {
-                this.container_0.Dispose();
+                this.components.Dispose();
             }
-            base.Dispose(bool_3);
+            base.Dispose(disposing);
         }
 
-       
+
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FillLabelSetCtrl));

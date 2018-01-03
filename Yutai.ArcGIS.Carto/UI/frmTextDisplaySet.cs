@@ -10,7 +10,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class frmTextDisplaySet : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private IHatchDefinition ihatchDefinition_0 = null;
 
         public frmTextDisplaySet()

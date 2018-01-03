@@ -18,9 +18,9 @@ namespace Yutai.ArcGIS.Carto.DesignLib
     {
         protected override void Dispose(bool bool_2)
         {
-            if (bool_2 && (this.icontainer_0 != null))
+            if (bool_2 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_2);
         }
@@ -28,13 +28,13 @@ namespace Yutai.ArcGIS.Carto.DesignLib
        
         private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTLConfig));
             this.txtLegend = new TextBox();
             this.labPoint = new Label();
             this.btnDele = new Button();
             this.butNewRow = new Button();
-            this.imageList_0 = new ImageList(this.icontainer_0);
+            this.imageList_0 = new ImageList(this.components);
             this.txtColumnNum = new TextBox();
             this.label1 = new Label();
             this.groupBox1 = new GroupBox();

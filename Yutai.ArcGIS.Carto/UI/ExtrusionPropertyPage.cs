@@ -13,7 +13,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private bool bool_1 = false;
         private I3DProperties i3DProperties_0 = null;
         private IBasicMap ibasicMap_0 = null;
-        private IContainer icontainer_0 = null;
+      
         private ILayer ilayer_0 = null;
 
         public ExtrusionPropertyPage()

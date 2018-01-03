@@ -22,9 +22,9 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         protected override void Dispose(bool bool_1)
         {
-            if (bool_1 && (this.icontainer_0 != null))
+            if (bool_1 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_1);
         }
@@ -32,7 +32,7 @@ namespace Yutai.ArcGIS.Carto.UI
        
         private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MapDataFramePage));
             this.groupBox1 = new GroupBox();
             this.panelExtend = new Panel();
@@ -61,8 +61,8 @@ namespace Yutai.ArcGIS.Carto.UI
             this.groupBox4 = new GroupBox();
             this.btnBorderInfo = new SimpleButton();
             this.btnBorderSelector = new SimpleButton();
-            this.cboBorder = new StyleComboBox(this.icontainer_0);
-            this.imageList_0 = new ImageList(this.icontainer_0);
+            this.cboBorder = new StyleComboBox(this.components);
+            this.imageList_0 = new ImageList(this.components);
             this.groupBox1.SuspendLayout();
             this.panelExtend.SuspendLayout();
             this.panelmapscale.SuspendLayout();
@@ -310,7 +310,7 @@ namespace Yutai.ArcGIS.Carto.UI
             base.Hide();
         }
 
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private SimpleButton btnBorderInfo;
         private SimpleButton btnBorderSelector;
         private Button btnExclude;

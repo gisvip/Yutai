@@ -7,51 +7,51 @@ namespace Yutai.ArcGIS.Carto
 {
     internal class YTTransformation
     {
-        private IActiveView iactiveView_0 = null;
-        private IActiveView iactiveView_1 = null;
+        private IActiveView _pFocusMapActiveView = null;
+        private IActiveView _pActiveView = null;
 
-        public YTTransformation(IActiveView iactiveView_2)
+        public YTTransformation(IActiveView pActiveView)
         {
-            if (iactiveView_2 is IPageLayout)
+            if (pActiveView is IPageLayout)
             {
-                this.iactiveView_0 = iactiveView_2.FocusMap as IActiveView;
-                this.iactiveView_1 = iactiveView_2;
+                this._pFocusMapActiveView = pActiveView.FocusMap as IActiveView;
+                this._pActiveView = pActiveView;
             }
             else
             {
-                this.iactiveView_0 = iactiveView_2;
+                this._pFocusMapActiveView = pActiveView;
             }
         }
 
-        public void TextWidth(ITextElement itextElement_0, out double double_0, out double double_1)
+        public void TextWidth(ITextElement pTextElement, out double xDelta, out double yDelta)
         {
-            IActiveView view = this.iactiveView_1;
+            IActiveView view = this._pActiveView;
             if (view == null)
             {
-                view = this.iactiveView_0;
+                view = this._pFocusMapActiveView;
             }
             double xSize = 0.0;
             double ySize = 0.0;
-            double_0 = 0.0;
-            double_1 = 0.0;
+            xDelta = 0.0;
+            yDelta = 0.0;
             double num3 = 2.54;
             try
             {
                 IEnvelope bounds = new EnvelopeClass();
                 view.ScreenDisplay.StartDrawing(view.ScreenDisplay.hDC, 0);
-                itextElement_0.Symbol.GetTextSize(view.ScreenDisplay.hDC, view.ScreenDisplay.DisplayTransformation,
-                    itextElement_0.Text, out xSize, out ySize);
-                (itextElement_0 as IElement).QueryBounds(view.ScreenDisplay, bounds);
+                pTextElement.Symbol.GetTextSize(view.ScreenDisplay.hDC, view.ScreenDisplay.DisplayTransformation,
+                    pTextElement.Text, out xSize, out ySize);
+                (pTextElement as IElement).QueryBounds(view.ScreenDisplay, bounds);
                 view.ScreenDisplay.FinishDrawing();
                 if (view is IPageLayout)
                 {
-                    double_0 = xSize*(num3/72.0);
-                    double_1 = ySize*(num3/72.0);
+                    xDelta = xSize*(num3/72.0);
+                    yDelta = ySize*(num3/72.0);
                 }
                 else
                 {
-                    double_0 = ((xSize*(num3/72.0))/100.0)*view.FocusMap.ReferenceScale;
-                    double_1 = ((ySize*(num3/72.0))/100.0)*view.FocusMap.ReferenceScale;
+                    xDelta = ((xSize*(num3/72.0))/100.0)*view.FocusMap.ReferenceScale;
+                    yDelta = ((ySize*(num3/72.0))/100.0)*view.FocusMap.ReferenceScale;
                 }
             }
             catch (Exception exception)
@@ -60,47 +60,47 @@ namespace Yutai.ArcGIS.Carto
             }
         }
 
-        public IPoint ToMapPoint(IPoint ipoint_0)
+        public IPoint ToMapPoint(IPoint pPoint)
         {
             int num;
             int num2;
-            if (this.iactiveView_1 == null)
+            if (this._pActiveView == null)
             {
-                return ipoint_0;
+                return pPoint;
             }
-            this.iactiveView_1.ScreenDisplay.DisplayTransformation.FromMapPoint(ipoint_0, out num, out num2);
-            return this.iactiveView_0.ScreenDisplay.DisplayTransformation.ToMapPoint(num, num2);
+            this._pActiveView.ScreenDisplay.DisplayTransformation.FromMapPoint(pPoint, out num, out num2);
+            return this._pFocusMapActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(num, num2);
         }
 
-        public IPoint ToMapPoint(double double_0, double double_1)
+        public IPoint ToMapPoint(double x, double y)
         {
             IPoint point = new PointClass();
-            point.PutCoords(double_0, double_1);
+            point.PutCoords(x, y);
             return this.ToMapPoint(point);
         }
 
-        public IPoint ToPageLayoutPoint(IPoint ipoint_0)
+        public IPoint ToPageLayoutPoint(IPoint pPoint)
         {
             int num;
             int num2;
-            if (this.iactiveView_1 == null)
+            if (this._pActiveView == null)
             {
-                return ipoint_0;
+                return pPoint;
             }
-            this.iactiveView_0.ScreenDisplay.DisplayTransformation.FromMapPoint(ipoint_0, out num, out num2);
-            return this.iactiveView_1.ScreenDisplay.DisplayTransformation.ToMapPoint(num, num2);
+            this._pFocusMapActiveView.ScreenDisplay.DisplayTransformation.FromMapPoint(pPoint, out num, out num2);
+            return this._pActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(num, num2);
         }
 
-        public IPoint ToPageLayoutPoint(double double_0, double double_1)
+        public IPoint ToPageLayoutPoint(double x, double y)
         {
             IPoint point = new PointClass();
-            point.PutCoords(double_0, double_1);
+            point.PutCoords(x, y);
             return this.ToPageLayoutPoint(point);
         }
 
         public IEnvelope MapExtent
         {
-            get { return this.iactiveView_0.Extent; }
+            get { return this._pFocusMapActiveView.Extent; }
         }
     }
 }

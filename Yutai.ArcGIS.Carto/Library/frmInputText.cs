@@ -7,7 +7,7 @@ namespace Yutai.ArcGIS.Carto.Library
 {
     public partial class frmInputText : Form
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private string string_0 = "";
 
         public frmInputText()

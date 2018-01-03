@@ -20,9 +20,9 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         protected override void Dispose(bool bool_1)
         {
-            if (bool_1 && (this.icontainer_0 != null))
+            if (bool_1 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_1);
         }
@@ -30,7 +30,7 @@ namespace Yutai.ArcGIS.Carto.UI
        
         private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOutline));
             this.groupBox1 = new GroupBox();
             this.rdoPlacePageMargine = new RadioButton();
@@ -42,19 +42,19 @@ namespace Yutai.ArcGIS.Carto.UI
             this.label1 = new Label();
             this.chkGroup = new CheckEdit();
             this.chkNewFrameElement = new CheckEdit();
-            this.imageList_0 = new ImageList(this.icontainer_0);
+            this.imageList_0 = new ImageList(this.components);
             this.groupBox2 = new GroupBox();
             this.btnBorderInfo = new SimpleButton();
             this.btnBorderSelector = new SimpleButton();
-            this.cboBorder = new StyleComboBox(this.icontainer_0);
+            this.cboBorder = new StyleComboBox(this.components);
             this.groupBox3 = new GroupBox();
             this.btnBackgroundInfo = new SimpleButton();
             this.btnBackgroundSelector = new SimpleButton();
-            this.cboBackground = new StyleComboBox(this.icontainer_0);
+            this.cboBackground = new StyleComboBox(this.components);
             this.groupBox4 = new GroupBox();
             this.btnshadowInfo = new SimpleButton();
             this.btnShadowSelector = new SimpleButton();
-            this.cboShadow = new StyleComboBox(this.icontainer_0);
+            this.cboShadow = new StyleComboBox(this.components);
             this.btnOK = new SimpleButton();
             this.btnCancel = new SimpleButton();
             this.groupBox1.SuspendLayout();
@@ -319,7 +319,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private GroupBox groupBox2;
         private GroupBox groupBox3;
         private GroupBox groupBox4;
-        private IContainer icontainer_0;
+        private IContainer components;
         private ImageList imageList_0;
         private Label label1;
         private Label label2;

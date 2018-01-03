@@ -13,7 +13,7 @@ namespace Yutai.ArcGIS.Carto.UI
     public partial class FormPrinterSetup : Form
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+     
         private IPage ipage_0 = null;
         private IPrinter iprinter_0 = null;
 

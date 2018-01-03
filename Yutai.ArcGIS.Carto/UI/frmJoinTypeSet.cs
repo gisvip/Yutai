@@ -10,7 +10,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class frmJoinTypeSet : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private esriJoinType esriJoinType_0 = esriJoinType.esriLeftOuterJoin;
 
         public frmJoinTypeSet()

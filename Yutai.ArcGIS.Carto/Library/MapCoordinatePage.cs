@@ -16,7 +16,7 @@ namespace Yutai.ArcGIS.Carto.Library
     public partial class MapCoordinatePage : UserControl, IPropertyPage
     {
         private bool _isDirty = false;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private MapTemplateApplyHelp mapTemplateApplyHelp = null;
         private List<IIndexMap> _indexMaps;
         public MapCoordinatePage()

@@ -13,7 +13,7 @@ namespace Yutai.ArcGIS.Carto.UI
     public partial class LayerDefinitionExpressionCtrl : UserControl, ILayerAndStandaloneTablePropertyPage
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private ITableDefinition itableDefinition_0 = null;
 
         public LayerDefinitionExpressionCtrl()

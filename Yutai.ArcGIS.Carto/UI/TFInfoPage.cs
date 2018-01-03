@@ -9,7 +9,7 @@ namespace Yutai.ArcGIS.Carto.UI
     [ToolboxItem(false)]
     internal partial class TFInfoPage : UserControl
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private YTTKAssiatant jlktkassiatant_0 = null;
 
         public TFInfoPage()

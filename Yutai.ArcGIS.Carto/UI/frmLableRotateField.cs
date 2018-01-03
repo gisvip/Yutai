@@ -11,7 +11,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class frmLableRotateField : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         public bool m_PerpendicularToAngle = false;
         public IFields m_pFields = null;
         public esriLabelRotationType m_RotationType = esriLabelRotationType.esriRotateLabelGeographic;

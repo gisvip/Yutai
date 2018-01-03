@@ -9,7 +9,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class RepresentationRuleListBox1 : UserControl
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IRepresentationRules irepresentationRules_0 = null;
 
         public RepresentationRuleListBox1()

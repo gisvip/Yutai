@@ -12,7 +12,7 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
         private ElementPosition elementPosition_0 = new ElementPosition();
         private ElementSymbolSetPage elementSymbolSetPage_0 = new ElementSymbolSetPage();
         private ElementTypeSelectPage elementTypeSelectPage_0 = new ElementTypeSelectPage();
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private int int_0 = 0;
         private LegendFormatSetupCtrl legendFormatSetupCtrl_0 = new LegendFormatSetupCtrl();
         private LegendFrameUserControl legendFrameUserControl_0 = new LegendFrameUserControl();

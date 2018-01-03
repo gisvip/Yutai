@@ -14,16 +14,17 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     partial class FeatureSelectionSetCtrl
     {
-        protected override void Dispose(bool bool_2)
+        private Container components = null;
+        protected override void Dispose(bool disposing)
         {
-            if (bool_2 && (this.container_0 != null))
+            if (disposing && (this.components != null))
             {
-                this.container_0.Dispose();
+                this.components.Dispose();
             }
-            base.Dispose(bool_2);
+            base.Dispose(disposing);
         }
 
-       
+
         private void InitializeComponent()
         {
             this.radioGroup1 = new RadioGroup();

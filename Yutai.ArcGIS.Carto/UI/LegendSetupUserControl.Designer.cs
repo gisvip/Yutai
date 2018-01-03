@@ -15,9 +15,9 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         protected override void Dispose(bool bool_1)
         {
-            if (bool_1 && (this.icontainer_0 != null))
+            if (bool_1 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_1);
         }
@@ -25,10 +25,10 @@ namespace Yutai.ArcGIS.Carto.UI
        
  private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             this.groupBox1 = new GroupBox();
-            this.cboAreaPatches = new StyleComboBox(this.icontainer_0);
-            this.cboLinePatches = new StyleComboBox(this.icontainer_0);
+            this.cboAreaPatches = new StyleComboBox(this.components);
+            this.cboLinePatches = new StyleComboBox(this.components);
             this.label6 = new Label();
             this.label7 = new Label();
             this.label5 = new Label();
@@ -157,7 +157,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private StyleComboBox cboLinePatches;
         private GroupBox groupBox1;
         private IArray iarray_0;
-        private IContainer icontainer_0;
+        private IContainer components;
         private Label label1;
         private Label label2;
         private Label label3;

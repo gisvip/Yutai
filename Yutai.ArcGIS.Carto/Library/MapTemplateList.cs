@@ -13,7 +13,7 @@ namespace Yutai.ArcGIS.Carto.Library
     {
         private bool bool_0 = false;
 
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private MapTemplateApplyHelp mapTemplateApplyHelp = null;
         private MapTemplateGallery mapTemplateGallery=null;
 

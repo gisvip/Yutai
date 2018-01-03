@@ -17,7 +17,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class frmLabelToAnnoSetup : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private double double_0 = 0.0;
         private esriLabelWhichFeatures esriLabelWhichFeatures_0 = esriLabelWhichFeatures.esriAllFeatures;
         private IFeatureLayer ifeatureLayer_0 = null;

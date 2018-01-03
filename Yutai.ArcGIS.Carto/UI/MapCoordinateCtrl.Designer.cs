@@ -19,9 +19,9 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         protected override void Dispose(bool bool_1)
         {
-            if (bool_1 && (this.icontainer_0 != null))
+            if (bool_1 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_1);
         }
@@ -29,14 +29,14 @@ namespace Yutai.ArcGIS.Carto.UI
        
  private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MapCoordinateCtrl));
             this.label1 = new Label();
             this.textBoxDetail = new MemoEdit();
             this.btnClear = new SimpleButton();
             this.label2 = new Label();
             this.treeView1 = new TreeView();
-            this.imageList_0 = new ImageList(this.icontainer_0);
+            this.imageList_0 = new ImageList(this.components);
             this.contextMenu_0 = new ContextMenu();
             this.menuItem_0 = new MenuItem();
             this.menuItem_1 = new MenuItem();
@@ -154,7 +154,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private SimpleButton btnSelect;
         private ContextMenu contextMenu_0;
         private IBasicMap ibasicMap_0;
-        private IContainer icontainer_0;
+        private IContainer components;
         private ImageList imageList_0;
         private ISpatialReference ispatialReference_0;
         private Label label1;

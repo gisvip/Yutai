@@ -8,7 +8,7 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
 {
     public partial class MapTemplateTypePage : UserControl
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
 
 
         public MapTemplateTypePage()

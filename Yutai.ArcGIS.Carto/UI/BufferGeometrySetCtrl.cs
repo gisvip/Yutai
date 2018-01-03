@@ -13,7 +13,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class BufferGeometrySetCtrl : UserControl
     {
-        private Container container_0 = null;
+     
 
         public BufferGeometrySetCtrl()
         {

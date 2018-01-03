@@ -16,7 +16,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private ChartRendererCtrl chartRendererCtrl_0 = new ChartRendererCtrl();
         private ChartRendererCtrl chartRendererCtrl_1 = new ChartRendererCtrl();
         private ClassBreaksRendererCtrl classBreaksRendererCtrl_0 = new ClassBreaksRendererCtrl();
-        private Container container_0 = null;
+        private Container components = null;
         private DotDensityRendererCtrl dotDensityRendererCtrl_0 = new DotDensityRendererCtrl();
         private IBasicMap ibasicMap_0 = null;
         private ILayer ilayer_0 = null;

@@ -21,7 +21,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
     {
         private bool bool_0 = false;
         private bool bool_1 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private IMapSurroundFrame imapSurroundFrame_0 = null;
         private INorthArrow inorthArrow_0 = null;
         private IStyleGallery istyleGallery_0 = ApplicationBase.StyleGallery;

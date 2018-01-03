@@ -19,7 +19,7 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         private bool bool_0 = false;
         private bool bool_1 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private IBasicMap ibasicMap_0 = null;
         private ICompositeLayer icompositeLayer_0 = null;
         private IGroupLayer igroupLayer_0 = null;

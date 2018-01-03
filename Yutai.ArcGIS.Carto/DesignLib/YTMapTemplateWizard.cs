@@ -11,7 +11,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
     public partial class YTMapTemplateWizard : Form
     {
         private GridAxisPropertyPage gridAxisPropertyPage_0 = new GridAxisPropertyPage();
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IMapFrame imapFrame_0 = null;
         private int int_0 = 0;
         private LabelFormatPropertyPage labelFormatPropertyPage_0 = new LabelFormatPropertyPage();

@@ -14,7 +14,7 @@ namespace Yutai.ArcGIS.Carto.UI
     internal partial class frmExpressionBuild : Form
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private ILayer ilayer_0 = null;
         private ITable itable_0 = null;
         private string string_0 = "";

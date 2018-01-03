@@ -8,7 +8,7 @@ namespace Yutai.ArcGIS.Carto.UI
     public partial class frmPageLayoutTemp : Form
     {
         internal AxPageLayoutControl axPageLayoutControl1;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
 
         public frmPageLayoutTemp()
         {

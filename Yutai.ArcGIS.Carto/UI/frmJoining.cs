@@ -14,7 +14,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class frmJoining : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private esriJoinType esriJoinType_0 = esriJoinType.esriLeftOuterJoin;
         private IBasicMap ibasicMap_0 = null;
         private ITable itable_0 = null;

@@ -9,7 +9,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class frmJTBElement : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private IJTBElement ijtbelement_0 = null;
         private string string_0 = "";
 

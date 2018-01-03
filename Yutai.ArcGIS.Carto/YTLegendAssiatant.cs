@@ -18,8 +18,8 @@ namespace Yutai.ArcGIS.Carto
         private double double_2 = 10.0;
         private double double_3 = 10.0;
         private double double_4 = 1.0;
-        private IList<ISymbol> ilist_0 = new List<ISymbol>();
-        private IList<string> ilist_1 = new List<string>();
+        private IList<ISymbol> lstSymbol = new List<ISymbol>();
+        private IList<string> lstSymHeader = new List<string>();
         private int int_0 = 3;
         private ITextSymbol itextSymbol_0 = null;
         private ITextSymbol itextSymbol_1 = null;
@@ -28,8 +28,8 @@ namespace Yutai.ArcGIS.Carto
         public void Create(IActiveView iactiveView_0, IEnvelope ienvelope_0)
         {
             IPoint upperLeft = ienvelope_0.UpperLeft;
-            int num = this.ilist_0.Count/this.int_0;
-            if ((num*this.double_0) < this.ilist_0.Count)
+            int num = this.lstSymbol.Count/this.int_0;
+            if ((num*this.double_0) < this.lstSymbol.Count)
             {
                 num++;
             }
@@ -51,11 +51,11 @@ namespace Yutai.ArcGIS.Carto
             double y = upperLeft.Y - height;
             IPoint point2 = new PointClass();
             IEnvelope bounds = new EnvelopeClass();
-            for (int i = 0; i < this.ilist_0.Count; i++)
+            for (int i = 0; i < this.lstSymbol.Count; i++)
             {
-                ISymbol local1 = this.ilist_0[i];
+                ISymbol local1 = this.lstSymbol[i];
                 point2.PutCoords(x, y);
-                IElement element3 = this.method_6(point2, this.ilist_0[i], this.ilist_1[i]);
+                IElement element3 = this.method_6(point2, this.lstSymbol[i], this.lstSymHeader[i]);
                 element3.QueryBounds(iactiveView_0.ScreenDisplay, bounds);
                 if (element3 is IGroupElement)
                 {
@@ -94,8 +94,8 @@ namespace Yutai.ArcGIS.Carto
 
         public void Create(IActiveView iactiveView_0, IPoint ipoint_0)
         {
-            int num = this.ilist_0.Count/this.int_0;
-            if ((num*this.double_0) < this.ilist_0.Count)
+            int num = this.lstSymbol.Count/this.int_0;
+            if ((num*this.double_0) < this.lstSymbol.Count)
             {
                 num++;
             }
@@ -117,11 +117,11 @@ namespace Yutai.ArcGIS.Carto
             double y = ipoint_0.Y - height;
             IPoint point = new PointClass();
             IEnvelope bounds = new EnvelopeClass();
-            for (int i = 0; i < this.ilist_0.Count; i++)
+            for (int i = 0; i < this.lstSymbol.Count; i++)
             {
-                ISymbol local1 = this.ilist_0[i];
+                ISymbol local1 = this.lstSymbol[i];
                 point.PutCoords(x, y);
-                IElement element3 = this.method_6(point, this.ilist_0[i], this.ilist_1[i]);
+                IElement element3 = this.method_6(point, this.lstSymbol[i], this.lstSymHeader[i]);
                 element3.QueryBounds(iactiveView_0.ScreenDisplay, bounds);
                 if (element3 is IGroupElement)
                 {
@@ -189,37 +189,37 @@ namespace Yutai.ArcGIS.Carto
             }
             ISymbol item = new SimpleMarkerSymbolClass();
             (item as ISimpleMarkerSymbol).Style = esriSimpleMarkerStyle.esriSMSCircle;
-            this.ilist_0.Add(item);
-            this.ilist_1.Add("圆retr678978");
+            this.lstSymbol.Add(item);
+            this.lstSymHeader.Add("圆retr678978");
             item = new SimpleMarkerSymbolClass();
             (item as ISimpleMarkerSymbol).Style = esriSimpleMarkerStyle.esriSMSCross;
-            this.ilist_0.Add(item);
-            this.ilist_1.Add("十字形");
+            this.lstSymbol.Add(item);
+            this.lstSymHeader.Add("十字形");
             item = new SimpleMarkerSymbolClass();
             (item as ISimpleMarkerSymbol).Style = esriSimpleMarkerStyle.esriSMSDiamond;
-            this.ilist_0.Add(item);
-            this.ilist_1.Add("菱形");
+            this.lstSymbol.Add(item);
+            this.lstSymHeader.Add("菱形");
             item = new SimpleLineSymbolClass();
             (item as ISimpleLineSymbol).Style = esriSimpleLineStyle.esriSLSDashDot;
-            this.ilist_0.Add(item);
-            this.ilist_1.Add("线");
+            this.lstSymbol.Add(item);
+            this.lstSymHeader.Add("线");
             item = new SimpleLineSymbolClass();
             (item as ISimpleLineSymbol).Style = esriSimpleLineStyle.esriSLSSolid;
-            this.ilist_0.Add(item);
-            this.ilist_1.Add("线2");
+            this.lstSymbol.Add(item);
+            this.lstSymHeader.Add("线2");
             item = new SimpleLineSymbolClass();
             (item as ISimpleLineSymbol).Style = esriSimpleLineStyle.esriSLSDashDot;
             (item as ISimpleLineSymbol).Width = 3.0;
-            this.ilist_0.Add(item);
-            this.ilist_1.Add("线3");
+            this.lstSymbol.Add(item);
+            this.lstSymHeader.Add("线3");
             item = new SimpleFillSymbolClass();
             (item as ISimpleFillSymbol).Style = esriSimpleFillStyle.esriSFSBackwardDiagonal;
-            this.ilist_0.Add(item);
-            this.ilist_1.Add("面1");
+            this.lstSymbol.Add(item);
+            this.lstSymHeader.Add("面1");
             item = new SimpleFillSymbolClass();
             (item as ISimpleFillSymbol).Style = esriSimpleFillStyle.esriSFSHorizontal;
-            this.ilist_0.Add(item);
-            this.ilist_1.Add("面2");
+            this.lstSymbol.Add(item);
+            this.lstSymHeader.Add("面2");
         }
 
         public void Load(string string_1)
@@ -429,8 +429,8 @@ namespace Yutai.ArcGIS.Carto
             }
             if (item != null)
             {
-                this.ilist_0.Add(item);
-                this.ilist_1.Add(str);
+                this.lstSymbol.Add(item);
+                this.lstSymHeader.Add(str);
             }
         }
 

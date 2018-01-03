@@ -17,16 +17,17 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     partial class FractionTextSymbolPage
     {
-        protected override void Dispose(bool bool_2)
+        private Container components = null;
+        protected override void Dispose(bool disposing)
         {
-            if (bool_2 && (this.icontainer_0 != null))
+            if (disposing && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
-            base.Dispose(bool_2);
+            base.Dispose(disposing);
         }
 
-       
+
         private void InitializeComponent()
         {
             this.label1 = new Label();

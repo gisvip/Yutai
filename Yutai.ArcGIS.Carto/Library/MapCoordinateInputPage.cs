@@ -10,7 +10,7 @@ namespace Yutai.ArcGIS.Carto.Library
         private bool _isFreePoint = false;
         private double _x = 0.0;
         private double _y = 0.0;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private MapTemplateApplyHelp mapTemplateApplyHelp = null;
 
         public MapCoordinateInputPage()

@@ -9,7 +9,7 @@ namespace Yutai.ArcGIS.Carto.Library
     {
         private double double_0 = 0.0;
         private double double_1 = 0.0;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
 
         public frmInputXY()
         {

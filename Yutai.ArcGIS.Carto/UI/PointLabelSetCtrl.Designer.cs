@@ -18,9 +18,9 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         protected override void Dispose(bool bool_3)
         {
-            if (bool_3 && (this.icontainer_0 != null))
+            if (bool_3 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_3);
         }
@@ -28,7 +28,7 @@ namespace Yutai.ArcGIS.Carto.UI
        
         private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PointLabelSetCtrl));
             this.btnLabelExpression = new GroupBox();
             this.btnEditSymbol = new SimpleButton();
@@ -41,7 +41,7 @@ namespace Yutai.ArcGIS.Carto.UI
             this.btnRotateField = new SimpleButton();
             this.btnAngles = new SimpleButton();
             this.imageComboBoxEdit1 = new ImageComboBoxEdit();
-            this.imageList_0 = new ImageList(this.icontainer_0);
+            this.imageList_0 = new ImageList(this.components);
             this.rdoPointPlacementMethod = new RadioGroup();
             this.btnSQL = new SimpleButton();
             this.btnScaleSet = new SimpleButton();
@@ -188,7 +188,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private ComboBoxEdit cboFields;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
-        private IContainer icontainer_0;
+        private IContainer components;
         private ImageComboBoxEdit imageComboBoxEdit1;
         private ImageList imageList_0;
         private Label label1;

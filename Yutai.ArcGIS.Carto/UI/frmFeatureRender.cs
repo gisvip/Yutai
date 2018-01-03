@@ -6,7 +6,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class frmFeatureRender : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
 
         public frmFeatureRender()
         {

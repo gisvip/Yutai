@@ -16,7 +16,7 @@ namespace Yutai.ArcGIS.Carto.UI
     internal partial class MapGridCoordinatePropertyPage : UserControl
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private IMapGrid imapGrid_0 = null;
         private IStyleGallery istyleGallery_0 = ApplicationBase.StyleGallery;
         private ITextSymbol itextSymbol_0 = new TextSymbolClass();

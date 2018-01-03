@@ -6,22 +6,21 @@ namespace Yutai.ArcGIS.Carto
 {
     internal abstract class BaseMap
     {
-        private bool bool_0 = false;
-        private bool bool_1 = false;
-        private double double_0 = 0.0;
-        private double double_1 = 0.0;
-        private IPoint ipoint_0 = null;
-        private IPoint ipoint_1 = null;
-        private IPoint ipoint_2 = null;
-        private IPoint ipoint_3 = null;
+        private bool _needLegend = false;
+        private bool _needGrid = false;
+        private double _inOutDist = 0.0;
+        private double _titleDist = 0.0;
+        private IPoint _leftUp = null;
+        private IPoint _leftLow = null;
+        private IPoint _rightUp = null;
+        private IPoint _rightLow = null;
         protected ICompositeGraphicsLayer m_GraphicsLayer = null;
         protected bool m_IsAdminSys = true;
         protected IActiveView m_pActiveView = null;
         protected double m_ReferenceScale = 10000.0;
-        private string string_0 = null;
-        private string string_1 = "";
-        private string string_2 = "";
-        private string string_3 = "";
+        private string _mapType = null;
+        private string _mapTM = "";
+        private string _mapTH = "";
         protected string styleFile = "";
 
         protected BaseMap()
@@ -45,8 +44,8 @@ namespace Yutai.ArcGIS.Carto
         public abstract void DrawRemark();
         public abstract void DrawTitle();
 
-        protected ITextSymbol FontStyle(double double_2, esriTextHorizontalAlignment esriTextHorizontalAlignment_0,
-            esriTextVerticalAlignment esriTextVerticalAlignment_0)
+        protected ITextSymbol FontStyle(double size, esriTextHorizontalAlignment textHorizontalAlignment,
+            esriTextVerticalAlignment textVerticalAlignment)
         {
             ITextSymbol symbol = new TextSymbolClass();
             IRgbColor color = new RgbColorClass
@@ -55,10 +54,10 @@ namespace Yutai.ArcGIS.Carto
                 Red = 0,
                 Green = 0
             };
-            symbol.Size = double_2;
+            symbol.Size = size;
             symbol.Color = color;
-            symbol.HorizontalAlignment = esriTextHorizontalAlignment_0;
-            symbol.VerticalAlignment = esriTextVerticalAlignment_0;
+            symbol.HorizontalAlignment = textHorizontalAlignment;
+            symbol.VerticalAlignment = textVerticalAlignment;
             return symbol;
         }
 
@@ -99,20 +98,20 @@ namespace Yutai.ArcGIS.Carto
 
         public double InOutDist
         {
-            get { return this.double_0; }
-            set { this.double_0 = value; }
+            get { return this._inOutDist; }
+            set { this._inOutDist = value; }
         }
 
         public IPoint LeftLow
         {
-            get { return this.ipoint_1; }
-            set { this.ipoint_1 = value; }
+            get { return this._leftLow; }
+            set { this._leftLow = value; }
         }
 
         public IPoint LeftUp
         {
-            get { return this.ipoint_0; }
-            set { this.ipoint_0 = value; }
+            get { return this._leftUp; }
+            set { this._leftUp = value; }
         }
 
         public double MapReferenceScale
@@ -122,44 +121,44 @@ namespace Yutai.ArcGIS.Carto
 
         public string MapTH
         {
-            get { return this.string_2; }
-            set { this.string_2 = value; }
+            get { return this._mapTH; }
+            set { this._mapTH = value; }
         }
 
         public string MapTM
         {
-            get { return this.string_1; }
-            set { this.string_1 = value; }
+            get { return this._mapTM; }
+            set { this._mapTM = value; }
         }
 
         public string MapType
         {
-            get { return this.string_0; }
-            set { this.string_0 = value; }
+            get { return this._mapType; }
+            set { this._mapType = value; }
         }
 
         public bool NeedGrid
         {
-            get { return this.bool_1; }
-            set { this.bool_1 = value; }
+            get { return this._needGrid; }
+            set { this._needGrid = value; }
         }
 
         public bool NeedLegend
         {
-            get { return this.bool_0; }
-            set { this.bool_0 = value; }
+            get { return this._needLegend; }
+            set { this._needLegend = value; }
         }
 
         public IPoint RightLow
         {
-            get { return this.ipoint_3; }
-            set { this.ipoint_3 = value; }
+            get { return this._rightLow; }
+            set { this._rightLow = value; }
         }
 
         public IPoint RightUp
         {
-            get { return this.ipoint_2; }
-            set { this.ipoint_2 = value; }
+            get { return this._rightUp; }
+            set { this._rightUp = value; }
         }
 
         public string StyleFile
@@ -170,8 +169,8 @@ namespace Yutai.ArcGIS.Carto
 
         public double TitleDist
         {
-            get { return this.double_1; }
-            set { this.double_1 = value; }
+            get { return this._titleDist; }
+            set { this._titleDist = value; }
         }
     }
 }

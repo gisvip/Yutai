@@ -11,7 +11,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class NewMapGridWizard : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private IGraphicsContainer igraphicsContainer_0 = null;
         private IMapFrame imapFrame_0 = null;
         private IndexGridLabelPropertyPage indexGridLabelPropertyPage_0 = new IndexGridLabelPropertyPage();

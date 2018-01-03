@@ -11,7 +11,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class LegendWizard : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private IArray iarray_0 = new ArrayClass();
         private ILegend ilegend_0 = new LegendClass_2();
         private IMap imap_0 = null;

@@ -28,7 +28,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
 
         private ImageList imageList_1;
 
-        private IContainer icontainer_0;
+        private IContainer components;
 
         private TextBox textBox;
 
@@ -166,9 +166,9 @@ namespace Yutai.ArcGIS.Carto.DesignLib
 
         protected override void Dispose(bool bool_1)
         {
-            if (bool_1 && this.icontainer_0 != null)
+            if (bool_1 && this.components != null)
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_1);
         }
@@ -338,9 +338,9 @@ namespace Yutai.ArcGIS.Carto.DesignLib
 
         private void method_0()
         {
-            this.icontainer_0 = new Container();
-            this.imageList_0 = new ImageList(this.icontainer_0);
-            this.imageList_1 = new ImageList(this.icontainer_0);
+            this.components = new Container();
+            this.imageList_0 = new ImageList(this.components);
+            this.imageList_1 = new ImageList(this.components);
             this.textBox = new TextBox();
             this.imageList_0.ImageSize = new Size(16, 16);
             this.imageList_0.TransparentColor = Color.Transparent;

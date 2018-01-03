@@ -11,7 +11,7 @@ namespace Yutai.ArcGIS.Carto.UI
     internal partial class frmDataExclusion : Form
     {
         private AttributeQueryControl attributeQueryControl_0 = new AttributeQueryControl();
-        private Container container_0 = null;
+        private Container components = null;
         private DataExclusionLegendCtrl dataExclusionLegendCtrl_0 = new DataExclusionLegendCtrl();
         private IDataExclusion idataExclusion_0 = null;
         private IGeoFeatureLayer igeoFeatureLayer_0 = null;

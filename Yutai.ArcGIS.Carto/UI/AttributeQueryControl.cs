@@ -12,7 +12,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class AttributeQueryControl : UserControl
     {
-        private Container container_0 = null;
+      
         private ILayer ilayer_0 = null;
         private string string_0 = "";
 

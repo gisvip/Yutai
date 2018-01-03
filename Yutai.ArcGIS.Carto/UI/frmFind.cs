@@ -14,7 +14,7 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         private FindControl findControl_0 = new FindControl();
         private IApplication iapplication_0 = null;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
 
         public frmFind()
         {

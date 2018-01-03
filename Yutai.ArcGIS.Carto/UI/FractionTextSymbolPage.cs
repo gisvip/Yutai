@@ -20,7 +20,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private bool bool_0 = false;
         private bool bool_1 = false;
         private IActiveView iactiveView_0 = null;
-        private IContainer icontainer_0 = null;
+      
         private ILineSymbol ilineSymbol_0 = null;
         private ITextSymbol itextSymbol_0 = null;
         private ITextSymbol itextSymbol_1 = null;

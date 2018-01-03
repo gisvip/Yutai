@@ -18,7 +18,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private bool bool_0 = false;
         private bool bool_1 = false;
         private bool bool_2 = false;
-        private Container container_0 = null;
+       
         private IAnnotateLayerProperties iannotateLayerProperties_0 = null;
         private IAnnotationExpressionEngine iannotationExpressionEngine_0 = null;
         private IGeoFeatureLayer igeoFeatureLayer_0 = null;

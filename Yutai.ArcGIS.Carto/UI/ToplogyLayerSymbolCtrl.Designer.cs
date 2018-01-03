@@ -21,9 +21,9 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         protected override void Dispose(bool bool_2)
         {
-            if (bool_2 && (this.icontainer_0 != null))
+            if (bool_2 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_2);
         }
@@ -31,7 +31,7 @@ namespace Yutai.ArcGIS.Carto.UI
        
  private void InitializeComponent()
         {
-            this.icontainer_0 = new Container();
+            this.components = new Container();
             this.chkListRender = new CheckedListBoxControl();
             this.label1 = new Label();
             this.rdoRenderType = new RadioGroup();
@@ -39,7 +39,7 @@ namespace Yutai.ArcGIS.Carto.UI
             this.listView1 = new RenderInfoListView();
             this.columnHeader_0 = new ColumnHeader();
             this.columnHeader_1 = new ColumnHeader();
-            this.imageList_0 = new ImageList(this.icontainer_0);
+            this.imageList_0 = new ImageList(this.components);
             ((ISupportInitialize) this.chkListRender).BeginInit();
             this.rdoRenderType.Properties.BeginInit();
             base.SuspendLayout();
@@ -100,7 +100,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private CheckedListBoxControl chkListRender;
         private ColumnHeader columnHeader_0;
         private ColumnHeader columnHeader_1;
-        private IContainer icontainer_0;
+        private IContainer components;
         private ImageList imageList_0;
         private Label label1;
         private RenderInfoListView listView1;

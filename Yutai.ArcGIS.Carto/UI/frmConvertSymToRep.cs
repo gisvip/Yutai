@@ -12,7 +12,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class frmConvertSymToRep : Form
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IFeatureLayer ifeatureLayer_0 = null;
         private IMap imap_0 = null;
 

@@ -18,7 +18,7 @@ namespace Yutai.ArcGIS.Carto.UI
     internal partial class ProportionalSymbolRendererCtrl : UserControl, IUserControl
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private IGeoFeatureLayer igeoFeatureLayer_0 = null;
         private IStyleGallery istyleGallery_0 = null;
 

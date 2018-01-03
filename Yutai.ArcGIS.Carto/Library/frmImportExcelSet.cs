@@ -11,7 +11,7 @@ namespace Yutai.ArcGIS.Carto.Library
 {
     public partial class frmImportExcelSet : Form
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IGeometry igeometry_0 = null;
 
         public frmImportExcelSet()

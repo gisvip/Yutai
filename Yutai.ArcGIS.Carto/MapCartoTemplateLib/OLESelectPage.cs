@@ -9,7 +9,7 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
     public partial class OLESelectPage : UserControl, IPropertyPage, IPropertyPageEvents
     {
         private bool bool_0 = false;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
 
         public event OnValueChangeEventHandler OnValueChange;
 

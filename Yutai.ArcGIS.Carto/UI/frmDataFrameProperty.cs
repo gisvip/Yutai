@@ -9,7 +9,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class frmDataFrameProperty : Form
     {
-        private Container container_0 = null;
+        private Container components = null;
         private IMapFrame imapFrame_0 = null;
         private MapCoordinateCtrl mapCoordinateCtrl_0 = new MapCoordinateCtrl();
         private MapDataFramePage mapDataFramePage_0 = new MapDataFramePage();

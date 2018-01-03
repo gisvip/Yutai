@@ -13,9 +13,9 @@ namespace Yutai.ArcGIS.Carto.DesignLib
     {
         protected override void Dispose(bool bool_1)
         {
-            if (bool_1 && (this.container_0 != null))
+            if (bool_1 && (this.components != null))
             {
-                this.container_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_1);
         }

@@ -10,7 +10,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     public partial class frmRasteStrechSet : Form
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private IRasterStretch2 irasterStretch2_0 = null;
 
         public frmRasteStrechSet()

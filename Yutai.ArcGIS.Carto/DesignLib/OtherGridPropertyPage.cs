@@ -18,7 +18,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
     {
         private bool bool_0 = false;
         private bool bool_1 = false;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private ILineSymbol ilineSymbol_0 = new SimpleLineSymbolClass();
         private IMarkerSymbol imarkerSymbol_0 = new SimpleMarkerSymbolClass();
         private MapTemplate mapTemplate_0 = null;

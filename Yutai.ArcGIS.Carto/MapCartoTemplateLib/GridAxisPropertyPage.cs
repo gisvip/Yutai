@@ -19,7 +19,7 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
     {
         private bool bool_0 = false;
         private bool bool_1 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private IMapGrid imapGrid_0 = null;
         private IMapGridBorder imapGridBorder_0 = null;
         internal static IMapGrid m_pOldMapGrid;

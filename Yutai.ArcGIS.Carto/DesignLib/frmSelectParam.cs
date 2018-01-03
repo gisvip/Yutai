@@ -7,7 +7,7 @@ namespace Yutai.ArcGIS.Carto.DesignLib
 {
     public partial class frmSelectParam : Form
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
 
         public frmSelectParam()
         {

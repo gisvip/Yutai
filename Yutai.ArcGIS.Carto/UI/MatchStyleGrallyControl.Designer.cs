@@ -19,9 +19,9 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         protected override void Dispose(bool bool_1)
         {
-            if (bool_1 && (this.icontainer_0 != null))
+            if (bool_1 && (this.components != null))
             {
-                this.icontainer_0.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(bool_1);
         }
@@ -164,7 +164,7 @@ namespace Yutai.ArcGIS.Carto.UI
         private ColumnHeader columnHeader_0;
         private ColumnHeader columnHeader_1;
         private ColumnHeader columnHeader_2;
-        private IContainer icontainer_0;
+        private IContainer components;
         private Label label1;
         private Label label2;
         private Label label4;

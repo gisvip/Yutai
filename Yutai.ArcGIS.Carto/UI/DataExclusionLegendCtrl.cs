@@ -13,7 +13,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class DataExclusionLegendCtrl : UserControl
     {
-        private Container container_0 = null;
+      
         private esriGeometryType esriGeometryType_0 = esriGeometryType.esriGeometryPoint;
         private IDataExclusion idataExclusion_0 = null;
         private IStyleGallery istyleGallery_0 = null;

@@ -14,7 +14,7 @@ namespace Yutai.ArcGIS.Carto.UI
     {
         private bool bool_0 = false;
         private IBasicMap ibasicMap_0 = null;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         private int[] int_0 = new int[] {4214, 4610, 4326};
         private List<string> list_0 = new List<string>();
 

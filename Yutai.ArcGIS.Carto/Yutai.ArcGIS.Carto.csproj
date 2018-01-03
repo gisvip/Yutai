@@ -462,7 +462,6 @@
       <Private>True</Private>
     </Reference>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Global.cs" />
     <Compile Include="UI\TKStyleSelectPage.cs">
       <SubType>UserControl</SubType>
     </Compile>

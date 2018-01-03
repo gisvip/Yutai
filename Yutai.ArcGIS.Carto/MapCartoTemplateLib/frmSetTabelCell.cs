@@ -9,7 +9,7 @@ namespace Yutai.ArcGIS.Carto.MapCartoTemplateLib
 {
     public partial class frmSetTabelCell : Form
     {
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
         internal SortedList<int, SortedList<int, string>> m_tabcell = new SortedList<int, SortedList<int, string>>();
 
 

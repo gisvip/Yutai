@@ -13,7 +13,7 @@ namespace Yutai.ArcGIS.Carto.UI
     internal partial class LegendLayerUserControl : UserControl
     {
         private bool bool_0 = false;
-        private Container container_0 = null;
+        private Container components = null;
         private ILegend ilegend_0 = null;
         private IMap imap_0 = null;
 

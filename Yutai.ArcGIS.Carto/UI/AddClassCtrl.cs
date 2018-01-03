@@ -12,7 +12,7 @@ namespace Yutai.ArcGIS.Carto.UI
 {
     internal partial class AddClassCtrl : UserControl
     {
-        private Container container_0 = null;
+        
         private IAnnotateLayerPropertiesCollection2 iannotateLayerPropertiesCollection2_0 = null;
         private TreeNode treeNode_0 = null;
 

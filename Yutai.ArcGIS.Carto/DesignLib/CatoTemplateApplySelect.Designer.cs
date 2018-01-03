@@ -10,17 +10,18 @@ namespace Yutai.ArcGIS.Carto.DesignLib
 {
     partial class CatoTemplateApplySelect
     {
-        protected override void Dispose(bool bool_0)
+       
+        protected override void Dispose(bool disposing)
         {
-            if (bool_0 && (this.icontainer_0 != null))
+            if (disposing && (components != null))
             {
-                this.icontainer_0.Dispose();
+                components.Dispose();
             }
-            base.Dispose(bool_0);
+            base.Dispose(disposing);
         }
 
-       
- private void InitializeComponent()
+
+        private void InitializeComponent()
         {
             this.listView1 = new ListView();
             this.columnHeader_0 = new ColumnHeader();
@@ -61,6 +62,6 @@ namespace Yutai.ArcGIS.Carto.DesignLib
         private ColumnHeader columnHeader_1;
         private Label label1;
         private ListView listView1;
-        private IContainer icontainer_0 = null;
+        private IContainer components = null;
     }
 }
