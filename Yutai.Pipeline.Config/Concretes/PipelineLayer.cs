@@ -12,7 +12,7 @@ using Yutai.Pipeline.Config.Interfaces;
 namespace Yutai.Pipeline.Config.Concretes
 {
     public class PipelineLayer : IPipelineLayer
-    {
+    {  
         private List<IPipelineTemplate> _templates;
         private string _name;
         private string _code;
